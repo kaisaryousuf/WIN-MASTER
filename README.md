@@ -15,11 +15,10 @@ Usage: python3 WinMaster.py neo4j password
 - [ ] Requires Neo4j (https://github.com/neo4j) to be installed.
 
         UNDER DEVELOPMENT:
-                [47] Pass the Ticket.
-                [52] BloodHound.
                 [53] Requires Neo4j & BloodHound.
-
-
+                [52] BloodHound.             
+                [47] Pass the Ticket.
+              
 A python script file to remotely exploit Microsoft Windows systems- It can pull domains, usernames, passwords, crack hashes, and much much more.
 
 ### CONSOLE DISPLAY
