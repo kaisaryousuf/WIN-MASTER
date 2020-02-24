@@ -16,7 +16,7 @@ Usage: python3 WinMaster.py neo4j password
         UNDER DEVELOPMENT:
                 [47] Pass the Ticket.
                 [52] BloodHound.
-                [53] Requires Neo4j and BloodHound.
+                [53] Requires Neo4j & BloodHound.
 
 - [ ] Requires Neo4j (https://github.com/neo4j) to be installed.
 
