@@ -11,7 +11,7 @@ Usage: python3 WinMaster.py neo4j password
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
 - [x] Requires Kerbrute (https://github.com/TarlogicSecurity/kerbrute) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
 - [x] Requires Windapsearch (https://github.com/ropnop/windapsearch) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
-- [ ] Requires AclPwn (https://pypi.org/project/aclpwn/) to be installed.
+- [x] Requires AclPwn (https://pypi.org/project/aclpwn/) to be installed.
 - [ ] Requires Neo4j (https://github.com/neo4j) to be installed.
 
         UNDER DEVELOPMENT:
