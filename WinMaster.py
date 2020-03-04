@@ -265,7 +265,7 @@ def options():
    print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) SmbExwc HASH (66)         " + '\u2551')
    print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) WmiExec HASh (67)         " + '\u2551')
    print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) Gen UserList (68)         " + '\u2551')
-   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) List Editor  (69) Autofill" + '\u2551')
+   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) User Editor  (69) Autofill" + '\u2551')
    print('\u255A' + ('\u2550')*132 + '\u255D')
 
 def stage1(DOM, SID):
@@ -275,31 +275,95 @@ def stage1(DOM, SID):
       else:
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
 
-      print("\n[+] Attempting to enumerate DOMAIN name...")
+      print("\n[*] Attempting to enumerate domain name...")
       temp = linecache.getline("temp.txt", 1)
       if temp[:6] != "Cannot":
          temp1,DOM = temp.split(":")
          DOM = DOM.strip(" ")
          if len(DOM) < COL1:
             DOM = padding(DOM, COL1)
-         print("[*] Found Domain", DOM)
+         print("[+] Found domain", DOM)
       else:
-         print("[-] Unable to enumerate DOMAIN...")   
+         print("[-] Unable to enumerate domain...")
+         os.remove("temp.txt")
+         return
 
-      print("\n[+] Attempting to enumerate domain SID...")
+      if DOM != "":
+         command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+         print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+
+      print("\n[*] Attempting to enumerate domain SID...")
       temp2 = linecache.getline("temp.txt", 2)
       if temp[:6] != "Cannot":
          temp2,SID = temp2.split(":")
          SID = SID.strip(" ")
          if len(SID) < COL1:
             SID = padding(SID, COL1)
-         print("[*] Found SID", SID)
+         print("[+] Found SID", SID)
       else:
-         print("[-] Unable to enumerate SID...")    
+         print("[-] Unable to enumerate SID...") 
 
       os.remove("temp.txt")
       return [DOM, SID]
- 
+
+def stage2():
+      if TIP[:5] == "EMPTY": 
+         print("\nPlease specify a valid remote IP address...")
+         return
+      else:
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.txt")
+
+      print("[*] Attempting to enumerate shares...")
+      temp = linecache.getline("shares.txt", 1)
+      if temp[:9] != "Could not":
+         command("cat shares.txt")
+      else:
+         print("[-] Unable to enumerate shares...")
+         os.remove("shares.txt")
+         return
+
+      # MORE CODE REQUIRED HERE
+
+      os.remove("shares.txt")
+
+def stage3():
+      if TIP[:5] == "EMPTY": 
+         print("\nPlease specify a valid remote IP address...")
+         return
+      else:
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.txt")
+
+      print("\n[*] Attempting to enumerate domain users...")
+      temp = linecache.getline("domusers.txt", 1)
+      if temp[:9] != "Could not" and temp[:6] != "result":
+         command("cat domusers.txt | wc -l > count.txt")
+      else:
+         print("[-] Unable to enumerate domain users...")
+         os.remove("domusers.txt")
+         return
+
+      count = int(linecache.getline("count.txt", 1))
+      os.remove("count.txt")
+
+      for x in range(0, MAX):
+         US[x] = " "
+         US[x] = padding(US[x], COL3)				# Clear current values.
+
+      for x in range(0, count):
+         temp = linecache.getline("domusers.txt", x + 1)
+         temp1,temp2,temp3 = temp.split(":")
+         US[x] = temp2
+         US[x] = US[x].replace("[","")
+         US[x] = US[x].replace("]","")
+         US[x] = US[x].replace("rid","")
+         print ("[+] Found user", US[x])
+
+         if len(US[x]) < COL4:
+            US[x] = padding(US[x], COL3)			# Populate new values.
+
+      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+      os.remove("domusers.txt")
+
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -1780,6 +1844,8 @@ while True:
 
    if selection =='69':
       DOM, SID = stage1(DOM, SID)
+      stage2()
+      stage3()
       prompt()
 
 # -------------------------------------------------------------------------------------
