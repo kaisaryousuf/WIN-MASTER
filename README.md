@@ -5,18 +5,17 @@ Usage: python3 WinMaster.py neo4j password
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
 |------     |------            | -------                          | ----    |
-| python3   | WinMaster.py     | f9dc336e54b61c050d6799fa36ef4656 | Sauna   |
+| python3   | WinMaster.py     | dbe32da7311362b38088dfa508841e9a | Sauna   |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
 - [x] Requires Kerbrute (https://github.com/TarlogicSecurity/kerbrute) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
 - [x] Requires Windapsearch (https://github.com/ropnop/windapsearch) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
 - [x] Requires AclPwn (https://pypi.org/project/aclpwn/) to be installed.
-- [ ] Requires Neo4j (https://github.com/neo4j) to be installed.
+      AclPwn requires Neo4j (https://github.com/neo4j) to be installed.
 
         UNDER DEVELOPMENT:
                 [53] Requires Neo4j & BloodHound.
-                [52] BloodHound.             
                 [47] Pass the Ticket.
               
 A python script file to remotely exploit Microsoft Windows systems- It can pull domains, usernames, passwords, crack hashes, and much much more.

