@@ -3,9 +3,9 @@
 
 Usage: python3 WinMaster.py neo4j password
 
-| LANGUAGE  | FILENAME         | MD5 Hash                         | Version    |
-|------     |------            | -------                          | ----       |
-| python3   | WinMaster.py     | dfcae6a882c8eb7874bdd96af8d24f6d | Monteverde |
+| LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
+|------     |------            | -------                          | ----    |
+| python3   | WinMaster.py     | 7d7e4a5fc47c6dede043ddecd4c81d1d | Sauna   |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
