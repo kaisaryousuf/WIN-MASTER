@@ -268,34 +268,33 @@ def options():
    print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) User Editor  (69) Autofill" + '\u2551')
    print('\u255A' + ('\u2550')*132 + '\u255D')
 
-def stage1(DOM, SID):
+def autofill1(USR, PAS, TIP, DOM, SID):
       if TIP[:5] == "EMPTY": 
          print("\nPlease specify a valid remote IP address...")
          return
-      else:
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
-
+      
       print("\n[*] Attempting to enumerate domain name...")
-      temp = linecache.getline("temp.txt", 1)
-      if temp[:6] != "Cannot":
-         temp1,DOM = temp.split(":")
+      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
+
+      test1 = linecache.getline("temp.txt", 1)
+      if test1[:6] != "Cannot":
+         temp,DOM = test1.split(":")
          DOM = DOM.strip(" ")
          if len(DOM) < COL1:
             DOM = padding(DOM, COL1)
          print("[+] Found domain", DOM)
       else:
-         print("[-] Unable to enumerate domain...")
+         print("[-] Unable to enumerate domain name...")
          os.remove("temp.txt")
          return
 
-      if DOM != "":
-         command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-         print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+      command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+      print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
 
       print("\n[*] Attempting to enumerate domain SID...")
-      temp2 = linecache.getline("temp.txt", 2)
-      if temp[:6] != "Cannot":
-         temp2,SID = temp2.split(":")
+      test2 = linecache.getline("temp.txt", 2)
+      if test2[:6] != "Cannot":
+         temp,SID = test2.split(":")
          SID = SID.strip(" ")
          if len(SID) < COL1:
             SID = padding(SID, COL1)
@@ -304,78 +303,27 @@ def stage1(DOM, SID):
          print("[-] Unable to enumerate SID...") 
 
       os.remove("temp.txt")
-      return [DOM, SID]
+      return DOM, SID
 
-def stage2():
+def autofill2(USR, PAS, TIP):
       if TIP[:5] == "EMPTY": 
          print("\nPlease specify a valid remote IP address...")
          return
-      else:
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.txt")
+      
+      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.txt")
 
       print("[*] Attempting to enumerate shares...")
-      temp = linecache.getline("shares.txt", 1)
-      if temp[:9] != "Could not" and temp[:6] != "result":
+      test3 = linecache.getline("shares.txt", 1)
+      if test3[:9] != "Could not" and test3[:6] != "result":
          command("cat shares.txt")
       else:
          print("[-] Unable to enumerate shares...")
          os.remove("shares.txt")
          return
 
-      # MORE CODE REQUIRED HERE
+      # MORE CODE REQUIRED HERE TO COLLECT AND DISPLAY SHARE NAMES
 
       os.remove("shares.txt")
-
-def stage3():
-      if TIP[:5] == "EMPTY": 
-         print("\nPlease specify a valid remote IP address...")
-         return
-      else:
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.txt")
-
-      print("\n[*] Attempting to enumerate domain users...")
-      temp = linecache.getline("domusers.txt", 1)
-      if temp[:9] != "Could not" and temp[:6] != "result":
-         command("cat domusers.txt | wc -l > count.txt")
-      else:
-         print("[-] Unable to enumerate domain users...")
-         os.remove("domusers.txt")
-         return
-
-      command("sort domusers.txt > domusers.tmp")
-      os.remove("domusers.txt")
-      command("mv domusers.tmp domusers.txt")
-
-      count = int(linecache.getline("count.txt", 1))
-      os.remove("count.txt")
-      os.remove("users.txt")
-
-      for x in range(0, MAX):
-         US[x] = " "
-         US[x] = padding(US[x], COL3)				# Clear current values.
-
-      for x in range(0, count):
-         temp = linecache.getline("domusers.txt", x + 1)
-         try:
-            temp1,temp2,temp3 = temp.split(":");
-         except ValueError:
-            temp2 = "Error..."
-         US[x] = temp2
-         US[x] = US[x].replace("[","")
-         US[x] = US[x].replace("]","")
-         US[x] = US[x].replace("rid","")
-         print ("[+] Found user", US[x])
-
-         if len(US[x]) < COL4:
-            US[x] = padding(US[x], COL3)			# Populate new values.
-         command("echo " + US[x] + " >> users.txt")
-
-      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
-
-      for x in range(0, MAX):
-         PA[x] = " "
-         PA[x] = padding(PA[x], COL4)				# Reset hash values.
-      os.remove("domusers.txt")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -1323,7 +1271,7 @@ while True:
          if len(US[x]) < COL3: US[x] = padding(US[x], COL3)
          if len(PA[x]) < COL4: PA[x] = padding(PA[x], COL4)
 
-      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       os.remove("USERS2.tmp")
       print("[*] All done!")
       prompt()
@@ -1628,7 +1576,7 @@ while True:
       for z in range(0, MAX):
          if US[z].rstrip(" ") == USR.rstrip(" "): NTM = PA[z]			# RESET DISPLAY HASH
 
-      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       os.remove("SECRETS.tmp")
       prompt()
 
@@ -1758,7 +1706,7 @@ while True:
          US[x] = linecache.getline("users.txt", x+1).rstrip(" ")
          if len(US[x]) < COL3: US[x] = padding(US[x], COL3)      
 
-      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       prompt()
 
 #------------------------------------------------------------------------------------- 
@@ -1774,8 +1722,8 @@ while True:
 
       for x in range (0, MAX):
          US[x] = linecache.getline("users.txt", x + 1).rstrip(" ")
-         if len(US[x]) < COL3: US[x] = padding(US[x], COL3)      
-      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+         if len(US[x]) < COL3: US[x] = padding(US[x], COL3)
+#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1876,14 +1824,83 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Sauna
-# Details : Menu option selected - Autofill parameters.
+# Details : Menu option selected - Autofill data, eventially have this occur at boot!!
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='69':
-      DOM, SID = stage1(DOM, SID)
-      stage2()
-      stage3()
+      DOM = " "*COl1
+      SID = " "*COL1
+      DOM, SID = autofill1(USR, PAS, TIP, DOM, SID)	# Get new DOMAIN AND SID
+
+# -------------------------------------------------------------------------------------
+    
+      SH0  = " "*COL2  					# Clean SHARE Values
+      SH1  = " "*COL2
+      SH2  = " "*COL2
+      SH3  = " "*COL2
+      SH4  = " "*COL2
+      SH5  = " "*COL2
+      SH6  = " "*COL2
+      SH7  = " "*COL2
+      SH8  = " "*COL2
+      SH9  = " "*COL2
+      SH10 = " "*COL2
+      SH11 = " "*COL2
+      SHA0  = " "*COL2
+      SHA1  = " "*COL2
+      SHA2  = " "*COL2
+      SHA3  = " "*COL2
+      SHA4  = " "*COL2
+      SHA5  = " "*COL2
+      SHA6  = " "*COL2
+      SHA7  = " "*COL2
+      SHA8  = " "*COL2
+      SHA9  = " "*COL2
+      SHA10 = " "*COL2
+      SHA11 = " "*COL2 
+      autofill2(USR, PAS, TIP)				# Get new shares
+
+# -------------------------------------------------------------------------------------
+
+      for x in range (0, MAX):
+         US[x] = " "*COL3
+         PA[x] = " "*COL4
+    
+      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.txt")      
+
+      print("\n[*] Attempting to enumerate domain users...")
+      test4 = linecache.getline("domusers.txt", 1)
+      if test4[:9] != "Could not" and test4[:6] != "result":
+         command("cat domusers.txt | wc -l > count.txt")
+         count = int(linecache.getline("count.txt", 1))
+      else:
+         print("[-] Unable to enumerate domain users...")
+
+      command("sort domusers.txt > domusers.tmp")
+      os.remove("domusers.txt")
+      os.remove("count.txt")
+      os.remove("users.txt")
+      command("mv domusers.tmp domusers.txt")      
+
+      for x in range(0, count):
+         test5 = linecache.getline("domusers.txt", x + 1)
+         try:
+            temp1,temp2,temp3 = test5.split(":");
+         except ValueError:
+            temp2 = "Error..."
+         US[x] = temp2
+         US[x] = US[x].replace("[","")
+         US[x] = US[x].replace("]","")
+         US[x] = US[x].replace("rid","")
+         print ("[+] Found user", US[x])
+
+         if len(US[x]) < COL3:
+            US[x] = padding(US[x], COL3)		# Populate new values.
+         command("echo " + US[x] + " >> users.txt")
+
+#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+      os.remove("domusers.txt")
       prompt()
 
 # -------------------------------------------------------------------------------------
