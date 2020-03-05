@@ -846,11 +846,20 @@ while True:
       if USR.rstrip(" ") != "Administrator":
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SHARES.tmp")
          command("cat SHARES.tmp")
-
-#        CODE TO BE ENTERED HERE TO CATCH SHARES
-#         command("sed -i '1,3d' SHARES.tmp")
-#         command("sed -i -e 's/share //g' SHARES.tmp")
-#         os.remove("SHARES.tmp")
+         command("cat SHARES.tmp | wc -l > count.txt")
+         count = int(linecache.getline("count.txt", 1))
+         command("sed -i '1,3d' SHARES.tmp")
+         command("sed -i -e 's/share //g' SHARES.tmp")
+         if count > 0:
+            for x in range(0, MAXX):
+               SHAR[x] = " "*COL2			# Clean current values.
+         for x in range(0, count):
+            SHAR[x] = linecache.getline("SHARES.tmp",x + 1)
+            SHAR[x] = SHAR[x].replace("[-] ","")
+            SHAR[x] = SHAR[x].replace("'","")
+            SHAR[x] = SHAR[x].replace("is not writable.","")
+            SHAR[x] = padding(SHAR[x], COL2)
+         os.remove("SHARES.tmp")
       else:
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
