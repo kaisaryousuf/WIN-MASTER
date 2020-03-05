@@ -1424,7 +1424,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='53':
-      print("\n[*] [*] Enumerating, please wait this can take sometime...")
+      print("\n[*] Enumerating, please wait this can take sometime...")
       command(PATH + "secretsdump.py " + DOM.rstrip(" ") + '/' + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
 
       command("sed -i '/:::/!d' SECRETS.tmp >> SECRETS2.tmp")
@@ -1479,7 +1479,7 @@ while True:
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
-      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
+#      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
       
       HASH = "." # Reset Value
       for x in range (0, MAXX):
@@ -1702,7 +1702,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Sauna
-# Details : Menu option selected - Autofill data.
+# Details : Menu option selected - Autofill DOMAIN, SID etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -1745,84 +1745,75 @@ while True:
       os.remove("temp.txt")
 
 # -------------------------------------------------------------------------------------
+# ENUMERATE SHARES
+# -------------------------------------------------------------------------------------
     
-      SH0  = " "*COL2  					# Clean SHARE Values
-      SH1  = " "*COL2
-      SH2  = " "*COL2
-      SH3  = " "*COL2
-      SH4  = " "*COL2
-      SH5  = " "*COL2
-      SH6  = " "*COL2
-      SH7  = " "*COL2
-      SH8  = " "*COL2
-      SH9  = " "*COL2
-      SH10 = " "*COL2
-      SH11 = " "*COL2
-      SHA0  = " "*COL2
-      SHA1  = " "*COL2
-      SHA2  = " "*COL2
-      SHA3  = " "*COL2
-      SHA4  = " "*COL2
-      SHA5  = " "*COL2
-      SHA6  = " "*COL2
-      SHA7  = " "*COL2
-      SHA8  = " "*COL2
-      SHA9  = " "*COL2
-      SHA10 = " "*COL2
-      SHA11 = " "*COL2 
-
-      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.txt")
-
       print("[*] Attempting to enumerate shares...")
-      test3 = linecache.getline("shares.txt", 1)
+      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.txt")
+
+      test3 = linecache.getline("shares1.txt", 1)
       if test3[:9] != "Could not" and test3[:6] != "result":
-         command("cat shares.txt")
+         for x in range (0, MAXX):
+            SHAR[x] = " "*COL2 						# Clean current values.
+
+         command("sed -i -n '/netname: /p' shares1.txt")		# Format text.
+         command("sort shares1.txt > shares2.txt")
+         command("cat shares2.txt | wc -l > count.txt")
+
+         count = int(linecache.getline("count.txt", 1))      
+         for x in range(0, count):
+            SHAR[x] = linecache.getline("shares2.txt", x + 1)
+            SHAR[x] = SHAR[x].replace(" ","")
+            try:
+               share2, SHAR[x] = SHAR[x].split(":")
+            except ValueError:
+               SHAR[x] = "Error..."
+            if len(SHAR[x]) < COL2: SHAR[x] = padding(SHAR[x], COL2)
+            print("[+] Found share " + SHAR[x])
       else:
-         print("[-] Unable to enumerate shares...")
-
-      # MORE CODE REQUIRED HERE TO COLLECT AND DISPLAY THE SHARE NAMES
-
-      os.remove("shares.txt")
+         print("[-] Unable to enumerate shares...")   
+     
+      os.remove("count.txt")
+      os.remove("shares1.txt")
+      os.remove("shares2.txt")
 
 # -------------------------------------------------------------------------------------
+# ENUMERATE DOMAIN USERS
+# -------------------------------------------------------------------------------------
 
-      for x in range (0, MAXX):
-         USER[x] = " "*COL3
-         PASS[x] = " "*COL4
-    
-      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.txt")      
+      print("\n[*] Attempting to enumerate domain users...")    
+      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.txt")      
 
-      print("\n[*] Attempting to enumerate domain users...")
-      test4 = linecache.getline("domusers.txt", 1)
+      test4 = linecache.getline("domusers1.txt", 1)
       if test4[:9] != "Could not" and test4[:6] != "result":
-         command("cat domusers.txt | wc -l > count.txt")
-         count = int(linecache.getline("count.txt", 1))
+         for x in range (0, MAXX):
+            USER[x] = " "*COL3						# Clean current values.
+            PASS[x] = " "*COL4
+ 
+         command("sort domusers1.txt > domusers2.txt")			# Format text.
+         command("cat domusers2.txt | wc -l > count2.txt")
+         count2 = int(linecache.getline("count2.txt", 1))
+ 
+         os.remove("domusers1.txt")
+         os.remove("count2.txt")
+         os.remove("users.txt")
+
+         for x in range(0, count2):
+            test5 = linecache.getline("domusers2.txt", x + 1)
+            try:
+               temp1,USER[x],temp2 = test5.split(":");
+            except ValueError:
+               USER[x] = "Error..."
+            USER[x] = USER[x].replace("[","")
+            USER[x] = USER[x].replace("]","")
+            USER[x] = USER[x].replace("rid","")
+            print ("[+] Found user", USER[x])
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            command("echo " + USER[x] + " >> users.txt")
       else:
          print("[-] Unable to enumerate domain users...")
-
-      command("sort domusers.txt > domusers.tmp")
-      os.remove("domusers.txt")
-      os.remove("count.txt")
-      os.remove("users.txt")
-      command("mv domusers.tmp domusers.txt")      
-
-      for x in range(0, count):
-         test5 = linecache.getline("domusers.txt", x + 1)
-         try:
-            temp1,temp2,temp3 = test5.split(":");
-         except ValueError:
-            temp2 = "Error..."
-         USER[x] = temp2
-         USER[x] = USER[x].replace("[","")
-         USER[x] = USER[x].replace("]","")
-         USER[x] = USER[x].replace("rid","")
-         print ("[+] Found user", USER[x])
-
-         if len(USER[x]) < COL3:
-            USER[x] = padding(USER[x], COL3)		# Populate new values.
-         command("echo " + USER[x] + " >> users.txt")
-
-      os.remove("domusers.txt")
+      
+      os.remove("domusers2.txt")
       prompt()
 
 # -------------------------------------------------------------------------------------
