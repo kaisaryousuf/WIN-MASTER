@@ -1742,7 +1742,8 @@ while True:
       else:
          print("[-] Unable to enumerate SID...") 
 
-      os.remove("temp.txt")
+      if os.path.exists("temp.txt"):
+         os.remove("temp.txt")
 
 # -------------------------------------------------------------------------------------
 # ENUMERATE SHARES
@@ -1773,9 +1774,12 @@ while True:
       else:
          print("[-] Unable to enumerate shares...")   
      
-      os.remove("count.txt")
-      os.remove("shares1.txt")
-      os.remove("shares2.txt")
+      if os.path.exists("count.txt"):
+         os.remove("count.txt")
+      if os.path.exists("shares1.txt"):
+         os.remove("shares1.txt")
+      if os.path.exists("shares2.txt"):
+         os.remove("shares2.txt")
 
 # -------------------------------------------------------------------------------------
 # ENUMERATE DOMAIN USERS
@@ -1813,7 +1817,8 @@ while True:
       else:
          print("[-] Unable to enumerate domain users...")
       
-      os.remove("domusers2.txt")
+      if os.path.exists("domusers2.txt"):
+         os.remove("domusers2.txt")
       prompt()
 
 # -------------------------------------------------------------------------------------
