@@ -4,9 +4,9 @@
     Usage: python3 WinMaster.py
            python3 WinMaster.py neo4j password - if you intend to use aclpwn
 
-| LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
-|------     |------            | -------                          | ----    |
-| python3   | WinMaster.py     | c231ca72397e73fba4130b752d26a0ee | Sauna   |
+| LANGUAGE  | FILENAME         | MD5 Hash                         | Version    |
+|------     |------            | -------                          | ----       |
+| python3   | WinMaster.py     | f8efc28637a03330529ade9bb268e95f | Monteverde |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.

