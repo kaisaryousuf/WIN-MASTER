@@ -36,12 +36,11 @@ if os.geteuid() != 0:
     print("\n[*] Please run this python3 script as root...")
     exit(True)
 
-if len(sys.argv) < 3:
-    print("\nUse the command python3 WinMaster.py neo4j password\n")
-    exit(True)
+BH1 = ""
 
-BH1 = sys.argv[1]	# NEO4J USERNAME
-BH2 = sys.argv[2]	# NEO4J PASSWORD
+if len(sys.argv) == 3:
+   BH1 = sys.argv[1]	# NEO4J USERNAME
+   BH2 = sys.argv[2]	# NEO4J PASSWORD
 
 BUG = 0			# BUGHUNT ON/OFF
 
@@ -281,7 +280,7 @@ print("BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS\n")
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-print("[*] Booting - [*] Please wait...\n")
+print("[*] Booting - Please wait...\n")
 if not os.path.exists("WORKAREA"):			
    os.mkdir("WORKAREA")
    print("[+] Work area created...")
@@ -359,13 +358,14 @@ else:
    if len(LTM) < COL1: LTM = padding(LTM, COL1)
    if len(DIR) < COL1: DIR = padding(DIR, COL1)
 
-print("[+] Starting neo4j database...")
-command("touch log.txt")
-command("neo4j start   >> log.txt 2>&1")
-# command("neo4j console >> log.txt 2>&1")
-os.remove("log.txt")
+if BH1 != "":
+   print("[+] Starting neo4j database...")
+   command("touch log.txt")
+   command("neo4j start   >> log.txt 2>&1")
+#  command("neo4j console >> log.txt 2>&1")
+   os.remove("log.txt")
 
-input("\n[*] Please ENTER key to continue...")
+input("\n[*] Press ENTER key to continue...")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
