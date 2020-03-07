@@ -250,7 +250,7 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*21  + '\u2569' + ('\u2550')*12 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*61 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) Save/Exit          (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) FTP     " + '\u2551')
+   print('\u2551' + "(0) Autofill REMOTE IP (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) FTP     " + '\u2551')
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) SSH     " + '\u2551')
    print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BH ACLPWN    (62) TelNet  " + '\u2551')
    print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) Secrets Dump (63) NetCat  " + '\u2551')
@@ -259,7 +259,7 @@ def options():
    print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) SmbExec HASH (66)         " + '\u2551')
    print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) WmiExec HASH (67)         " + '\u2551')
    print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) Gen UserList (68)         " + '\u2551')
-   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) User Editor  (69) Autofill" + '\u2551')
+   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) User Editor  (69) Quit!!  " + '\u2551')
    print('\u255A' + ('\u2550')*132 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -394,35 +394,118 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Monteverde
-# Details : Menu option selected - Save current data to config.txt and exit the program.
+# Details : Menu option selected - Autofill DOMAIN, SID, SHARES, USERS etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '0':
-      command("echo " + DNS + " > config.txt")			# CREATE NEW CONFIG FILE
-      command("echo " + TIP  + " >> config.txt")
+   if selection =='0':
+      if TIP[:5] != "EMPTY":
+         print("\n[*] Attempting to enumerate domain name...")
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
 
-      if USR.rstrip(" ") == "\"\"":
-         command("echo '\"\"' >> config.txt")
-      else:
-         command("echo " + USR  + " >> config.txt")           
-      
-      if PAS.rstrip(" ") == "\"\"":
-         command("echo '\"\"' >> config.txt")
-      else:
-         command("echo " + PAS  + " >> config.txt")     
+         test1 = linecache.getline("temp.txt", 1)
+         if test1[:6] != "Cannot":
+            DOM = " "*COL1							# Clean current values
+            SID = " "*COL1
+            try:
+               temp,DOM = test1.split(":")
+            except ValueError:
+               DOM = "Error..."
+            DOM = DOM.strip(" ")
+            if len(DOM) < COL1:
+               DOM = padding(DOM, COL1)
+            print("[+] Found domain", DOM)
+            command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+            print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+         else:
+            print("[-] Unable to enumerate domain name...")      
+
+         print("\n[*] Attempting to enumerate domain SID...")
+         test2 = linecache.getline("temp.txt", 2)
+         if test2[:6] != "Cannot":
+            try:
+               temp,SID = test2.split(":")
+            except ValueError:
+               SID = "Error..."
+            SID = SID.strip(" ")
+            if len(SID) < COL1:
+               SID = padding(SID, COL1)
+            print("[+] Found SID", SID)
+         else:
+            print("[-] Unable to enumerate SID...") 
+
+         if os.path.exists("temp.txt"):
+            os.remove("temp.txt")
+   
+         print("[*] Attempting to enumerate shares...")
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.txt")
+
+         test3 = linecache.getline("shares1.txt", 1)
+         if test3[:9] != "Could not" and test3[:6] != "result":
+            for x in range (0, MAXX):
+               SHAR[x] = " "*COL2 						# Clean current values.
+
+            command("sed -i -n '/netname: /p' shares1.txt")		# Format text.
+            command("sort shares1.txt > shares2.txt")
+            command("cat shares2.txt | wc -l > count.txt")
+
+            count = int(linecache.getline("count.txt", 1))      
+            for x in range(0, count):
+               SHAR[x] = linecache.getline("shares2.txt", x + 1)
+               SHAR[x] = SHAR[x].replace(" ","")
+               try:
+                  share2, SHAR[x] = SHAR[x].split(":")
+               except ValueError:
+                  SHAR[x] = "Error..."
+               print("[+] Found share " + SHAR[x].rstrip("\n"))
+               if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)
+         else:
+            print("[-] Unable to enumerate shares...")   
+     
+         if os.path.exists("count.txt"):
+            os.remove("count.txt")
+         if os.path.exists("shares1.txt"):
+            os.remove("shares1.txt")
+         if os.path.exists("shares2.txt"):
+            os.remove("shares2.txt")
+
+         print("\n[*] Attempting to enumerate domain users...")    
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.txt")      
+
+         test4 = linecache.getline("domusers1.txt", 1)
+         if test4[:9] != "Could not" and test4[:6] != "result":
+            for x in range (0, MAXX):
+               USER[x] = " "*COL3						# Clean current values.
+               PASS[x] = " "*COL4
  
-      command("echo " + NTM.rstrip("\n") + " >> config.txt")
-      command("echo " + DOM  + " >> config.txt")  
-      command("echo " + SID.rstrip("\n") + " >> config.txt")
-      command("echo " + TSH  + " >> config.txt")  
-      command("echo " + IMP  + " >> config.txt")  
-      temp = '\"' + CMD.rstrip(" ") + '\"'
-      command("echo " + temp + " >> config.txt")  
-      command("echo " + LTM  + " >> config.txt")  
-      command("echo " + DIR  + " >> config.txt")       
-
-      exit(1)
+            command("sort domusers1.txt > domusers2.txt")			# Format text.
+            command("cat domusers2.txt | wc -l > count2.txt")
+            count2 = int(linecache.getline("count2.txt", 1))
+ 
+            os.remove("domusers1.txt")
+            os.remove("count2.txt")
+            os.remove("users.txt")
+ 
+            for x in range(0, count2):
+               test5 = linecache.getline("domusers2.txt", x + 1)
+               try:
+                  temp1,USER[x],temp2 = test5.split(":");
+               except ValueError:
+                  USER[x] = "Error..."
+               USER[x] = USER[x].replace("[","")
+               USER[x] = USER[x].replace("]","")
+               USER[x] = USER[x].replace("rid","")
+               print ("[+] Found user", USER[x])
+               if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+               command("echo " + USER[x] + " >> users.txt")
+         else:
+            print("[-] Unable to enumerate domain users...")
+      
+         if os.path.exists("domusers2.txt"):
+            os.remove("domusers2.txt")
+      else:
+         print("\n[-] Remote IP has not been set...")
+      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2073,120 +2156,37 @@ while True:
 
    if selection =='68':
       exit(1)
-
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Monteverde
-# Details : Menu option selected - Autofill DOMAIN, SID, SHARES, USERS etc.
+# Details : Menu option selected - Save current data to config.txt and exit the program.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='69':
-      if TIP[:5] != "EMPTY":
-         print("\n[*] Attempting to enumerate domain name...")
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
+   if selection == '69':
+      command("echo " + DNS + " > config.txt")			# CREATE NEW CONFIG FILE
+      command("echo " + TIP  + " >> config.txt")
 
-         test1 = linecache.getline("temp.txt", 1)
-         if test1[:6] != "Cannot":
-            DOM = " "*COL1							# Clean current values
-            SID = " "*COL1
-            try:
-               temp,DOM = test1.split(":")
-            except ValueError:
-               DOM = "Error..."
-            DOM = DOM.strip(" ")
-            if len(DOM) < COL1:
-               DOM = padding(DOM, COL1)
-            print("[+] Found domain", DOM)
-            command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-            print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-         else:
-            print("[-] Unable to enumerate domain name...")      
-
-         print("\n[*] Attempting to enumerate domain SID...")
-         test2 = linecache.getline("temp.txt", 2)
-         if test2[:6] != "Cannot":
-            try:
-               temp,SID = test2.split(":")
-            except ValueError:
-               SID = "Error..."
-            SID = SID.strip(" ")
-            if len(SID) < COL1:
-               SID = padding(SID, COL1)
-            print("[+] Found SID", SID)
-         else:
-            print("[-] Unable to enumerate SID...") 
-
-         if os.path.exists("temp.txt"):
-            os.remove("temp.txt")
-   
-         print("[*] Attempting to enumerate shares...")
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.txt")
-
-         test3 = linecache.getline("shares1.txt", 1)
-         if test3[:9] != "Could not" and test3[:6] != "result":
-            for x in range (0, MAXX):
-               SHAR[x] = " "*COL2 						# Clean current values.
-
-            command("sed -i -n '/netname: /p' shares1.txt")		# Format text.
-            command("sort shares1.txt > shares2.txt")
-            command("cat shares2.txt | wc -l > count.txt")
-
-            count = int(linecache.getline("count.txt", 1))      
-            for x in range(0, count):
-               SHAR[x] = linecache.getline("shares2.txt", x + 1)
-               SHAR[x] = SHAR[x].replace(" ","")
-               try:
-                  share2, SHAR[x] = SHAR[x].split(":")
-               except ValueError:
-                  SHAR[x] = "Error..."
-               print("[+] Found share " + SHAR[x].rstrip("\n"))
-               if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)
-         else:
-            print("[-] Unable to enumerate shares...")   
-     
-         if os.path.exists("count.txt"):
-            os.remove("count.txt")
-         if os.path.exists("shares1.txt"):
-            os.remove("shares1.txt")
-         if os.path.exists("shares2.txt"):
-            os.remove("shares2.txt")
-
-         print("\n[*] Attempting to enumerate domain users...")    
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.txt")      
-
-         test4 = linecache.getline("domusers1.txt", 1)
-         if test4[:9] != "Could not" and test4[:6] != "result":
-            for x in range (0, MAXX):
-               USER[x] = " "*COL3						# Clean current values.
-               PASS[x] = " "*COL4
- 
-            command("sort domusers1.txt > domusers2.txt")			# Format text.
-            command("cat domusers2.txt | wc -l > count2.txt")
-            count2 = int(linecache.getline("count2.txt", 1))
- 
-            os.remove("domusers1.txt")
-            os.remove("count2.txt")
-            os.remove("users.txt")
- 
-            for x in range(0, count2):
-               test5 = linecache.getline("domusers2.txt", x + 1)
-               try:
-                  temp1,USER[x],temp2 = test5.split(":");
-               except ValueError:
-                  USER[x] = "Error..."
-               USER[x] = USER[x].replace("[","")
-               USER[x] = USER[x].replace("]","")
-               USER[x] = USER[x].replace("rid","")
-               print ("[+] Found user", USER[x])
-               if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-               command("echo " + USER[x] + " >> users.txt")
-         else:
-            print("[-] Unable to enumerate domain users...")
+      if USR.rstrip(" ") == "\"\"":
+         command("echo '\"\"' >> config.txt")
+      else:
+         command("echo " + USR  + " >> config.txt")           
       
-         if os.path.exists("domusers2.txt"):
-            os.remove("domusers2.txt")
-      prompt()
+      if PAS.rstrip(" ") == "\"\"":
+         command("echo '\"\"' >> config.txt")
+      else:
+         command("echo " + PAS  + " >> config.txt")     
+ 
+      command("echo " + NTM.rstrip("\n") + " >> config.txt")
+      command("echo " + DOM  + " >> config.txt")  
+      command("echo " + SID.rstrip("\n") + " >> config.txt")
+      command("echo " + TSH  + " >> config.txt")  
+      command("echo " + IMP  + " >> config.txt")  
+      temp = '\"' + CMD.rstrip(" ") + '\"'
+      command("echo " + temp + " >> config.txt")  
+      command("echo " + LTM  + " >> config.txt")  
+      command("echo " + DIR  + " >> config.txt")       
+      exit(1)
 
 # Eof...	
