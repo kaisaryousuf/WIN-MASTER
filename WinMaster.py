@@ -1614,7 +1614,7 @@ while True:
          print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
-      if CheckParam != 1:
+      if CheckParams != 1:
          print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
 
          if (NTM[:1] != "") & (SID[:1] != ""):
