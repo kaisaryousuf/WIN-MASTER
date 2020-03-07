@@ -6,7 +6,7 @@
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version    |
 |------     |------            | -------                          | ----       |
-| python3   | WinMaster.py     | 2afa410839aae8b28a956cd7141d3039 | Monteverde |
+| python3   | WinMaster.py     | 9b60341f4ee17d35398cac2de17345ef | Monteverde |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
