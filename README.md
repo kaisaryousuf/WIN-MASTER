@@ -12,7 +12,7 @@ Usage: python3 WinMaster.py
 - [x] Requires Kerbrute (https://github.com/TarlogicSecurity/kerbrute) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
 - [x] Requires Windapsearch (https://github.com/ropnop/windapsearch) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
 
-    - [x] AclPwn (https://pypi.org/project/aclpwn/) requires BloodHound (https://github.com/BloodHoundAD/BloodHound) and Neo4j               (https://github.com/neo4j) to be installed.
+        AclPwn (https://pypi.org/project/aclpwn/) requires BloodHound (https://github.com/BloodHoundAD/BloodHound) and Neo4j                     (https://github.com/neo4j) to be installed.
               
 A python script file to remotely exploit Microsoft Windows systems- It can pull domains, usernames, passwords, crack hashes, and much much more.
 
