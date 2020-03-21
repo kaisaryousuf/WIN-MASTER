@@ -19,7 +19,7 @@ Usage: python3 WinMaster.py
               
 A python script file to remotely exploit Microsoft Windows systems- It can pull domains, usernames, passwords, crack hashes, and much much more.
 
-### CONSOLE DISPLAY
+### CONSOLE DISPLAY AND VIDEO LINK
 ![Screenshot](picture1.png)
 
 Found this project useful, or would like to see it amended in some way - make a donation.
