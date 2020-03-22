@@ -193,7 +193,7 @@ def display():
    print('\u2551')   
 
    print('\u2551' + " IMPERSONATE  " + '\u2502', end=' ')
-   if IMP == "Administrator      ":
+   if IMP == "administrator      ":
       print(colored(IMP[:COL1],colour1), end=' ')
    else:
       print(colored(IMP[:COL1],colour2), end=' ')
@@ -335,7 +335,7 @@ if not os.path.exists('config.txt'):
    DOM = "EMPTY              " # DOMAIN NAME
    SID = "EMPTY              " # DOMAIN SID
    TSH = "EMPTY              " # SESSION SHARE
-   IMP = "Administrator      " # IMPERSONATE
+   IMP = "administrator      " # IMPERSONATE
    CMD = "whoami             " # WINDOWS COMMAND                                            
    LTM = "00:00              " # LOCAL TIME    
    DIR = "WORKAREA           " # DIRECTORY
@@ -1865,15 +1865,20 @@ while True:
       if CheckParams != 1:
          print("\n[*] Enumerating " + TIP.rstrip(" ") +  " with user " + USR.rstrip(" ") + " and password '" + PAS.rstrip(" ") +"'...\n")
 
+         print(colored("[+] Other exploitable machines on the same subnet...\n",colour1), end=' ')        
          command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
+         
+         print(colored("[+] Trying specified windows command...\n",colour1), end=' ')
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
 
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")
+         print(colored("[+] Trying to enumerate users and shares...\n",colour1), end=' ')
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
          command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
          
-#         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
+         print(colored("[+] Trying a few other command while I am here...\n",colour1), end=' ')
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
+         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")         
+#        command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
       
          HASH = "." # Reset Value
          for x in range (0, MAXX):

@@ -5,7 +5,7 @@ Usage: python3 WinMaster.py
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
 |------     |------            | -------                          | ----    |
-| python3   | WinMaster.py     | 4156027db1e2ba9f3d52ea9d7e383e7c | Forest  |
+| python3   | WinMaster.py     | f037e3c9610c2252914010459b7ed952 | Forest  |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
@@ -20,7 +20,7 @@ Usage: python3 WinMaster.py
 A python script file to remotely exploit Microsoft Windows systems- It can pull domains, usernames, passwords, crack hashes, and much much more.
 
 ### CONSOLE DISPLAY AND VIDEO LINK
-![Screenshot](picture1.png)
+[![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/5wBMgItFVt4 "WinMaster")
 
 Found this project useful, or would like to see it amended in some way - make a donation.
 https://paypal.me/TerenceBroadbent
