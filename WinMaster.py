@@ -311,7 +311,7 @@ COL1 = 19	 	# SESSIONS
 COL2 = 31	 	# SHARE NAMES
 COL3 = 26	 	# USER NAMES
 COL4 = 32	 	# PASSWORDS
-MAXX = 40		# 0 - 39
+MAXX = 300		# 0 - 299
 
 SHAR = [" "*COL2]*MAXX	# SHARE NAMES
 USER = [" "*COL3]*MAXX	# USER NAMES
@@ -1821,17 +1821,27 @@ while True:
             data = data.replace(temp,"")
             temp = DOM.rstrip(" ") + ".LOCAL\\"
             data = data.replace(temp,"")
+
             try:
                get1,get2,get3,get4 = data.split(":") 
             except ValueError:
-               get1 = "Error..."
-               get4 = "Error..."
+               if get1 == "":
+                  get1 == "Error..."
+               if get2 == "":
+                  get2 == "Error..."
+               if get3 == "":
+                  get3 == "Error..."
+               if get4 == "":
+                  get4 == "Error..."
+
             get1 = get1.rstrip("\n")
+            get2 = get1.rstrip("\n")
+            get3 = get1.rstrip("\n")
             get4 = get4.rstrip("\n")
 
             print("[+] Found User", get1)
             USER[x] = get1[:COL3]
-            USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")			# STRIP DOMAIN NAME
+            USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")		# STRIP DOMAIN NAME
             PASS[x] = get4[:COL4]         
             
             if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3) 			# USER
