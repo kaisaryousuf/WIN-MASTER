@@ -416,7 +416,11 @@ while True:
             if len(DOM) < COL1:
                DOM = padding(DOM, COL1)
             print("[+] Found domain", DOM)
+            if DOMC == 1:
+               print("[+] Resetting current domain association...")
+               command("sed -i '$d' /etc/hosts")
             command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+            DOMC = 1
             print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
          else:
             print("[-] Unable to enumerate domain name...")      
@@ -547,7 +551,7 @@ while True:
          if len(TIP) < COL1:
             TIP = padding(TIP, COL1)
          if DOMC == 1:
-            print("\n[+] Resetting domain association...")
+            print("\n[+] Resetting current domain association...")
             command("sed -i '$d' /etc/hosts")
             DOM = "EMPTY              "
             DOMC = 0
