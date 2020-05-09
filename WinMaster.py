@@ -45,7 +45,7 @@ BUG = 0			# BUGHUNT ON/OFF
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
 # Version : Forest
-# Details : Create function calls from main.
+# Details : Create functional calls from main.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
@@ -262,7 +262,7 @@ def options():
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Forest                                                                
-# Details : Display universal header.
+# Details : Display my universal header.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
@@ -273,7 +273,7 @@ print(" \ \ /\ / / | ||  \| | | |\/| | / _ \ \___ \ | | |  _| | |_) |    ")
 print("  \ V  V /  | || |\  | | |  | |/ ___ \ ___) || | | |___|  _ <     ") 
 print("   \_/\_/  |___|_| \_| |_|  |_/_/   \_\____/ |_| |_____|_| \_\    ")
 print("                                                                  ")
-print("BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS\n")
+print("BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS).	     \n")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -307,15 +307,16 @@ print("[+] Populating system variables...")
 PATH = "/usr/share/doc/python3-impacket/examples/" 	# IMPACKET LOCATION
 
 SKEW = 0         	# TIME SKEW
+DOMC = 0		# DOMAIN COUNTER
 COL1 = 19	 	# SESSIONS
 COL2 = 31	 	# SHARE NAMES
 COL3 = 26	 	# USER NAMES
 COL4 = 32	 	# PASSWORDS
-MAXX = 300		# 0 - 299
+MAXX = 300		# 0 - 299			# NOT LIMITED
 
 SHAR = [" "*COL2]*MAXX	# SHARE NAMES
 USER = [" "*COL3]*MAXX	# USER NAMES
-PASS = [" "*COL4]*MAXX  # PASSWORDS
+PASS = [" "*COL4]*MAXX	# PASSWORDS
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -346,7 +347,7 @@ else:
    USR = linecache.getline('config.txt', 3).rstrip("\n")
    PAS = linecache.getline('config.txt', 4).rstrip("\n")
    NTM = linecache.getline('config.txt', 5).rstrip("\n")
-   DOM = linecache.getline('config.txt', 6).rstrip("\n")
+   DOM = linecache.getline('config.txt', 6).rstrip("\n")	
    SID = linecache.getline('config.txt', 7).rstrip("\n")
    TSH = linecache.getline('config.txt', 8).rstrip("\n")
    IMP = linecache.getline('config.txt', 9).rstrip("\n")
@@ -367,7 +368,12 @@ else:
    if len(LTM) < COL1: LTM = padding(LTM, COL1)
    if len(DIR) < COL1: DIR = padding(DIR, COL1)
 
-input("\n[*] Press ENTER key to continue...")
+   if DOM != "EMPTY              ":
+      command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+      print("[+] DOMAIN " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+      DOMC = 1
+
+prompt()
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -540,6 +546,12 @@ while True:
       else:
          if len(TIP) < COL1:
             TIP = padding(TIP, COL1)
+         if DOMC == 1:
+            print("\n[+] Resetting domain association...")
+            command("sed -i '$d' /etc/hosts")
+            DOM = "EMPTY              "
+            DOMC = 0
+            prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -613,8 +625,12 @@ while True:
       if DOM != "":
          if len(DOM) < COL1:
             DOM = padding(DOM, COL1)
+         if DOMC == 1:
+            print("\n[+] Removing previous domain name " + DOM.rstrip(" ") + " from /etc/hosts...")
+            command("sed -i '$d' /etc/hosts")
          command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
          print("\n[+] DOMAIN " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+         DOMC = 1
          prompt()
       else:
          DOM = BAK      
@@ -2247,7 +2263,9 @@ while True:
       command("echo " + LTM  + " >> config.txt")  
       command("echo " + DIR  + " >> config.txt")   
       os.remove("usernames.txt")
-      os.remove("passwords.txt")    
+      os.remove("passwords.txt")
+      if DOMC == 1:
+         command("sed -i '$d' /etc/hosts")
       exit(1)
 
 # Eof...	
