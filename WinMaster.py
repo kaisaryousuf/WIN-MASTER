@@ -312,7 +312,7 @@ COL1 = 19	 	# SESSIONS
 COL2 = 31	 	# SHARE NAMES
 COL3 = 26	 	# USER NAMES
 COL4 = 32	 	# PASSWORDS
-MAXX = 300		# 0 - 299			# NOT LIMITED
+MAXX = 1000		# 0 - 999			# NOT LIMITED
 
 SHAR = [" "*COL2]*MAXX	# SHARE NAMES
 USER = [" "*COL3]*MAXX	# USER NAMES
@@ -817,7 +817,7 @@ while True:
 
    if selection == '16':
       if TIP[:5] != "EMPTY":
-         command("nmap -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
+         command("nmap -sV -sC -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
       else:
          print("\n[-] Remote IP address has not been specified...")
       prompt()
