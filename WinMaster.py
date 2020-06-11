@@ -9,7 +9,7 @@
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest                                                                
+# Version : Blackfield                                                                
 # Details : Load required imports.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ colour3 = 'white'
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Forest                                                                
+# Version : Blackfield                                                                
 # Details : Conduct simple and routine tests on user supplied arguements.   
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ BUG = 0			# BUGHUNT ON/OFF
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Forest
+# Version : Blackfield
 # Details : Create functional calls from main.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ def display():
    print('\u2551')
 
    print('\u2551' + " USERNAME     " + '\u2502', end=' ')
-   if USR[:2] == '""':
+   if USR[:2] == "''":
       print(colored(USR[:COL1],colour1), end=' ')
    else:
       print(colored(USR[:COL1],colour2), end=' ')
@@ -133,7 +133,7 @@ def display():
    print('\u2551')
 
    print('\u2551' + " PASSWORD     " + '\u2502', end=' ')
-   if PAS[:2] == '""':
+   if PAS[:2] == "''":
       print(colored(PAS[:COL1],colour1), end=' ')
    else:
       print(colored(PAS[:COL1],colour2), end=' ')
@@ -205,7 +205,7 @@ def display():
    print('\u2551')      
 
    print('\u2551' + " WIN COMMAND  " + '\u2502', end=' ')
-   if CMD == "whoami             ":
+   if CMD == "whoami /all        ":
       print(colored(CMD[:COL1],colour1), end=' ')
    else:
       print(colored(CMD[:COL1],colour2), end=' ')
@@ -252,7 +252,7 @@ def options():
    print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) CrackMapExec (63) SSH     " + '\u2551')
    print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) PsExec HASH  (64) TelNet  " + '\u2551')
    print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) SmbExec HASH (65) NetCat  " + '\u2551')
-   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap O/S + Skew   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) WmiExec HASH (66) WinRm   " + '\u2551')
+   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Server Time  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) WmiExec HASH (66) WinRm   " + '\u2551')
    print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) GenUser List (67) RDesktop" + '\u2551')
    print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) USER Editor  (68) XFreerdp" + '\u2551')
    print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) PASS Editor  (69) Quit!!  " + '\u2551')
@@ -261,7 +261,7 @@ def options():
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest                                                                
+# Version : Blackfield                                                                
 # Details : Display my universal header.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -278,7 +278,7 @@ print("BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS).	     \n")
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Forest
+# Version : Blackfield
 # Details : Boot the system and initialise program files and variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -321,7 +321,7 @@ PASS = [" "*COL4]*MAXX	# PASSWORDS
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Forest
+# Version : Blackfield
 # Details : Check the config file for stored variables.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -330,14 +330,14 @@ if not os.path.exists('config.txt'):
    print("[+] Configuration file not found - using defualt values...")
    DNS = "EMPTY              " # DNS NAME
    TIP = "EMPTY              " # REMOTE IP
-   USR = '""                 ' # SESSION USERNAME
-   PAS = '""                 ' # SESSION PASSWORD       
+   USR = "''                 " # SESSION USERNAME
+   PAS = "''                 " # SESSION PASSWORD       
    NTM = "EMPTY              " # NTLM HASH
    DOM = "EMPTY              " # DOMAIN NAME
    SID = "EMPTY              " # DOMAIN SID
    TSH = "EMPTY              " # SESSION SHARE
    IMP = "administrator      " # IMPERSONATE
-   CMD = "whoami             " # WINDOWS COMMAND                                            
+   CMD = "whoami /all        " # WINDOWS COMMAND                                            
    LTM = "00:00              " # LOCAL TIME    
    DIR = "WORKAREA           " # DIRECTORY
 else:
@@ -378,7 +378,7 @@ prompt()
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Forest
+# Version : Blackfield
 # Details : Start the main menu controller.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -394,7 +394,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Autofill DOMAIN, SID, SHARES, USERS etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -475,6 +475,8 @@ while True:
             os.remove("shares2.txt")
 
          print("\n[*] Attempting to enumerate domain users...")    
+         command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm='" + DOM.rstrip(" ") + "' " + TIP.rstrip(""))
+         print("")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.txt")      
 
          test4 = linecache.getline("domusers1.txt", 1)
@@ -504,7 +506,7 @@ while True:
                if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
                command("echo " + USER[x] + " >> usernames.txt")
          else:
-            print("[-] Unable to enumerate domain users...")
+            print("[-] Unable to enumerate RDP domain users...")
       
          if os.path.exists("domusers2.txt"):
             os.remove("domusers2.txt")
@@ -515,7 +517,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change remote DNS SERVER name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -536,7 +538,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change remote IP address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -560,7 +562,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change the current USER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -581,7 +583,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change the current USERS PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -599,7 +601,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change the current USERS HASH value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -617,7 +619,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change the remote DOMAIN name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -642,7 +644,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change the remote DOMAIN SID value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -660,7 +662,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change the remote SHARE name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -678,7 +680,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change the remote Windows USER to impersonate.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -696,7 +698,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change the remote windows COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -714,7 +716,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Reset local TIME to match kerberos skew. 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -733,7 +735,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Change local working DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -755,7 +757,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Ping localhost IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -770,7 +772,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -795,7 +797,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - fierce -dns DNS SERVER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -810,14 +812,15 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - nmap -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '16':
       if TIP[:5] != "EMPTY":
-         command("nmap -sV -sC " + TIP.rstrip(" "))
+         print("")
+         command("nmap -sV " + TIP.rstrip(" ") + " -p 88")
       else:
          print("\n[-] Remote IP address has not been specified...")
       prompt()
@@ -825,7 +828,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - nmap -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -848,7 +851,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Intense quick TCP scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -863,7 +866,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Full, slow and comprehensive nmap scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -878,7 +881,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - getArch.py -target IP
 # Details : 32/64 bit
 # Modified: N/A
@@ -892,7 +895,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - netview.py DOMAIM/USER:PASSWORD -target IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -915,7 +918,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - services.py USER:PASSWOrd@IP list.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -938,7 +941,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - atexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -961,7 +964,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - dcomexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -983,7 +986,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP cmd.exe.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1025,7 +1028,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - smbexec.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1048,7 +1051,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - wmiexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1071,7 +1074,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - ifmap.py IP 135.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1084,7 +1087,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - opdump.py IP 135 99FCFEC4-5260-101B-BBCB-00AA0021347A 0.0.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1098,7 +1101,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - enum4linux -u "" -p "" REMOTE IP.
 # Details : Anonymous login check.
 # Modified: N/A
@@ -1113,7 +1116,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -GUC --da --full.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1136,7 +1139,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - lookupsid.py DOMAIN/USR:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1170,7 +1173,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1224,7 +1227,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - ./rpcdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1247,7 +1250,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - reg.py DOMAIN/USER:PASSWORD@IP query -keyName HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows -s.
 # Details : #HKEY_LOCAL_MACHINE\SAM
 # Modified: N/A
@@ -1271,7 +1274,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - smbclient -L \\\\IP -U USER%PASSWORD
 # Modified: 
 # -------------------------------------------------------------------------------------
@@ -1294,7 +1297,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R ?
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1317,7 +1320,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - smbclient \\\\IP\\SHARE -U USER%PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1340,7 +1343,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - rpcclient -U USER%PASSWORD IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1363,7 +1366,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - GetADUsers.py DOMAIN/USER:PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1386,7 +1389,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=usernames.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1424,7 +1427,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - kerbrute.py -domain DOMAIN -users usernames.txt -passwords passwords.txt -outputfile optional.txt.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1494,7 +1497,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected -  GetUserSPNs.py DOMAIN/USER:PASSWORD -outputfile hashroast1.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1523,7 +1526,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile usernames.txt -format hashcat -outputfile hashroast2.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1552,7 +1555,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - print binascii.hexlify(hashlib.new("md4", "<password>".encode("utf-16le")).digest())'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1574,7 +1577,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - getTGT.py DOMAIN/USER:PASSWORD
 # Details :                        getTGT.py DOMAIN/USER -hashes :HASH
 # Modified: N/A
@@ -1627,7 +1630,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Pass the Ticket.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1639,8 +1642,8 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
-# Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/Forest
+# Version : Blackfield
+# Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/Blackfield
 # Details : Silver Ticket!! 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1692,7 +1695,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
 # Details : Golden Ticket!!
 # Modified: N/A
@@ -1744,7 +1747,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - goldenpac.py -dc-ip IP -target-ip IP DOMAIN/USER:PASSWORD@DOMAIN
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1779,7 +1782,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - ldapdomaindump -u DOMAIN\USER:PASSWORD IP -o DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1804,7 +1807,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1876,7 +1879,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - crackmapexec smb IP -u Administrator -p password --lusers --local-auth --shares & H hash -x 'net user Administrator /domain'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1925,7 +1928,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1960,7 +1963,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - domain/username:password@<targetName or address
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1995,7 +1998,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2030,7 +2033,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - crewl -d 3 -m5 -w textfile.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2053,7 +2056,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Nano usernames.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2068,7 +2071,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Nano passwords.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2080,7 +2083,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - SMB Spray with USERS AND PASSWORDS
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2119,7 +2122,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2147,7 +2150,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - pftb IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2160,7 +2163,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - ssh -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2173,7 +2176,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - telnet -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2186,7 +2189,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - nc IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2199,20 +2202,23 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Windows remote login on port 5985.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='66':
       if TIP[:5] != "EMPTY":
-         command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
+         if PAS.rstrip(" ") == "''":
+            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H '" + NTM.rstrip(" ") + "'")
+         else:
+            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - rdesktop - u user -p password -d domain / IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2225,7 +2231,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - BLANK
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2238,7 +2244,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Forest
+# Version : Blackfield
 # Details : Menu option selected - Save current data to config.txt and exit the program.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2247,15 +2253,16 @@ while True:
       command("echo " + DNS + " > config.txt")			# CREATE NEW CONFIG FILE
       command("echo " + TIP  + " >> config.txt")
 
-      if USR.rstrip(" ") == "\"\"":
-         command("echo '\"\"' >> config.txt")
+      null = "\\'\\'"
+      if USR.rstrip(" ") == "''":
+         command("echo " + null + " >> config.txt")
       else:
-         command("echo " + USR  + " >> config.txt")           
+         command("echo '" + USR  + "' >> config.txt")           
       
-      if PAS.rstrip(" ") == "\"\"":
-         command("echo '\"\"' >> config.txt")
+      if PAS.rstrip(" ") == "''":
+         command("echo " + null + " >> config.txt")
       else:
-         command("echo " + PAS  + " >> config.txt")     
+         command("echo '" + PAS  + "' >> config.txt")     
  
       command("echo " + NTM.rstrip("\n") + " >> config.txt")
       command("echo " + DOM  + " >> config.txt")  
