@@ -880,6 +880,7 @@ while True:
 
    if selection == '19':
       if TIP[:5] != "EMPTY":
+         command("nmap -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
          command("nmap -sV -p 88 " + TIP.rstrip(" "))
       else:
          print("\n[-] Remote IP address has not been specified...")
