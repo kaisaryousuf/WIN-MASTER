@@ -246,7 +246,7 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*21  + '\u2569' + ('\u2550')*12 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*61 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) Autofill REMOTE IP (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) PASpray " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) PASpray " + '\u2551')
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) ACLPwn  " + '\u2551')
    print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) Secrets Dump (62) FTP     " + '\u2551')
    print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) CrackMapExec (63) SSH     " + '\u2551')
@@ -787,6 +787,14 @@ while True:
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
+         
+      if USR[:2] == "''":
+         print("\n[-] Username has not been specified...")
+         CheckParams = 1
+         
+      if PAS[:2] == "''":
+         print("\n[-] Password has not been specified...")
+         CheckParams = 1
 
       if CheckParams != 1:
          command("adidnsdump -u '" + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + DOM.rstrip(" ") + " --include-tombstoned -r")
@@ -819,8 +827,10 @@ while True:
 
    if selection == '16':
       if TIP[:5] != "EMPTY":
-         print("")
-         command("nmap -sV " + TIP.rstrip(" ") + " -p 88")
+         print("[*] Enumerating, please wait this can take sometime...\n")
+         command("nmap -sV " + TIP.rstrip(" ") + " > temp.txt")
+         command("cat temp.txt | grep 'server time'")
+         os.remove("temp.txt")
       else:
          print("\n[-] Remote IP address has not been specified...")
       prompt()
