@@ -252,10 +252,10 @@ def options():
    print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) CrackMapExec (63) SSH     " + '\u2551')
    print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) PsExec HASH  (64) TelNet  " + '\u2551')
    print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) SmbExec HASH (65) NetCat  " + '\u2551')
-   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Server Time  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) WmiExec HASH (66) WinRm   " + '\u2551')
-   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Subdomains   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) GenUser List (67) RDesktop" + '\u2551')
-   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Intense TCP  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) USER Editor  (68) XFreerdp" + '\u2551')
-   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Slow & Full  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) PASS Editor  (69) Quit!!  " + '\u2551')
+   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) WmiExec HASH (66) WinRm   " + '\u2551')
+   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Intense TCP  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) GenUser List (67) RDesktop" + '\u2551')
+   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Sub-Domains  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) USER Editor  (68) XFreerdp" + '\u2551')
+   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Server Time  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) PASS Editor  (69) Quit!!  " + '\u2551')
    print('\u255A' + ('\u2550')*132 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -475,7 +475,7 @@ while True:
             os.remove("shares2.txt")
 
          print("\n[*] Attempting to enumerate domain users...")    
-         command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm='" + DOM.rstrip(" ") + "' " + TIP.rstrip(""))
+         command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm='" + DOM.rstrip(" ") + "' " + TIP.rstrip(" "))
          print("")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.txt")      
 
@@ -816,25 +816,37 @@ while True:
       else:
          print("\n[-] DNS server has not been specified...")
       prompt()
-
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Blackfield
-# Details : Menu option selected - nmap -sU -O -p 123 --script ntp-info IP.
+# Details : Menu option selected - Full, slow and comprehensive nmap scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '16':
       if TIP[:5] != "EMPTY":
-         print("[*] Enumerating, please wait this can take sometime...\n")
-         command("nmap -sV " + TIP.rstrip(" ") + " > temp.txt")
-         command("cat temp.txt | grep 'server time'")
-         os.remove("temp.txt")
+         command("nmap -sS -sU -T4 -A -v -PE -PP -PS80,443 -PA3389 -PU40125 -PY -g 53 --script 'default or (discovery and safe)' " + TIP.rstrip(" "))
       else:
          print("\n[-] Remote IP address has not been specified...")
       prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Blackfield
+# Details : Menu option selected - Intense quick TCP scan.
+# Modified: N/A
+# -------------------------------------------------------------------------------------
 
+   if selection == '17':
+      if TIP[:5] != "EMPTY":
+         command("nmap -T4 -F " + TIP.rstrip(" "))
+      else:
+         print("\n[-] Remote IP address has not been specified...")
+      prompt()
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -843,7 +855,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '17':
+   if selection == '18':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -862,32 +874,17 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Blackfield
-# Details : Menu option selected - Intense quick TCP scan.
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '18':
-      if TIP[:5] != "EMPTY":
-         command("nmap -T4 -F " + TIP.rstrip(" "))
-      else:
-         print("\n[-] Remote IP address has not been specified...")
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Blackfield
-# Details : Menu option selected - Full, slow and comprehensive nmap scan.
+# Details : Menu option selected - nmap -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '19':
       if TIP[:5] != "EMPTY":
-         command("nmap -sS -sU -T4 -A -v -PE -PP -PS80,443 -PA3389 -PU40125 -PY -g 53 --script 'default or (discovery and safe)' " + TIP.rstrip(" "))
+         command("nmap -sV -p 88 " + TIP.rstrip(" "))
       else:
          print("\n[-] Remote IP address has not been specified...")
       prompt()
-
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -1406,7 +1403,7 @@ while True:
 
    if selection == '41':
       if TIP[:5] != "EMPTY":
-         print("\n[*] Please wait, checking to see if any found username is assigned to Kerberous...")
+         print("[*] Please wait, checking to see if any found username is assigned to Kerberous...")
          command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
          command("sed -i '/@/!d' KUSERS.tmp")
          command("sort KUSERS.tmp > USERS2.tmp")
@@ -2218,11 +2215,25 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='66':
-      if TIP[:5] != "EMPTY":
-         if PAS.rstrip(" ") == "''":
+      CheckParams = 0      
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP has not been specified...")
+         CheckParams = 1
+         
+      if PAS.rstrip(" ") == "''":
+         print("[-] Password has not been specified...")
+         CheckParams = 1   
+   
+      if CheckParams == 1:
+         if (NTM[:5] != "EMPTY") and (TIP[:5] != "EMPTY"):      
+            print("[*] Using the HASH value as a login credential...")
             command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H '" + NTM.rstrip(" ") + "'")
          else:
-            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
+            if (NTM[:5] == "EMPTY") or (NTM[:1] == "."):
+               print("[-] Hash value has not been specified...")
+                    
+      if CheckParams == 0:
+         command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2287,6 +2298,8 @@ while True:
       os.remove("passwords.txt")
       if DOMC == 1:
          command("sed -i '$d' /etc/hosts")
+      if len(os.listdir(DIR.rstrip(" "))) == 0:
+         os.rmdir(DIR.rstrip(" "))
       exit(1)
 
 # Eof...	
