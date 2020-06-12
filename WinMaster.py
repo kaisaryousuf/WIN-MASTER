@@ -1120,7 +1120,7 @@ while True:
    if selection == '30':
       if TIP[:5] != "EMPTY":
          print ("")
-         command("enum4linux -v " + TIP.rstrip(" "))
+         command("enum4linux -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -v " + TIP.rstrip(" "))
       prompt()
 
 #------------------------------------------------------------------------------------- 
