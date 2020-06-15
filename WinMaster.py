@@ -2052,14 +2052,16 @@ while True:
       if TIP[:5] != "EMPTY":
          redirect = input("[*] Please enter the URL to parse or press ENTER to use defualt IP address: ")
          if redirect == "":
-            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write usernames.txt --offsite " + TIP.rstrip(" ") + " 2>&1")
+            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write usernames.txt " + TIP.rstrip(" ") + " 2>&1")
          else:
-            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write usernames.txt --offsite " + redirect + " 2>&1")
+            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write usernames.txt " + redirect + " 2>&1")
          print("\n[+] Userlist generated via website...")
 
          if os.path.exists("/usr/share/ncrack/minimal.usr"):
             command("cat /usr/share/ncrack/minimal.usr >> usernames.txt 2>&1")
             command("sed -i '/#/d' usernames.txt 2>&1")
+            command("sed -i '/Email addresses found/d' usernames.txt 2>&1")
+            command("sed -i '/---------------------/d' usernames.txt 2>&1")
             print("[+] NCrack minimal.usr list added as well...")
 
          for x in range (0,MAXX):
