@@ -1407,9 +1407,11 @@ while True:
          print("[*] Please wait, checking to see if any found username is assigned to Kerberous...")
          command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
          command("sed -i '/@/!d' KUSERS.tmp")
-         command("sort KUSERS.tmp > USERS2.tmp")
-         os.remove("KUSERS.tmp")	# DELETE FILE
+         command("sort KUSERS.tmp | uniq > USERS2.tmp")
+         
+         os.remove("KUSERS.tmp")		# DELETE REDUNDANT FILE
          os.remove("usernames.txt")		# DELETE OLD FILE
+         command("touch usernames.txt")		# CREATE NEW FILE
 	
          for x in range (0, MAXX):
             TEMP = linecache.getline("USERS2.tmp", x+1)
@@ -1421,7 +1423,7 @@ while True:
                if TEMP[:1] != " ":							# CONTAINS DATA
                   USER[x] = TEMP							# ASSIGN USER NAME
                   print("[+] Found user ", USER[x])
-                  command("echo " + USER[x] + " >> usernames.txt")				# EXPORT FOUND USER
+                  command("echo " + USER[x] + " >> usernames.txt")			# EXPORT FOUND USER
             else:
                USER[x] = " "*COL3							# ASSIGN EMPTY USER
             if USER[x][:1] != " ": PASS[x] = "."*COL4					# RESET HASH VALUE
@@ -2042,13 +2044,17 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Blackfield
-# Details : Menu option selected - crewl -d 3 -m5 -w textfile.txt IP.
+# Details : Menu option selected - https://tools.kali.org/password-attacks/cewl
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='57':
       if TIP[:5] != "EMPTY":
-         command("cewl -d 3 -m 5 -w usernames.txt " + TIP.rstrip(" ") + " 2>&1")
+         redirect = input("[*] Please enter the URL to parse or press ENTER to use defualt IP address: ")
+         if redirect == "":
+            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write usernames.txt --offsite " + TIP.rstrip(" ") + " 2>&1")
+         else:
+            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write usernames.txt --offsite " + redirect + " 2>&1")
          print("\n[+] Userlist generated via website...")
 
          if os.path.exists("/usr/share/ncrack/minimal.usr"):
