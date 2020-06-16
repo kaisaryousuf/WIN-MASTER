@@ -437,14 +437,21 @@ while True:
                DOM = padding(DOM, COL1)
             print("[+] Found domain...\n")
             command2("echo " + DOM)
+            
             if DOMC == 1:
                print("\n[*] Resetting current domain association...")
                command("sed -i '$d' /etc/hosts")
-            command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-            DOMC = 1
-            print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+               command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+               print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+            
+            if DOMC == 0:
+               if DOM[:5] != "EMPTY":
+                  command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+                  print("\n[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+                  DOMC = 1          
+                      
          else:
-            print("[-] Unable to enumerate domain name...")      
+            print("[-] Unable to enumerate domain name...")       
 
          print("[*] Attempting to enumerate domain SID...")
          test2 = linecache.getline("temp.txt", 2)
@@ -1230,21 +1237,22 @@ while True:
          else:
             print("[-] Unable to find usernames...")
          
-         command("rm usernames.txt")		# DELETE OLD
-         command("touch usernames.txt")		# CREATE NEW
+         if os.path.getsize("USERS.tmp") != 0:
+            command("rm usernames.txt")		# DELETE OLD
+            command("touch usernames.txt")	# CREATE NEW
          
-         for x in range(0, MAXX):
-            username = linecache.getline("USERS.tmp", x + 1)
-            if username != "":
-               try:
-                  null,USER[x] = username.split(DOM.rstrip(" ") + "\\")
-               except ValueError:
-                  USER[x] = "Error..."
-               if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-               command("echo " + USER[x] + " >> usernames.txt")
-            else:
-               USER[x] = " "*COL3      
-         command("rm *.tmp")         
+            for x in range(0, MAXX):
+               username = linecache.getline("USERS.tmp", x + 1)
+               if username != "":
+                  try:
+                     null,USER[x] = username.split(DOM.rstrip(" ") + "\\")
+                  except ValueError:
+                     USER[x] = "Error..."
+                  if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+                  command("echo " + USER[x] + " >> usernames.txt")
+               else:
+                  USER[x] = " "*COL3      
+            command("rm *.tmp")         
       prompt()
 
 # ------------------------------------------------------------------------------------- 
