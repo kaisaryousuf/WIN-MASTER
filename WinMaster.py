@@ -22,10 +22,11 @@ import binascii
 import datetime
 import linecache
 
-from termcolor import colored					# pip install termcolor
+from termcolor import colored	# pip install termcolor
 colour1 = 'yellow'
 colour2 = 'green'
 colour3 = 'white'
+enumcol = 2			# https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -84,13 +85,32 @@ def gettime(value):
 
 def command(command):
    if BUG == 1:
-         print(colored(command, colour3))
+      print(colored(command, colour3))
    os.system(command)
    return
+   
+def command2(command):
+   seton(enumcol)
+   if BUG == 1:
+      print(colored(command, colour3))
+   os.system(command)
+   setoff()
+   return
 
+def seton(value):
+   command("tput setaf " + str(value))
+   command("tput bold")   
+   return
+   
+def setoff():
+   command("tput sgr0")
+   command("tput dim")
+   return
+   
 def prompt():
    selection = input("\nPress ENTER to continue...")
    return
+   
 
 def display():
    print('\u2554' + ('\u2550')*36 + '\u2566' + ('\u2550')*33 + '\u2566' + ('\u2550')*61 + '\u2557')
@@ -401,7 +421,7 @@ while True:
 
    if selection =='0':
       if TIP[:5] != "EMPTY":
-         print("\n[*] Attempting to enumerate domain name...")
+         print("[*] Attempting to enumerate domain name...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > temp.txt")
 
          test1 = linecache.getline("temp.txt", 1)
@@ -415,17 +435,18 @@ while True:
             DOM = DOM.strip(" ")
             if len(DOM) < COL1:
                DOM = padding(DOM, COL1)
-            print("[+] Found domain", DOM)
+            print("[+] Found domain...\n")
+            command2("echo " + DOM)
             if DOMC == 1:
-               print("[+] Resetting current domain association...")
+               print("\n[*] Resetting current domain association...")
                command("sed -i '$d' /etc/hosts")
             command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
             DOMC = 1
-            print("\n[*] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+            print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
          else:
             print("[-] Unable to enumerate domain name...")      
 
-         print("\n[*] Attempting to enumerate domain SID...")
+         print("[*] Attempting to enumerate domain SID...")
          test2 = linecache.getline("temp.txt", 2)
          if test2[:6] != "Cannot":
             try:
@@ -435,25 +456,27 @@ while True:
             SID = SID.strip(" ")
             if len(SID) < COL1:
                SID = padding(SID, COL1)
-            print("[+] Found SID", SID)
+            print("[+] Found SID...\n")
+            command2("echo " + SID)
          else:
             print("[-] Unable to enumerate SID...") 
 
          if os.path.exists("temp.txt"):
             os.remove("temp.txt")
    
-         print("[*] Attempting to enumerate shares...")
+         print("\n[*] Attempting to enumerate shares...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.txt")
 
          test3 = linecache.getline("shares1.txt", 1)
          if test3[:9] != "Could not" and test3[:6] != "result":
             for x in range (0, MAXX):
-               SHAR[x] = " "*COL2 						# Clean current values.
+               SHAR[x] = " "*COL2 					# Clean current values.
 
             command("sed -i -n '/netname: /p' shares1.txt")		# Format text.
             command("sort shares1.txt > shares2.txt")
             command("cat shares2.txt | wc -l > count.txt")
 
+            print("[+] Found shares...\n")
             count = int(linecache.getline("count.txt", 1))      
             for x in range(0, count):
                SHAR[x] = linecache.getline("shares2.txt", x + 1)
@@ -462,7 +485,7 @@ while True:
                   share2, SHAR[x] = SHAR[x].split(":")
                except ValueError:
                   SHAR[x] = "Error..."
-               print("[+] Found share " + SHAR[x].rstrip("\n"))
+               command2("echo " + SHAR[x].rstrip("\n"))
                if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)
          else:
             print("[-] Unable to enumerate shares...")   
@@ -493,6 +516,7 @@ while True:
             os.remove("count2.txt")
             os.remove("usernames.txt")
  
+            print ("[+] Found users...\n")
             for x in range(0, count2):
                test5 = linecache.getline("domusers2.txt", x + 1)
                try:
@@ -502,7 +526,7 @@ while True:
                USER[x] = USER[x].replace("[","")
                USER[x] = USER[x].replace("]","")
                USER[x] = USER[x].replace("rid","")
-               print ("[+] Found user", USER[x])
+               command2("echo " + USER[x])
                if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
                command("echo " + USER[x] + " >> usernames.txt")
          else:
@@ -1156,26 +1180,71 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Enumerating, please wait....\n")
-         command(PATH + "lookupsid.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > DOMAIN.tmp")
-         command("cat DOMAIN.tmp | grep SidTypeGroup"); print ("")
-         command("cat DOMAIN.tmp | grep SidTypeAlias"); print ("")
-         command("cat DOMAIN.tmp | grep SidTypeUser"); print ("")
+         print("[*] Enumerating, please wait....")
+         command(PATH + "lookupsid.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > DOMAIN.tmp")         
+         
          command("cat DOMAIN.tmp | grep 'Domain SID' > SID.tmp")
-         os.remove("DOMAIN.tmp")
          SIDID = linecache.getline("SID.tmp", 1)
-         os.remove("SID.tmp")
-
          if SIDID != "":
-            SID = SIDID.replace('[*] Domain SID is: ',"")
+            if SID[:5] == "EMPTY":
+               SID = SIDID.replace('[*] Domain SID is: ',"")
+               print("[+] Domain SID found...\n")
+               command2("echo " + SID + "\n")
+         if SID[:5] == "EMPTY":
+            print("[-] Unable to find domain SID...")
+         os.remove("SID.tmp")
+         
+         command("sed -i /*/d DOMAIN.tmp")
+         command("sed -i 's/.*://g' DOMAIN.tmp")   
+         command("cat DOMAIN.tmp | grep SidTypeAlias | sort > ALIAS.tmp")      
+         command("cat DOMAIN.tmp | grep SidTypeGroup | sort > GROUP.tmp")
+         command("cat DOMAIN.tmp | grep SidTypeUser  | sort > USERS.tmp")
+         
+         command("sed -i 's/(SidTypeAlias)//g' ALIAS.tmp")
+         command("sed -i 's/(SidTypeGroup)//g' GROUP.tmp")
+         command("sed -i 's/(SidTypeUser)//g'  USERS.tmp")
+         
+         if os.path.getsize("ALIAS.tmp") != 0:
+            print("\n[+] Found Aliases...\n")
+            command2("cat ALIAS.tmp")
+         else:
+            print("[-] Unable to find aliases...")
+            
+         if os.path.getsize("GROUP.tmp") != 0:
+            print("\n[+] Found Groups...\n")
+            command2("cat GROUP.tmp")
+         else:
+            print("[-] Unable to find groups...")
+            
+         if os.path.getsize("USERS.tmp") != 0:
+            print("\n[+] Found Users...\n")
+            command2("cat USERS.tmp")  
+         else:
+            print("[-] Unable to find usernames...")
+         
+         command("rm usernames.txt")		# DELETE OLD
+         command("touch usernames.txt")		# CREATE NEW
+         
+         for x in range(0, MAXX):
+            username = linecache.getline("USERS.tmp", x + 1)
+            if username != "":
+               try:
+                  null,USER[x] = username.split(DOM.rstrip(" ") + "\\")
+               except ValueError:
+                  USER[x] = "Error..."
+               if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+               command("echo " + USER[x] + " >> usernames.txt")
+            else:
+               USER[x] = " "*COL3      
+         command("rm *.tmp")         
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1403,26 +1472,35 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '41':
-      if TIP[:5] != "EMPTY":
-         print("[*] Please wait, checking to see if any found username is assigned to Kerberous...")
+      CheckParams = 0
+
+      if DOM[:5] == "EMPTY":
+         print("[-] Domain name has not been specified...")
+         CheckParams = 1
+
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("[*] Enumerating, please wait...\n")
          command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
          command("sed -i '/@/!d' KUSERS.tmp")
          command("sort KUSERS.tmp | uniq > USERS2.tmp")
          
-         os.remove("KUSERS.tmp")		# DELETE REDUNDANT FILE
          os.remove("usernames.txt")		# DELETE OLD FILE
+         os.remove("KUSERS.tmp")		# DELETE REDUNDANT FILE
          command("touch usernames.txt")		# CREATE NEW FILE
 	
-         for x in range (0, MAXX):
-            TEMP = linecache.getline("USERS2.tmp", x+1)
-            if TEMP != "":
-               TEMP = TEMP.replace("|     ", "")
-               TEMP = TEMP.replace("|_    ", "")
-               TEMP = TEMP.split("@")
-               TEMP = TEMP[0]
-               if TEMP[:1] != " ":							# CONTAINS DATA
-                  USER[x] = TEMP							# ASSIGN USER NAME
-                  print("[+] Found user ", USER[x])
+         for x in range(0, MAXX):
+            username = linecache.getline("USERS2.tmp", x + 1)
+            if username != "":
+               username = username.replace("|     ", "")
+               username = username.replace("|_    ", "")
+               username = username.split("@")
+               username = username[0]
+               if username[:1] != " ":							# CONTAINS DATA
+                  USER[x] = username							# ASSIGN USER NAME
                   command("echo " + USER[x] + " >> usernames.txt")			# EXPORT FOUND USER
             else:
                USER[x] = " "*COL3							# ASSIGN EMPTY USER
@@ -1430,8 +1508,9 @@ while True:
             if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
             if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4)
 
-         os.remove("USERS2.tmp")
-         print("[*] All done!")
+         os.remove("USERS2.tmp")         
+         print("[+] Found Users...\n")
+         command2("cat usernames.txt")         
       prompt()
 
 # ------------------------------------------------------------------------------------- 

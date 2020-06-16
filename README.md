@@ -5,7 +5,7 @@ Usage: python3 WinMaster.py
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version    |
 |------     |------            | -------                          | ----       |
-| python3   | WinMaster.py     | 254d1355fca355fd49ec5ea79e0d0d0a | Blackfield |
+| python3   | WinMaster.py     | bee937da4b59fe4651d2dfd96da5fb4d | Blackfield |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
