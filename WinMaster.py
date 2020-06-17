@@ -457,8 +457,7 @@ while True:
                except ValueError:
                   SID = "Error..."
                SID = SID.strip(" ")
-               if len(SID) < COL1:
-                  SID = padding(SID, COL1)
+               SID = padding(SID, COL1)
             
                if SID[:5] != "Error":
                   print("[+] Found SID...\n")
