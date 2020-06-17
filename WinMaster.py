@@ -1539,8 +1539,8 @@ while True:
          if test1 != "":
             found = 1
             USR,PAS = test1.split(":")
-            if len(USR) < COL3: USR = padding(USR, COL3)
-            if len(PAS) < COL4: PAS = padding(PAS, COL4)
+            if len(USR) < COL1: USR = padding(USR, COL1)
+            if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
             print("\n[*] Now trying all usernames with matching passwords...")
@@ -1551,8 +1551,8 @@ while True:
          if test2 != "":
             found = 1
             USR,PAS = test2.split(":")
-            if len(USR) < COL3: USR = padding(USR, COL3)
-            if len(PAS) < COL4: PAS = padding(PAS, COL4)
+            if len(USR) < COL1: USR = padding(USR, COL1)
+            if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
             print("\n[*] Now trying user Administrator with random passwords...")
@@ -1563,8 +1563,8 @@ while True:
          if test3 != "":
             found = 1
             USR,PAS = test3.split(":")        
-            if len(USR) < COL3: USR = padding(USR, COL3)
-            if len(PAS) < COL4: PAS = padding(PAS, COL4)
+            if len(USR) < COL1: USR = padding(USR, COL1)
+            if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
             print("\n[*] Now trying all users with random passwords...")
@@ -1574,8 +1574,8 @@ while True:
          test4 = test4.rstrip("\n")
          if test4 != "":
             USR,PAS = test4.split(":") 
-            if len(USR) < COL3: USR = padding(USR, COL3)
-            if len(PAS) < COL4: PAS = padding(PAS, COL4)
+            if len(USR) < COL1: USR = padding(USR, COL1)
+            if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          command("rm bpassword*.txt")
       prompt()
