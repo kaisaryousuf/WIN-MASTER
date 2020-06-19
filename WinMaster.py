@@ -2643,7 +2643,8 @@ while True:
       command("echo " + LTM  + " >> config.txt")  
       command("echo " + DIR  + " >> config.txt")   
       os.remove("usernames.txt")
-      os.remove("usernames2.txt")
+      if os.path.exists("usernames2.txt"):
+         os.remove("usernames2.txt")      
       os.remove("passwords.txt")
       if DOMC == 1:
          command("sed -i '$d' /etc/hosts")
