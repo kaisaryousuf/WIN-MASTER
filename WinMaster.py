@@ -261,16 +261,16 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenUser List (70) FTP                  " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenPass List (71) SSH                  " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) USER Editor  (72) Telnet               " + '\u2551')
-   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) PASS Editor  (73) NetCat               " + '\u2551')
-   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASpray SMB  (74) Evil WinRm           " + '\u2551')
-   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) GPP Decrypt  (75) WIN Remote Desktop   " + '\u2551')
-   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66)              (76) XFree Remote Desktop " + '\u2551')
-   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Intense TCP  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)              (77)                      " + '\u2551')
-   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Sub-Domains  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)              (78)                      " + '\u2551')
-   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Server Time  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59)              (69)              (79) Save & Exit Program!!" + '\u2551')
+   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenUSERList (70)          (80) FTP     " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenPASSList (71)          (81) SSH     " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) USER Editor (72)          (82) Sqsh    " + '\u2551')
+   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) PASS Editor (73)          (83) MySQL   " + '\u2551')
+   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASpray SMB (74)          (84) Telnet  " + '\u2551')
+   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) WPScan      (75)          (85) Netcat  " + '\u2551')
+   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66) Dirb        (76)          (86) WinRM   " + '\u2551')
+   print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Intense TCP  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)          (87) RDesktop" + '\u2551')
+   print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Sub-Domains  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)          (88) XFreerdp" + '\u2551')
+   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Server Time  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) GPP Decrypt  (69)             (79)          (89) Quit !! " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -2167,12 +2167,15 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Active
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - gpp AES256 Cracker
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='59':
-      exit(1)
+      AES256 = input("[*] Please enter the AES-256 Encryption: ")
+      if AES256 != "":
+         command("gpp-decrypt " + AES256)
+      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2299,15 +2302,21 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Active
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - WPScanner - version 1.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='65':
-      AES256 = input("\n[*] Please enter the AES-256 Encryption: ")
-      if AES256 != "":
-         command("gpp-decrypt " + AES256)
-      prompt()
+     if TIP[:5] != "EMPTY":
+         print("[*] Attempting to enumerate usernames...")
+         command("wpscan --url " + TIP.rstrip(" ") + " --enumerate u -o usernames2.txt")
+         command("cat usernames2.txt")
+         print("[*] Attempting to enumerate passwords...")
+         if os.path.getsize("passwords.txt") == 0:
+            command("wpscan --url " + TIP.rstrip(" ") + " --passwords /usr/share/wordlists/rockyou.txt --usernames usernames2.txt")
+         else:
+            command("wpscan --url " + TIP.rstrip(" ") + " --passwords passwords.txt --usernames usernames2.txt")
+     prompt()
             
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2318,8 +2327,11 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='66':
-      exit(1)
-
+      if TIP[:5] != "EMPTY":
+         print("[*] Enumerating, please wait...")
+         command("dirb http://" + TIP.rstrip(" ") + " -R -X .bak,.zip,.php,.html,.pdf,.txt /usr/share/wordlists/dirb/common.txt")
+      prompt()
+      
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -2352,6 +2364,116 @@ while True:
 
    if selection =='69':
       exit(1)         
+
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='70':
+      exit(1)
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='71':
+      exit(1)    
+      
+ #------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='72':
+      exit(1)          
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='73':
+      exit(1)    
+      
+ #------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='74':
+      exit(1)    
+ 
+ #------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='75':
+      exit(1)          
+      
+ #------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='76':
+      exit(1)    
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='77':
+      exit(1)    
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='78':
+      exit(1)    
+
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='79':
+      exit(1)          
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2361,7 +2483,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='70':
+   if selection =='80':
       if TIP[:5] != "EMPTY":
          command("pftp " + TIP.rstrip(" "))
       prompt()
@@ -2374,10 +2496,37 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='71':
+   if selection =='81':
       if TIP[:5] != "EMPTY":
          command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='82':
+      if TIP[:5] != "EMPTY":
+         command("sqsh -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -S " + TIP.rstrip(" "))
+      prompt()
+
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='83':
+      if TIP[:5] != "EMPTY":
+         command("mysql -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -h " + TIP.rstrip(" "))
+      prompt()
+
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2387,7 +2536,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='72':
+   if selection =='84':
       if TIP[:5] != "EMPTY":
          command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
@@ -2400,7 +2549,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='73':
+   if selection =='85':
       if TIP[:5] != "EMPTY":
          command("nc " + TIP.rstrip(" "))
       prompt()
@@ -2413,7 +2562,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='74':
+   if selection =='86':
       CheckParams = 0      
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP has not been specified...")
@@ -2443,7 +2592,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='75':
+   if selection =='87':
       if TIP[:5] != "EMPTY":
          command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
       prompt()
@@ -2456,33 +2605,11 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '76':
+   if selection == '88':
       if TIP[:5] != "EMPTY":
          command("xfreerdp /u:" + USR.rstrip(" ") + " /p:'" + PAS.rstrip(" ") + "' /v:" + TIP.rstrip(" "))
       prompt()     
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Active
-# Details : Menu option selected - 
-# Modified: N/A
-# ------------------------------------------------------------------------------------- 
-
-   if selection == '77':
-      exit(1)
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Active
-# Details : Menu option selected - 
-# Modified: N/A
-# ------------------------------------------------------------------------------------- 
-
-   if selection == '78':
-      exit(1)
-      
+                 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -2491,7 +2618,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '79':
+   if selection == '89':
       command("echo " + DNS + " > config.txt")			# CREATE NEW CONFIG FILE
       command("echo " + TIP  + " >> config.txt")
 
@@ -2516,6 +2643,7 @@ while True:
       command("echo " + LTM  + " >> config.txt")  
       command("echo " + DIR  + " >> config.txt")   
       os.remove("usernames.txt")
+      os.remove("usernames2.txt")
       os.remove("passwords.txt")
       if DOMC == 1:
          command("sed -i '$d' /etc/hosts")
