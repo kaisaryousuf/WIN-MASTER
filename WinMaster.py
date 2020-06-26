@@ -449,7 +449,7 @@ while True:
             print("[*] Attempting to enumerate domain SID...")
             line2 = linecache.getline("dump.tmp", 2)
          
-            if line2[:6] == "Cannot":
+            if (line2[:6] == "Cannot") or (line2[:1] == ""):
                print("[-] Unable to enumerate SID...")
             else:
                try:
@@ -461,13 +461,13 @@ while True:
             
                if SID[:5] != "Error":
                   print("[+] Found SID...\n")
-                  print(colored(SID,colour2, attrs=['bold']))
+                  print(colored(SID,colour2, attrs=['bold']) + "\n")
           
-         print("\n[*] Attempting to enumerate shares...")
+         print("[*] Attempting to enumerate shares...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.tmp")
 
          line3 = linecache.getline("shares1.tmp", 1)
-         if (line3[:9] == "Could not") or (line3[:6] == "result"):
+         if (line3[:9] == "Could not") or (line3[:6] == "result") or (line2[:1] == ""):
             print("[-] Unable to enumerate shares...")
          else:
             cleanshares()						# WIPE CURRENT SHARE VALUES
@@ -487,13 +487,14 @@ while True:
                   except ValueError:
                      SHAR[x] = "Error..."
                   print(colored(SHAR[x].rstrip("\n"),colour2, attrs=['bold']))
-                  if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)            
+                  if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)
+                  if x == count: print("\n")            
      
-         print("\n[*] Attempting to enumerate domain users...")          
+         print("[*] Attempting to enumerate domain users...")          
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.tmp")      
 
          line4 = linecache.getline("domusers1.tmp", 1)
-         if (line4[:9] != "Could not") and (line4[:6] != "result"):
+         if (line4[:9] != "Could not") and (line4[:6] != "result") and (line4[:6] != "Cannot"):
             cleanusers()							# WIPE CLEAN USERS AND PASSWORDS 
             
             os.remove("usernames.txt")						# PURGE CURRENT USERFILE LIST
@@ -518,8 +519,8 @@ while True:
                      print(colored(USER[x],colour2, attrs=['bold']))
                   if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
                   command("echo " + USER[x] + " >> usernames.txt")
-            else:
-               print("[-] Unable to enumerate RDP domain users...")
+         else:
+            print("[-] Unable to enumerate RDP domain users...")
       
       command("rm *.tmp")
       prompt()
