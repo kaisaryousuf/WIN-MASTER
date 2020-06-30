@@ -22,7 +22,7 @@ import binascii
 import datetime
 import linecache
 
-from termcolor import colored	# pip install termcolor
+from termcolor import colored	# PIP INSTALL TERMCOLOR
 colour1 = 'yellow'
 colour2 = 'green'
 colour3 = 'white'
@@ -408,66 +408,78 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='0':
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified..")
-      else:
-         print("[*] Attempting to enumerate domain name...")
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > dump.tmp")
+      CheckParams = 0
 
-         if os.path.getsize("dump.tmp") == 0:
-            print("[-] Unable to enumerate any RPC data...")
+      if (TIP[:5] == "EMPTY"):
+         print("\n[-] Remote IP address not specified...")
+         CheckParams = 1
+
+      if CheckParams != 1:
+         print("[*] Attempting to enumerate domain name...")
+         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
+
+         if os.path.getsize("lsaquery.tmp") == 0:
+            print("[-] Unable to enumerate RPC data...")
          else:
-            line1 = linecache.getline("dump.tmp", 1)
-            if line1[:6] != "Cannot":
+            line1 = linecache.getline("lsaquery.tmp", 1)
+            if (line1[:6] == "Cannot") or (line1[:1] == ""):
+               print("[-] Unable to connect to RPC data...")
+            else:
                DOM = " "*COL1					# WIPE CLEAN CURRENT VALUES
                SID = " "*COL1
                try:
                   null,DOM = line1.split(":")
                except ValueError:
                   DOM = "Error..."
-               DOM = DOM.strip(" ")
-               if len(DOM) < COL1:
-                  DOM = padding(DOM, COL1)
                   
-               if DOM[:5] != "Error":
+               DOM = DOM.strip(" ")				# CLEAN UP DATA
+               if len(DOM) < COL1: DOM = padding(DOM, COL1)
+                  
+               if DOM[:5] == "Error":
+                  print("[-] Unable to enumerate domain name...")
+               else:
                   print("[+] Found domain...\n")
                   print(colored(DOM,colour2, attrs=['bold']))
             
-               if (DOMC == 1) and (DOM[:5] != "Error"):
-                  print("\n[*] Resetting current domain association...")
-                  command("sed -i '$d' /etc/hosts")
-                  command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-                  print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-            
-               if (DOMC == 0) and (DOM[:5] != "Error") and (DOM[:5] != "EMPTY"):
-                  command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-                  print("\n[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-                  DOMC = 1
-            else: 
-               print("[-] Unable to enumerate domain name...")
+                  if DOMC == 1:
+                     print("\n[*] Resetting current domain association...")
+                     command("sed -i '$d' /etc/hosts")
+                     command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+                     print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+                  else:
+                     command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+                     print("\n[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+                     DOMC = 1
+                     
+# ------------------------------------------------------------------------------------- 
 
             print("[*] Attempting to enumerate domain SID...")
-            line2 = linecache.getline("dump.tmp", 2)
-         
-            if (line2[:6] == "Cannot") or (line2[:1] == ""):
-               print("[-] Unable to enumerate SID...")
+            line2 = linecache.getline("lsaquery.tmp", 2)
+            
+            if (line2[:6] == "Cannot") or (line2[:1] == ""):            
+               print("[-] Unable to connect to RPC data...")
             else:
                try:
                   null,SID = line2.split(":")
                except ValueError:
                   SID = "Error..."
-               SID = SID.strip(" ")
+               
+               SID = SID.strip(" ")				# CLEAN UP DATA
                SID = padding(SID, COL1)
-            
-               if SID[:5] != "Error":
+               
+               if SID[:5] == "Error":
+                  print("[-] Unable to enumerate domain SID...")
+               else:
                   print("[+] Found SID...\n")
                   print(colored(SID,colour2, attrs=['bold']) + "\n")
+                  
+# ------------------------------------------------------------------------------------- 
           
          print("[*] Attempting to enumerate shares...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.tmp")
 
          line3 = linecache.getline("shares1.tmp", 1)
-         if (line3[:9] == "Could not") or (line3[:6] == "result") or (line2[:1] == ""):
+         if (line3[:9] == "Could not") or (line3[:6] == "result") or (line3[:1] == ""):
             print("[-] Unable to enumerate shares...")
          else:
             cleanshares()						# WIPE CURRENT SHARE VALUES
@@ -488,22 +500,25 @@ while True:
                      SHAR[x] = "Error..."
                   print(colored(SHAR[x].rstrip("\n"),colour2, attrs=['bold']))
                   if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)
-                  if x == count: print("\n")            
+               print("")
+                  
+# ------------------------------------------------------------------------------------- 
      
          print("[*] Attempting to enumerate domain users...")          
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.tmp")      
 
          line4 = linecache.getline("domusers1.tmp", 1)
-         if (line4[:9] != "Could not") and (line4[:6] != "result") and (line4[:6] != "Cannot"):
-            cleanusers()							# WIPE CLEAN USERS AND PASSWORDS 
-            
-            os.remove("usernames.txt")						# PURGE CURRENT USERFILE LIST
-            command("touch usernames.txt")					# CREATE NEW USERFILE LIST
-            
-            command("cat domusers1.tmp | sort > domusers2.tmp")			# TIDY FILE FOR READING
+         if (line4[:9] == "Could not") or (line4[:6] == "result") or (line4[:6] == "Cannot") or (line4[:1] == ""):
+            print("[-] Unable to enumerate domain users..")
+         else:
+            cleanusers()							# WIPE CLEAN USERS AND PASSWORDS             
+            os.remove("usernames.txt")						# PURGE CURRENT USERFILE LIST            
+            command("touch usernames.txt")					# CREATE NEW USERFILE LIST   
+                     
+            command("cat domusers1.tmp | sort > domusers2.tmp")			# TIDY NEW USER FILE FOR READING
             command("sed -i '/^$/d' domusers2.tmp")
-            count2 = len(open('domusers2.tmp').readlines())
- 
+            
+            count2 = len(open('domusers2.tmp').readlines()) 
             if count2 != 0:
                print ("[+] Found users...\n")
                for x in range(0, count2):
@@ -519,8 +534,6 @@ while True:
                      print(colored(USER[x],colour2, attrs=['bold']))
                   if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
                   command("echo " + USER[x] + " >> usernames.txt")
-         else:
-            print("[-] Unable to enumerate RDP domain users...")
       
       command("rm *.tmp")
       prompt()
@@ -566,7 +579,8 @@ while True:
          if DOMC == 1:
             print("\n[+] Resetting current domain association...")
             command("sed -i '$d' /etc/hosts")
-            DOM = "EMPTY              "
+            DOM = "EMPTY"
+            DOM = padding(DOM, COL1)
             DOMC = 0
             prompt()
 
@@ -582,15 +596,14 @@ while True:
       BAK = USR
       USR = input("\n[*] Please enter USERNAME: ")
 
-      if USR != "":
-         if len(USR) < COL1:
-            USR = padding(USR, COL1)
+      if USR == "":
+         USR = BAK
+      else:
+         if len(USR) < COL1: USR = padding(USR, COL1)
          for x in range(0, MAXX):
             if USER[x].rstrip(" ") == USR.rstrip(" "):
                NTM = PASS[x] # UPDATE HASH VALUE TO MATCH USER.
                NTM = padding(NTM, COL1)
-      else:
-         USR = BAK
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1246,7 +1259,7 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Enumerating, please wait...\n")
+         print("[*] Enumerating, please wait...\n")
          os.remove("usernames.txt")					# DELETE CURRENT VERSION
          command("touch usernames.txt")					# CREATE EMPTY NEW ONE
          command(PATH + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > USERS.tmp")
