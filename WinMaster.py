@@ -261,9 +261,9 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenSSH Keys (70)          (80) FTP     " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenSSHKeyID (70)          (80) FTP     " + '\u2551')
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenUSERList (71)          (81) SSH     " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)          (82) SQSH    " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)          (82) SSH ID  " + '\u2551')
    print('\u2551' + "(3) Re/Set USERNAME    (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)          (83) MySQL   " + '\u2551')
    print('\u2551' + "(4) Re/Set PASSWORD    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)          (84) Telnet  " + '\u2551')
    print('\u2551' + "(5) Re/Set NTLM HASH   (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) PASpray SMB (75)          (85) Netcat  " + '\u2551')
@@ -2193,15 +2193,15 @@ while True:
 
    if selection =='60':
       print("[*] Generating Keys...\n")
-      command("ssh-keygen -t rsa -b 4096 -N '' -f './specialkeys' >/dev/null 2>&1")
+      command("ssh-keygen -t rsa -b 4096 -N '' -f './id_rsa' >/dev/null 2>&1")
       command("tput setaf 2; tput bold")
-      command("cat specialkeys.pub")
+      command("cat id_rsa.pub")
       command("tput sgr0; tput dim")
       print("\n[+] Insert the above into authorized_keys on the victim's machine...")
       if USR[:2] == "''":
-         print("[+] Then ssh login with this command:- ssh -i specialkeys user@" + TIP.rstrip(" ") +"...")
+         print("[+] Then ssh login with this command:- ssh -i id_rsa user@" + TIP.rstrip(" ") +"...")
       else:
-         print("[+] Then ssh login with this command:- ssh -i specialkeys " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + "...")
+         print("[+] Then ssh login with this command:- ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + "...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2509,13 +2509,13 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Active
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - ssh -i id USER@IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='82':
       if TIP[:5] != "EMPTY":
-         command("sqsh -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -S " + TIP.rstrip(" "))
+         command("ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()
 
 #------------------------------------------------------------------------------------- 
@@ -2647,9 +2647,9 @@ while True:
       command("echo " + LTM  + " >> config.txt")  
       command("echo " + DIR  + " >> config.txt")   
       os.remove("usernames.txt")
-      if os.path.exists("specialkeys.pub"):
-         os.remove("specialkeys.pub")
-         os.remove("specialkeys")
+      if os.path.exists("id_rsa.pub"):
+         os.remove("id_rsa.pub")
+         os.remove("id_rsa")
       if os.path.exists("usernames2.txt"):
          os.remove("usernames2.txt")      
       os.remove("passwords.txt")
