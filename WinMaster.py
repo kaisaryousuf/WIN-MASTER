@@ -152,16 +152,30 @@ def display():
    
 # -------------------------------------------------------------------------------------
 
+   print('\u2551' + " WEB ADDRESS  " + '\u2502', end=' ')
+   if WEB[:5] == "EMPTY":
+      print(colored(WEB[:COL1],colour1), end=' ')
+   else:
+      print(colored(WEB[:COL1],colour2), end=' ')
+   print('\u2551', end=' ')
+   print(colored(SHAR[3],colour2), end=' ')
+   print('\u2551', end=' ')
+   print(colored(USER[3],colour2), end=' ')
+   print(colored(PASS[3],colour2), end=' ')
+   print('\u2551')
+   
+# -------------------------------------------------------------------------------------
+
    print('\u2551' + " USERNAME     " + '\u2502', end=' ')
    if USR[:2] == "''":
       print(colored(USR[:COL1],colour1), end=' ')
    else:
       print(colored(USR[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[3],colour2), end=' ')
+   print(colored(SHAR[4],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[3],colour2), end=' ')
-   print(colored(PASS[3],colour2), end=' ')
+   print(colored(USER[4],colour2), end=' ')
+   print(colored(PASS[4],colour2), end=' ')
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -172,10 +186,10 @@ def display():
    else:
       print(colored(PAS[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[4],colour2), end=' ')
+   print(colored(SHAR[5],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[4],colour2), end=' ')
-   print(colored(PASS[4],colour2), end=' ')
+   print(colored(USER[5],colour2), end=' ')
+   print(colored(PASS[5],colour2), end=' ')
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -186,10 +200,10 @@ def display():
    else:
       print(colored(NTM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[5],colour2), end=' ')
+   print(colored(SHAR[6],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[5],colour2), end=' ')
-   print(colored(PASS[5],colour2), end=' ')
+   print(colored(USER[6],colour2), end=' ')
+   print(colored(PASS[6],colour2), end=' ')
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -200,10 +214,10 @@ def display():
    else:
       print(colored(DOM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[6],colour2), end=' ')
+   print(colored(SHAR[7],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[6],colour2), end=' ')
-   print(colored(PASS[6],colour2), end=' ')
+   print(colored(USER[7],colour2), end=' ')
+   print(colored(PASS[7],colour2), end=' ')
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -214,10 +228,10 @@ def display():
    else:
       print(colored(SID[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[7],colour2), end=' ')
+   print(colored(SHAR[8],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(USER[7],colour2), end=' ')
-   print(colored(PASS[7],colour2), end=' ')
+   print(colored(USER[8],colour2), end=' ')
+   print(colored(PASS[8],colour2), end=' ')
    print('\u2551')     
    
 # -------------------------------------------------------------------------------------
@@ -228,25 +242,11 @@ def display():
    else:
       print(colored(TSH[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[8],colour2), end=' ')
-   print('\u2551', end=' ')
-   print(colored(USER[8],colour2), end=' ')
-   print(colored(PASS[8],colour2), end=' ')
-   print('\u2551')        
-   
-# -------------------------------------------------------------------------------------
-
-   print('\u2551' + " WIN COMMAND  " + '\u2502', end=' ')
-   if CMD[:11] == "whoami /all":
-      print(colored(CMD[:COL1],colour1), end=' ')
-   else:
-      print(colored(CMD[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
    print(colored(SHAR[9],colour2), end=' ')
    print('\u2551', end=' ')
    print(colored(USER[9],colour2), end=' ')
    print(colored(PASS[9],colour2), end=' ')
-   print('\u2551')
+   print('\u2551')        
    
 # -------------------------------------------------------------------------------------
 
@@ -285,16 +285,16 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set WINCOMMAND (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenSSHKeyID (70)          (80) FTP     " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set SHARE NAME (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenSSHKeyID (70)          (80) FTP     " + '\u2551')
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenUSERList (71)          (81) SSH     " + '\u2551')
    print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)          (82) SSH ID  " + '\u2551')
    print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)          (83) MySQL   " + '\u2551')
-   print('\u2551' + "(4) Re/Set USERNAME    (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)          (84) Telnet  " + '\u2551')
-   print('\u2551' + "(5) Re/Set PASSWORD    (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) PASpray SMB (75)          (85) Netcat  " + '\u2551')
-   print('\u2551' + "(6) Re/Set NTLM HASH   (16) Nmap Slow & Full  (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66)             (76)          (86) WinRM   " + '\u2551')
-   print('\u2551' + "(7) Re/Set DOMAIN NAME (17) Nmap LIVE PORTS   (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)          (87) RDesktop" + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAIN SID  (18) Nmap Sub-Domains  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)          (88) XFreerdp" + '\u2551')
-   print('\u2551' + "(9) Re/Set SHARE NAME  (19) Nmap Server Time  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) GPP Decrypt  (69)             (79)          (89) Quit!!  " + '\u2551')
+   print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)          (84) Telnet  " + '\u2551')
+   print('\u2551' + "(5) Re/Set USERNAME    (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) PASpray SMB (75)          (85) Netcat  " + '\u2551')
+   print('\u2551' + "(6) Re/Set PASSWORD    (16) Nmap LIVE PORTS   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66)             (76)          (86) WinRM   " + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH   (17) Nmap Sub-DOMAINS  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)          (87) RDesktop" + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAIN NAME (18) Nmap Server Time  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)          (88) XFreerdp" + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) Gobuster ADDRESS  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) GPP Decrypt  (69)             (79)          (89) Quit!!  " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -370,13 +370,13 @@ if not os.path.exists('config.txt'):
    DNS = "EMPTY              " # DNS NAME
    TIP = "EMPTY              " # REMOTE IP
    POR = "EMPTY              " # LIVE PORTS
+   WEB = "EMPTY              " # WEB ADDRESS
    USR = "''                 " # SESSION USERNAME
    PAS = "''                 " # SESSION PASSWORD       
    NTM = "EMPTY              " # NTLM HASH
    DOM = "EMPTY              " # DOMAIN NAME
    SID = "EMPTY              " # DOMAIN SID
    TSH = "EMPTY              " # SESSION SHARE
-   CMD = "whoami /all        " # WINDOWS COMMAND                                            
    LTM = "00:00              " # LOCAL TIME    
    DIR = "WORKAREA           " # DIRECTORY
 else:
@@ -384,26 +384,26 @@ else:
    DNS = linecache.getline('config.txt', 1).rstrip("\n")
    TIP = linecache.getline('config.txt', 2).rstrip("\n")
    POR = linecache.getline('config.txt', 3).rstrip("\n")
-   USR = linecache.getline('config.txt', 4).rstrip("\n")
-   PAS = linecache.getline('config.txt', 5).rstrip("\n")
-   NTM = linecache.getline('config.txt', 6).rstrip("\n")
-   DOM = linecache.getline('config.txt', 7).rstrip("\n")	
-   SID = linecache.getline('config.txt', 8).rstrip("\n")
-   TSH = linecache.getline('config.txt', 9).rstrip("\n")
-   CMD = linecache.getline('config.txt', 10).rstrip("\n")
+   WEB = linecache.getline('config.txt', 4).rstrip("\n")
+   USR = linecache.getline('config.txt', 5).rstrip("\n")
+   PAS = linecache.getline('config.txt', 6).rstrip("\n")
+   NTM = linecache.getline('config.txt', 7).rstrip("\n")
+   DOM = linecache.getline('config.txt', 8).rstrip("\n")	
+   SID = linecache.getline('config.txt', 9).rstrip("\n")
+   TSH = linecache.getline('config.txt', 10).rstrip("\n")
    LTM = linecache.getline('config.txt', 11).rstrip("\n")
    DIR = linecache.getline('config.txt', 12).rstrip("\n")
 
 if len(DNS) < COL1: DNS = padding(DNS, COL1)
 if len(TIP) < COL1: TIP = padding(TIP, COL1)
 if len(POR) < COL1: POR = padding(POR, COL1)
+if len(WEB) < COL1: WEB = padding(WEB, COL1)
 if len(USR) < COL1: USR = padding(USR, COL1)
 if len(PAS) < COL1: PAS = padding(PAS, COL1)
 if len(NTM) < COL1: NTM = padding(NTM, COL1)
 if len(DOM) < COL1: DOM = padding(DOM, COL1)
 if len(SID) < COL1: SID = padding(SID, COL1)
 if len(TSH) < COL1: TSH = padding(TSH, COL1)
-if len(CMD) < COL1: CMD = padding(CMD, COL1)
 if len(LTM) < COL1: LTM = padding(LTM, COL1)
 if len(DIR) < COL1: DIR = padding(DIR, COL1)
 
@@ -636,7 +636,25 @@ while True:
          if len(POR) < COL1:
             POR = padding(POR, COL1)
       else:
-         POR = BAK         
+         POR = BAK
+         
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                           
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Change the web address.
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '4':
+      BAK = WEB
+      WEB = input("\n[*] Please enter the web address: ")
+
+      if WEB != "":
+         if len(WEB) < COL1:
+            WEB = padding(WEB, COL1)
+      else:
+         WEB = BAK
          
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -646,7 +664,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '4':
+   if selection == '5':
       BAK = USR
       USR = input("\n[*] Please enter USERNAME: ")
 
@@ -667,7 +685,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '5':
+   if selection == '6':
       BAK = PAS
       PAS = input("\n[*] Please enter PASSWORD: ")
 
@@ -685,7 +703,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '6':
+   if selection == '7':
       BAK = NTM
       NTM = input("\n[*] Please enter HASH value: ")
 
@@ -703,7 +721,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '7':
+   if selection == '8':
       BAK = DOM
       DOM = input("\n[*] Please enter DOMAIN name: ")
 
@@ -729,7 +747,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '8':
+   if selection == '9':
       BAK = SID
       SID = input("\n[*] Please enter DOMAIN SID value: ")
 
@@ -747,7 +765,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '9':
+   if selection == '10':
       BAK = TSH
       TSH = input("\n[*] Please enter SHARE name: ")
 
@@ -756,24 +774,6 @@ while True:
             TSH = padding(TSH,COL1)
       else:
          TSH = BAK
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                           
-# CONTRACT: GitHub
-# Version : Active
-# Details : Menu option selected - Change the remote windows COMMAND.
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '10':
-      BAK = CMD
-      CMD = input("\n[*] Please enter Windows COMMAND: ")
-
-      if CMD != "":
-         if len(CMD) < COL1:
-            CMD = padding(CMD, COL1)
-      else:
-         CMD = BAK
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
@@ -878,23 +878,7 @@ while True:
          command("fierce -dns " + DNS.rstrip(" "))
       else:
          print("\n[-] DNS server has not been specified...")
-      prompt()
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Active
-# Details : Menu option selected - Full, slow and comprehensive nmap scan.
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '16':
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-      else:
-         command("nmap -sS -sU -T4 -A -v -PE -PP -PS80,443 -PA3389 -PU40125 -PY -g 53 --script 'default or (discovery and safe)' " + TIP.rstrip(" "))
-      prompt()
-      
+      prompt()      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -903,7 +887,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '17':
+   if selection == '16':
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
       else:
@@ -921,7 +905,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '18':
+   if selection == '17':
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
@@ -944,12 +928,28 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '19':
+   if selection == '18':
       if TIP[:5] != "EMPTY":
          command("nmap -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
          command("nmap -sV -p 88 " + TIP.rstrip(" "))
       else:
          print("\n[-] Remote IP address has not been specified...")
+      prompt()
+      
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Active
+# Details : Menu option selected - Gobuster with common.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '19':
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+      else:
+         command("gobuster dir -k -u " + WEB.rstrip(" ") + " -e bak,zip,php,html,pdf,txt -f -w /usr/share/wordlists/dirb/common.txt -t 50")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1032,7 +1032,7 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         command(PATH + "atexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + CMD.rstrip(" ") + "'")
+         command(PATH + "atexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " whoami /all")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1054,14 +1054,14 @@ while True:
          print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
-      command(PATH + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + CMD.rstrip(" ") + "'")
+      command(PATH + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + WEB.rstrip(" ") + "'")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Active
-# Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP cmd.exe.
+# Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP service command.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2019,7 +2019,7 @@ while True:
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
             print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x whoami /all")
 
             print("\n[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
@@ -2034,7 +2034,7 @@ while True:
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
             print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x '" + CMD.rstrip(" ") + "'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x whoami /all")
 
             print("\n[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' --users")
@@ -2571,30 +2571,32 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '89':
-      command("echo " + DNS + " > config.txt")			# CREATE NEW CONFIG FILE
-      command("echo " + TIP  + " >> config.txt")
+      if os.path.exists("config.txt"):
+         os.remove("config.txt")				# DELETE OLD CONFIG FILE
+      command("touch config.txt")				# CREATE NEW CONFIG FILE
+      command("echo " + DNS + " >> config.txt")
+      command("echo " + TIP + " >> config.txt")
+      command("echo " + POR + " >> config.txt")  
+      command("echo " + WEB + " >> config.txt")  
 
       null = "\\'\\'"
       if USR.rstrip(" ") == "''":
          command("echo " + null + " >> config.txt")
       else:
          command("echo '" + USR  + "' >> config.txt")           
-      
       if PAS.rstrip(" ") == "''":
          command("echo " + null + " >> config.txt")
       else:
          command("echo '" + PAS  + "' >> config.txt")     
  
-      command("echo " + NTM.rstrip("\n") + " >> config.txt")
-      command("echo " + DOM  + " >> config.txt")  
-      command("echo " + SID.rstrip("\n") + " >> config.txt")
-      command("echo " + TSH  + " >> config.txt")  
-      command("echo " + POR  + " >> config.txt")  
-      temp = '\"' + CMD.rstrip(" ") + '\"'
-      command("echo " + temp + " >> config.txt")  
-      command("echo " + LTM  + " >> config.txt")  
-      command("echo " + DIR  + " >> config.txt")   
-      os.remove("usernames.txt")
+      command("echo " + NTM + " >> config.txt")
+      command("echo " + DOM + " >> config.txt")  
+      command("echo " + SID + " >> config.txt")
+      command("echo " + TSH + " >> config.txt")  
+      command("echo " + LTM + " >> config.txt")  
+      command("echo " + DIR + " >> config.txt")   
+      
+      os.remove("usernames.txt")			# NOW TIDY UP
       if os.path.exists("id_rsa.pub"):
          os.remove("id_rsa.pub")
          os.remove("id_rsa")
@@ -2603,8 +2605,8 @@ while True:
       os.remove("passwords.txt")
       if DOMC == 1:
          command("sed -i '$d' /etc/hosts")
-      if len(os.listdir(DIR.rstrip(" "))) == 0:
-         os.rmdir(DIR.rstrip(" "))
+      if len(os.listdir("WORKAREA")) == 0:
+         os.rmdir("WORKAREA")
       exit(1)
 
 # Eof...	
