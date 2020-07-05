@@ -440,7 +440,7 @@ while True:
 
       if CheckParams != 1:
          print("[*] Attempting to enumerate ports, please wait...")
-         command("ports=$(nmap -p- --min-rate=1000 -T4 10.13.38.12 | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports >> PORTS.tmp")
+         command("ports=$(nmap -p- --min-rate=1000 -T4 " + IP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports >> PORTS.tmp")
          POR = linecache.getline("PORTS.tmp", 1)
          if len(POR) < COL1: POR = padding(POR, COL1)
          if POR[:1] == "":
