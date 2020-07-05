@@ -439,10 +439,15 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("[*] Attempting to enumerate ports, please wait...")
-         command("ports=$(nmap -p- --min-rate=1000 -T4 " + IP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports >> PORTS.tmp")
+         print("[*] Attempting to enumerate live ports, please wait this can take sometime...")
+         command("ports=$(nmap -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
          POR = linecache.getline("PORTS.tmp", 1)
-         if len(POR) < COL1: POR = padding(POR, COL1)
+         
+         if len(POR) < COL1:
+            POR = padding(POR, COL1)
+         else:
+            POR = POR.rstrip("\n")
+            
          if POR[:1] == "":
             print("[-] Unable to enumerate port information...")
          else:
@@ -629,12 +634,15 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '3':
+      print("[+] Live ports: " + POR.rstrip(" "))
       BAK = POR
-      POR = input("\n[*] Please enter PORT numbers: ")
+      POR = input("[*] Please enter PORT numbers: ")
 
       if POR != "":
          if len(POR) < COL1:
             POR = padding(POR, COL1)
+         else:
+            POR = POR.rstrip("\n")
       else:
          POR = BAK
          
@@ -889,8 +897,9 @@ while True:
 
    if selection == '16':
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
       else:
+         print("[*] Scanning live ports only, please wait this can take some time...")
          if POR[:5] != "EMPTY":
             command("nmap -p " + POR.rstrip(" ") + " -sC -sV " + TIP.rstrip(" "))
          else:
@@ -930,7 +939,7 @@ while True:
 
    if selection == '18':
       if TIP[:5] != "EMPTY":
-         command("nmap -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
+#         command("nmap -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
          command("nmap -sV -p 88 " + TIP.rstrip(" "))
       else:
          print("\n[-] Remote IP address has not been specified...")
