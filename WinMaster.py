@@ -285,16 +285,16 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP SCANNER  (10) Re/Set SHARE NAME (20) Get Arch (30) Enum4Linux     (40) Kerb Users Info (50) Golden PAC   (60) GenSSHKeyID (70)          (80) FTP     " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set CLOCK TIME (21) Net View (31) WinDap Search  (41) Kerb Filter     (51) Domain Dump  (61) GenUSERList (71)          (81) SSH     " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)          (82) SSH ID  " + '\u2551')
-   print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection  (23) AtExec   (33) Sam Dump Users (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)          (83) MySQL   " + '\u2551')
-   print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Check DNS Records (24) DcomExec (34) Rpc Dump       (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)          (84) Telnet  " + '\u2551')
-   print('\u2551' + "(5) Re/Set USERNAME    (15) Check DNS SERVER  (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) PASpray SMB (75)          (85) Netcat  " + '\u2551')
-   print('\u2551' + "(6) Re/Set PASSWORD    (16) Nmap LIVE PORTS   (26) SmbExec  (36) Smb Client     (46) Pass the Hash   (56) PSExec HASH  (66)             (76)          (86) WinRM   " + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH   (17) Nmap Sub-DOMAINS  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)          (87) RDesktop" + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAIN NAME (18) Nmap Server Time  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)          (88) XFreerdp" + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) Gobuster ADDRESS  (29) OpDump   (39) Rpc Client     (49) Golden Ticket   (59) GPP Decrypt  (69)             (79)          (89) Quit!!  " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP SCANNER (10) Re/Set SHARENAME (20) Get Arch (30) Enum4Linux     (40) Kerb User Info  (50) Golden PAC   (60) GenSSHKeyID (70)           (80) FTP      " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set CLOCKTIME (21) Net View (31) WinDap Search  (41) Kerb UserFilter (51) Domain Dump  (61) GenUSERList (71)           (81) SSH      " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)           (82) SSH ID   " + '\u2551')
+   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection (23) AtExec   (33) SamDump Users  (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)           (83) MySQL    " + '\u2551')
+   print('\u2551' + "(4) Re/Set WEBADDRESS (14) Check DNS Record (24) DcomExec (34) RpcDump        (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)           (84) Telnet   " + '\u2551')
+   print('\u2551' + "(5) Re/Set USERNAME   (15) Check DNS Server (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) PASpray SMB (75)           (85) Netcat   " + '\u2551')
+   print('\u2551' + "(6) Re/Set PASSWORD   (16) Scan LIVE PORTS  (26) SmbExec  (36) SmbClient      (46) Pass the Hash   (56) PSExec HASH  (66)             (76)           (86) EvilWinRm" + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH  (17) Scan SubDOMAINS  (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77)           (87) RDesktop " + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAINNAME (18) Scan Server Time (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78)           (88) XFreeRDP " + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAINSID  (19) GoBuster ADDRESS (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69)             (79)           (89) Quit!!..." + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -589,13 +589,13 @@ while True:
 
    if selection =='1':
       BAK = DNS
-      DNS = input("\n[*] Please enter DNS SERVER name: ")
+      DNS = input("[*] Please enter DNS SERVER name: ")
 
       if DNS != "":
          if len(DNS) < COL1:
             DNS = padding(DNS, COL1)
          command("echo '" + TIP.rstrip(" ") + "\t" + DNS.rstrip(" ") + "' >> /etc/hosts")
-         print("\n[+] DNS SERVER " + DNS.rstrip(" ") + " has been added to /etc/hosts...")
+         print("[+] DNS SERVER " + DNS.rstrip(" ") + " has been added to /etc/hosts...")
          prompt()
       else:
          DNS = BAK      
@@ -610,7 +610,7 @@ while True:
 
    if selection =='2':
       BAK = TIP
-      TIP = input("\n[*] Please enter REMOTE IP address: ")
+      TIP = input("[*] Please enter REMOTE IP address: ")
 
       if TIP == "":
          TIP = BAK
@@ -656,7 +656,7 @@ while True:
 
    if selection == '4':
       BAK = WEB
-      WEB = input("\n[*] Please enter the web address: ")
+      WEB = input("[*] Please enter the web address: ")
 
       if WEB != "":
          if len(WEB) < COL1:
@@ -674,7 +674,7 @@ while True:
 
    if selection == '5':
       BAK = USR
-      USR = input("\n[*] Please enter USERNAME: ")
+      USR = input("[*] Please enter USERNAME: ")
 
       if USR == "":
          USR = BAK
@@ -695,7 +695,7 @@ while True:
 
    if selection == '6':
       BAK = PAS
-      PAS = input("\n[*] Please enter PASSWORD: ")
+      PAS = input("[*] Please enter PASSWORD: ")
 
       if PAS != "":
          if len(PAS) < COL1:
@@ -713,7 +713,7 @@ while True:
 
    if selection == '7':
       BAK = NTM
-      NTM = input("\n[*] Please enter HASH value: ")
+      NTM = input("[*] Please enter HASH value: ")
 
       if NTM != "":
          if len(NTM) < COL1:
@@ -731,7 +731,7 @@ while True:
 
    if selection == '8':
       BAK = DOM
-      DOM = input("\n[*] Please enter DOMAIN name: ")
+      DOM = input("[*] Please enter DOMAIN name: ")
 
       if DOM != "":
          if len(DOM) < COL1:
@@ -757,7 +757,7 @@ while True:
 
    if selection == '9':
       BAK = SID
-      SID = input("\n[*] Please enter DOMAIN SID value: ")
+      SID = input("[*] Please enter DOMAIN SID value: ")
 
       if SID != "":
          if len(SID) < COL1:
@@ -775,7 +775,7 @@ while True:
 
    if selection == '10':
       BAK = TSH
-      TSH = input("\n[*] Please enter SHARE name: ")
+      TSH = input("[*] Please enter SHARE name: ")
 
       if TSH != "":
          if len(TSH) < COL1:
@@ -793,7 +793,7 @@ while True:
 
    if selection == '11':
       BAK = LTM
-      LTM = input("\n[*] Please enter computer TIME: ")
+      LTM = input("[*] Please enter computer TIME: ")
 
       if LTM != "":
          command("date --set=" + LTM)
@@ -811,17 +811,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '12':
-      directory = input("\n[*] Please enter new working DIRECTORY: ")
+      directory = input("[*] Please enter new working DIRECTORY: ")
 
       if os.path.exists(directory):
-         print("\n[-] Directory already exists....")
+         print("[-] Directory already exists....")
       else:
          if len(directory) > 0:
             os.mkdir(directory)
             DIR = directory
             if len(DIR) < COL1:
                DIR = padding(DIR, COL1)
-            print("\n[+] Working directory changed...")
+            print("[+] Working directory changed...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -899,10 +899,11 @@ while True:
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
       else:
-         print("[*] Scanning live ports only, please wait this can take some time...")
          if POR[:5] != "EMPTY":
+            print("[*] Scanning specified live ports only, please wait this can take some time...")
             command("nmap -p " + POR.rstrip(" ") + " -sC -sV " + TIP.rstrip(" "))
          else:
+            print("[*] Fast scanning all ports, please wait..")
             command("nmap -T4 -F " + TIP.rstrip(" "))
       prompt()
       
@@ -958,7 +959,10 @@ while True:
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
       else:
-         command("gobuster dir -k -u " + WEB.rstrip(" ") + " -e bak,zip,php,html,pdf,txt -f -w /usr/share/wordlists/dirb/common.txt -t 50")
+         if WEB[:5] != "EMPTY":
+            command("gobuster dir -k -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt -f -w /usr/share/wordlists/dirb/common.txt -t 50")
+         else:
+            command("gobuster dir -k -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt -f -w /usr/share/wordlists/dirb/common.txt -t 50")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1190,11 +1194,11 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1307,7 +1311,7 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("[*] Enumerating, please wait...\n")
+         print("[*] Enumerating users, please wait this can take sometime...\n")
          os.remove("usernames.txt")					# DELETE CURRENT VERSION
          command("touch usernames.txt")					# CREATE EMPTY NEW ONE
          command(PATH + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > USERS.tmp")
