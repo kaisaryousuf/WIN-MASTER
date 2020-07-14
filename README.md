@@ -5,7 +5,7 @@ Usage: python3 WinMaster.py
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version  |
 |------     |------            | -------                          | ----     |
-| python3   | WinMaster.py     | 95c098cdbe0801c6d9989358048936d7 | EndGames |
+| python3   | WinMaster.py     | 63763ae1c7dc7ea0488797dcd7b0593b | EndGames |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
