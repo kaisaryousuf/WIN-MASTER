@@ -286,16 +286,16 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME  (20) Get Arch (30) Enum4Linux     (40) Kerb User Info  (50) Golden PAC   (60) GenSSHKeyID (70) MSF TOM  (80) SSH      " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) Net View (31) WinDap Search  (41) Kerb UserFilter (51) Domain Dump  (61) GenUSERList (71)          (81) SSH ID   " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Services (32) Lookup Sids    (42) Kerb Bruteforce (52) BloodHound   (62) GenPassList (72)          (82) MSSQL    " + '\u2551')
-   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec   (33) SamDump Users  (43) Kerb Roasting   (53) ACLPwn       (63) USER Editor (73) Nikto    (83) MySQL    " + '\u2551')
-   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExec (34) RpcDump        (44) Kerb ASREPRoast (54) Secrets Dump (64) PASS Editor (74) GoBuster (84) Telnet   " + '\u2551')
-   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec   (35) REGistery      (45) PASSWORD2HASH   (55) CrackMapExec (65) HOST Editor (75) FTP      (85) Netcat   " + '\u2551')
-   print('\u2551' + "(6) Re/Set PASSWORD   (16) NMap LIVE PORTS   (26) SmbExec  (36) SmbClient      (46) Pass the HASH   (56) PSExec HASH  (66) Hydra FTP   (76) TFPS     (86) EvilWinRm" + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH  (17) NMap PORTServices (27) WmiExec  (37) SmbMap SHARE   (47) Pass the Ticket (57) SmbExec HASH (67) Hydra SSH   (77) SFTP     (87) RDesktop " + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAINNAME (18) NMap SubDOMAINS   (28) IfMap    (38) SmbMount SHARE (48) Silver Ticket   (58) WmiExec HASH (68) Hydra SMB   (78) PFTP     (88) XFreeRDP " + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAINSID  (19) NMAP SERVERTIME   (29) OpDump   (39) RpcClient      (49) Golden Ticket   (59) GPP Decrypt  (69) Hydra TOM   (79) SQSH     (89) Save/Exit" + '\u2551')
+   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME  (20) GetArch (30) Enum4Linux    (40) Kerb UserInfo   (50) Golden PAC  (60) GenSSHKey ID (70) MSFTomcat (80) SSH 22    " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) NetView (31) WinDap Search (41) Kerb UserFilter (51) Domain Dump (61) Gen USERList (71)           (81) SSH ID 22 " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Service (32) Lookup Sids   (42) Kerb Bruteforce (52) BloodHound  (62) Gen PassList (72)           (82) MSSQL 1433" + '\u2551')
+   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec  (33) SamDump Users (43) Kerb Roasting   (53) ACLPwn      (63) USER Editor  (73) Nikto     (83) MySQL 3306" + '\u2551')
+   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExe (34) RpcDump       (44) Kerb ASREPRoast (54) SecretsDump (64) PASS Editor  (74) GoBuster  (84) Telnet 23 " + '\u2551')
+   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec  (35) REGistery     (45) PASSWORD2HASH   (55) CrackMapExe (65) HOST Editor  (75) FTP  21   (85) Netcat 80 " + '\u2551')
+   print('\u2551' + "(6) Re/Set PASSWORD   (16) NMap LIVE PORTS   (26) SmbExec (36) SmbClient 139 (46) Pass the HASH   (56) PSExec HASH (66) Hydra FTP    (76) TFPS 21   (86) EvilWinRm " + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH  (17) NMap PORTServices (27) WmiExec (37) SmbMap  SHARE (47) Pass the Ticket (57) SmbExecHASH (67) Hydra SSH    (77) SFTP 21   (87) RDesktop  " + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAINNAME (18) NMap SubDOMAINS   (28) IfMap   (38) SmbMountSHARE (48) Silver Ticket   (58) WmiExecHASH (68) Hydra SMB    (78) PFTP 21   (88) XFreeRDP  " + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAINSID  (19) NMAP SERVERTIME   (29) OpDump  (39) RpcClient     (49) Golden Ticket   (59) GPP Decrypt (69) Hydra Tomcat (79) SQSH 1433 (89) Save/Exit " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -2511,7 +2511,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - GOBUSTER 
+# Details : Menu option selected - GOBUSTER WEB ADDRESS/IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2532,7 +2532,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - FTP IP
+# Details : Menu option selected - FTP IP PORT 21
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2545,7 +2545,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - TFPS IP
+# Details : Menu option selected - TFPS IP PORT 21
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2558,7 +2558,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - SFTP IP
+# Details : Menu option selected - SFTP IP PORT 21
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2571,7 +2571,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - PFTP
+# Details : Menu option selected - PFTP PORT 21
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2585,7 +2585,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected -  sqsh -H IP -L user=USER -L password=PASSWORD + exec xp_cmdshell 'whoami'; go
+# Details : Menu option selected -  sqsh -H IP -L user=USER -L password=PASSWORD + exec xp_cmdshell 'whoami'; go PORT 1433
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2598,33 +2598,33 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - ssh -l USER IP.
+# Details : Menu option selected - ssh -l USER IP -p PORT
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='80':
       if TIP[:5] != "EMPTY":
-         command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
+         command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " -p 22")
       prompt()
       
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - ssh -i id USER@IP
+# Details : Menu option selected - ssh -i id USER@IP -p 22
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='81':
       if TIP[:5] != "EMPTY":
-         command("ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
+         command("ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -p 22")
       prompt()
 
 #------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - MSSQLCLIENT PORT 1433
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2640,7 +2640,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - MYSQL PORT 3306
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2649,31 +2649,30 @@ while True:
          command("mysql -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -h " + TIP.rstrip(" "))
       prompt()
 
-
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - telnet -l USER IP.
+# Details : Menu option selected - telnet -l USER IP PORT.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='84':
       if TIP[:5] != "EMPTY":
-         command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" "))
+         command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " 23")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
-# Details : Menu option selected - nc IP.
+# Details : Menu option selected - nc IP PORT.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='85':
       if TIP[:5] != "EMPTY":
-         command("nc " + TIP.rstrip(" "))
+         command("nc " + TIP.rstrip(" ") + " 80")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
