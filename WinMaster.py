@@ -287,11 +287,11 @@ def display():
 
 def options():
    print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME  (20) GetArch (30) Enum4Linux    (40) Kerb UserInfo   (50) Golden PAC  (60) GenSSHKey ID (70) MSFTomcat (80) SSH ID 22 " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) NetView (31) WinDap Search (41) Kerb UserFilter (51) Domain Dump (61) GenUSER List (71)           (81) Telnet 23 " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Service (32) Lookup Sids   (42) Kerb BruteForce (52) BloodHound  (62) GenPass List (72)           (82) NetCat 80 " + '\u2551')
-   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec  (33) SamDump Users (43) Kerb Roasting   (53) ACLPwn      (63) USER Editor  (73) Nikto     (83) SQSH  1433" + '\u2551')
-   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExe (34) REGistryValue (44) Kerb ASREPRoast (54) SecretsDump (64) PASS Editor  (74) GoBuster  (84) MSSQL 1433" + '\u2551')
-   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec  (35) RpcDump   135 (45) PASSWORD2HASH   (55) CrackMapExe (65) HOST Editor  (75)           (85) MySQL 3306" + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) NetView (31) WinDap Search (41) Kerb UserFilter (51) Domain Dump (61) GenList USER (71)           (81) Telnet 23 " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Service (32) Lookup Sids   (42) Kerb BruteForce (52) BloodHound  (62) GenList PASS (72)           (82) NetCat 80 " + '\u2551')
+   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec  (33) SamDump Users (43) Kerb Roasting   (53) ACLPwn      (63) Editor USER  (73) Nikto     (83) SQSH  1433" + '\u2551')
+   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExe (34) REGistryValue (44) Kerb ASREPRoast (54) SecretsDump (64) Editor PASS  (74) GoBuster  (84) MSSQL 1433" + '\u2551')
+   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec  (35) RpcDump   135 (45) PASSWORD2HASH   (55) CrackMapExe (65) Editor HOST  (75)           (85) MySQL 3306" + '\u2551')
    print('\u2551' + "(6) Re/Set PASSWORD   (16) NMap LIVE PORTS   (26) SmbExec (36) RpcClient 135 (46) Pass the HASH   (56) PSExec HASH (66) Hydra FTP    (76)           (86) RDesk 3389" + '\u2551')
    print('\u2551' + "(7) Re/Set NTLM HASH  (17) NMap PORTServices (27) WmiExec (37) SmbClient 139 (47) Pass the Ticket (57) SmbExecHASH (67) Hydra SSH    (77)           (87) XRDP  3389" + '\u2551')
    print('\u2551' + "(8) Re/Set DOMAINNAME (18) NMap SubDOMAINS   (28) IfMap   (38) SmbMap SHARE  (48) Silver Ticket   (58) WmiExecHASH (68) Hydra SMB    (78) FTP 21    (88) WinRm 5985" + '\u2551')
