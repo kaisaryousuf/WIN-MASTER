@@ -286,16 +286,16 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME  (20) GetArch (30) Enum4Linux    (40) Kerb UserInfo   (50) Golden PAC  (60) GenSSHKey ID (70) MSFTomcat (80) SSH ID 22 " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) NetView (31) WinDap Search (41) Kerb UserFilter (51) Domain Dump (61) GenList USER (71)           (81) Telnet 23 " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Service (32) Lookup Sids   (42) Kerb BruteForce (52) BloodHound  (62) GenList PASS (72)           (82) NetCat 80 " + '\u2551')
-   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec  (33) SamDump Users (43) Kerb Roasting   (53) ACLPwn      (63) Editor USER  (73) Nikto     (83) SQSH  1433" + '\u2551')
-   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExe (34) REGistryValue (44) Kerb ASREPRoast (54) SecretsDump (64) Editor PASS  (74) GoBuster  (84) MSSQL 1433" + '\u2551')
-   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec  (35) RpcDump   135 (45) PASSWORD2HASH   (55) CrackMapExe (65) Editor HOST  (75)           (85) MySQL 3306" + '\u2551')
-   print('\u2551' + "(6) Re/Set PASSWORD   (16) NMap LIVE PORTS   (26) SmbExec (36) RpcClient 135 (46) Pass the HASH   (56) PSExec HASH (66) Hydra FTP    (76)           (86) RDesk 3389" + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH  (17) NMap PORTServices (27) WmiExec (37) SmbClient 139 (47) Pass the Ticket (57) SmbExecHASH (67) Hydra SSH    (77)           (87) XRDP  3389" + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAINNAME (18) NMap SubDOMAINS   (28) IfMap   (38) SmbMap SHARE  (48) Silver Ticket   (58) WmiExecHASH (68) Hydra SMB    (78) FTP 21    (88) WinRm 5985" + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAINSID  (19) NMAP SERVERTIME   (29) OpDump  (39) SmbMountSHARE (49) Golden Ticket   (59) GPP Decrypt (69) Hydra Tomcat (79) SSH 22    (89) Save/Exit " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME  (20) GetArch (30) Enum4Linux     (40) Kerb Info 88    (50) Golden PAC  (60) GenSSHKey ID (70) MSTomcat (80) SSH ID 22 " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) NetView (31) WinDap Search  (41) Kerb UserFilter (51) Domain Dump (61) GenList USER (71)          (81) Telnet 23 " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Service (32) Lookup Sids    (42) Kerb BruteForce (52) BloodHound  (62) GenList PASS (72)          (82) NetCat 80 " + '\u2551')
+   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec  (33) SamDump Users  (43) Kerb Roasting   (53) ACLPwn      (63) Editor USER  (73)          (83) SQSH  1433" + '\u2551')
+   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExe (34) REGistryValues (44) Kerb ASREPRoast (54) SecretsDump (64) Editor PASS  (74)          (84) MSSQL 1433" + '\u2551')
+   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec  (35) RpcDump        (45) PASSWORD 2 HASH (55) CrackMapExe (65) Editor HOST  (75)          (85) MySQL 3306" + '\u2551')
+   print('\u2551' + "(6) Re/Set PASSWORD   (16) NMap LIVE PORTS   (26) SmbExec (36) RpcClient 135  (46) Pass the HASH   (56) PSExec HASH (66) Hydra FTP    (76) Nikto    (86) RDesk 3389" + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH  (17) NMap PORTServices (27) WmiExec (37) SmbClient 139  (47) Pass the Ticket (57) SmbExecHASH (67) Hydra SSH    (77) GoBuster (87) XRDP  3389" + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAINNAME (18) NMap SubDOMAINS   (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket   (58) WmiExecHASH (68) Hydra SMB    (78) FTP 21   (88) WinRm 5985" + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAINSID  (19) NMAP SERVERTIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket   (59) GPP Decrypt (69) Hydra Tomcat (79) SSH 22   (89) Save/Exit " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -1177,7 +1177,7 @@ while True:
          command("enum4linux -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -v " + TIP.rstrip(" "))
       prompt()
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -1887,7 +1887,7 @@ while True:
          command("ls -la ./" + DIR.rstrip(" "))
       prompt()
       
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2129,7 +2129,7 @@ while True:
          command(PATH + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()     
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2143,7 +2143,7 @@ while True:
          command("gpp-decrypt " + AES256)
       prompt()
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2199,7 +2199,7 @@ while True:
             if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
       prompt()
       
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2230,7 +2230,7 @@ while True:
             print("[+] Adding NCrack minimal.usr list as well...")
       prompt()
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2245,7 +2245,7 @@ while True:
          if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
       prompt()
       
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2257,7 +2257,7 @@ while True:
       command("nano passwords.txt")
       prompt()
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2269,7 +2269,7 @@ while True:
       command("nano /etc/hosts")
       prompt()
             
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2311,7 +2311,7 @@ while True:
             
       prompt() 
       
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2353,7 +2353,7 @@ while True:
             
       prompt()
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2395,7 +2395,7 @@ while True:
             
       prompt() 
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2436,7 +2436,7 @@ while True:
             
       prompt()
       
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2467,7 +2467,7 @@ while True:
       prompt() 
       os.remove("meterpreter.rc")      
       
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2478,7 +2478,7 @@ while True:
    if selection =='71':
       exit(1)  
       
- #------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2488,8 +2488,41 @@ while True:
 
    if selection =='72':
       exit(1)          
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : ENDGAMES
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='73':
+      exit(1)
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : ENDGAMES
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='74':
+      exit(1)
       
- #------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : ENDGAMES
+# Details : Menu option selected - Exit(1)
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='75':
+      exit(1)
+      
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2497,7 +2530,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='73':
+   if selection =='76':
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
       else:
@@ -2505,9 +2538,9 @@ while True:
             command("nikto -h " + WEB.rstrip(" "))
          else:
             command("nikto -h " + TIP.rstrip(" "))
-      prompt()   
- 
- #------------------------------------------------------------------------------------- 
+      prompt()  
+      
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2515,7 +2548,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='74':
+   if selection =='77':
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
       else:
@@ -2528,40 +2561,7 @@ while True:
                command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
       prompt()
       
- #------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : ENDGAMES
-# Details : Menu option selected - Exit(1)
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='75':
-      exit(1)
-      
-#------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : ENDGAMES
-# Details : Menu option selected - Exit(1)
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='76':
-      exit(1)
-      
-#------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : ENDGAMES
-# Details : Menu option selected - Exit(1)
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='77':
-      exit(1)
-
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2573,7 +2573,6 @@ while True:
       if TIP[:5] != "EMPTY":
          command("ftp " + TIP.rstrip(" ") + " 21")
       prompt()       
-
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2627,7 +2626,7 @@ while True:
          command("nc " + TIP.rstrip(" ") + " 80")
       prompt()
       
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2640,7 +2639,7 @@ while True:
          command("sqsh -S " + TIP.rstrip(" ") + " -L user=" + USR.rstrip(" ") + " -L password=" + PAS.rstrip(" "))
       prompt()
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
@@ -2656,7 +2655,7 @@ while True:
             command(PATH + "mssqlclient.py " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()
 
-#------------------------------------------------------------------------------------- 
+# ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : ENDGAMES
