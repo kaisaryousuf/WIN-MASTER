@@ -21,7 +21,7 @@ Usage: python3 WinMaster.py
         MailForce requires gnome-terminal to be installed (apt-get install gnome-terminal).      
         MSFTomcat requires Seclists to be installed (apt-get install seclists).
               
-A python script file to remotely exploit Microsoft Windows systems- It can pull domains, usernames, passwords, crack hashes, and much much more.
+A python script file to remotely exploit Microsoft Windows - It can pull domains, usernames, passwords, crack hashes, and much much more.
 
 ### CONSOLE DISPLAY AND VIDEO LINK
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "WinMaster")
