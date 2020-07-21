@@ -3,21 +3,23 @@
 
 Usage: python3 WinMaster.py
 
-| LANGUAGE  | FILENAME         | MD5 Hash                         | Version  |
-|------     |------            | -------                          | ----     |
-| python3   | WinMaster.py     | ff2d0161b4e26a687fd2f0c24b7b35ec | EndGames |
+| LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
+|------     |------            | -------                          | ----    |
+| python3   | WinMaster.py     | 30f9534dfc16c49f99cd3778555809f3 | Sneaky  |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
 - [x] Requires Kerbrute (https://github.com/TarlogicSecurity/kerbrute) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
 - [x] Requires Windapsearch (https://github.com/ropnop/windapsearch) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
-- [x] Requires GoBuster (apt-get install gobuster) to be installed.
-- [x] Requires Seclists (apt-get install seclists) to be installed.
+- [x] Requires GoBuster (https://github.com/PentestBox/gobuster) to be install (apt-get install gobuster).
 
 **OPTIONAL**
 
-        AclPwn (https://pypi.org/project/aclpwn/) requires BloodHound (https://github.com/BloodHoundAD/BloodHound)
-        and Neo4j (https://github.com/neo4j) to be installed.
+        To install AclPwn type (pip3 install aclpwn).
+	To install BloodHound and Neo4j type (apt-get install bloodhound).
+	
+        MailForce requires gnome-terminal to be installed (apt-get install gnome-terminal).      
+        MSFTomcat requires Seclists to be installed (apt-get install seclists).
               
 A python script file to remotely exploit Microsoft Windows systems- It can pull domains, usernames, passwords, crack hashes, and much much more.
 
