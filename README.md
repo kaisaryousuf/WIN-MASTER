@@ -11,12 +11,12 @@ Usage: python3 WinMaster.py
 - [x] Requires Evil-WinRm (https://github.com/Hackplayers/evil-winrm) to be installed.
 - [x] Requires Kerbrute (https://github.com/TarlogicSecurity/kerbrute) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
 - [x] Requires Windapsearch (https://github.com/ropnop/windapsearch) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
-- [x] Requires GoBuster (https://github.com/PentestBox/gobuster) to be install (apt-get install gobuster).
 
 **OPTIONAL**
 
         To install AclPwn type (pip3 install aclpwn).
-        To install BloodHound and Neo4j type (apt-get install bloodhound).	
+        To install BloodHound and Neo4j type (apt-get install bloodhound).
+        To install GoBuster type (apt-get install gobuster)
         
         MailForce requires gnome-terminal to be installed (apt-get install gnome-terminal).      
         MSFTomcat requires Seclists to be installed (apt-get install seclists).
