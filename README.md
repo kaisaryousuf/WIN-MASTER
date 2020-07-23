@@ -13,13 +13,13 @@ Usage: python3 WinMaster.py
 
 **INSTALL OPTIONS**
 
-       	To install BloodHound and Neo4j type (apt-get install bloodhound).
-	To install Evil-WinRm type (gem install evil-winrm).
-	To install AclPwn type (pip3 install aclpwn).
-	To install GoBuster type (apt-get install gobuster)
+     	To install BloodHound and Neo4j type (apt-get install bloodhound).
+     	To install Evil-WinRm type (gem install evil-winrm).
+     	To install AclPwn type (pip3 install aclpwn).
+     	To install GoBuster type (apt-get install gobuster)
 
-	MailForce requires gnome-terminal to be installed (apt-get install gnome-terminal).
-	MSFTomcat requires Seclists to be installed (apt-get install seclists).
+     	MailForce requires gnome-terminal to be installed (apt-get install gnome-terminal).
+     	MSFTomcat requires Seclists to be installed (apt-get install seclists).
               
 A python script file to remotely exploit Microsoft Windows - It can pull domains, usernames, passwords, crack hashes, and so much more...
 
