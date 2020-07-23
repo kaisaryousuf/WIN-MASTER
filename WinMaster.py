@@ -2,7 +2,7 @@
 # coding:UTF-8
 
 # -------------------------------------------------------------------------------------
-#       PYTHON SCRIPT FILE FOR THE FORENSIC ANALYSIS OF REMOTE WINDOWS SYSTEMS
+#      PYTHON SCRIPT FILE FOR THE FORENSIC ANALYSIS OF REMOTE WINDOWS SYSTEMS
 #         BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS
 # -------------------------------------------------------------------------------------
 
@@ -348,6 +348,7 @@ PATH = "/usr/share/doc/python3-impacket/examples/" 	# IMPACKET LOCATION
 
 SKEW = 0         	# TIME SKEW
 DOMC = 0		# DOMAIN COUNTER
+DNSC = 0		# DNS COUNTER
 COL1 = 40	 	# SESSIONS
 COL2 = 44	 	# SHARE NAMES
 COL3 = 23	 	# USER NAMES
@@ -573,16 +574,24 @@ while True:
 
    if selection =='1':
       BAK = DNS
-      DNS = input("[*] Please enter DNS SERVER name: ")
+      DNS = input("[*] Please enter DNSERVER IP address: ")
 
-      if DNS != "":
+      if DNS == "":
+         DNS = BAK
+      else:
          if len(DNS) < COL1:
             DNS = padding(DNS, COL1)
-         command("echo '" + TIP.rstrip(" ") + "\t" + DNS.rstrip(" ") + "' >> /etc/hosts")
-         print("[+] DNS SERVER " + DNS.rstrip(" ") + " has been added to /etc/hosts...")
-         prompt()
-      else:
-         DNS = BAK      
+         if DNSC == 1:
+            print("\n[+] Resetting current DNSERVER IP association...")
+            command("sed -i '$d' /etc/resolv.conf")
+            DNS = "EMPTY"
+            DNS = padding(DOM, COL1)
+            DNSC = 0
+         if DNS[:5] != "EMPTY":
+            command("echo 'nameserver " + DNS.rstrip(" ") + "' >> /etc/resolv.conf")
+            print("[+] DNSERVER IP " + DNS.rstrip(" ") + " has been added to /etc/resolv.conf...")
+            DNSC = 1
+      prompt()    
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -607,6 +616,10 @@ while True:
             DOM = "EMPTY"
             DOM = padding(DOM, COL1)
             DOMC = 0
+         if DOM[:5] != "EMPTY":
+            command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+            print("[+] DOMAIN " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+            DOMC = 1
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -941,7 +954,7 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         command("nmap -p 80 --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
+         command("nmap --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
