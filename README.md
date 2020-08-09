@@ -5,7 +5,7 @@ Usage: python3 WinMaster.py
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
 |------     |------            | -------                          | ----    |
-| python3   | WinMaster.py     | 3eb79253f4f49fe9e1585f4d1c6c1097 | Sneaky  |
+| python3   | WinMaster.py     | 576a8c77db73aa51e52b658f216c0fe2 | Sneaky  |
 
 - [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
 - [x] Requires Kerbrute (https://github.com/TarlogicSecurity/kerbrute) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
