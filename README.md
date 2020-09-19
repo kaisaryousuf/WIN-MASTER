@@ -1,8 +1,8 @@
 # WIN-MASTER
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT MICROSOFT WINDOWS SYSTEMS VIA IMPACKET.
 
->   **Computer Misuse Act 1990 3A** <br>
->   This program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
+>   **Computer Misuse Act 1990 3A** <br> <
+>   This program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons. <
 
 Usage: python3 WinMaster.py
 
