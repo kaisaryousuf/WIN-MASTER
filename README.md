@@ -1,7 +1,7 @@
 # WIN-MASTER
-Computer Misuse Act 1990 3A
+    Computer Misuse Act 1990 3A
 
-These programs have been specifically written for the purpose of legitimate penetration testing and should not be used for any unauthorized purposes.
+    This program has been specifically written for the purpose of legitimate penetration testing and should not be used for any unauthorised or nefarious reasons.
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT MICROSOFT WINDOWS SYSTEMS VIA IMPACKET.
 
 Usage: python3 WinMaster.py
