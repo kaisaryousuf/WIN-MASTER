@@ -1,7 +1,5 @@
 # D127Y 80X
-<p align="center">
-  ![Screenshot](picture0.png)
-</p>
+![Screenshot](picture0.png)
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT MICROSOFT WINDOWS SYSTEMS VIA IMPACKET.
 
 >   **COMPUTER MISUSE ACT 1990 - SECTION 3A** <br><br>
