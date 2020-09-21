@@ -1,29 +1,26 @@
 # WIN-MASTER
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT MICROSOFT WINDOWS SYSTEMS VIA IMPACKET.
 
->   **Computer Misuse Act 1990 3A** <br><br>
->   This program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
+>   **COMPUTER MISUSE ACT 1990 S3A** <br><br>
+>   This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
 
 Usage: python3 WinMaster.py
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
 |------     |------            | -------                          | ----    |
-| python3   | WinMaster.py     | a3fa4b3f553fa62a5840336250321d47 | Sneaky  |
-
-- [x] Requires Impacket (https://github.com/SecureAuthCorp/impacket) to be installed.
-- [x] Requires Kerbrute (https://github.com/TarlogicSecurity/kerbrute) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
-- [x] Requires Windapsearch (https://github.com/ropnop/windapsearch) to be installed in the /usr/share/doc/python3-impacket/examples/ directory.
+| bash      | install.sh       | 53e4926ac6087633b11483c363516c44 | sneaky  |
+| python3   | WinMaster.py     | dae1c29e75a06cb9033595e34067f53a | Sneaky  |
 
 **INSTALL OPTIONS**
 
-     	To install BloodHound and Neo4j type (apt-get install bloodhound).
-     	To install Evil-WinRm type (gem install evil-winrm).
-     	To install AclPwn type (pip3 install aclpwn).
-     	To install GoBuster type (apt-get install gobuster)
+        bash install.sh - install the basic supporting packages.
 
-     	MailForce requires gnome-terminal to be installed (apt-get install gnome-terminal).
-     	MSFTomcat requires Seclists to be installed (apt-get install seclists).
-              
+        BLOODHOUND INSTALLATION
+        -----------------------
+        apt-get install bloodhound
+        git clone https://github.com/fox-it/BloodHound.py.git && pip install .
+        pip3 install aclpwn
+     	              
 A python script file to remotely exploit Microsoft Windows - It can pull domains, usernames, passwords, crack hashes, and so much more...
 
 ### CONSOLE DISPLAY AND VIDEO LINK

@@ -344,7 +344,7 @@ else:
 
 print("[+] Populating system variables...")
 
-PATH = "/usr/share/doc/python3-impacket/examples/" 	# IMPACKET LOCATION
+PATH = "python3 /usr/share/doc/python3-impacket/examples/" 	# IMPACKET LOCATION
 
 SKEW = 0         	# TIME SKEW
 DOMC = 0		# DOMAIN COUNTER
@@ -977,14 +977,23 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : SNEAKY
-# Details : Menu option selected - getArch.py -target IP
+# Details : Menu option selected - getArch.py target IP
 # Details : 32/64 bit
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '20':
       if TIP[:5] != "EMPTY":
-         command(PATH + "getArch.py -target " + TIP.rstrip(" "))
+         print("[*] Attempting to enumerate architecture...")
+         OS = "[-] Not found..."
+         command(PATH + "getArch.py -target " + TIP.rstrip(" ") + " > os.txt")
+         with open("os.txt") as search:
+            for line in search:
+               if "is" in line:
+                  OS = line
+                  print("[+] Found architecture...")
+         print(colored("\n" + OS,colour2, attrs=['bold']))
+         command("rm os.txt")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
