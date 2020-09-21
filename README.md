@@ -1,9 +1,6 @@
 ![Screenshot](picture0.png)
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT MICROSOFT WINDOWS SYSTEMS VIA IMPACKET.
 
-## COMPUTER MISUSE ACT 1990 - SECTION 3A
-This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reason.
-
 TESTED: Kali Linux 2019
 USAGE : python3 WinMaster.py
 
@@ -26,6 +23,9 @@ USAGE : python3 WinMaster.py
         pip3 install aclpwn
      	              
 A python script file to remotely exploit Microsoft Windows - It can pull domains, usernames, passwords, crack hashes, and so much more...
+
+## COMPUTER MISUSE ACT 1990 - SECTION 3A
+This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reason.
 
 ### CONSOLE DISPLAY AND VIDEO LINK
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "WinMaster")
