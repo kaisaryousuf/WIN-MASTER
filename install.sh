@@ -7,11 +7,9 @@ gem install evil-winrm
 pip3 install kerbrute
 git clone https://github.com/ropnop/windapsearch.git
 cd ./windapsearch
-cp ./windapsearch.py ./usr/share/doc/python3-impacket/examples/windapsearch.py
-rm *.*
-rm *
+mv ./windapsearch.py /usr/share/doc/python3-impacket/examples/windapsearch.py
 cd ..
-rmdir ./windapsearch
+rm -r windapsearch
 
 
 
