@@ -1,7 +1,7 @@
 ![Screenshot](picture0.png)
-# A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT MICROSOFT WINDOWS SYSTEMS VIA IMPACKET.
+## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT MICROSOFT WINDOWS SYSTEMS VIA IMPACKET.
 
-## **COMPUTER MISUSE ACT 1990 - SECTION 3A** <br><br>
+## COMPUTER MISUSE ACT 1990 - SECTION 3A
 ## This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reason.
 
 TESTED: Kali Linux 2019
