@@ -6,7 +6,7 @@ apt-get install gobuster
 gem install evil-winrm
 pip3 install kerbrute
 git clone https://github.com/ropnop/windapsearch.git
-cd /windapsearch
+cd ./windapsearch
 cp ./windapsearch.py ./usr/share/doc/python3-impacket/examples/windapsearch.py
 rm *.*
 rm *
