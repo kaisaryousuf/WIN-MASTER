@@ -1,19 +1,26 @@
-# WIN-MASTER
+# D127Y 80X
+<p align="center">
+  ![Screenshot](picture0.png)
+</p>
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT MICROSOFT WINDOWS SYSTEMS VIA IMPACKET.
 
->   **COMPUTER MISUSE ACT 1990 S3A** <br><br>
->   This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
+>   **COMPUTER MISUSE ACT 1990 - SECTION 3A** <br><br>
+>   This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reason.
 
-Usage: python3 WinMaster.py
+TESTED: Kali Linux 2019
+USAGE : python3 WinMaster.py
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
 |------     |------            | -------                          | ----    |
-| bash      | install.sh       | 53e4926ac6087633b11483c363516c44 | sneaky  |
-| python3   | WinMaster.py     | dae1c29e75a06cb9033595e34067f53a | Sneaky  |
+| bash      | install.sh       | 646f7f9d96f98bc190755b7da1156164 | Covid-3 |
+| python3   | WinMaster.py     | 169a67c8bcd561d67500061fae6f9247 | Covid-3 |
 
 **INSTALL OPTIONS**
 
-        bash install.sh - install the basic supporting packages.
+        BASIC INSTALL
+        -------------
+
+        bash install.sh
 
         BLOODHOUND INSTALLATION
         -----------------------
