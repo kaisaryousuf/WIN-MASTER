@@ -7,7 +7,7 @@ USAGE : python3 WinMaster.py
 
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version |
 |------     |------            | -------                          | ----    |
-| bash      | install.sh       | d78b7fad07a21378d510696020f19f8c | Covid-3 |
+| bash      | install.sh       | 13a0a7d8a04ed517d02c45d8479c4c12 | Covid-3 |
 | python3   | WinMaster.py     | 169a67c8bcd561d67500061fae6f9247 | Covid-3 |
 
 **INSTALL OPTIONS**

@@ -12,4 +12,5 @@ cd ..
 rm -r windapsearch
 python3 -m pip install pipx
 pipx ensurepath
+apt-get install python3-venv
 pipx install crackmapexec
