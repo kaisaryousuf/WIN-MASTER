@@ -267,11 +267,11 @@ def display():
    
 # -------------------------------------------------------------------------------------
 
-   print('\u2551' + " MY DIRECTORY " + '\u2502', end=' ')
-   if DIR[:8] == "WORKAREA":
+   print('\u2551' + " WORK FOLDER  " + '\u2502', end=' ')
+   if DIR[:8] == "DEFAULT_":
       print(colored(DIR[:COL1],colour1), end=' ')
    else:
-      print(colored(DIR[:COL1],colour2), end=' ')
+      print(colored(DIR[:COL2],colour2), end=' ')
    print('\u2551', end=' ')
    
    if SHAR[12][:1] != " ":
@@ -290,7 +290,7 @@ def display():
 def options():
    print('\u2551' + "(0) REMOTE IP Scanner  (10) Re/Set SHARE NAME  (20) GetArch (30) Enum4Linux     (40) Kerberos Info  (50) Golden PAC  (60) GenSSHKeyID (70) Hydra POP3 (80) FTP     " + '\u2551')
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set SERVER TIME (21) NetView (31) WinDap Search  (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra TOM  (81) SSH     " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY   (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) SSH ID  " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set WORK AREA   (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) SSH ID  " + '\u2551')
    print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection   (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) BH ACLPwn   (63) Editor USER (73) RemoteSync (83) Telnet  " + '\u2551')
    print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Dump DNS SERVER    (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RSyncDumpS (84) NetCat  " + '\u2551')
    print('\u2551' + "(5) Re/Set USER NAME   (15) Recon DNS SERVER   (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) MailForcer (85) SQSH    " + '\u2551')
@@ -326,8 +326,8 @@ print("BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS).	     \n")
 # -------------------------------------------------------------------------------------
 
 print("[*] Booting - Please wait...\n")
-if not os.path.exists("WORKAREA"):			
-   os.mkdir("WORKAREA")
+if not os.path.exists("DEFAULT_FOLDER"):
+   os.mkdir("DEFAULT_FOLDER")
    print("[+] Work area created...")
 else:
    print("[+] Work area already exists...")		# DEFAULT WORK DIRECTORY
@@ -382,7 +382,7 @@ if not os.path.exists('config.txt'):
    SID = "EMPTY              " # DOMAIN SID
    TSH = "EMPTY              " # SESSION SHARE
    LTM = "00:00              " # LOCAL TIME    
-   DIR = "WORKAREA           " # DIRECTORY
+   DIR = "DEFAULT_FOLDER          " # DIRECTORY
 else:
    print("[+] Configuration file found - restoring saved data....")
    DNS = linecache.getline('config.txt', 1).rstrip("\n")
@@ -828,17 +828,24 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '12':
-      directory = input("[*] Please enter new working DIRECTORY: ")
+      oldDirectory = DIR.rstrip(" ")     
+      newDirectory = input("[*] Please enter new WORK FOLDER: ").upper()
 
-      if os.path.exists(directory):
+      if os.path.exists(newDirectory):
          print("[-] Directory already exists....")
       else:
-         if len(directory) > 0:
-            os.mkdir(directory)
-            DIR = directory
+         if len(newDirectory) > 0:
+            os.mkdir(newDirectory)
+            DIR = newDirectory
             if len(DIR) < COL1:
                DIR = padding(DIR, COL1)
             print("[+] Working directory changed...")
+            print("[*] Checking to see if the old directory can be safely deleted...")
+            if len(os.listdir(oldDirectory)) == 0:
+               os.rmdir(oldDirectory)
+               print("[+] Old directory succesfully deleted...")
+            else:
+               print("[-] Old directory still contains data...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2866,8 +2873,8 @@ while True:
       os.remove("passwords.txt")
       if DOMC == 1:
          command("sed -i '$d' /etc/hosts")
-      if len(os.listdir("WORKAREA")) == 0:
-         os.rmdir("WORKAREA")
+      if len(os.listdir(DIR.rstrip(" "))) == 0:
+         os.rmdir(DIR.rstrip(" "))
       exit(1)
 
 # Eof...	
