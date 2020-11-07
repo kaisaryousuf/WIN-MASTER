@@ -27,6 +27,7 @@ from termcolor import colored	# PIP INSTALL TERMCOLOR
 colour1 = 'yellow'
 colour2 = 'green'
 colour3 = 'white'
+colour4 = 'red'
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -143,7 +144,8 @@ def display():
    if POR[:5] == "EMPTY":
       print(colored(POR[:COL1],colour1), end=' ')
    else:
-      print(colored(POR[:COL1],colour2), end=' ')
+      lastChar = POR[COL1-1]
+      print(colored(POR[:COL1-1],colour2) + colored(lastChar,colour4), end=' ')
    print('\u2551', end=' ')
    print(colored(SHAR[2],colour2), end=' ')
    print('\u2551', end=' ')
@@ -181,7 +183,7 @@ def display():
    
 # -------------------------------------------------------------------------------------
 
-   print('\u2551' + " PASSWORD     " + '\u2502', end=' ')
+   print('\u2551' + " PASS WORD    " + '\u2502', end=' ')
    if PAS[:2] == "''":
       print(colored(PAS[:COL1],colour1), end=' ')
    else:
@@ -278,7 +280,7 @@ def display():
       print(colored(SHAR[11],colour2), end=' ')
    print('\u2551', end=' ')
    if USER[12][:1] != " ":
-      print(colored(USER[11],'red'), end=' ')
+      print(colored(USER[11],colour4), end=' ')
    else:
       print(colored(USER[11],colour2), end=' ')
    print(colored(PASS[11],colour2), end=' ')
@@ -286,16 +288,16 @@ def display():
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP Scanner (10) Re/Set SHARENAME  (20) GetArch (30) Enum4Linux     (40) Kerberos Info  (50) Golden PAC  (60) GenSSHKeyID (70) Hydra POP3 (80) SSH ID    " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER (11) Re/Set SERVERTIME (21) NetView (31) WinDap Search  (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra TOM  (81) Telnet    " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP  (12) Re/Set DIRECTORY  (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) NetCat    " + '\u2551')
-   print('\u2551' + "(3) Re/Set LIVE PORTS (13) Check Connection  (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) BH ACLPwn   (63) Editor USER (73) RemoteSync (83) SQSH      " + '\u2551')
-   print('\u2551' + "(4) Re/Set WEBADDRESS (14) DNSDump DNSSERVER (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RSyncDumpS (84) MSSQL     " + '\u2551')
-   print('\u2551' + "(5) Re/Set USERNAME   (15) DNSReco DNSSERVER (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) MailForce  (85) MySQL     " + '\u2551')
-   print('\u2551' + "(6) Re/Set PASSWORD   (16) NMap LIVE PORTS   (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor DNS  (76) Nikto Scan (86) RDeskTop  " + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH  (17) NMap PORTServices (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP   (77) GoBuster   (87) XDeskTop  " + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAINNAME (18) NMap SubDOMAINS   (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) Hydra SSH   (78) FTP        (88) EvilWinRm " + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAINSID  (19) NMAP SERVERTIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) GPP Decrypt (69) Hydra SMB   (79) SSH        (89) Save/Exit " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP Scanner  (10) Re/Set SHARE NAME  (20) GetArch (30) Enum4Linux     (40) Kerberos Info  (50) Golden PAC  (60) GenSSHKeyID (70) Hydra POP3 (80) FTP     " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set SERVER TIME (21) NetView (31) WinDap Search  (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra TOM  (81) SSH     " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set DIRECTORY   (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) SSH ID  " + '\u2551')
+   print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection   (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) BH ACLPwn   (63) Editor USER (73) RemoteSync (83) Telnet  " + '\u2551')
+   print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Dump DNS SERVER    (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RSyncDumpS (84) NetCat  " + '\u2551')
+   print('\u2551' + "(5) Re/Set USER NAME   (15) Recon DNS SERVER   (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) MailForcer (85) SQSH    " + '\u2551')
+   print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor DNS  (76) Nikto Scan (86) MSSQL   " + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP   (77) GoBuster   (87) MySQL   " + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) Hydra SSH   (78) RDeskTop   (88) WinRm   " + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMAP SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) GPP Decrypt (69) Hydra SMB   (79) XDesktop   (89) Exit    " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -433,7 +435,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='0':
+   if selection =='0':   
       CheckParams = 0
 
       if (TIP[:5] == "EMPTY"):
@@ -441,7 +443,24 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("[*] Attempting to enumerate domain name...")
+         print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
+         command("ports=$(nmap -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
+         POR = linecache.getline("PORTS.tmp", 1)
+         
+         if len(POR) < COL1:
+            POR = padding(POR, COL1)
+         else:
+            POR = POR.rstrip("\n")           
+
+         if POR[:1] == "":
+            print("[-] Unable to enumerate any port information, good luck!!...")
+         else:
+            print("[+] Found live ports...\n")
+            print(colored(POR,colour2, attrs=['bold']))         
+                    
+ # -------------------------------------------------------------------------------------       
+      
+         print("\n[*] Attempting to enumerate domain name...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
 
          if os.path.getsize("lsaquery.tmp") == 0:
@@ -616,11 +635,12 @@ while True:
             DOM = "EMPTY"
             DOM = padding(DOM, COL1)
             DOMC = 0
+
          if DOM[:5] != "EMPTY":
             command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
             print("[+] DOMAIN " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
             DOMC = 1
-      prompt()
+            prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
@@ -2632,13 +2652,39 @@ while True:
          print("\n[-] Remote IP address has not been specified...")
       else:
          if WEB[:5] == "EMPTY":
-            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
+            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 50")
          else:
             if (WEB[:5] == "https") or (WEB[:5] == "HTTPS"):
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50 -k") 
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 50 -k") 
             else: 
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/wordlists/dirb/common.txt -t 50")
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 50")
       prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : COVID-3
+# Details : Menu option selected - rdesktop - u user -p password -d domain / IP
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='78':
+      if TIP[:5] != "EMPTY":
+         command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
+      prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : COVID-3
+# Details : Menu option selected - Xfreeredp
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '79':
+      if TIP[:5] != "EMPTY":
+         command("xfreerdp /u:" + USR.rstrip(" ") + " /p:'" + PAS.rstrip(" ") + "' /v:" + TIP.rstrip(" "))
+      prompt()  
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2648,7 +2694,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='78':
+   if selection =='80':
       if TIP[:5] != "EMPTY":
          command("ftp " + TIP.rstrip(" ") + " 21")
       prompt()       
@@ -2661,7 +2707,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='79':
+   if selection =='81':
       if TIP[:5] != "EMPTY":
          command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " -p 22")
       prompt() 
@@ -2674,7 +2720,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='80':
+   if selection =='82':
       if TIP[:5] != "EMPTY":
          command("ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -p 22")
       prompt()
@@ -2687,7 +2733,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='81':
+   if selection =='83':
       if TIP[:5] != "EMPTY":
          command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " 23")
       prompt()
@@ -2700,7 +2746,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='82':
+   if selection =='84':
       if TIP[:5] != "EMPTY":
          command("nc " + TIP.rstrip(" ") + " 80")
       prompt()
@@ -2713,7 +2759,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='83':
+   if selection =='85':
       if TIP[:5] != "EMPTY":
          command("sqsh -S " + TIP.rstrip(" ") + " -L user=" + USR.rstrip(" ") + " -L password=" + PAS.rstrip(" "))
       prompt()
@@ -2726,7 +2772,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='84':
+   if selection =='86':
       if TIP[:5] != "EMPTY":
          if DOM[:5] != "EMPTY":
             command(PATH + "mssqlclient.py " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -2742,36 +2788,10 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='85':
+   if selection =='87':
       if TIP[:5] != "EMPTY":
          command("mysql -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -h " + TIP.rstrip(" "))
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : COVID-3
-# Details : Menu option selected - rdesktop - u user -p password -d domain / IP
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='86':
-      if TIP[:5] != "EMPTY":
-         command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
-      prompt()
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : COVID-3
-# Details : Menu option selected - Xfreeredp
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '87':
-      if TIP[:5] != "EMPTY":
-         command("xfreerdp /u:" + USR.rstrip(" ") + " /p:'" + PAS.rstrip(" ") + "' /v:" + TIP.rstrip(" "))
-      prompt()    
+      prompt() 
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
