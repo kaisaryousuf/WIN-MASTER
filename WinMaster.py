@@ -16,6 +16,7 @@
 
 import os
 import sys
+import time
 import os.path
 import hashlib
 import binascii
@@ -268,7 +269,7 @@ def display():
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " WORK FOLDER  " + '\u2502', end=' ')
-   if DIR[:8] == "DEFAULT_":
+   if DIR[:12] == "LOCAL_FOLDER":
       print(colored(DIR[:COL1],colour1), end=' ')
    else:
       print(colored(DIR[:COL2],colour2), end=' ')
@@ -292,8 +293,8 @@ def options():
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set SERVER TIME (21) NetView (31) WinDap Search  (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra TOM  (81) SSH     " + '\u2551')
    print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set WORK AREA   (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) SSH ID  " + '\u2551')
    print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection   (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) BH ACLPwn   (63) Editor USER (73) RemoteSync (83) Telnet  " + '\u2551')
-   print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Dump DNS SERVER    (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RSyncDumpS (84) NetCat  " + '\u2551')
-   print('\u2551' + "(5) Re/Set USER NAME   (15) Recon DNS SERVER   (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) MailForcer (85) SQSH    " + '\u2551')
+   print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Recon DNS SERVER   (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RSyncDumpS (84) NetCat  " + '\u2551')
+   print('\u2551' + "(5) Re/Set USER NAME   (15) Dump DNS SERVER    (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) MailForcer (85) SQSH    " + '\u2551')
    print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor DNS  (76) Nikto Scan (86) MSSQL   " + '\u2551')
    print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP   (77) GoBuster   (87) MySQL   " + '\u2551')
    print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) Hydra SSH   (78) RDeskTop   (88) WinRm   " + '\u2551')
@@ -309,13 +310,14 @@ def options():
 # -------------------------------------------------------------------------------------
 
 command("clear")
+command("xdotool key Alt+Shift+S; xdotool type 'WIN MASTER'; xdotool key Return")
 print("__        _____ _   _   __  __    _    ____ _____ _____ ____      ") 
 print("\ \      / /_ _| \ | | |  \/  |  / \  / ___|_   _| ____|  _ \     ") 
 print(" \ \ /\ / / | ||  \| | | |\/| | / _ \ \___ \ | | |  _| | |_) |    ") 
 print("  \ V  V /  | || |\  | | |  | |/ ___ \ ___) || | | |___|  _ <     ") 
 print("   \_/\_/  |___|_| \_| |_|  |_/_/   \_\____/ |_| |_____|_| \_\    ")
 print("                                                                  ")
-print("BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS).	     \n")
+print("       BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)       ")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -325,25 +327,31 @@ print("BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS).	     \n")
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-print("[*] Booting - Please wait...\n")
-if not os.path.exists("DEFAULT_FOLDER"):
-   os.mkdir("DEFAULT_FOLDER")
+print("\n[*] Booting - Please wait...\n")
+if not os.path.exists("LOCAL_FOLDER"):
+   os.mkdir("LOCAL_FOLDER")
    print("[+] Work area created...")
 else:
-   print("[+] Work area already exists...")		# DEFAULT WORK DIRECTORY
+   print("[-] Work area already exists...")		# DEFAULT WORK DIRECTORY
 
 if not os.path.exists("usernames.txt"):			
    command("touch usernames.txt")
    print("[+] File usernames.txt created...")
 else:
-   print("[+] File usernames.txt already exists...")	# USER LIST
+   print("[-] File usernames.txt already exists...")	# USER LIST
    
 if not os.path.exists("passwords.txt"):			
    command("touch passwords.txt")
    print("[+] File passwords.txt created...")
 else:
-   print("[+] File passwords.txt already exists...")	# PASSWORD LIST
+   print("[-] File passwords.txt already exists...")	# PASSWORD LIST
 
+if not os.path.exists("hashes.txt"):			
+   command("touch hashes.txt")
+   print("[+] File hashes.txt created...")
+else:
+   print("[-] File hashes.txt already exists...")	# PASSWORD LIST
+   
 print("[+] Populating system variables...")
 
 PATH = "python3 /usr/share/doc/python3-impacket/examples/" 	# IMPACKET LOCATION
@@ -356,6 +364,7 @@ COL2 = 44	 	# SHARE NAMES
 COL3 = 23	 	# USER NAMES
 COL4 = 32	 	# PASSWORDS
 MAXX = 1000		# 0 - 999			# NOT LIMITED
+IP46 = " -4 "		# IP TYPE
 
 SHAR = [" "*COL2]*MAXX	# SHARE NAMES
 USER = [" "*COL3]*MAXX	# USER NAMES
@@ -382,7 +391,7 @@ if not os.path.exists('config.txt'):
    SID = "EMPTY              " # DOMAIN SID
    TSH = "EMPTY              " # SESSION SHARE
    LTM = "00:00              " # LOCAL TIME    
-   DIR = "DEFAULT_FOLDER          " # DIRECTORY
+   DIR = "LOCAL_FOLDER       " # DIRECTORY
 else:
    print("[+] Configuration file found - restoring saved data....")
    DNS = linecache.getline('config.txt', 1).rstrip("\n")
@@ -410,6 +419,8 @@ if len(SID) < COL1: SID = padding(SID, COL1)
 if len(TSH) < COL1: TSH = padding(TSH, COL1)
 if len(LTM) < COL1: LTM = padding(LTM, COL1)
 if len(DIR) < COL1: DIR = padding(DIR, COL1)
+
+time.sleep( 5 ) # Splash Screen
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -443,88 +454,65 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
-         command("ports=$(nmap -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
-         POR = linecache.getline("PORTS.tmp", 1)
-         
-         if len(POR) < COL1:
-            POR = padding(POR, COL1)
-         else:
-            POR = POR.rstrip("\n")           
-
-         if POR[:1] == "":
-            print("[-] Unable to enumerate any port information, good luck!!...")
-         else:
-            print("[+] Found live ports...\n")
-            print(colored(POR,colour2, attrs=['bold']))         
-                    
- # -------------------------------------------------------------------------------------       
-      
          print("\n[*] Attempting to enumerate domain name...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
 
-         if os.path.getsize("lsaquery.tmp") == 0:
-            print("[-] Unable to enumerate RPC data...")
+         line1 = linecache.getline("lsaquery.tmp", 1)
+         if (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
+            print(colored("[*] WARNING!!! - Unable to connect to RPC data...",'red'))
          else:
-            line1 = linecache.getline("lsaquery.tmp", 1)
-            if (line1[:6] == "Cannot") or (line1[:1] == ""):
-               print("[-] Unable to connect to RPC data...")
-            else:
-               DOM = " "*COL1					# WIPE CLEAN CURRENT VALUES
-               SID = " "*COL1
-               try:
-                  null,DOM = line1.split(":")
-               except ValueError:
-                  DOM = "Error..."
+            DOM = " "*COL1					# WE HAVE CONNECTION SO
+            SID = " "*COL1					# WIPE CLEAN CURRENT VALUES
+            try:
+               null,DOM = line1.split(":")
+            except ValueError:
+               DOM = "EMPTY"
                   
-               DOM = DOM.strip(" ")				# CLEAN UP DATA
-               if len(DOM) < COL1: DOM = padding(DOM, COL1)
+         DOM = DOM.strip(" ")					# CLEAN UP DATA
+         if len(DOM) < COL1: DOM = padding(DOM, COL1)
                   
-               if DOM[:5] == "Error":
-                  print("[-] Unable to enumerate domain name...")
-               else:
-                  print("[+] Found domain...\n")
-                  print(colored(DOM,colour2, attrs=['bold']))
+         if DOM[:5] == "EMPTY":
+           print("[-] Unable to enumerate domain name...")
+         else:
+            print("[+] Found domain...\n")
+            print(colored(DOM,colour2, attrs=['bold']))
             
-                  if DOMC == 1:
-                     print("\n[*] Resetting current domain association...")
-                     command("sed -i '$d' /etc/hosts")
-                     command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-                     print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-                  else:
-                     command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-                     print("\n[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-                     DOMC = 1
+            if DOMC == 1:
+               print("\n[*] Resetting current domain association...")
+               command("sed -i '$d' /etc/hosts")
+               command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+               print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+            else:
+               command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+               print("\n[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+               DOMC = 1
                      
 # ------------------------------------------------------------------------------------- 
 
-            print("[*] Attempting to enumerate domain SID...")
-            line2 = linecache.getline("lsaquery.tmp", 2)
-            
-            if (line2[:6] == "Cannot") or (line2[:1] == ""):            
-               print("[-] Unable to connect to RPC data...")
-            else:
-               try:
-                  null,SID = line2.split(":")
-               except ValueError:
-                  SID = "Error..."
+         print("[*] Attempting to enumerate domain SID...")
+         line2 = linecache.getline("lsaquery.tmp", 2)
+                     
+         try:
+            null,SID = line2.split(":")
+         except ValueError:
+            SID = "EMPTY"    
                
-               SID = SID.strip(" ")				# CLEAN UP DATA
-               SID = padding(SID, COL1)
-               
-               if SID[:5] == "Error":
-                  print("[-] Unable to enumerate domain SID...")
-               else:
-                  print("[+] Found SID...\n")
-                  print(colored(SID,colour2, attrs=['bold']) + "\n")
-                  
+         SID = SID.strip(" ")				# CLEAN UP DATA
+         SID = padding(SID, COL1)              
+         
+         if SID[:5] == "EMPTY":
+            print("[-] Unable to enumerate domain SID...")
+         else:
+            print("[+] Found SID...\n")
+            print(colored(SID,colour2, attrs=['bold']) + "\n")
+                 
 # ------------------------------------------------------------------------------------- 
           
          print("[*] Attempting to enumerate shares...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.tmp")
-
+  
          line3 = linecache.getline("shares1.tmp", 1)
-         if (line3[:9] == "Could not") or (line3[:6] == "Cannot") or (line3[:1] == ""):
+         if (line3[:9] == "Could not") or (line3[:6] == "Cannot") or (line3[:1] == "") or "ACCESS_DENIED" in line3:
             print("[-] Unable to enumerate shares...")
          else:
             cleanshares()						# WIPE CURRENT SHARE VALUES
@@ -553,8 +541,8 @@ while True:
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.tmp")      
 
          line4 = linecache.getline("domusers1.tmp", 1)
-         if (line4[:9] == "Could not") or (line4[:6] == "result") or (line4[:6] == "Cannot") or (line4[:1] == ""):
-            print("[-] Unable to enumerate domain users..")
+         if (line4[:9] == "Could not") or (line4[:6] == "result") or (line4[:6] == "Cannot") or (line4[:1] == "") or "ACCESS_DENIED" in line4:
+            print("[-] Unable to enumerate domain users...")
          else:
             cleanusers()							# WIPE CLEAN USERS AND PASSWORDS             
             os.remove("usernames.txt")						# PURGE CURRENT USERFILE LIST            
@@ -640,7 +628,15 @@ while True:
             command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
             print("[+] DOMAIN " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
             DOMC = 1
-            prompt()
+         
+         if":" in TIP:
+            print("[*] Defaulting to IP 6...")
+            IP46 = "-6"
+         else:
+            print("[*] Defualting to IP 4...")
+            IP46 = "-4"
+
+         prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
@@ -868,11 +864,26 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : COVID-3
-# Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
+# Details : Menu option selected - fierce -dns DNS SERVER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '14':
+      if DNS[:5] != "EMPTY":
+         command("fierce -dns " + DNS.rstrip(" "))
+      else:
+         print("\n[-] DNS server has not been specified...")
+      prompt()      
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : COVID-3
+# Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '15':
       CheckParams = 0
 
       if (DOM[:5] == "EMPTY"):
@@ -896,21 +907,6 @@ while True:
          command("sed -i '1d' records.csv")
          command("\ncat records.csv")
       prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : COVID-3
-# Details : Menu option selected - fierce -dns DNS SERVER.
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '15':
-      if DNS[:5] != "EMPTY":
-         command("fierce -dns " + DNS.rstrip(" "))
-      else:
-         print("\n[-] DNS server has not been specified...")
-      prompt()      
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -925,7 +921,7 @@ while True:
          print("[-] Remote IP address has not been specified...")
       else:
          print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
-         command("ports=$(nmap -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
+         command("ports=$(nmap " + IP46 + " -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
          POR = linecache.getline("PORTS.tmp", 1)         
          
          if len(POR) < COL1:
@@ -955,17 +951,17 @@ while True:
       else:
          if POR[:5] != "EMPTY":
             print("[*] Scanning specified live ports only, please wait...")
-            command("nmap -p " + POR.rstrip(" ") + " -sC -sV " + TIP.rstrip(" "))
+            command("nmap " + IP46 + " -p " + POR.rstrip(" ") + " -sC -sV " + TIP.rstrip(" "))
          else:
             print("[*] Fast scanning all ports, please wait...")
-            command("nmap -T4 -F " + TIP.rstrip(" "))
+            command("nmap " + IP46 + " -T4 -F " + TIP.rstrip(" "))
       prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : COVID-3
-# Details : Menu option selected - nmap -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
+# Details : Menu option selected - nmap IP46 -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -988,14 +984,14 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : COVID-3
-# Details : Menu option selected - nmap -sU -O -p 123 --script ntp-info IP.
+# Details : Menu option selected - nmap IP46 -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '19':
       if TIP[:5] != "EMPTY":
-#         command("nmap -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
-         command("nmap -sV -p 88 " + TIP.rstrip(" "))
+#         command("nmap " + IP46 + " -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
+         command("nmap " + IP46 + " -sV -p 88 " + TIP.rstrip(" "))
       else:
          print("\n[-] Remote IP address has not been specified...")
       prompt()
@@ -1582,7 +1578,7 @@ while True:
 
       if CheckParams != 1:
          print("[*] Enumerating, please wait...")
-         command("nmap -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
+         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
          command("sed -i '/@/!d' KUSERS.tmp")
          command("sort KUSERS.tmp | uniq > USERS2.tmp")
          
@@ -2864,17 +2860,22 @@ while True:
       command("echo " + LTM + " >> config.txt")  
       command("echo " + DIR + " >> config.txt")   
       
-      os.remove("usernames.txt")			# NOW TIDY UP
-      if os.path.exists("id_rsa.pub"):
-         os.remove("id_rsa.pub")
-         os.remove("id_rsa")
-      if os.path.exists("usernames2.txt"):
-         os.remove("usernames2.txt")      
-      os.remove("passwords.txt")
-      if DOMC == 1:
-         command("sed -i '$d' /etc/hosts")
-      if len(os.listdir(DIR.rstrip(" "))) == 0:
-         os.rmdir(DIR.rstrip(" "))
+      if os.path.exists("PORTS.tmp"):
+         os.remove("PORTS.tmp")
+      
+#      if os.path.exists("usernames.txt"):
+#         os.remove("usernames.txt")      
+#      if os.path.exists("passwords.txt"):
+#         os.remove("passwords.txt")
+#      if os.path.exists("hashes.txt"):
+#         os.remove("hashes.txt")      
+#      if os.path.exists("id_rsa.pub"):
+#         os.remove("id_rsa.pub")
+#         os.remove("id_rsa")
+#      if DOMC == 1:
+#         command("sed -i '$d' /etc/hosts")
+#      if len(os.listdir(DIR.rstrip(" "))) == 0:
+#         os.rmdir(DIR.rstrip(" "))
       exit(1)
 
 # Eof...	
