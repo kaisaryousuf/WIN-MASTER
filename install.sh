@@ -12,4 +12,4 @@ cd ./windapsearch
 mv ./windapsearch.py /usr/share/doc/python3-impacket/examples/windapsearch.py
 cd ..
 rm -r windapsearch
-echo "Done!"
+echo "All Done!"
