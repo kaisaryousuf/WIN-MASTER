@@ -378,6 +378,12 @@ if not os.path.exists("hashes.txt"):
 else:
    print("[-] File hashes.txt already exists...")		# DEFUALT HASHFILE LIST
    
+if not os.path.exists("shares.txt"):
+   command("touch shares.txt")
+   print("[+] File shares.txt created...")
+else:
+   print("[-] File shares.txt already exists...")		# DEFUALT SHARES LIST
+   
 print("[+] Populating system variables...")
 
 PATH = "python3 /usr/share/doc/python3-impacket/examples/" 	# IMPACKET LOCATION
@@ -432,6 +438,19 @@ else:
    TSH = linecache.getline('config.txt', 10).rstrip("\n")
    LTM = linecache.getline('config.txt', 11).rstrip("\n")
    DIR = linecache.getline('config.txt', 12).rstrip("\n")   
+   
+   for x in range (0, MAXX):
+      USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+      USER[x] = padding(USER[x], COL3)
+      
+   for x in range (0, MAXX):
+      PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
+      PASS[x] = padding(PASS[x], COL4)
+
+   for x in range(0, MAXX):
+      SHAR[x] = linecache.getline("shares.txt",x + 1).rstrip(" ")
+      SHAR[x] = SHAR[x].lstrip()
+      SHAR[x] = padding(SHAR[x], COL2)
 
 if len(DNS) < COL1: DNS = padding(DNS, COL1)
 if len(TIP) < COL1: TIP = padding(TIP, COL1)
@@ -1018,7 +1037,7 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         command("nmap --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
+         command("nmap " + IP46 + " --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1510,27 +1529,26 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
-         command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > SHARES.tmp")
+         command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > shares.txt")
          
          command("tput setaf 2")
-         command("cat SHARES.tmp")
+         command("cat shares.txt")
          command("tput sgr0")
          
-         command("sed -i /Sharename/d SHARES.tmp")		# TIDY UP THE FILE READY FOR READING
-         command("sed -i /-/d         SHARES.tmp")
-         command("sed -i /SMB1/d      SHARES.tmp")
-         command("sed -i '/^$/d'      SHARES.tmp")
+         command("sed -i /Sharename/d shares.txt")		# TIDY UP THE FILE READY FOR READING
+         command("sed -i /-/d         shares.txt")
+         command("sed -i /SMB1/d      shares.txt")
+         command("sed -i '/^$/d'      shares.txt")
       
-         count = len(open('SHARES.tmp').readlines( ))                
+         count = len(open('shares.txt').readlines( ))                
          if count > 0:
             cleanshares()					# PURGE CURRENT SHARE VALUES
+         
          for x in range(0, count):
-            SHAR[x] = linecache.getline("SHARES.tmp",x + 1)	# RE-POPULATE THE SHARE VALUES
+            SHAR[x] = linecache.getline("shares.txt",x + 1).rstrip(" ")
             SHAR[x] = SHAR[x].lstrip()
             SHAR[x] = padding(SHAR[x], COL2)
-         
-         os.remove("SHARES.tmp")
-         
+            
          if SHAR[0]== "session setup failed: NT_STATUS_PASSWORD_MUS":
             print("[*] Bonus!! It look's like we can change this users password...")
             command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
@@ -1623,36 +1641,24 @@ while True:
 
       if CheckParams != 1:
          print("[*] Enumerating, please wait...")
-         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> KUSERS.tmp")
-         command("sed -i '/@/!d' KUSERS.tmp")
-         command("sort KUSERS.tmp | uniq > USERS2.tmp")
+         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> kusers.tmp")
+         command("sed -i '/@/!d' kusers.tmp")
+         command("sort kusers.tmp | uniq > kusers2.tmp")
          
-         os.remove("usernames.txt")		# DELETE OLD FILE
-         os.remove("KUSERS.tmp")		# DELETE REDUNDANT FILE
-         command("touch usernames.txt")		# CREATE NEW FILE
-	
          for x in range(0, MAXX):
-            username = linecache.getline("USERS2.tmp", x + 1)
+            username = linecache.getline("kusers2.tmp", x + 1)
             if username != "":
                username = username.replace("|     ", "")
                username = username.replace("|_    ", "")
                username = username.split("@")
                username = username[0]
                if username[:1] != " ":							# CONTAINS DATA
-                  USER[x] = username							# ASSIGN USER NAME
-                  command("echo " + USER[x] + " >> usernames.txt")			# EXPORT FOUND USER
-            else:
-               USER[x] = " "*COL3							# ASSIGN EMPTY USER
-            if USER[x][:1] != " ": PASS[x] = "."*COL4					# RESET HASH VALUE
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-            if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4)
+                  command("echo " + username + " >> valid.tmp")				# EXPORT VALID USER
 
-         os.remove("USERS2.tmp")         
-         print("[+] Found Users...\n")
-         
-         command("tput setaf 2; tput bold")
-         command("cat usernames.txt")
-         command("tput sgr0; tput dim")
+         print("[+] Only the following users are valid...\n")         
+         command("tput setaf 2")
+         command("cat valid.tmp")
+         command("tput sgr0")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1705,15 +1711,16 @@ while True:
             with open("passwords.txt","r") as read:
                for line in read:
                   line = line.rstrip("\n")
-                  command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + line + " -outputfile bpassword3.tmp > log.tmp") 
+                  if line != "":
+                     command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + line + " -outputfile bpassword3.tmp > log.tmp") 
                   
-                  test3 = linecache.getline("bpassword3.tmp", 1)
-                  test3 = test3.rstrip("\n")                                    
+                     test3 = linecache.getline("bpassword3.tmp", 1)
+                     test3 = test3.rstrip("\n")                                    
                                     
-                  if test3 != "":
-                     USRX,PASX = test3.split(":") 
-                     print("[+] User " + USRX + " has associated password " + PASX + "...")
-                     os.remove("bpassword3.tmp")
+                     if test3 != "":
+                        USRX,PASX = test3.split(":") 
+                        print("[+] User " + USRX + " has associated password " + PASX + "...")
+                        os.remove("bpassword3.tmp")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
