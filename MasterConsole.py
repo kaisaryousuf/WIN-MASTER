@@ -656,6 +656,12 @@ while True:
             command("echo 'nameserver " + DNS.rstrip(" ") + "' >> /etc/resolv.conf")
             print("[+] DNSERVER IP " + DNS.rstrip(" ") + " has been added to /etc/resolv.conf...")
             DNSC = 1
+         if":" in TIP:
+            print("[*] Defaulting to IP 6...")
+            IP46 = "-6"
+         else:
+            print("[*] Defualting to IP 4...")
+            IP46 = "-4"            
       prompt()    
 
 # ------------------------------------------------------------------------------------- 
@@ -1529,31 +1535,35 @@ while True:
          CheckParams = 1
 
       if CheckParams != 1:
+         os.remove("shares.txt")
          command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > shares.txt")
          
          command("tput setaf 2")
          command("cat shares.txt")
          command("tput sgr0")
          
-         command("sed -i /Sharename/d shares.txt")		# TIDY UP THE FILE READY FOR READING
-         command("sed -i /-/d         shares.txt")
-         command("sed -i /SMB1/d      shares.txt")
-         command("sed -i '/^$/d'      shares.txt")
+         command("sed -i /'is an IPv6 address'/d shares.txt")	# TIDY UP THE FILE READY FOR READING
+         command("sed -i /Sharename/d shares.txt")
+         command("sed -i /-/d shares.txt")
+         command("sed -i '/^$/d' shares.txt")
       
          count = len(open('shares.txt').readlines( ))                
          if count > 0:
-            cleanshares()					# PURGE CURRENT SHARE VALUES
+            cleanshares()					# PURGE CURRENT SHARE VALUES STORED IN MEMORY
          
          for x in range(0, count):
-            SHAR[x] = linecache.getline("shares.txt",x + 1).rstrip(" ")
-            SHAR[x] = SHAR[x].lstrip()
-            SHAR[x] = padding(SHAR[x], COL2)
+            test = linecache.getline("shares.txt",x + 1).rstrip(" ")
+            if test != '':
+               SHAR[x] = test.lstrip()
+               SHAR[x] = padding(SHAR[x], COL2)			# REPOPULATE SHARE
             
-         if SHAR[0]== "session setup failed: NT_STATUS_PASSWORD_MUS":
-            print("[*] Bonus!! It look's like we can change this users password...")
-            command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
+            if x == 0:
+               if SHAR[0] == "session setup failed: NT_STATUS_PASSWORD_MUS":
+                  print(colored("[!] Bonus!! It looks like we can change this paricular users password...", colour4))
+                  command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
+                  print("[+] Password has been reset for this user...")
       prompt()
-
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
