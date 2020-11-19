@@ -8,7 +8,7 @@ USAGE : python3 WinMaster.py
 | LANGUAGE  | FILENAME         | MD5 Hash                         | Version          |
 |------     |------            | -------                          | ----             |
 | bash      | install.sh       | 0f28cacea5b59226b78b2d83c9c8001b | Pr0J3CT_M@k30V3r |
-| python3   | MasterConsole.py | 3b24f3cc9da205975812c122baac11eb | Pr0J3CT_M@k30V3r |
+| python3   | MasterConsole.py | d08662be7a2ffe6fe92441dfbf0ffe24 | Pr0J3CT_M@k30V3r |
 
 **INSTALL OPTIONS**
 

