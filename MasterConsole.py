@@ -179,7 +179,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[0],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[0] == 1:
+   if VALD[0] == "1":
       print(colored(USER[0],colour5), end=' ')
       print(colored(PASS[0],colour5), end=' ')
    else:
@@ -197,7 +197,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[1],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[1] == 1:
+   if VALD[1] == "1":
       print(colored(USER[1],colour5), end=' ')
       print(colored(PASS[1],colour5), end=' ')
    else:
@@ -216,7 +216,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[2],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[2] == 1:
+   if VALD[2] == "1":
       print(colored(USER[2],colour5), end=' ')
       print(colored(PASS[2],colour5), end=' ')
    else:
@@ -234,7 +234,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[3],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[3] == 1:
+   if VALD[3] == "1":
       print(colored(USER[3],colour5), end=' ')
       print(colored(PASS[3],colour5), end=' ')
    else:
@@ -252,7 +252,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[4],colour2), end=' ')
    print('\u2551', end=' ')
-   if VALD[4] == 1:
+   if VALD[4] == "1":
       print(colored(USER[4],colour5), end=' ')
       print(colored(PASS[4],colour5), end=' ')
    else:
@@ -270,7 +270,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[5],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[5] == 1:
+   if VALD[5] == "1":
       print(colored(USER[5],colour5), end=' ')
       print(colored(PASS[5],colour5), end=' ')
    else:
@@ -288,7 +288,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[6],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[6] == 1:
+   if VALD[6] == "1":
       print(colored(USER[6],colour5), end=' ')
       print(colored(PASS[6],colour5), end=' ')
    else:
@@ -306,7 +306,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[7],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[7] == 1:
+   if VALD[7] == "1":
       print(colored(USER[7],colour5), end=' ')
       print(colored(PASS[7],colour5), end=' ')
    else:
@@ -324,7 +324,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[8],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[8] == 1:
+   if VALD[8] == "1":
       print(colored(USER[8],colour5), end=' ')
       print(colored(PASS[8],colour5), end=' ')
    else:
@@ -342,7 +342,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[9],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[9] == 1:
+   if VALD[9] == "1":
       print(colored(USER[9],colour5), end=' ')
       print(colored(PASS[9],colour5), end=' ')
    else:
@@ -360,7 +360,7 @@ def display():
    print('\u2551', end=' ')
    print(colored(SHAR[10],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[10] == 1:
+   if VALD[10] == "1":
       print(colored(USER[10],colour5), end=' ')
       print(colored(PASS[10],colour5), end=' ')
    else:
@@ -381,7 +381,7 @@ def display():
    else:
       print(colored(SHAR[11],colour2), end=' ')
    print('\u2551', end=' ')   
-   if VALD[11] == 1:
+   if VALD[11] == "1":
       print(colored(USER[11],colour5), end=' ')
       print(colored(PASS[11],colour5), end=' ')
    else:
@@ -470,11 +470,11 @@ if not os.path.exists("shares.txt"):
 else:
    print("[-] File shares.txt already exists...")		# DEFUALT SHARES LIST
    
-if not os.path.exists("token.txt"):
-   command("touch token.txt")
-   print("[+] File token.txt created...")
+if not os.path.exists("tokens.txt"):
+   command("touch tokens.txt")
+   print("[+] File tokens.txt created...")
 else:
-   print("[-] File token.txt already exists...")		# DEFUALT TOKEN LIST
+   print("[-] File tokens.txt already exists...")		# DEFUALT TOKEN LIST
    
 print("[+] Populating system variables...")
 
@@ -490,7 +490,7 @@ IP46 = "-4"			# IP TYPE
 SHAR = [" "*COL2]*maximum	# SHARE NAMES
 USER = [" "*COL3]*maximum	# USER NAMES
 PASS = [" "*COL4]*maximum	# PASSWORDS
-VALD = [0]*maximum		# USER TOKEN
+VALD = ["0"]*maximum		# USER TOKEN
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -543,7 +543,7 @@ else:
       SHAR[x] = spacePadding(SHAR[x], COL2)
       
    for x in range(0, maximum):
-      VALD[x] = linecache.getline("token.txt",x + 1).rstrip(" ")
+      VALD[x] = linecache.getline("tokens.txt",x + 1).rstrip("\n")
 
 if len(DNS) < COL1: DNS = spacePadding(DNS, COL1)
 if len(TIP) < COL1: TIP = spacePadding(TIP, COL1)
@@ -1730,7 +1730,9 @@ while True:
          command("mv tophash.tmp hashes.txt")
          
          cleanUsers()
+         cleanTokens()
          linecache.checkcache()
+         os.remove("tokens.txt")
             
          for x in range (0, maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip("\n")
@@ -1748,6 +1750,8 @@ while True:
                checkuser2 = linecache.getline("usernames.txt", y + 1).rstrip("\n")
                if validname2 == checkuser2:	
                   VALD[y] = 1								# ASSIGN A TOKEN TO THIS USER
+                  command("echo " + str(VALD[y]) + " >> tokens.txt")			# REMEMBER SETTINGS
+                  
           	
          if os.path.exists("rvalid.tmp"):
             print("[+] Only the following users are valid...\n")         
@@ -1922,7 +1926,7 @@ while True:
                print("[-] Current associated hash is not valid...")
            
          if checkParams != 1:
-            count = len(open('hashes.txt').readlines())z
+            count = len(open('hashes.txt').readlines())
             
             if count > 0:
                print("[*] Please wait, bruteforcing using " + str(count) + " found hashes...")
@@ -3050,9 +3054,6 @@ while True:
       command("echo " + LTM + " >> config.txt")  
       command("echo " + DIR + " >> config.txt")   
       
-      for x in range(0, maximum):
-         os.command("echo " + VALD[x] + " >> token.txt")
-
       if DOMC == 1:
          command("sed -i '$d' /etc/hosts")
       if len(os.listdir(DIR.rstrip(" "))) == 0:
