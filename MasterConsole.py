@@ -1922,7 +1922,7 @@ while True:
                print("[-] Current associated hash is not valid...")
            
          if checkParams != 1:
-            count = len(open('hashes.txt').readlines())
+            count = len(open('hashes.txt').readlines())z
             
             if count > 0:
                print("[*] Please wait, bruteforcing using " + str(count) + " found hashes...")
@@ -3028,7 +3028,6 @@ while True:
       if os.path.exists("config.txt"):
          os.remove("config.txt")				# DELETE OLD CONFIG FILE
          
-      command("touch config.txt")				# CREATE NEW CONFIG FILE
       command("echo " + DNS + " >> config.txt")
       command("echo " + TIP + " >> config.txt")
       command("echo " + POR + " >> config.txt")  
@@ -3051,8 +3050,9 @@ while True:
       command("echo " + LTM + " >> config.txt")  
       command("echo " + DIR + " >> config.txt")   
       
-      if os.path.exists("PORTS.tmp"):
-         os.remove("PORTS.tmp")
+      for x in range(0, maximum):
+         os.command("echo " + VALD[x] + " >> token.txt")
+
       if DOMC == 1:
          command("sed -i '$d' /etc/hosts")
       if len(os.listdir(DIR.rstrip(" "))) == 0:
