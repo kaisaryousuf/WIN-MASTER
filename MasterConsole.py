@@ -545,18 +545,18 @@ else:
    for x in range(0, maximum):
       VALD[x] = linecache.getline("tokens.txt",x + 1).rstrip("\n")
 
-if len(DNS) < COL1: DNS = spacePadding(DNS, COL1)
-if len(TIP) < COL1: TIP = spacePadding(TIP, COL1)
-if len(POR) < COL1: POR = spacePadding(POR, COL1)
-if len(WEB) < COL1: WEB = spacePadding(WEB, COL1)
-if len(USR) < COL1: USR = spacePadding(USR, COL1)
-if len(PAS) < COL1: PAS = spacePadding(PAS, COL1)
-if len(NTM) < COL1: NTM = spacePadding(NTM, COL1)
-if len(DOM) < COL1: DOM = spacePadding(DOM, COL1)
-if len(SID) < COL1: SID = spacePadding(SID, COL1)
-if len(TSH) < COL1: TSH = spacePadding(TSH, COL1)
-if len(LTM) < COL1: LTM = spacePadding(LTM, COL1)
-if len(DIR) < COL1: DIR = spacePadding(DIR, COL1)
+DNS = spacePadding(DNS, COL1)
+TIP = spacePadding(TIP, COL1)
+POR = spacePadding(POR, COL1)
+WEB = spacePadding(WEB, COL1)
+USR = spacePadding(USR, COL1)
+PAS = spacePadding(PAS, COL1)
+NTM = spacePadding(NTM, COL1)
+DOM = spacePadding(DOM, COL1)
+SID = spacePadding(SID, COL1)
+TSH = spacePadding(TSH, COL1)
+LTM = spacePadding(LTM, COL1)
+DIR = spacePadding(DIR, COL1)
 
 if DOM[:5] != "EMPTY":
    command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
@@ -600,8 +600,8 @@ while True:
       checkParams = testOne(checkParams)
 
       if checkParams != 1:
-         print("[i] Using HASH value as password credential...")
-         if NTM != "EMPTY":
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
             command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
          else:
             command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
@@ -619,13 +619,13 @@ while True:
                print("[*] Attempting to enumerate domain name...")
                DOM = " "*COL1						# WIPE CURRENT VALUES
                SID = " "*COL1
-            try:
-               null,DOM = line1.split(":")
-            except ValueError:
-               DOM = "EMPTY"
-            
+               try:
+                  null,DOM = line1.split(":")
+               except ValueError:
+                  DOM = "EMPTY"
+               
                DOM = DOM.strip(" ")					# CLEAN UP DATA
-               if len(DOM) < COL1: DOM = spacePadding(DOM, COL1)
+               DOM = spacePadding(DOM, COL1)
                   
                if DOM[:5] == "EMPTY":
                  print("[-] Unable to enumerate domain name...")
@@ -666,7 +666,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
           
          print("[*] Attempting to enumerate shares...")
-         if NTM != "EMPTY":
+         if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.tmp")
          else:
@@ -705,7 +705,7 @@ while True:
      
          print("[*] Attempting to enumerate domain users...")              
 
-         if NTM != "EMPTY":
+         if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
          else:
@@ -819,18 +819,22 @@ while True:
             
          print("[i] Identifying network interfaces...\n")
          
-         authLevel = RPC_C_AUTHN_LEVEL_NONE
-         stringBinding = r'ncacn_ip_tcp:%s' % TIP.rstrip(" ")
-         rpctransport = transport.DCERPCTransportFactory(stringBinding)
-         portmap = rpctransport.get_dce_rpc()
-         portmap.set_auth_level(authLevel)
-         portmap.connect()
-         objExporter = IObjectExporter(portmap)
-         bindings = objExporter.ServerAlive2()         
+         try:      
+            authLevel = RPC_C_AUTHN_LEVEL_NONE
+            stringBinding = r'ncacn_ip_tcp:%s' % TIP.rstrip(" ")
+            rpctransport = transport.DCERPCTransportFactory(stringBinding)
+            portmap = rpctransport.get_dce_rpc()
+            portmap.set_auth_level(authLevel)
+            portmap.connect()
+            objExporter = IObjectExporter(portmap)
+            bindings = objExporter.ServerAlive2()         
 
-         for binding in bindings:
-             NetworkAddr = binding['aNetworkAddr']
-             print(colored("Address: " + NetworkAddr, colour2))
+            for binding in bindings:
+               NetworkAddr = binding['aNetworkAddr']
+               print(colored("Address: " + NetworkAddr, colour2))
+         except:
+            print(colored("[!] WARNING!!! - Unable to enumerate network address, no route to host...", colour4))
+               
          prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -847,10 +851,8 @@ while True:
       POR = input("[*] Please enter PORT numbers: ")
 
       if POR != "":
-         if len(POR) < COL1:
-            POR = spacePadding(POR, COL1)
-         else:
-            POR = POR.rstrip("\n")
+         POR = spacePadding(POR, COL1)
+         POR = POR.rstrip("\n")
       else:
          POR = BAK
          
@@ -867,8 +869,7 @@ while True:
       WEB = input("[*] Please enter the web address: ")
 
       if WEB != "":
-         if len(WEB) < COL1:
-            WEB = spacePadding(WEB, COL1)
+         WEB = spacePadding(WEB, COL1)
       else:
          WEB = BAK
          
@@ -908,8 +909,7 @@ while True:
       PAS = input("[*] Please enter PASSWORD: ")
 
       if PAS != "":
-         if len(PAS) < COL1:
-            PAS = spacePadding(PAS, COL1)
+         PAS = spacePadding(PAS, COL1)
       else:
          PAS = BAK
 
@@ -926,8 +926,7 @@ while True:
       NTM = input("[*] Please enter HASH value: ")
 
       if NTM != "":
-         if len(NTM) < COL1:
-            NTM = spacePadding(NTM, COL1)
+         NTM = spacePadding(NTM, COL1)
       else:
          NTM = BAK
 
@@ -944,8 +943,7 @@ while True:
       DOM = input("[*] Please enter DOMAIN name: ")
 
       if DOM != "":
-         if len(DOM) < COL1:
-            DOM = spacePadding(DOM, COL1)
+         DOM = spacePadding(DOM, COL1)
          if DOMC == 1:
             print("[+] Removing previous domain name from /etc/hosts...")
             command("sed -i '$d' /etc/hosts")
@@ -970,8 +968,7 @@ while True:
       SID = input("[*] Please enter DOMAIN SID value: ")
 
       if SID != "":
-         if len(SID) < COL1:
-            SID = spacePadding(SID, COL1)
+         SID = spacePadding(SID, COL1)
       else:
          SID = BAK
 
@@ -988,8 +985,7 @@ while True:
       TSH = input("[*] Please enter SHARE name: ")
 
       if TSH != "":
-         if len(TSH) < COL1:
-            TSH = spacePadding(TSH,COL1)
+         TSH = spacePadding(TSH,COL1)
       else:
          TSH = BAK
 
@@ -1031,8 +1027,7 @@ while True:
             os.mkdir(newDirectory)
             DIR = newDirectory
             
-            if len(DIR) < COL1:
-               DIR = spacePadding(DIR, COL1)
+            DIR = spacePadding(DIR, COL1)
             print("[+] Working directory changed...")
             print("[*] Checking to see if the old directory can be safely deleted...")
             
@@ -1113,12 +1108,9 @@ while True:
       if checkParams != 1:
             print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
             command("ports=$(nmap " + IP46 + " -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
-            POR = linecache.getline("PORTS.tmp", 1)         
-         
-            if len(POR) < COL1:
-               POR = spacePadding(POR, COL1)
-            else:
-               POR = POR.rstrip("\n")           
+            POR = linecache.getline("PORTS.tmp", 1)
+            POR = spacePadding(POR, COL1)
+            POR = POR.rstrip("\n")           
 
             if POR[:1] == "":
                print("[-] Unable to enumerate any port information, good luck!!...")
@@ -1564,7 +1556,7 @@ while True:
       checkParams = testOne(checkParams)
          
       if checkParams != 1:
-         if NTM != "EMPTY":
+         if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash > shares.tmp")
          else:
@@ -1577,9 +1569,9 @@ while True:
             command("cat shares.tmp")
             command("tput sgr0")
          
-            command("sed -i /'is an IPv6 address'/d shares.tmp")	# TIDY UP THE FILE READY FOR READING
+#            command("sed -i /'is an IPv6 address'/d shares.tmp")	# TIDY UP THE FILE READY FOR READING
             command("sed -i /Sharename/d shares.tmp")
-            command("sed -i /-/d shares.tmp")
+            command("sed -i /---------/d shares.tmp")
             command("sed -i '/^$/d' shares.tmp")
       
             cleanShares()						# PURGE CURRENT SHARE VALUES STORED IN MEMORY
@@ -1636,6 +1628,10 @@ while True:
 
    if selection == '39':
       checkParams = testOne(checkParams)
+      
+      if TSH[:5] == "EMPTY":
+         print("[-] SHARE NAME has not been specified...")
+         checkParams = 1
       
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -2158,13 +2154,13 @@ while True:
             USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")		# STRIP ANY REMAINING DOMAIN NAME
             PASS[x] = get4[:COL4]         
             
-            if len(USER[x]) < COL1: USER[x] = spacePadding(USER[x], COL3) 			# USER
-            if len(PASS[x]) < COL4: PASS[x] = spacePadding(PASS[x], COL4) 			# PASSWORD
+            USER[x] = spacePadding(USER[x], COL3) 			# USER
+            PASS[x] = spacePadding(PASS[x], COL4) 			# PASSWORD
 
          for z in range(0, maximum):
             if USER[z].rstrip(" ") == USR.rstrip(" "):
                NTM = PASS[z]			# RESET DISPLAY HASH
-               if len(NTM) < COL1: NTM = spacePadding(NTM, COL1)
+               NTM = spacePadding(NTM, COL1)
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2355,7 +2351,7 @@ while True:
 
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x+1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
+            USER[x] = spacePadding(USER[x], COL3)
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2609,7 +2605,7 @@ while True:
          
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
+            USER[x] = spacePadding(USER[x], COL3)
             
       prompt() 
       
@@ -2650,7 +2646,7 @@ while True:
          
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
+            USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
 
@@ -2735,7 +2731,7 @@ while True:
                
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
+            USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
       
@@ -2776,7 +2772,7 @@ while True:
                           
          for x in range (0,maximum):
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-            if len(USER[x]) < COL3: USER[x] = spacePadding(USER[x], COL3)
+            USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
       
@@ -2888,7 +2884,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='80':
-      checkparams = testOne(checkParams)
+      checkParams = testOne(checkParams)
       
       if checkParams != 1:
          command("ftp " + TIP.rstrip(" ") + " 21")
