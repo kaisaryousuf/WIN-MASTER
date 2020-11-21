@@ -22,6 +22,7 @@ USAGE : python3 Console.py
         apt-get install bloodhound
         pip3 install aclpwn
         pip3 install bloodhound
+        pip3 install neo4j-driver===1.7.6 
 
      	              
 A python script file to remotely analyse computer systems - It can pull domains, usernames, passwords, crack hashes, and so much more...
