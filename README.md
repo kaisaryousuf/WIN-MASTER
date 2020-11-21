@@ -3,7 +3,7 @@
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
 
 TESTED: Kali Linux 2019 <br>
-USAGE : python3 WinMaster.py
+USAGE : python3 Console.py
 
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version          |
 |------     |------      | -------                          | ----             |
