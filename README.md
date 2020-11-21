@@ -22,7 +22,7 @@ USAGE : python3 WinMaster.py
         git clone https://github.com/fox-it/BloodHound.py.git && pip install .
         pip3 install aclpwn
      	              
-A python script file to remotely exploit computer systems - It can pull domains, usernames, passwords, crack hashes, and so much more...
+A python script file to remotely analyse computer systems - It can pull domains, usernames, passwords, crack hashes, and so much more...
 
 ## COMPUTER MISUSE ACT 1990 - SECTION 3A
 This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
