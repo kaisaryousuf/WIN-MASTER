@@ -18,11 +18,11 @@ USAGE : python3 Console.py
 
         BLOODHOUND INSTALLATION
         -----------------------
-        pip3 install neo4j
         apt-get install neo4j
-        pip3 install bloodhound
         apt-get install bloodhound
         pip3 install aclpwn
+        pip3 install bloodhound
+
      	              
 A python script file to remotely analyse computer systems - It can pull domains, usernames, passwords, crack hashes, and so much more...
 
