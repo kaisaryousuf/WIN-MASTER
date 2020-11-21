@@ -18,7 +18,6 @@ USAGE : python3 Console.py
 
         BLOODHOUND INSTALLATION
         -----------------------
-        apt-get install neo4j
         apt-get install bloodhound
         pip3 install aclpwn
         pip3 install bloodhound
