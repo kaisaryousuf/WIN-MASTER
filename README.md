@@ -18,6 +18,7 @@ USAGE : python3 Console.py
 
         BLOODHOUND INSTALLATION
         -----------------------
+        apt-get install bloodhound
         pip3 install bloodhound
         pip3 install aclpwn
      	              
