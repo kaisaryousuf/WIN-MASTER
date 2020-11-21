@@ -12,7 +12,7 @@ USAGE : python3 Console.py
 
 **INSTALL OPTIONS**
 
-        MCP INSTALL
+        MCP BASIC INSTALL
         -------------
         bash install.sh
 
