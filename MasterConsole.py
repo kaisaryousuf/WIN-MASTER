@@ -1683,8 +1683,9 @@ while True:
             command("tput setaf 2")
             command("cat shares.tmp")
             command("tput sgr0")
-         
+            
             command("sed -i /'is an IPv6 address'/d shares.tmp")	# TIDY UP THE FILE READY FOR READING
+            command("sed -i /'no workgroup'/d shares.tmp")
             command("sed -i /Sharename/d shares.tmp")
             command("sed -i /---------/d shares.tmp")
             command("sed -i '/^$/d' shares.tmp")
@@ -2413,6 +2414,8 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='59':     
+      checkParams = 0
+      
       print("[*] Checking work folder for relevant files...")
 
       if os.path.exists("./" + DIR.rstrip(" ") + "/ntds.dit"):
