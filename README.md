@@ -1,14 +1,14 @@
-# MASTER CONSOLE
+# MASTER CONTROL PROGRAM
 ![Screenshot](picture0.png)
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE AND EXPLOIT REMOTE COMPUTER SYSTEMS.
 
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 WinMaster.py
 
-| LANGUAGE  | FILENAME         | MD5 Hash                         | Version          |
-|------     |------            | -------                          | ----             |
-| bash      | install.sh       | 0f28cacea5b59226b78b2d83c9c8001b | Pr0J3CT_M@k30V3r |
-| python3   | MasterConsole.py | cc32bc53a6f1be651c52d151232938a5 | Pr0J3CT_M@k30V3r |
+| LANGUAGE  | FILENAME   | MD5 Hash                         | Version          |
+|------     |------      | -------                          | ----             |
+| bash      | install.sh | 0f28cacea5b59226b78b2d83c9c8001b | Pr0J3CT_M@k30V3r |
+| python3   | Console.py | cc32bc53a6f1be651c52d151232938a5 | Pr0J3CT_M@k30V3r |
 
 **INSTALL OPTIONS**
 
