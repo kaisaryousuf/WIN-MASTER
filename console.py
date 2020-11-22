@@ -50,7 +50,7 @@ if os.geteuid() != 0:
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-colour1 = "yellow"					# SYSTEM COLOURS
+colour1 = "yellow"						# SYSTEM COLOURS
 colour2 = "green"
 colour3 = "white"
 colour4 = "red"
@@ -60,18 +60,18 @@ colour7 = "cyan"
 colour8 = "white"
 colour9 = "black"
 
-network = "tun0"					# LOCAL NETWORK
-workdir = "MASTER"					# WORKING DIRECTORY
+network = "tun0"						# LOCAL NETWORK
+workdir = "MASTER"						# WORKING DIRECTORY
 
-splashs = 1						# SPLASH SCREEN ON/OFF
-bughunt = 0						# BUG HUNT ON/OFF
-maximum = 5000						# MAX USERS - NOTE NOT LIMITED TO 5000
+splashs = 1							# SPLASH SCREEN ON/OFF
+bughunt = 0							# BUG HUNT ON/OFF
+maximum = 5000							# MAX USERS - NOTE NOT LIMITED TO 5000
 
-scriptr = "python3"					# PYTHON VERSION
-impacke = "/usr/share/doc/python3-impacket/examples/"	# IMPACKET LOCATION
-keypath = scriptr + " " + impacke			# FULL COMMAND
+scriptr = "python3"						# PYTHON VERSION
+impacke = "/usr/share/doc/python3-impacket/examples/"		# IMPACKET LOCATION
+keypath = scriptr + " " + impacke				# FULL COMMAND
 
-fileExt = "xlsx,docx,doc,txt,xml,bak,zip,php,html,pdf"	# TARGET EXTRACTION FILES
+fileExt = "'(xlsx|docx|doc|txt|xml|bak|zip|php|html|pdf)'"	# TARGET EXTRACTION FILES
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -149,7 +149,7 @@ def prompt():
 def cleanUsers():
    for x in range (0, maximum):
       USER[x] = " "*COL3
-      PASS[x] = " "*COL4
+      HASH[x] = " "*COL4
    return
    
 def cleanShares():
@@ -184,10 +184,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[0] == "1":
       print(colored(USER[0],colour5), end=' ')
-      print(colored(PASS[0],colour5), end=' ')
+      print(colored(HASH[0],colour5), end=' ')
    else:
       print(colored(USER[0],colour2), end=' ')
-      print(colored(PASS[0],colour2), end=' ')   
+      print(colored(HASH[0],colour2), end=' ')   
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -207,10 +207,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[1] == "1":
       print(colored(USER[1],colour5), end=' ')
-      print(colored(PASS[1],colour5), end=' ')
+      print(colored(HASH[1],colour5), end=' ')
    else:
       print(colored(USER[1],colour2), end=' ')
-      print(colored(PASS[1],colour2), end=' ')         
+      print(colored(HASH[1],colour2), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -231,10 +231,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[2] == "1":
       print(colored(USER[2],colour5), end=' ')
-      print(colored(PASS[2],colour5), end=' ')
+      print(colored(HASH[2],colour5), end=' ')
    else:
       print(colored(USER[2],colour2), end=' ')
-      print(colored(PASS[2],colour2), end=' ')         
+      print(colored(HASH[2],colour2), end=' ')         
    print('\u2551') 
    
 # -------------------------------------------------------------------------------------
@@ -254,10 +254,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[3] == "1":
       print(colored(USER[3],colour5), end=' ')
-      print(colored(PASS[3],colour5), end=' ')
+      print(colored(HASH[3],colour5), end=' ')
    else:
       print(colored(USER[3],colour2), end=' ')
-      print(colored(PASS[3],colour2), end=' ')         
+      print(colored(HASH[3],colour2), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -277,10 +277,10 @@ def display():
    print('\u2551', end=' ')
    if VALD[4] == "1":
       print(colored(USER[4],colour5), end=' ')
-      print(colored(PASS[4],colour5), end=' ')
+      print(colored(HASH[4],colour5), end=' ')
    else:
       print(colored(USER[4],colour2), end=' ')
-      print(colored(PASS[4],colour2), end=' ')   
+      print(colored(HASH[4],colour2), end=' ')   
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -300,10 +300,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[5] == "1":
       print(colored(USER[5],colour5), end=' ')
-      print(colored(PASS[5],colour5), end=' ')
+      print(colored(HASH[5],colour5), end=' ')
    else:
       print(colored(USER[5],colour2), end=' ')
-      print(colored(PASS[5],colour2), end=' ')         
+      print(colored(HASH[5],colour2), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -323,10 +323,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[6] == "1":
       print(colored(USER[6],colour5), end=' ')
-      print(colored(PASS[6],colour5), end=' ')
+      print(colored(HASH[6],colour5), end=' ')
    else:
       print(colored(USER[6],colour2), end=' ')
-      print(colored(PASS[6],colour2), end=' ')         
+      print(colored(HASH[6],colour2), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -346,10 +346,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[7] == "1":
       print(colored(USER[7],colour5), end=' ')
-      print(colored(PASS[7],colour5), end=' ')
+      print(colored(HASH[7],colour5), end=' ')
    else:
       print(colored(USER[7],colour2), end=' ')
-      print(colored(PASS[7],colour2), end=' ')         
+      print(colored(HASH[7],colour2), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
@@ -369,10 +369,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[8] == "1":
       print(colored(USER[8],colour5), end=' ')
-      print(colored(PASS[8],colour5), end=' ')
+      print(colored(HASH[8],colour5), end=' ')
    else:
       print(colored(USER[8],colour2), end=' ')
-      print(colored(PASS[8],colour2), end=' ')         
+      print(colored(HASH[8],colour2), end=' ')         
    print('\u2551')     
    
 # -------------------------------------------------------------------------------------
@@ -392,10 +392,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[9] == "1":
       print(colored(USER[9],colour5), end=' ')
-      print(colored(PASS[9],colour5), end=' ')
+      print(colored(HASH[9],colour5), end=' ')
    else:
       print(colored(USER[9],colour2), end=' ')
-      print(colored(PASS[9],colour2), end=' ')      
+      print(colored(HASH[9],colour2), end=' ')      
    print('\u2551')        
    
 # -------------------------------------------------------------------------------------
@@ -415,10 +415,10 @@ def display():
    print('\u2551', end=' ')   
    if VALD[10] == "1":
       print(colored(USER[10],colour5), end=' ')
-      print(colored(PASS[10],colour5), end=' ')
+      print(colored(HASH[10],colour5), end=' ')
    else:
       print(colored(USER[10],colour2), end=' ')
-      print(colored(PASS[10],colour2), end=' ')         
+      print(colored(HASH[10],colour2), end=' ')         
    print('\u2551')   
    
 # -------------------------------------------------------------------------------------
@@ -441,14 +441,14 @@ def display():
    print('\u2551', end=' ')   
    if VALD[11] == "1":
       print(colored(USER[11],colour5), end=' ')
-      print(colored(PASS[11],colour5), end=' ')
+      print(colored(HASH[11],colour5), end=' ')
    else:
       if USER[12][:1] != " ":   
          print(colored(USER[11],colour4), end=' ')
-         print(colored(PASS[11],colour4), end=' ')
+         print(colored(HASH[11],colour4), end=' ')
       else:
          print(colored(USER[11],colour2), end=' ')
-         print(colored(PASS[11],colour2), end=' ')   
+         print(colored(HASH[11],colour2), end=' ')   
    print('\u2551')     
    
 # -------------------------------------------------------------------------------------
@@ -545,10 +545,10 @@ COL3 = 23	 		# USER NAMES
 COL4 = 32	 		# HASHED PASSWORDS
 IP46 = "-4"			# IP TYPE
 
-SHAR = [" "*COL2]*maximum	# SHARE NAMES
 USER = [" "*COL3]*maximum	# USER NAMES
-PASS = [" "*COL4]*maximum	# PASSWORDS
+HASH = [" "*COL4]*maximum	# PASSWORDS
 VALD = ["0"]*maximum		# USER TOKEN
+SHAR = [" "*COL2]*maximum	# SHARE NAMES
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -571,7 +571,9 @@ if not os.path.exists('config.txt'):
    SID = "EMPTY              " # DOMAIN SID
    TSH = "EMPTY              " # SESSION SHARE
    LTM = "00:00              " # LOCAL TIME    
-   DIR = workdir	       # DIRECTORY
+   DIR = workdir	       # DIRECTORY   
+   PTS = POR
+   
 else:
    print("[+] Configuration file found - restoring saved data....")
    DNS = linecache.getline('config.txt', 1).rstrip("\n")
@@ -585,18 +587,19 @@ else:
    SID = linecache.getline('config.txt', 9).rstrip("\n")
    TSH = linecache.getline('config.txt', 10).rstrip("\n")
    LTM = linecache.getline('config.txt', 11).rstrip("\n")
-   DIR = linecache.getline('config.txt', 12).rstrip("\n")   
+   DIR = linecache.getline('config.txt', 12).rstrip("\n")      
+   PTS = POR							# KEEP FULL PORT LISTING
    
    for x in range (0, maximum):
       USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
       USER[x] = spacePadding(USER[x], COL3)
       
    for x in range (0, maximum):
-      PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
+      HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
       if USER[x][:1] == " ":
-         PASS[x] = spacePadding(PASS[x], COL4)
+         HASH[x] = spacePadding(HASH[x], COL4)
       else:
-         PASS[x] = dotPadding(PASS[x], COL4)
+         HASH[x] = dotPadding(HASH[x], COL4)
          
    for x in range(0, maximum):
       SHAR[x] = linecache.getline("shares.txt",x + 1).rstrip(" ")
@@ -743,7 +746,7 @@ while True:
 
             command("sed -i -n '/netname: /p' shares.tmp")		# TIDY UP FILE FOR READING 
             command("sed -i '/^$/d' shares.tmp")
-            command("cat sharess.tmp | sort > sshares.tmp")
+            command("cat shares.tmp | sort > sshares.tmp")
                         
             count = len(open('sshares.tmp').readlines())
             if count != 0:
@@ -778,7 +781,8 @@ while True:
          if (line1[:9] == "Could not") or (line1[:6] == "result") or (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
             print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
          else:
-            cleanUsers()							# WIPE CLEAN USERS AND PASSWORDS     
+            cleanUsers()
+            cleanTokens()							# WIPE CLEAN USERS AND PASSWORDS     
             command("rm usernames.txt")						# PURGE CURRENT USERFILE LIST
             command("rm hashes.txt")						# PURGE CURRENT HASH FILE
             
@@ -801,11 +805,11 @@ while True:
                      
                      if USER[x][:5] != "Error":
                         print(colored(USER[x],colour2))
-                        PASS[x] = ""
+                        HASH[x] = ""
                         USER[x] = spacePadding(USER[x], COL3)
-                        PASS[x] = dotPadding(PASS[x], COL4)
+                        HASH[x] = dotPadding(HASH[x], COL4)
                         command("echo " + USER[x] + " >> usernames.txt")
-                        command("echo " + PASS[x] + " >> hashes.txt")
+                        command("echo " + HASH[x] + " >> hashes.txt")
                read.close()
             else:
                print("[-] Unable to enumerate domain users...")         
@@ -911,13 +915,13 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '3':
-      print("[+] Live ports: " + POR.rstrip(" "))
+      print("[i] Current live port listing: " + PTS)
       BAK = POR
       POR = input("[*] Please enter PORT numbers: ")
 
       if POR != "":
+         PTS = POR
          POR = spacePadding(POR, COL1)
-         POR = POR.rstrip("\n")
       else:
          POR = BAK
          
@@ -956,7 +960,7 @@ while True:
          USR = spacePadding(USR, COL1)
          for x in range(0, maximum):
             if USER[x].rstrip(" ") == USR.rstrip(" "):
-               NTM = PASS[x] 			# UPDATE HASH VALUE TO MATCH NEW USER.
+               NTM = HASH[x] 			# UPDATE HASH VALUE TO MATCH NEW USER.
                if (NTM[:1] == "") or (NTM[:1] == "."):
                   NTM = "EMPTY"
          NTM = spacePadding(NTM, COL1)
@@ -1173,15 +1177,14 @@ while True:
       if checkParams != 1:
             print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
             command("ports=$(nmap " + IP46 + " -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
-            POR = linecache.getline("PORTS.tmp", 1)
-            POR = spacePadding(POR, COL1)
-            POR = POR.rstrip("\n")           
+            PTS = linecache.getline("PORTS.tmp", 1).rstrip("\n")
+            POR = spacePadding(PTS, COL1)
 
             if POR[:1] == "":
                print("[-] Unable to enumerate any port information, good luck!!...")
             else:
                print("[+] Found live ports...\n")
-               print(colored(POR,colour2))
+               print(colored(PTS,colour2))
         
       prompt()
       
@@ -1586,13 +1589,13 @@ while True:
                      if USER[x] != "":
                        print(colored(USER[x],colour2))
                        command("echo " + USER[x] + " >> usernames.txt")		# ASSIGN USERS NAME
-                       PASS[x] = "."*COL4					# RESET PASSWORDS
+                       HASH[x] = "."*COL4					# RESET PASSWORDS
                      else:
                         USER[x] = " "*COL3					# ASSIGN EMPTY USERS
-                        PASS[x] = "."*COL4					# RESET PASSWORDS
+                        HASH[x] = "."*COL4					# RESET PASSWORDS
                   else:
                      USER[x] = " "*COL3
-                     PASS[x] = " "*COL4   
+                     HASH[x] = " "*COL4   
             read.close()         
          else:
             print ("[*] No entries were found...")
@@ -1714,19 +1717,31 @@ while True:
       
       if IP46 == "-6":
          print(colored("[!] WARNING!!! - Not compatable with IP 6...",colour4))
-         
-      if TSH[:5] == "EMPTY":
-         print("[-] SHARE NAME has not been specified...")
-         checkParams = 1
-      
+                 
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
+            print("[*] Checking OS...")
+            command("smbmap -v --admin -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" "))      
+         else:
+            print("[*] Checking OS...")
+            command("smbmap -v --admin -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" "))
+            
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            print("[*] Checking command privilege...")
+            command("smbmap -x whoami -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" "))      
+         else:
+            print("[*] Checking command privilege...")
+            command("smbmap -x whoami -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" "))
+      
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
             print("[*] Mapping Shares...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + " -R")      
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -r")      
          else:
             print("[*] Mapping Shares...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -s " + TSH.rstrip(" ") + " -R")
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -r")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1874,11 +1889,11 @@ while True:
             USER[x] = linecache.getline("usernames.txt", x + 1).rstrip("\n")
             USER[x] = spacePadding(USER[x], COL3)
             
-            PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
+            HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
             if USER[x][:1] == " ":
-               PASS[x] = spacePadding(PASS[x], COL4)
+               HASH[x] = spacePadding(HASH[x], COL4)
             else:
-               PASS[x] = dotPadding(PASS[x], COL4)
+               HASH[x] = dotPadding(HASH[x], COL4)
             
          count = len(open('rvalid.tmp').readlines())					# FIND OUT HOW MANY TO PROCESS                                  
          
@@ -2025,7 +2040,7 @@ while True:
          
          for x in range(0, maximum):
             if USER[x].rstrip(" ") == USR.rstrip(" "):
-               PASS[x] = NTM.rstrip(" ") 			# RESET USERS HASH
+               HASH[x] = NTM.rstrip(" ") 			# RESET USERS HASH
          NTM = spacePadding(NTM, COL1)
       else:
          print("[-] Password not found...")
@@ -2283,51 +2298,59 @@ while True:
       if checkParams != 1:
          print("Enumerating, please wait...\n")
          if PAS[:2] != "''":
-            command(keypath + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") + "'@" + TIP.rstrip(" ") + " > SECRETS.tmp")
+            command(keypath + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") + "'@" + TIP.rstrip(" ") + " > secrets.tmp")
          else:
-            command(keypath + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes ':" + NTM.rstrip(" ") + "' > SECRETS.tmp")
+            command(keypath + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes ':" + NTM.rstrip(" ") + "' > secrets.tmp")
 
-         command("sed -i '/:::/!d' SECRETS.tmp")			# TIDY UP FILE READY FOR READING
-         count = len(open('SECRETS.tmp').readlines())
+         command("sed -i '/:::/!d' secrets.tmp")			# TIDY UP FILE READY FOR READING
+         command("sort -u secrets.tmp > ssecrets.tmp")
+         	
+         count = len(open('ssecrets.tmp').readlines())         
+         if count > 0:
+            cleanUsers()						# DELETE CURRENT VALUES 
+            cleanTokens()   
+            command("rm usernames.txt")
+            command("rm hashes.txt")
+            command("rm tokens.txt")
+            command("touch tokens.txt")
+             
+            for x in range(0, count):
+               data = linecache.getline("ssecrets.tmp", x + 1)
+               
+               data = data.replace(":::","")				# TIDY UP THE DATA
+               temp = DOM.rstrip(" ") + "\\"
+               data = data.replace(temp,"")
+               temp = DOM.rstrip(" ") + ".LOCAL\\"
+               data = data.replace(temp,"")
 
-         cleanUsers()         
-         for x in range(0, count):
-            data = linecache.getline("SECRETS.tmp", x + 1)
-            data = data.replace(":::","")				# DELETE THIS LINE?
-            temp = DOM.rstrip(" ") + "\\"				# TIDY UP THE DATA
-            data = data.replace(temp,"")
-            temp = DOM.rstrip(" ") + ".LOCAL\\"
-            data = data.replace(temp,"")
+               try:
+                  get1,get2,get3,get4 = data.split(":") 
+               except ValueError:
+                  if get1 == "":
+                     get1 == "Error..."
+                  if get2 == "":
+                     get2 == "Error..."
+                  if get3 == "":
+                     get3 == "Error..."
+                  if get4 == "":
+                     get4 == "Error..."
 
-            try:
-               get1,get2,get3,get4 = data.split(":") 
-            except ValueError:
-               if get1 == "":
-                  get1 == "Error..."
-               if get2 == "":
-                  get2 == "Error..."
-               if get3 == "":
-                  get3 == "Error..."
-               if get4 == "":
-                  get4 == "Error..."
+               get1 = get1.rstrip("\n")
+               get2 = get1.rstrip("\n")
+               get3 = get1.rstrip("\n")
+               get4 = get4.rstrip("\n")
 
-            get1 = get1.rstrip("\n")
-            get2 = get1.rstrip("\n")
-            get3 = get1.rstrip("\n")
-            get4 = get4.rstrip("\n")
-
-            print(colored("[+] Found User " + get1,colour2))
-            USER[x] = get1[:COL3]
-            USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")		# STRIP ANY REMAINING DOMAIN NAME
-            PASS[x] = get4[:COL4]         
+               print(colored("[+] Found User " + get1,colour2))
             
-            USER[x] = spacePadding(USER[x], COL3) 			# USER
-            PASS[x] = spacePadding(PASS[x], COL4) 			# PASSWORD
-
-         for z in range(0, maximum):
-            if USER[z].rstrip(" ") == USR.rstrip(" "):
-               NTM = PASS[z]			# RESET DISPLAY HASH
-               NTM = spacePadding(NTM, COL1)
+               USER[x] = get1[:COL3]
+               USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")	# STRIP ANY REMAINING DOMAIN NAME
+               HASH[x] = get4[:COL4]
+               
+               USER[x] = spacePadding(USER[x], COL3) 					# TIDY UP DATA
+               HASH[x] = spacePadding(HASH[x], COL4)
+            
+               command("echo " + USER[x].rstrip(" ") + " >> usernames.txt")		# SAVE DATA	
+               command("echo " + HASH[x].rstrip(" ") + " >> hashes.txt")           
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2467,8 +2490,8 @@ while True:
             USER[x] = spacePadding(USER[x], COL3)
          
          for x in range (0, maximum):
-            PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
-            PASS[x] = spacePadding(PASS[x], COL4)
+            HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
+            HASH[x] = spacePadding(HASH[x], COL4)
              
       prompt()
 
@@ -2580,8 +2603,8 @@ while True:
       command("nano passwords.txt")
       
       for x in range (0, maximum):
-         PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
-         PASS[x] = spacePadding(PASS[x], COL4)     
+         HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
+         HASH[x] = spacePadding(HASH[x], COL4)     
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2596,8 +2619,8 @@ while True:
       command("nano hashes.txt")
            
       for x in range (0, maximum):
-            PASS[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
-            PASS[x] = spacePadding(PASS[x], COL4)
+            HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
+            HASH[x] = spacePadding(HASH[x], COL4)
             
       prompt()
 
@@ -2761,7 +2784,7 @@ while True:
          
          if os.path.getsize("passwords.txt") == 0:             
             print("[-] Password file is empty...")
-            if PASS[:1] != "'":
+            if HASH[:1] != "'":
                print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
                command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
             else:
@@ -2802,7 +2825,7 @@ while True:
          
          if os.path.getsize("passwords.txt") == 0:             
             print("[-] Password file is empty...")
-            if PASS[:1] != "'":
+            if HASH[:1] != "'":
                print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
                command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
             else:
@@ -2843,7 +2866,7 @@ while True:
          
          if os.path.getsize("passwords.txt") == 0:             
             print("[-] Password file is empty...")
-            if PASS[:1] != "'":
+            if HASH[:1] != "'":
                print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
                command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
             else:
@@ -2884,7 +2907,7 @@ while True:
          
          if os.path.getsize("passwords.txt") == 0:             
             print("[-] Password file is empty...")
-            if PASS[:1] != "'":
+            if HASH[:1] != "'":
                print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
                command("echo '" + PAS.rstrip(" ") + "' >> passwords.txt")
             else:
@@ -3201,7 +3224,7 @@ while True:
          
       command("echo " + DNS + " >> config.txt")
       command("echo " + TIP + " >> config.txt")
-      command("echo " + POR + " >> config.txt")  
+      command("echo " + PTS + " >> config.txt")  
       command("echo " + WEB + " >> config.txt")  
 
       null = "\\'\\'"
