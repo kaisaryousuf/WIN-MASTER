@@ -8,7 +8,7 @@ USAGE : python3 console.py
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version          |
 |------     |------      | -------                          | ----             |
 | bash      | install.sh | 0f28cacea5b59226b78b2d83c9c8001b | Pr0J3CT_M@k30V3r |
-| python3   | console.py | ae4fd36e7889b4feaa60f8d33edec4f2 | Pr0J3CT_M@k30V3r |
+| python3   | console.py | 2c00ce6bfda75c4a7f19eae877f092e7 | Pr0J3CT_M@k30V3r |
 
 **INSTALL OPTIONS**
 

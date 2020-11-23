@@ -2735,6 +2735,10 @@ while True:
    if selection =='68':
       checkParams = testOne(checkParams)
       
+      fileExt = fileExt.replace('(','')
+      fileExt = fileExt.replace(')','')
+      fileExt = fileExt.replace('|',',')
+      
       if checkParams != 1:
          if WEB[:5] == "EMPTY":
             command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x " + fileExt + " -f -w /usr/share/dirb/wordlists/common.txt -t 50")
