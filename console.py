@@ -662,55 +662,55 @@ while True:
 
    if selection =='0':   
       checkParams = testOne(checkParams)
-
+      
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
          else:
-            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")
-                    
-         with open("lsaquery.tmp", "r") as read:
-            line1 = read.readline()
-         
-            if (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
-               print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
-               checkParams = 1
-                              
-# ------------------------------------------------------------------------------------- 
-            
-            if checkParams != 1:
-               print("[*] Attempting to enumerate domain name...")        
-                   
-               try:
-                  null,DOM = line1.split(":")
-                  SID = " "*COL1
-               except ValueError:
-                  DOM = "EMPTY"
-               DOM = DOM.lstrip(" ")
-               DOM = spacePadding(DOM, COL1)
+            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")     
+# -----
+# ERROR MANAGEMENT
+# -----
+         errorCheck = linecache.getline("lsaquery.tmp", 1) 
+                 
+         if (errorCheck[:6] == "Cannot") or (errorCheck[:1] == "") or "ACCESS_DENIED" in errorCheck:
+            print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
+            checkParams = 1                       
+# -----
+# DOMAIN MANAGEMENT
+# -----
+         if checkParams != 1:
+            print("[*] Attempting to enumerate domain name...")               
+            try:
+               null,DOM = errorCheck.split(":")
+               SID = " "*COL1
+            except ValueError:
+               DOM = "EMPTY"
+            DOM = DOM.lstrip(" ")
+            DOM = spacePadding(DOM, COL1)
                   
-               if DOM[:5] == "EMPTY":
-                 print("[-] Unable to enumerate domain name...")
-               else:
-                  print("[+] Found domain...\n")
-                  print(colored(DOM,colour2))                  
+            if DOM[:5] == "EMPTY":
+               print("[-] Unable to enumerate domain name...")
+            else:
+               print("[+] Found domain...\n")
+               print(colored(DOM,colour2))                  
             
-                  if DOMC == 1:
-                     print("\n[*] Resetting current domain associated host...")
-                     command("sed -i '$d' /etc/hosts")
-                     command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-                     print("[+] Domain " + DOM.rstrip(" ") + " has successfully been added to /etc/hosts...")
-                  else:
-                     command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-                     print("\n[+] Domain " + DOM.rstrip(" ") + " has successfully been added to /etc/hosts...")
-                     DOMC = 1
+            if DOMC == 1:
+               print("\n[*] Resetting current domain associated host...")
+               command("sed -i '$d' /etc/hosts")
+               command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+               print("[+] Domain " + DOM.rstrip(" ") + " has successfully been added to /etc/hosts...")
+            else:
+               command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
+               print("\n[+] Domain " + DOM.rstrip(" ") + " has successfully been added to /etc/hosts...")
+               DOMC = 1  
+# -----
+# SID MANGEMENT
+# ---- 
+            print("[*] Attempting to enumerate domain SID...")   
                      
-# ------------------------------------------------------------------------------------- 
-
-            print("[*] Attempting to enumerate domain SID...")
-            
-            line2 = read.readline()
+            line2 = linecache.getline("lsaquery.tmp", 2)
             try:
                null,SID = line2.split(":")
             except ValueError:
@@ -722,97 +722,104 @@ while True:
                print("[-] Unable to enumerate domain SID...")
             else:
                print("[+] Found SID...\n")
-               print(colored(SID,colour2) + "\n")
-         read.close()
-         
-# ------------------------------------------------------------------------------------- 
-          
-         print("[*] Attempting to enumerate shares...")
-         
-         if NTM[:5] != "EMPTY":
-            print("[i] Using HASH value as password credential...")
-            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.tmp")
-         else:
-            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.tmp")
-         
-         with open("shares.tmp", "r") as read:
-            line1 = read.readline()
-         read.close()
-  
-         if (line1[:9] == "Could not") or (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
-            print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
-         else:
-            cleanShares()						# WIPE CURRENT SHARE VALUES
-
-            command("sed -i -n '/netname: /p' shares.tmp")		# TIDY UP FILE FOR READING 
-            command("sed -i '/^$/d' shares.tmp")
-            command("cat shares.tmp | sort > sshares.tmp")
-                        
-            count = len(open('sshares.tmp').readlines())
-            if count != 0:
-               print("[+] Found shares...\n")
-               with open("sshares.tmp") as read:
-                  for x in range(0, count):
-                     SHAR[x]  = read.readline()
-                     SHAR[x] = SHAR[x].replace(" ","")
-                     try:
-                        null, SHAR[x] = SHAR[x].split(":")
-                     except ValueError:
-                        SHAR[x] = "Error..."
-                     print(colored(SHAR[x].rstrip("\n"),colour2))
-                     SHAR[x] = dotPadding(SHAR[x], COL2)
-                  print("")
-               read.close()
-                  
-# ------------------------------------------------------------------------------------- 
-     
-         print("[*] Attempting to enumerate domain users...")              
-
-         if NTM[:5] != "EMPTY":
-            print("[i] Using HASH value as password credential...")
-            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
-         else:
-            command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
-
-         with open("domusers.tmp","r") as read:
-            line1 = read.readline()
-         read.close()
-
-         if (line1[:9] == "Could not") or (line1[:6] == "result") or (line1[:6] == "Cannot") or (line1[:1] == "") or "ACCESS_DENIED" in line1:
-            print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
-         else:
-            cleanUsers()
-            cleanTokens()							# WIPE CLEAN USERS AND PASSWORDS     
-            command("rm usernames.txt")						# PURGE CURRENT USERFILE LIST
-            command("rm hashes.txt")						# PURGE CURRENT HASH FILE
-            
-            command("cat domusers.tmp | sort > sdomusers.tmp")			# TIDY FILE FOR READING
-            command("sed -i '/^$/d' sdomusers.tmp")            
-            count2 = len(open('sdomusers.tmp').readlines())             
-            
-            if count2 != 0:
-               print ("[+] Found users...\n")
-               with open("sdomusers.tmp", "r") as read:
-                  for x in range(0, count2):
-                     line2 = read.readline()
-                     try:
-                        null1,USER[x],null2 = line2.split(":");
-                     except ValueError:
-                        USER[x] = "Error..."
-                     USER[x] = USER[x].replace("[","")
-                     USER[x] = USER[x].replace("]","")
-                     USER[x] = USER[x].replace("rid","")
-                     
-                     if USER[x][:5] != "Error":
-                        print(colored(USER[x],colour2))
-                        HASH[x] = ""
-                        USER[x] = spacePadding(USER[x], COL3)
-                        HASH[x] = dotPadding(HASH[x], COL4)
-                        command("echo " + USER[x] + " >> usernames.txt")
-                        command("echo " + HASH[x] + " >> hashes.txt")
-               read.close()
+               print(colored(SID,colour2) + "\n")         
+# -----
+# SHARE MANAGEMENT
+# -----
+            print("[*] Attempting to enumerate shares...")   
+               
+            if NTM[:5] != "EMPTY":
+               print("[i] Using HASH value as password credential...")
+               command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.tmp")
             else:
-               print("[-] Unable to enumerate domain users...")         
+               command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.tmp")
+# -----
+# ERROR MANAGEMENT
+# -----
+            errorCheck = linecache.getline("shares.tmp", 1)
+  
+            if (errorCheck[:9] == "Could not") or (errorCheck[:6] == "Cannot") or (errorCheck[:1] == "") or "ACCESS_DENIED" in errorCheck:
+               print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
+            else:
+               cleanShares()     
+# -----
+# FILE PREP
+# -----
+               command("sed -i -n '/netname: /p' shares.tmp")
+               command("sed -i '/^$/d' shares.tmp")
+               command("cat shares.tmp | sort > sshares.tmp")
+                        
+               count = len(open('sshares.tmp').readlines())
+            
+               if count != 0:
+                  print("[+] Found shares...\n")
+                  with open("sshares.tmp") as read:
+                     for x in range(0, count):
+                        SHAR[x]  = read.readline()
+                        SHAR[x] = SHAR[x].replace(" ","")
+                        try:
+                           null, SHAR[x] = SHAR[x].split(":")
+                        except ValueError:
+                           SHAR[x] = "Error..."
+                        print(colored(SHAR[x].rstrip("\n"),colour2))
+                        SHAR[x] = dotPadding(SHAR[x], COL2)
+                     print("")                 
+# -----
+# DOMAIN MANAGEMENT
+# -----
+            print("[*] Attempting to enumerate domain users...")              
+
+            if NTM[:5] != "EMPTY":
+               print("[i] Using HASH value as password credential...")
+               command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
+            else:
+               command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
+# -----
+# ERROR MANAGEMENT
+# -----
+            errorCheck = linecache.getline("domusers.tmp", 1)
+
+            if (errorCheck[:9] == "Could not") or (errorCheck[:6] == "result") or (errorCheck[:6] == "Cannot") or (errorCheck[:1] == "") or "ACCESS_DENIED" in errorCheck:
+               print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
+            else:
+               cleanUsers()
+               cleanTokens()
+               command("rm usernames.txt")
+               command("rm hashes.txt")    
+# -----
+# FILE PREP
+# -----
+               command("sort domusers.tmp > sdomusers.tmp")
+               command("sed -i '/^$/d' sdomusers.tmp")            
+               count2 = len(open('sdomusers.tmp').readlines())               
+# -----
+# MEMORY MANAGEMENT
+# -----     
+               if count2 != 0:
+                  print ("[+] Found users...\n")
+                  with open("sdomusers.tmp", "r") as read, open("usernames.txt", "a") as write1, open("hashes.txt", "a") as write2:
+                     for x in range(0, count2):
+                        line = read.readline()
+                        try:
+                           null1,USER[x],null2 = line.split(":");
+                        except ValueError:
+                           USER[x] = "Error..."
+                           
+                        USER[x] = USER[x].replace("[","")
+                        USER[x] = USER[x].replace("]","")
+                        USER[x] = USER[x].replace("rid","")
+                     
+                        if USER[x][:5] != "Error":
+                           USER[x] = spacePadding(USER[x], COL3)
+                           HASH[x] = ""
+                           HASH[x] = dotPadding(HASH[x], COL4)
+                           
+                           write1.write(USER[x].rstrip(" ") + "\n")
+                           write2.write(HASH[x].rstrip(" ") + "\n")
+                                                         
+                           print(colored(USER[x],colour2))
+               else:
+                  print("[-] Unable to enumerate domain users...")         
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1717,6 +1724,7 @@ while True:
       
       if IP46 == "-6":
          print(colored("[!] WARNING!!! - Not compatable with IP 6...",colour4))
+         checkParams = 1
                  
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -1757,6 +1765,7 @@ while True:
       
       if IP46 == "-6":
          print(colored("[!] WARNING!!! - Not compatable with IP 6...", colour4)) 
+         checkParams = 1 
       
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -1817,7 +1826,6 @@ while True:
 # Version : Pr0J3CT_M@k30V3r                                                               
 # Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=usernames.txt IP.
 # Modified: N/A
-# Notes   : Still dealing with duplicates very well!!?
 # -------------------------------------------------------------------------------------
 
    if selection == '41':
@@ -1825,90 +1833,81 @@ while True:
       
       if checkParams != 1:
          print("[*] Enumerating, please wait...")
-         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")
-         
-         command("sed -i '/@/!d' users.tmp")						# REMOVE ALL LINES NOT CONTAINING DOMAIN NAME     
-         command("sort users.tmp | uniq > susers.tmp")					# SORT UNIQUE
+         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")         
+# -----
+# GARBAGE MANAGEMENT
+# ----- 
+         command("sed -i '/@/!d' users.tmp")
+         command("sort users.tmp > sortedusers.tmp")
 
-         with open("susers.tmp", "r") as read:
-            for line in read:
-               line = line.replace("|     ","")
-               line = line.replace("|_    ","")
-               line, null = line.split("@")
-               if line != "":
-                  command("echo " + line + " >> rvalid.tmp")
-         read.close()
-         
-         count = len(open('rvalid.tmp').readlines())					# FIND OUT HOW MANY TO PROCESS
-                       
-         with open("rvalid.tmp", "r") as read:
-            for x in range(0, count):
-               line1 = read.readline().rstrip("\n")
-               
-               for y in range(0, maximum):
-                  checkuser = linecache.getline("usernames.txt", y + 1).rstrip("\n")
-                  checkhash = linecache.getline("hashes.txt", y + 1).rstrip("\n")
-                  
-                  if line1 == checkuser:
-                     command("echo " + checkuser + " >> topusers.tmp")
-                     
-                     if "$" in checkuser:
-                        with open("usernames.txt", "r") as read2:				# ONLY WAY TO DEAL WITH CHARCTER $ IN NAME 
-                            for line2 in read2:
-                                line2 = line2.rstrip("\n")
-                                if line2 != checkuser:
-                                   line2 = line2.replace("$", "\$")
-
-                                   command("echo " + line2 + " >> newusers.tmp")
-                        read2.close()
-                  
-                        command("rm usernames.txt")
-                        command("mv newusers.tmp usernames.txt")
-                     else:
-                        command("gawk -i inplace '!/" + checkuser + "/' usernames.txt")
-                     
-                     command("echo " + checkhash + " >> tophash.tmp")
-                     command("sed -i '/" + checkhash + "/d' hashes.txt")
-         
-         read.close()
+         with open("sortedusers.tmp", "r") as read, open("validusers.tmp", "a") as parse:
+            for username in read:
+               username = username.replace("|     ","")
+               username = username.replace("|_    ","")
+               username, null = username.split("@")
+               if username != "":
+                  parse.write(username + "\n")
+# -----
+# DATA MANAGEMENT
+# -----  
+         count = len(open('validusers.tmp').readlines())      
+                          
+         with open("usernames.txt", "r") as read1, open("hashes.txt", "r") as read2, open("validusers.tmp", "r") as read3, open("topusers.tmp", "w") as write1, open("tophashes.tmp", "w") as write2:
+            for loop in range(0, count):
+               checkname = read1.readline().rstrip("\n")
+               checkhash = read2.readline().rstrip("\n")
+               validname = read3.readline().rstrip("\n")               
+               for x in range(0, maximum):                                  
+                  if validname == USER[x].rstrip(" "):
+                     write1.write(validname + "\n")
+                     write2.write(checkhash + "\n")                         
+                     command("sed -i '/" + validname + "/d' usernames.txt")
+                     command("sed -i '/" + checkhash + "/d' hashes.txt") 
+# -----
+# FILE MANAGMENT
+# -----
          command("cat usernames.txt >> topusers.tmp")
          command("rm usernames.txt")
-         command("mv topusers.tmp usernames.txt")         
+         command("mv topusers.tmp usernames.txt")                  
          command("cat hashes.txt >> tophash.tmp")
          command("rm hashes.txt")
-         command("mv tophash.tmp hashes.txt")
-         
+         command("mv tophash.tmp hashes.txt")         
+         command("rm tokens.txt")
+         command("touch tokens.txt")         
+# -----
+# MEMORY MANAGMENT
+# -----
          cleanUsers()
          cleanTokens()
-         linecache.checkcache()
-         command("rm tokens.txt")
             
-         for x in range (0, maximum):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip("\n")
-            USER[x] = spacePadding(USER[x], COL3)
-            
-            HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
-            if USER[x][:1] == " ":
-               HASH[x] = spacePadding(HASH[x], COL4)
-            else:
-               HASH[x] = dotPadding(HASH[x], COL4)
-            
-         count = len(open('rvalid.tmp').readlines())					# FIND OUT HOW MANY TO PROCESS                                  
-         
-         for x in range(0, count):
-            validname2 = linecache.getline("rvalid.tmp", x + 1).rstrip("\n")
-           
-            for y in range(0, maximum):
-               checkuser2 = linecache.getline("usernames.txt", y + 1).rstrip("\n")
-               if validname2 == checkuser2:	
-                  VALD[y] = "1"								# ASSIGN A TOKEN TO THIS USER
-                  command("echo " + str(VALD[y]) + " >> tokens.txt")			# REMEMBER SETTINGS
-                  
-          	
-         if os.path.exists("rvalid.tmp"):
-            print("[+] Only the following users are valid...\n")         
+         with open("usernames.txt", "r") as read1, open("hashes.txt", "r") as read2:
+            for x in range (0, maximum):
+               USER[x] = read1.readline().rstrip("\n")
+               USER[x] = spacePadding(USER[x], COL3)  
+               
+               HASH[x] = read2.readline().rstrip("\n")
+               if USER[x][:1] == " ":
+                  HASH[x] = spacePadding(HASH[x], COL4)
+               else:
+                  HASH[x] = dotPadding(HASH[x], COL4)        
+# ----
+# TOKEN MANAGEMENT   
+# ----         
+         with open("validusers.tmp", "r") as read1, open("tokens.txt", "a") as write1:
+            for loop in range(0, count): 
+               validuser = read1.readline().rstrip("\n")
+                              
+               for x in range(0, maximum):
+                  if validuser == USER[x].rstrip(" "):
+                     VALD[x] = "1"
+                     write1.write("1" + "\n")
+# -----
+# DISPLAY MANAGEMENT
+# -----
+         if os.path.exists("validusers.tmp"):
+            print("[+] Only the following users are valid...\n")
             command("tput setaf 2")
-            command("cat rvalid.tmp")
+            command("cat validusers.tmp")
             command("tput sgr0")                      
       else:
          print("[-] No users where found, check to see if the domain name is correct...")     
@@ -2651,14 +2650,17 @@ while True:
          command("xdotool key Ctrl+Shift+T")
          command("xdotool key Alt+Shift+S; xdotool type 'Go Phishing'; xdotool key Return; sleep 2")
          
-         print("  ____  ___    ____  _   _ ___ ____  _   _ ___ _   _  ____ ")
-         print(" / ___|/ _ \  |  _ \| | | |_ _/ ___|| | | |_ _| \ | |/ ___|")
-         print("| |  _| | | | | |_) | |_| || |\___ \| |_| || ||  \| | |  _ ")
-         print("| |_| | |_| | |  __/|  _  || | ___) |  _  || || |\  | |_| |")
-         print(" \____|\___/  |_|   |_| |_|___|____/|_| |_|___|_| \_|\____|")
-         print("                                                           ")
-         print("   BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)  \n")
+         with open("logo2.tmp", "a") as logo:
+            logo.write("  ____  ___    ____  _   _ ___ ____  _   _ ___ _   _  ____ \n")
+            logo.write(" / ___|/ _ \  |  _ \| | | |_ _/ ___|| | | |_ _| \ | |/ ___|\n")
+            logo.write("| |  _| | | | | |_) | |_| || |\___ \| |_| || ||  \| | |  _ \n")
+            logo.write("| |_| | |_| | |  __/|  _  || | ___) |  _  || || |\  | |_| |\n")
+            logo.write(" \____|\___/  |_|   |_| |_|___|____/|_| |_|___|_| \_|\____|\n")
+            logo.write("                                                           \n")
+            logo.write("   BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)    \n")
+         logo.close()
          
+         command("xdotool type 'cat logo2.tmp'; xdotool key Return")
          command("xdotool type 'nc -nvlp 80'; xdotool key Return")
          command("xdotool key Ctrl+Shift+Tab")
                  
