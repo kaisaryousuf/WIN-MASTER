@@ -5,10 +5,10 @@
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 console.py
 
-| LANGUAGE  | FILENAME   | MD5 Hash                         | Version     |
-|------     |------      | -------                          | ----        |
-| bash      | install.sh | 0f28cacea5b59226b78b2d83c9c8001b | @g3nT0r@nG3 |
-| python3   | console.py | 4ff7eee294b33e9622c484a4f42be0e9 | @g3nT0r@nG3 |
+| LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
+|------     |------      | -------                          | ----         |
+| bash      | install.sh | 0f28cacea5b59226b78b2d83c9c8001b | Al@N_3r@dL3y |
+| python3   | console.py | 4363e3fb3a754f5a3a1f6ed0a98a8d3f | Al@N_3r@dL3y |
 
 **INSTALL OPTIONS**
 
