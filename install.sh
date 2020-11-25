@@ -2,7 +2,7 @@
 # coding:UTF-8
 
 # -------------------------------------------------------------------------------------
-#                           WINDOWS MASTER PROGRAM INSTALL
+#                       WINDOWS MASTER CONTROL PROGRAM INSTALL
 #                BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)
 # -------------------------------------------------------------------------------------
 
