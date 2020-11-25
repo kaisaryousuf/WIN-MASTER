@@ -12,12 +12,12 @@ USAGE : python3 console.py
 
 **INSTALL OPTIONS**
 
-        MCP BASIC INSTALL
-        -------------
+        MASTER CONTROL PROGRAM - BASIC INSTALLATION
+        -------------------------------------------
         bash install.sh
 
-        BLOODHOUND INSTALLATION
-        -----------------------
+        BLOODHOUND - INSTALLATION
+        -------------------------
         apt-get install bloodhound
         pip3 install aclpwn
         pip3 install bloodhound
