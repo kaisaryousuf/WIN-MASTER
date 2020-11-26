@@ -6,6 +6,9 @@
 
 ## A COMMAND CENTRE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
 
+TESTED: Kali Linux 2019 <br>
+USAGE : python3 mcp.py
+
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
 |------     |------      | -------                          | ----         |
 | bash      | install.sh | 1c32cc4def5f2ba9de67271618557f0d | Al@N_3r@dL3y |
@@ -16,9 +19,6 @@ A python script file to remotely analyse computer systems - It can pull domains,
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
 </p> 
-
-TESTED: Kali Linux 2019 <br>
-USAGE : python3 mcp.py
 
 **INSTALL OPTIONS**
 
