@@ -5,7 +5,7 @@
 ## A REMOTE VIEWER TO FORENSICALLY ANALYSE COMPUTER SYSTEMS.
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture6.png">
 </p>
 
 TESTED: Kali Linux 2019 <br>
