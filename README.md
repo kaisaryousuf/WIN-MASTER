@@ -1,4 +1,5 @@
 # WIN-MASTER
+![Screenshot](picture4.png)
 ## A REMOTE VIEWER TO FORENSICALLY ANALYSE COMPUTER SYSTEMS.
 
 <p align="center">
