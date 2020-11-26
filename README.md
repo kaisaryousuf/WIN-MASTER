@@ -10,7 +10,7 @@ USAGE : python3 mcp.py
 | bash      | install.sh | 1c32cc4def5f2ba9de67271618557f0d | Al@N_3r@dL3y |
 | python3   | mcp.py     | a209c3ee0e23536d70961df69efe9cd5 | Al@N_3r@dL3y |
 
-![Screenshot](picture2.png)
+![Screenshot](picture3.png)
 
 **INSTALL OPTIONS**
 
