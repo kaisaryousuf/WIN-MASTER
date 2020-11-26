@@ -1,7 +1,9 @@
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture4.png">
-</p><br>
-## A REMOTE VIEWER TO FORENSICALLY ANALYSE COMPUTER SYSTEMS.<br>
+</p><
+
+## A REMOTE VIEWER TO FORENSICALLY ANALYSE COMPUTER SYSTEMS.
+
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
 </p>
