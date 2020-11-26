@@ -4,7 +4,7 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/header.png">
 </p>
 
-## A MASTER CONSOLE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
+## A COMMAND CONSOLE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
 
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 mcp.py
