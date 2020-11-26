@@ -1,5 +1,3 @@
-# WIN-MASTER
-
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/header.png">
 </p>
