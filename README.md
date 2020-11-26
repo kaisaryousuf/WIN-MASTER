@@ -28,12 +28,12 @@ USAGE : python3 mcp.py
         pip3 install aclpwn
         pip3 install bloodhound
         pip3 install neo4j-driver===1.7.6 
-        
+
+A python script file to remotely analyse computer systems - It can pull domains, usernames, passwords, crack hashes, and so much more...
+
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
-</p>
-           	              
-A python script file to remotely analyse computer systems - It can pull domains, usernames, passwords, crack hashes, and so much more...
+</p>           	              
 
 ## COMPUTER MISUSE ACT 1990 - SECTION 3A
 This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
