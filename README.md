@@ -1,7 +1,7 @@
 # WIN MASTER
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture6.png">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/header.png">
 </p>
 
 TESTED: Kali Linux 2019 <br>
