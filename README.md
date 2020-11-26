@@ -4,12 +4,12 @@
 
 ## A REMOTE VIEWER TO FORENSICALLY ANALYSE COMPUTER SYSTEMS.
 
-<p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
-</p>
-
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 mcp.py
+
+<p align="right">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
+</p>
 
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
 |------     |------      | -------                          | ----         |
