@@ -2,8 +2,6 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture4.png">
 </p>
 
-![Screenshot](picture4.png)
-
 ## A REMOTE VIEWER TO FORENSICALLY ANALYSE COMPUTER SYSTEMS.
 
 <p align="center">
