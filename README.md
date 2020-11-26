@@ -1,9 +1,13 @@
 # WIN MASTER
+
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture6.png">
 </p>
+
 ## A CONSOLE COMMAND CENTRE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
+
 Usage: python3 mcp.py
+
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
 </p>           	              
