@@ -1,8 +1,8 @@
+## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
+
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/header.png">
 </p>
-
-## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
 
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
