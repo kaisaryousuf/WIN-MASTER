@@ -17,7 +17,7 @@ USAGE : python3 mcp.py
 A python script file to remotely analyse computer systems - It can pull domains, usernames, passwords, crack hashes, and so much more...
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/CD.png">
 </p> 
 
 ## CONSOLE DISPLAY AND VIDEO LINK
