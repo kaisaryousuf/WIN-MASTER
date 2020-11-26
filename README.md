@@ -14,8 +14,6 @@ USAGE : python3 mcp.py
   ![Screenshot](picture3.png) />
 </p>
 
-![Screenshot](picture3.png)
-
 **INSTALL OPTIONS**
 
         MASTER CONTROL PROGRAM - BASIC INSTALLATION
