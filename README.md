@@ -11,7 +11,7 @@ USAGE : python3 mcp.py
 | python3   | mcp.py     | a209c3ee0e23536d70961df69efe9cd5 | Al@N_3r@dL3y |
 
 <p align="center">
-  ![Screenshot](picture3.png) />
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
 </p>
 
 **INSTALL OPTIONS**
