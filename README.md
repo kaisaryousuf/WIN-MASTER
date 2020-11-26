@@ -1,12 +1,12 @@
 # WIN-MASTER
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
 
+TESTED: Kali Linux 2019 <br>
+USAGE : python3 mcp.py
+
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
 </p>
-
-TESTED: Kali Linux 2019 <br>
-USAGE : python3 mcp.py
 
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
 |------     |------      | -------                          | ----         |
