@@ -3,19 +3,19 @@
 </p>
 
 ## COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
-TESTED: Kali Linux 2019 <br>
-USAGE : python3 mcp.py
-
-<p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
-</p> 
-
-**THE PRODUCT CONTAINS THE FOLLOWING FILES**
 
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
 |------     |------      | -------                          | ----         |
 | python3   | mcp.py     | a209c3ee0e23536d70961df69efe9cd5 | Al@N_3r@dL3y |
 | bash      | install.sh | 1c32cc4def5f2ba9de67271618557f0d | Al@N_3r@dL3y |
+
+<p align="center">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
+</p> 
+
+TESTED: Kali Linux 2019 <br>
+USAGE : python3 mcp.py
+
 
 **INSTALL OPTIONS**
 
