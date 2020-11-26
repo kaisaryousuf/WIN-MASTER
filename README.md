@@ -29,11 +29,11 @@ A python script file to remotely analyse computer systems - It can pull domains,
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
 </p>
 
-## COMPUTER MISUSE ACT 1990 - SECTION 3A
-This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
-
 ### CONSOLE DISPLAY AND VIDEO LINK
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
+
+## COMPUTER MISUSE ACT 1990 - SECTION 3A
+This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
 
 Found this project useful, or would like to see it amended in some way - make a donation.
 https://paypal.me/TerenceBroadbent
