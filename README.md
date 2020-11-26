@@ -1,5 +1,4 @@
 # WIN-MASTER
-![Screenshot](picture0.png)
 ## A PYTHON SCRIPT FILE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
 
 <p align="center">
@@ -16,8 +15,9 @@ USAGE : python3 mcp.py
 
 **INSTALL OPTIONS**
 
-        MASTER CONTROL PROGRAM - BASIC INSTALLATION
+        WIN-MASTER - BASIC INSTALLATION
         -------------------------------------------
+        git clone https://github.com/BroadbentT/WIN-MASTER.git
         bash install.sh
 
         BLOODHOUND - INSTALLATION
