@@ -10,7 +10,7 @@ USAGE : python3 mcp.py
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
 </p>  
 
-**PRODUCT CONTAINS THE FOLLOWING FILES**
+**CONTAINS THE FOLLOWING FILES**
 
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
 |------     |------      | -------                          | ----         |
