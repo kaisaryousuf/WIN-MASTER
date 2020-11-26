@@ -19,18 +19,18 @@
         pip3 install neo4j-driver===1.7.6 
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture5.png">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture0.png">
 </p> 
 
 A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...  
 
 TESTED: Kali Linux 2019 <br>
-USAGE : python3 mcp.py
+USAGE : python3 win-master.py
 
-| LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
-|------     |------      | -------                          | ----         |
-| python3   | mcp.py     | a209c3ee0e23536d70961df69efe9cd5 | Al@N_3r@dL3y |
-| bash      | install.sh | 1c32cc4def5f2ba9de67271618557f0d | Al@N_3r@dL3y |	                
+| LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
+|------     |------         | -------                          | ----         |
+| python3   | win-master.py | a209c3ee0e23536d70961df69efe9cd5 | @g3nT_0r@ng3 |
+| bash      | install.sh    | 497e638268671fbc80727758c231fbc1 | @g3nT_0r@ng3 |	                
 
 ## CONSOLE DISPLAY AND VIDEO LINK
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
