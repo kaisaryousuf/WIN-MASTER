@@ -6,12 +6,12 @@
 
 **INSTALLATION OPTIONS**
 
-        WIN-MASTER - BASIC INSTALLATION
+        WIN-MASTER - BASIC INSTALL
         -------------------------------------------
         git clone https://github.com/BroadbentT/WIN-MASTER.git
         bash install.sh
 
-        BLOODHOUND - INSTALLATION
+        BLOODHOUND - FULL INSTALL
         -------------------------
         apt-get install bloodhound
         pip3 install aclpwn
