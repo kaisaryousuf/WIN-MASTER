@@ -2,6 +2,8 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/header.png">
 </p>
 
+## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
+
 **INSTALL OPTIONS**
 
         WIN-MASTER - BASIC INSTALLATION
@@ -24,8 +26,6 @@ USAGE : python3 mcp.py
 </p> 
 
 A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...  
-
-## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
 
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
 |------     |------      | -------                          | ----         |
