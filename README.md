@@ -26,6 +26,9 @@ A python script file to remotely analyse ldap and active directory computer syst
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
 </p>
 
+### COMPUTER MISUSE ACT 1990 - SECTION 3A
+This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
+
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 mcp.py
 
@@ -36,9 +39,6 @@ USAGE : python3 mcp.py
 
 ## CONSOLE DISPLAY AND VIDEO LINK
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
-
-### COMPUTER MISUSE ACT 1990 - SECTION 3A
-This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
 
 Found this project useful, or would like to see it amended in some way - make a donation.
 https://paypal.me/TerenceBroadbent
