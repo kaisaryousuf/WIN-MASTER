@@ -26,9 +26,6 @@ A python script file to remotely analyse ldap and active directory computer syst
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
 </p>       	              
 
-## CONSOLE DISPLAY AND VIDEO LINK
-[![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
-
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 mcp.py
 
@@ -36,6 +33,10 @@ USAGE : python3 mcp.py
 |------     |------      | -------                          | ----         |
 | bash      | install.sh | 1c32cc4def5f2ba9de67271618557f0d | Al@N_3r@dL3y |
 | python3   | mcp.py     | a209c3ee0e23536d70961df69efe9cd5 | Al@N_3r@dL3y | 
+
+## CONSOLE DISPLAY AND VIDEO LINK
+[![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
+
 
 ### COMPUTER MISUSE ACT 1990 - SECTION 3A
 This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
