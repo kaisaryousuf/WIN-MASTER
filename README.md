@@ -23,11 +23,9 @@ USAGE : python3 mcp.py
         pip3 install bloodhound
         pip3 install neo4j-driver===1.7.6 
 
-A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
-
-<p align="center">
+A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more... | <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
-</p>       	              
+</p>       	                
 
 **PRODUCT FILES**
 
