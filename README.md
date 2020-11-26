@@ -4,7 +4,7 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/header.png">
 </p>
 
-## A COMMAND CENTRE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
+## REMOTE VIEWER TO INVESTIGATE AND ANALYSE COMPUTER SYSTEMS.
 
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 mcp.py
