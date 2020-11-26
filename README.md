@@ -4,7 +4,7 @@
 
 ## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
 
-**INSTALL OPTIONS**
+**INSTALLATION OPTIONS**
 
         WIN-MASTER - BASIC INSTALLATION
         -------------------------------------------
