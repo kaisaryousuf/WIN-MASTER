@@ -6,6 +6,20 @@
 
 ## A COMMAND CONSOLE TO REMOTELY ANALYSE COMPUTER SYSTEMS.
 
+**INSTALL OPTIONS**
+
+        WIN-MASTER - BASIC INSTALLATION
+        -------------------------------------------
+        git clone https://github.com/BroadbentT/WIN-MASTER.git
+        bash install.sh
+
+        BLOODHOUND - INSTALLATION
+        -------------------------
+        apt-get install bloodhound
+        pip3 install aclpwn
+        pip3 install bloodhound
+        pip3 install neo4j-driver===1.7.6 
+
 A python script file to remotely analyse ldap and active directory computer systems - It can pull domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
 
 <p align="center">
@@ -25,20 +39,6 @@ USAGE : python3 mcp.py
 
 ### COMPUTER MISUSE ACT 1990 - SECTION 3A
 This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
-
-**INSTALL OPTIONS**
-
-        WIN-MASTER - BASIC INSTALLATION
-        -------------------------------------------
-        git clone https://github.com/BroadbentT/WIN-MASTER.git
-        bash install.sh
-
-        BLOODHOUND - INSTALLATION
-        -------------------------
-        apt-get install bloodhound
-        pip3 install aclpwn
-        pip3 install bloodhound
-        pip3 install neo4j-driver===1.7.6 
 
 Found this project useful, or would like to see it amended in some way - make a donation.
 https://paypal.me/TerenceBroadbent
