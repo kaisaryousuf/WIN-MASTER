@@ -13,12 +13,12 @@ USAGE : python3 mcp.py
 |------     |------      | -------                          | ----         |
 | bash      | install.sh | 1c32cc4def5f2ba9de67271618557f0d | Al@N_3r@dL3y |
 | python3   | mcp.py     | a209c3ee0e23536d70961df69efe9cd5 | Al@N_3r@dL3y |
-          	              
-A python script file to remotely analyse ldap and active directory computer systems - It can pull domain names, sid's, usernames, hashes, create silver and golden tickts and so much more...
 
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
 </p>
+          	              
+A python script file to remotely analyse ldap and active directory computer systems - It can pull domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
 
 ## CONSOLE DISPLAY AND VIDEO LINK
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
