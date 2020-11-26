@@ -2,13 +2,13 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture6.png">
 </p>
 
-## A REMOTE VIEWER TO FORENSICALLY ANALYSE COMPUTER SYSTEMS.
-
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture3.png">
 </p>           	              
 
 A python script file to remotely analyse computer systems - It can pull domains, usernames, passwords, crack hashes, and so much more...
+
+## A REMOTE VIEWER TO FORENSICALLY ANALYSE COMPUTER SYSTEMS.
 
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 mcp.py
