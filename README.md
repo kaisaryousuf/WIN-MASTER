@@ -3,11 +3,12 @@
 </p>
 
 ## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
+TESTED: Kali Linux 2019
+USAGE : python3 mcp.py
 
-| ----------------------- | ---------- |
-| TESTED: Kali Linux 2019 |<p align="center"> <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png"> </p> |
-| USAGE : python3 mc.py   |            | 
-
+<p align="center">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/WIN-MASTER.png">
+</p> 
 **THE PRODUCT CONTAINS THE FOLLOWING FILES**
 
 | LANGUAGE  | FILENAME   | MD5 Hash                         | Version      |
