@@ -2,6 +2,9 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture0.png">
 </p>
 
+## CONSOLE DISPLAY AND VIDEO LINK
+[![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture2.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
+
 ## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
 
 **INSTALLATION OPTIONS**
@@ -31,10 +34,6 @@ USAGE : python3 win-master.py
 |------     |-------        | -------                          | ----         |
 | bash      | install.sh    | 801f873d9e4d51210c7165d7f3234943 | @g3nT_0r@ng3 |	                
 | python3   | win-master.py | 0a9e3c7f2e5b41935cd2f44ef1c21978 | @g3nT_0r@ng3 |
-
-
-## CONSOLE DISPLAY AND VIDEO LINK
-[![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture2.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
 
 ### COMPUTER MISUSE ACT 1990 - SECTION 3A
 This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
