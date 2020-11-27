@@ -16,7 +16,8 @@ USAGE : python3 win-master.py
 
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
-</p><br>
+</p>
+
 ## WIN MASTER II
 
 **INSTALLATION INSTRUCTIONS**
