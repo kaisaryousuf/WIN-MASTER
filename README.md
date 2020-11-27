@@ -2,6 +2,8 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture0.png">
 </p>
 
+## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
+
 **INSTALLATION OPTIONS**
 
         WIN-MASTER - BASIC INSTALL
