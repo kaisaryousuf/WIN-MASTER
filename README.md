@@ -30,7 +30,7 @@ USAGE : python3 win-master.py
 | LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
 |------     |------         | -------                          | ----         |
 | python3   | win-master.py | a209c3ee0e23536d70961df69efe9cd5 | @g3nT_0r@ng3 |
-| bash      | install.sh    | ee074b5e14a08a23b9fa383233ebd647 | @g3nT_0r@ng3 |	                
+| bash      | install.sh    | 0a9e3c7f2e5b41935cd2f44ef1c21978 | @g3nT_0r@ng3 |	                
 
 ## CONSOLE DISPLAY AND VIDEO LINK
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")

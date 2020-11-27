@@ -63,6 +63,7 @@ colour6 = "white"
 colour7 = "green"
 colour8 = "yellow"
 colour9 = "magenta"
+colour0 = "grey"
 
 network = "tun0"						# LOCAL INTERFACE
 workdir = "WORKAREA"
@@ -178,7 +179,7 @@ def privCheck():
 
 def display():
    print('\u2554' + ('\u2550')*57 + '\u2566' + ('\u2550')*46 + '\u2566' + ('\u2550')*58 + '\u2557')
-   print('\u2551' + (" ")*30 + colored("REMOTE SYSTEM",colour5) +  (" ")*14 + '\u2551' + (" ")*1 + colored("SHARENAME",colour5) + (" ")*7 + colored("TYPE",colour5) + (" ")*6 + colored("COMMENT",colour5) + (" ")*12 + '\u2551' + (" ")*1 + colored("USERNAME",colour5) + (" ")*16 + colored("NTFS PASSWORD HASH",colour5) + (" ")*15 + '\u2551') 
+   print('\u2551' + colored(" @g3nT_0r@ng3",colour0) + (" ")*17 + colored("REMOTE SYSTEM",colour5) +  (" ")*14 + '\u2551' + (" ")*1 + colored("SHARENAME",colour5) + (" ")*7 + colored("TYPE",colour5) + (" ")*6 + colored("COMMENT",colour5) + (" ")*12 + '\u2551' + (" ")*1 + colored("USERNAME",colour5) + (" ")*16 + colored("NTFS PASSWORD HASH",colour5) + (" ")*15 + '\u2551') 
    print('\u2560' + ('\u2550')*14 + '\u2564' + ('\u2550')*42 + '\u256C' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u256C' + ('\u2550')*58 + '\u2563')
 
 # -------------------------------------------------------------------------------------
@@ -659,15 +660,11 @@ while True:
          else:
             command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'lsaquery' > lsaquery.tmp")     
 # -----
-# ERROR MANAGEMENT
-# -----
          errorCheck = linecache.getline("lsaquery.tmp", 1) 
                  
          if (errorCheck[:6] == "Cannot") or (errorCheck[:1] == "") or "ACCESS_DENIED" in errorCheck:
             print(colored("[!] WARNING!!! - Unable to connect to RPC data...", colour1))
             checkParams = 1                       
-# -----
-# DOMAIN MANAGEMENT
 # -----
          if checkParams != 1:
             print("[*] Attempting to enumerate domain name...")               
@@ -695,8 +692,6 @@ while True:
                print("\n[+] Domain " + DOM.rstrip(" ") + " has successfully been added to /etc/hosts...")
                DOMC = 1  
 # -----
-# SID MANGEMENT
-# ---- 
             print("[*] Attempting to enumerate domain SID...")   
                      
             line2 = linecache.getline("lsaquery.tmp", 2)
@@ -713,8 +708,6 @@ while True:
                print("[+] Found SID...\n")
                print(colored(SID,colour7) + "\n")         
 # -----
-# SHARE MANAGEMENT
-# -----
             print("[*] Attempting to enumerate shares...")   
                
             if NTM[:5] != "EMPTY":
@@ -723,8 +716,6 @@ while True:
             else:
                command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'netshareenum' > shares.tmp")
 # -----
-# ERROR MANAGEMENT
-# -----
             errorCheck = linecache.getline("shares.tmp", 1)
   
             if (errorCheck[:9] == "Could not") or (errorCheck[:6] == "Cannot") or (errorCheck[:1] == "") or "ACCESS_DENIED" in errorCheck:
@@ -732,8 +723,6 @@ while True:
             else:
                for x in range(0, maximum):
                   SHAR[x] = " "*COL2
-# -----
-# FILE PREP
 # -----
                command("sed -i -n '/netname: /p' shares.tmp")
                command("sed -i '/^$/d' shares.tmp")
@@ -755,8 +744,6 @@ while True:
                         SHAR[x] = dotPadding(SHAR[x], COL2)
                      print("")                 
 # -----
-# DOMAIN MANAGEMENT
-# -----
             print("[*] Attempting to enumerate domain users...")              
 
             if NTM[:5] != "EMPTY":
@@ -764,8 +751,6 @@ while True:
                command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + NTM.rstrip(" ") + " --pw-nt-hash " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
             else:
                command("rpcclient -W '' -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " " + TIP.rstrip(" ") + " -c 'enumdomusers' > domusers.tmp")
-# -----
-# ERROR MANAGEMENT
 # -----
             errorCheck = linecache.getline("domusers.tmp", 1)
 
@@ -777,14 +762,10 @@ while True:
                command("rm DATAFILES/usernames.txt")
                command("rm DATAFILES/hashes.txt")    
 # -----
-# FILE PREP
-# -----
                command("sort domusers.tmp > sdomusers.tmp")
                command("sed -i '/^$/d' sdomusers.tmp")            
                count2 = len(open('sdomusers.tmp').readlines())               
-# -----
-# MEMORY MANAGEMENT
-# -----     
+# -----   
                if count2 != 0:
                   print ("[+] Found users...\n")
                   with open("sdomusers.tmp", "r") as read, open("DATAFILES/usernames.txt", "a") as write1, open("DATAFILES/hashes.txt", "a") as write2:
@@ -1528,7 +1509,6 @@ while True:
 # Version : @g3nT_0r@ng3                                                             
 # Details : Menu option selected - ./samrdump.py DOMAIN/USER:PASSWORD@IP.
 # Modified: N/A
-# Status  : Need to re-script!!
 # -------------------------------------------------------------------------------------
 
    if selection =='32':
@@ -1679,7 +1659,6 @@ while True:
 # Version : @g3nT_0r@ng3                                                             
 # Details : Menu option selected - smbclient -L \\\\IP -U USER%PASSWORD
 # Modified: N/A
-# Status  : Streamlined
 # -------------------------------------------------------------------------------------
 
    if selection =='36':
@@ -1880,8 +1859,6 @@ while True:
                      write1.write(USER[x].rstrip(" ") + "\n")
                      write2.write(HASH[x].rstrip(" ") + "\n")
                      write3.write(VALD[x].rstrip(" ") + "\n")
-      else:
-         print("[-] No usernames where accepted by the remote server...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2021,7 +1998,6 @@ while True:
 # Details : Menu option selected - getTGT.py DOMAIN/USER:PASSWORD
 # Details :                        getTGT.py DOMAIN/USER -hashes :HASH
 # Modified: N/A
-# Status  : Streamlined
 # -------------------------------------------------------------------------------------
 
    if selection == '46':
@@ -3180,7 +3156,6 @@ while True:
 # Version : @g3nT_0r@ng3                                                             
 # Details : Menu option selected - Save config to DATAFILES/config.txt and exit program
 # Modified: N/A
-# Status  : Streamlined
 # -------------------------------------------------------------------------------------
 
    if selection == '89':        
