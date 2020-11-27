@@ -14,6 +14,10 @@ USAGE : python3 win-master.py
 | bash      | install.sh    | 801f873d9e4d51210c7165d7f3234943 | @g3nT_0r@ng3 |	                
 | python3   | win-master.py | 0a9e3c7f2e5b41935cd2f44ef1c21978 | @g3nT_0r@ng3 |
 
+<p align="center">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
+</p> 
+
 ## WIN MASTER II
 
 **INSTALLATION INSTRUCTIONS**
@@ -30,10 +34,6 @@ USAGE : python3 win-master.py
         pip3 install bloodhound
         pip3 install neo4j-driver===1.7.6
         
-<p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
-</p> 
-
 ## CONSOLE DISPLAY AND VIDEO LINK
 
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture2.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
