@@ -2,6 +2,18 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture0.png">
 </p>
 
+## WIN MASTER - VERSION RELEASE @g3nT_0r@ng3
+
+A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
+
+TESTED: Kali Linux 2019 <br>
+USAGE : python3 win-master.py
+
+| LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
+|------     |-------        | -------                          | ----         |
+| bash      | install.sh    | 801f873d9e4d51210c7165d7f3234943 | @g3nT_0r@ng3 |	                
+| python3   | win-master.py | 0a9e3c7f2e5b41935cd2f44ef1c21978 | @g3nT_0r@ng3 |
+
 ## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
 
 **INSTALLATION INSTRUCTIONS**
@@ -21,18 +33,6 @@
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
 </p> 
-
-## WIN MASTER VERSION RELEASE @g3nT_0r@ng3
-
-A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
-
-TESTED: Kali Linux 2019 <br>
-USAGE : python3 win-master.py
-
-| LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
-|------     |-------        | -------                          | ----         |
-| bash      | install.sh    | 801f873d9e4d51210c7165d7f3234943 | @g3nT_0r@ng3 |	                
-| python3   | win-master.py | 0a9e3c7f2e5b41935cd2f44ef1c21978 | @g3nT_0r@ng3 |
 
 ## CONSOLE DISPLAY AND VIDEO LINK
 
