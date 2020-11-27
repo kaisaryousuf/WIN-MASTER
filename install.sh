@@ -21,6 +21,6 @@ mv ./windapsearch.py /usr/share/doc/python3-impacket/examples/windapsearch.py
 cd ..
 rm -r windapsearch
 
-echo "I am all Done!!..."
+echo "\n\ntype python3 win-master.py to begin..."
 
 #Eof
