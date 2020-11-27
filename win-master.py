@@ -177,6 +177,15 @@ def privCheck():
    command(keypath + "psexec.py -k " + DOM.rstrip(" "))
    return 
 
+def keys():
+   print("")
+   print("   HKEY_CLASSES_ROOT	\tHKCR")
+   print("   HKEY_CURRENT_USER	\tHKCU")
+   print("   HKEY_LOCAL_MACHINE	\tHKLM")
+   print("   HKEY_USERS		\tHKU")
+   print("   HKEY_CURRENT_CONFIG\tHKCC")
+   return
+
 def display():
    print('\u2554' + ('\u2550')*57 + '\u2566' + ('\u2550')*46 + '\u2566' + ('\u2550')*58 + '\u2557')
    print('\u2551' + colored(" @g3nT_0r@ng3",colour0) + (" ")*17 + colored("REMOTE SYSTEM",colour5) +  (" ")*14 + '\u2551' + (" ")*1 + colored("SHARENAME",colour5) + (" ")*7 + colored("TYPE",colour5) + (" ")*6 + colored("COMMENT",colour5) + (" ")*12 + '\u2551' + (" ")*1 + colored("USERNAME",colour5) + (" ")*16 + colored("NTFS PASSWORD HASH",colour5) + (" ")*15 + '\u2551') 
@@ -1588,35 +1597,24 @@ while True:
    if selection =='33':
       checkParams = testTwo()
       
-      print("[i] For your information, registry key format...\n")
-      
-      print("   HKEY_CLASSES_ROOT	\tHKCR")
-      print("   HKEY_CURRENT_USER	\tHKCU")
-      print("   HKEY_LOCAL_MACHINE	\tHKLM")
-      print("   HKEY_USERS		\tHKU")
-      print("   HKEY_CURRENT_CONFIG	\tHKCC\n")    
-      
-      print("   Registry Path		Hive and Supporting Files")
-      print("   -------------           -------------------------")
-      print("   HKLM\SAM                \tSAM, SAM.LOG")
-      print("   HKLM\SECURITY		SECURITY, SECURITY.LOG")
-      print("   HKLM\SOFTWARE		software, software.LOG, software.sav")
-      print("   HKLM\SYSTEM             \tsystem, system.LOG, system.sav")
-      print("   HKLM\HARDWARE		(Dynamic/Volatile Hive)")
-      print("   HKU\.DEFAULT            \tdefault, default.LOG, default.sav")
-      print("   HKU\SID			NTUSER.DAT")
-      print("   HKU\SID_CLASSES		UsrClass.dat, UsrClass.dat.LOG\n")
-      
-      print("[i] Example entry: HKCR\exefile\shell\open\command\n")                          
-      
-      registryKey = input("[*] Please enter the registry key to enumerate: ")
-      
+      if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password authentication...")
+            
+      print("[i] For your information, registry key format looks like this...")
+      keys()
+                
       if checkParams != 1:
-         if NTM[:5] != "EMPTY":
-            print("[i] Using HASH value as password authentication...\n")
-            command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") + " query -keyName '" + registryKey + "'")
-         else:
-            command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName '" + registryKey + "'")
+         registryKey = ""
+         while registryKey.lower() != "quit":
+            registryKey = input("\n[*] Enter registry key or type 'quit' to finish or 'help' for help: ") 
+            if registryKey.lower() == "help":
+               keys()
+            else:
+               if NTM[:5] != "EMPTY" and registryKey.lower() != "quit": 
+                  command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") + " query -keyName '" + registryKey + "'")
+               else:
+                  if registryKey.lower() != "quit":
+                     command(keypath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName ' -s" + registryKey + "'")
       prompt()
             
 # ------------------------------------------------------------------------------------- 
