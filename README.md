@@ -20,9 +20,7 @@ A python script file to remotely analyse ldap and active directory computer syst
         pip3 install bloodhound
         pip3 install neo4j-driver===1.7.6
 
-<p align="right">
-TESTED: Kali Linux 2019 <br>
-USAGE : python3 win-master.py
+<p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
 </p>
 
