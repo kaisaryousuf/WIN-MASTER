@@ -11,7 +11,7 @@ USAGE : python3 win-master.py
 
 | LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
 |------     |-------        | -------                          | ----         |
-| python3   | install.py    | 519d86fe35fc0213808fb09865b36302 | Thr3adSt0nE  |	                
+| python3   | install.py    | dfd2a51dde0747f009733d98083cb1ab | Thr3adSt0nE  |	                
 | python3   | win-master.py | 7ddd04bf87ada142f0cd32f6ebb49448 | Thr3adSt0nE  |
 <br>
 <p align="center">
