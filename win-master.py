@@ -1887,7 +1887,7 @@ while True:
       
       if checkParams != 1:
          print("[" + colored("*", colour8) + "] Enumerating remote server, please wait...")
-         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")         
+         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=" + dataDir + "/usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")         
 
          command("sed -i '/@/!d' users.tmp")
          command("sort -r users.tmp > sortedusers.tmp")
