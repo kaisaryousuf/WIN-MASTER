@@ -11,8 +11,8 @@ USAGE : python3 win-master.py
 
 | LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
 |------     |-------        | -------                          | ----         |
-| bash      | install.sh    | 801f873d9e4d51210c7165d7f3234943 | @g3nT_0r@ng3 |	                
-| python3   | win-master.py | 004594454cf0d8cee5d1526b517f750a | @g3nT_0r@ng3 |
+| bash      | install.sh    | dcfb5a981ef8de216bf5d2c3d0c7c630 | Thr3adSt0nE  |	                
+| python3   | win-master.py | 7ddd04bf87ada142f0cd32f6ebb49448 | Thr3adSt0nE  |
 <br>
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
