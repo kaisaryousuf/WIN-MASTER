@@ -1,12 +1,8 @@
-<p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture0.png">
-</p>
+# A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
 
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
 </p>
-
-## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
 
 A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
 
