@@ -11,7 +11,7 @@ USAGE : python3 win-master.py
 
 | LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
 |------     |-------        | -------                          | ----         |
-| bash      | install.sh    | dcfb5a981ef8de216bf5d2c3d0c7c630 | Thr3adSt0nE  |	                
+| python3   | install.py    | 519d86fe35fc0213808fb09865b36302 | Thr3adSt0nE  |	                
 | python3   | win-master.py | 7ddd04bf87ada142f0cd32f6ebb49448 | Thr3adSt0nE  |
 <br>
 <p align="center">
@@ -25,7 +25,7 @@ USAGE : python3 win-master.py
         WIN-MASTER - BASIC INSTALL
         -------------------------------------------
         git clone https://github.com/BroadbentT/WIN-MASTER.git
-        bash install.sh
+        python3 install.sh
 
         BLOODHOUND - FULL INSTALL
         -------------------------
