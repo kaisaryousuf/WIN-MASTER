@@ -12,7 +12,7 @@ USAGE : python3 win-master.py
 | LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
 |------     |-------        | -------                          | ----         |
 | python3   | install.py    | 53966d4be1f8192654e74006d8e064d6 | TREADSTONE   |	                
-| python3   | win-master.py | 1b29ee37c7756ed08eb623d381973c02 | TREADSTONE  |
+| python3   | win-master.py | a6a3e60dd48496d9912633bc6a394c65 | TREADSTONE  |
 <br>
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
