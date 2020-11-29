@@ -15,7 +15,7 @@ USAGE : python3 win-master.py
 | python3   | win-master.py | fbbad0c2e4c1abdad8184ce273895d6d | TREADSTONE   |
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/advert.png">
 </p>
 
 ## WIN-MASTER II (TREADSTONE)
