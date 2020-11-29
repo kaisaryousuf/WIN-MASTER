@@ -19,7 +19,7 @@ USAGE : python3 win-master.py
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/advert.png">
 </p>
 
-## WIN-MASTER II (TREADSTONE)
+## WIN-MASTER II (TREADSTONE EDITION)
 
 **INSTALLATION INSTRUCTIONS**
 
