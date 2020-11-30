@@ -7,7 +7,7 @@
 A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/cdimage.png">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/image.png">
 </p>
 
 TESTED: Kali Linux 2019 <br>
@@ -18,10 +18,6 @@ USAGE : python3 win-master.py
 | python3   | install.py    | 53966d4be1f8192654e74006d8e064d6 | TREADSTONE   |	                
 | python3   | win-master.py | fbbad0c2e4c1abdad8184ce273895d6d | TREADSTONE   |
 <br>
-
-<p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/advert.png">
-</p>
 
 ## WIN-MASTER II (TREADSTONE EDITION)
 
