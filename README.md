@@ -25,7 +25,7 @@
 
 ## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
 
-A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
+A comprehensive, yet sleek and portable python script-file that enables cyber-security professionals worldwide to remotely evaluate the threat posture of their companies Microsoft system servers. The latest realse  ‘Treadstone’ is capable of not just enumerating live ports and services but analysing smb and ldap active directory systems, extrapolating hidden subdomains, security identifers, usernames and encrypted passwords, creating Kerberos silver and golden tickets and so much more...
 
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 win-master.py
