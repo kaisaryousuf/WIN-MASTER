@@ -2,7 +2,7 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture0.png">
 </p>
 
-## WIN-MASTER II (TREADSTONE EDITION)
+## TREADSTONE EDITION
 
 **INSTALLATION INSTRUCTIONS**
 
@@ -33,8 +33,7 @@ USAGE : python3 win-master.py
 |------     |-------        | -------                          | ----         |
 | python3   | install.py    | 53966d4be1f8192654e74006d8e064d6 | TREADSTONE   |	                
 | python3   | win-master.py | fbbad0c2e4c1abdad8184ce273895d6d | TREADSTONE   |
-<br>
-        
+       
 ## CONSOLE DISPLAY AND VIDEO LINK
 
 [![WinMaster](https://github.com/BroadbentT/WIN-MASTER/blob/master/picture2.png)](https://youtu.be/6kbGW_IIq2A "MasterConsole")
