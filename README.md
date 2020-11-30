@@ -18,7 +18,7 @@
 
 ## COMMAND CONSOLE FOR REMOTE ANALYSE OF COMPUTER NETWORKS
 
-A comprehensive, yet sleek and portable python script file that enables cyber security professionals worldwide to remotely evaluate the security threat posture of their companies system servers. The latest realse 'Treadstone' is not just capable of enumerating live ports and services, it can analyse smb and ldap active directory systems, start phishing campaigns, extrapolate hidden data such as subdomains, security identifers, usernames and encrypted passwords, utilise pass the hash techniques, crack and import ntds.dit files and produce silver and golden Kerberos tickets on demand... and well, so much more...
+A comprehensive, yet sleek and portable python script file that enables cyber security professionals worldwide to remotely evaluate the security threat posture of their companies computer network. The latest realse 'Treadstone' is not just capable of enumerating live ports and services, it can analyse smb and ldap active directory systems, start phishing campaigns, extrapolate hidden data such as subdomains, security identifers, usernames and encrypted passwords; utilise pass the hash techniques, crack and auto import ntds.dit files, produce silver and golden Kerberos tickets on demand... and well, so much more...
 
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 win-master.py
