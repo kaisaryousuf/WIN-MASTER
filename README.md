@@ -16,9 +16,9 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/cdcover.png">
 </p>
 
-## A COMMAND CONSOLE FOR REMOTE ANALYSE OF COMPUTER SYSTEMS.
+## A COMMAND CONSOLE FOR THE REMOTE ANALYSE OF COMPUTER NETWORKS.
 
-A comprehensive, yet sleek and portable python script-file that enables cyber-security professionals worldwide to remotely evaluate the threat posture of their companies Microsoft system servers. The latest realse  ‘Treadstone’ is capable of not just enumerating live ports and services but analysing smb and ldap active directory systems, extrapolating hidden subdomains, security identifers, usernames and encrypted passwords, creating Kerberos silver and golden tickets and so much more...
+A comprehensive, yet sleek and portable python script-file that enables cyber-security professionals worldwide to remotely evaluate the security threat posture of their companies system servers. The latest realse 'Treadstone' is not just capable of enumerating live ports and services, it can analyse smb and ldap active directory systems, extrapolate hidden subdomains, security identifers, usernames and encrypted passwords and create silver and golden Kerberos tickets and so much more...
 
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 win-master.py
