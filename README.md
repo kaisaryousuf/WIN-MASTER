@@ -6,19 +6,6 @@
 
 A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
 
-<p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/image.png">
-</p>
-
-TESTED: Kali Linux 2019 <br>
-USAGE : python3 win-master.py
-
-| LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
-|------     |-------        | -------                          | ----         |
-| python3   | install.py    | 53966d4be1f8192654e74006d8e064d6 | TREADSTONE   |	                
-| python3   | win-master.py | fbbad0c2e4c1abdad8184ce273895d6d | TREADSTONE   |
-<br>
-
 ## WIN-MASTER II (TREADSTONE EDITION)
 
 **INSTALLATION INSTRUCTIONS**
@@ -34,6 +21,19 @@ USAGE : python3 win-master.py
         pip3 install aclpwn
         pip3 install bloodhound
         pip3 install neo4j-driver===1.7.6
+
+<p align="center">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/image.png">
+</p>
+
+TESTED: Kali Linux 2019 <br>
+USAGE : python3 win-master.py
+
+| LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
+|------     |-------        | -------                          | ----         |
+| python3   | install.py    | 53966d4be1f8192654e74006d8e064d6 | TREADSTONE   |	                
+| python3   | win-master.py | fbbad0c2e4c1abdad8184ce273895d6d | TREADSTONE   |
+<br>
         
 ## CONSOLE DISPLAY AND VIDEO LINK
 
