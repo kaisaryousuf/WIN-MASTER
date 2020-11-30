@@ -6,12 +6,12 @@
 
 **INSTALLATION INSTRUCTIONS**
 
-        WIN-MASTER - BASIC INSTALL
+        BASIC INSTALL
         -------------------------------------------
         git clone https://github.com/BroadbentT/WIN-MASTER.git
         python3 install.sh
 
-        BLOODHOUND - FULL INSTALL
+        FULL INSTALL
         -------------------------
         apt-get install bloodhound
         pip3 install aclpwn
