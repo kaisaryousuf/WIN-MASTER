@@ -2,10 +2,6 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture0.png">
 </p>
 
-## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
-
-A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
-
 ## WIN-MASTER II (TREADSTONE EDITION)
 
 **INSTALLATION INSTRUCTIONS**
@@ -25,6 +21,10 @@ A python script file to remotely analyse ldap and active directory computer syst
 <p align="center">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/image.png">
 </p>
+
+## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
+
+A python script file to remotely analyse ldap and active directory computer systems - It can enumerate domain names, sid's, usernames, hashes, create silver and golden tickets and so much more...
 
 TESTED: Kali Linux 2019 <br>
 USAGE : python3 win-master.py
