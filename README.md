@@ -12,7 +12,6 @@
         python3 install.py
         
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture0.png">
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/cdcover.png">
 </p>
 
