@@ -13,7 +13,7 @@
 <br>
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/cdcover.png">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/picture1.png">
 </p>
 
 ## A COMMAND CONSOLE FOR REMOTE ANALYSE OF COMPUTER NETWORKS
@@ -23,12 +23,12 @@ A comprehensive, yet sleek and portable python script file that enables cyber se
 </p>
 
 TESTED: Kali Linux 2019 <br>
-USAGE : python3 win-master.py
+USAGE : python3 rogue-agent.py
 
-| LANGUAGE  | FILENAME      | MD5 Hash                         | Version      |
-|------     |-------        | -------                          | ----         |
-| python3   | install.py    | 53966d4be1f8192654e74006d8e064d6 | TREADSTONE   |	                
-| python3   | win-master.py | fbbad0c2e4c1abdad8184ce273895d6d | TREADSTONE   |
+| LANGUAGE  | FILENAME       | MD5 Hash                         | Version      |
+|------     |-------         | -------                          | ----         |
+| python3   | install.py     | a20fd3afac2adf6e155b6050296617ba | TREADSTONE   |	                
+| python3   | rogue-agent.py | 4a3040e86eb600232fe7bbd9f0f45724 | TREADSTONE   |
        
 ## CONSOLE DISPLAY AND VIDEO LINK
 

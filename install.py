@@ -40,6 +40,7 @@ os.system("gem install evil-winrm")
 os.system("pip3 install kerbrute")
 os.system("pip3 install smtp-user-enum")
 os.system("pip3 install termcolor")
+os.system("pip3 install adidnsdump")
 
 os.system("git clone https://github.com/ropnop/windapsearch.git")
 os.system("mv windapsearch/windapsearch.py /usr/share/doc/python3-impacket/examples/windapsearch.py")
