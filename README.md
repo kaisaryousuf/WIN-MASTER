@@ -8,7 +8,7 @@
 
         TREADSTONE INSTALL
         -------------------------------------------
-        git clone https://github.com/BroadbentT/WIN-MASTER.git
+        git clone https://github.com/BroadbentT/ROGUE-AGENT.git
         python3 install.py
 <br>
 
