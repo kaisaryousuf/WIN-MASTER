@@ -9,7 +9,7 @@
         TREADSTONE INSTALL
         -------------------------------------------
         git clone https://github.com/BroadbentT/WIN-MASTER.git
-        python3 install.sh
+        python3 install.py
 <br>
 
 <p align="center">
