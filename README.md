@@ -16,7 +16,7 @@
   <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/cdcover.png">
 </p>
 
-## COMMAND CONSOLE FOR REMOTE ANALYSE OF COMPUTER SYSTEMS.
+## A COMMAND CONSOLE FOR REMOTE ANALYSE OF COMPUTER SYSTEMS.
 
 A comprehensive, yet sleek and portable python script-file that enables cyber-security professionals worldwide to remotely evaluate the threat posture of their companies Microsoft system servers. The latest realse  ‘Treadstone’ is capable of not just enumerating live ports and services but analysing smb and ldap active directory systems, extrapolating hidden subdomains, security identifers, usernames and encrypted passwords, creating Kerberos silver and golden tickets and so much more...
 
