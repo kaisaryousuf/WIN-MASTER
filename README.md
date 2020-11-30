@@ -19,7 +19,7 @@
         pip3 install neo4j-driver===1.7.6
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/image.png">
+  <img src="https://github.com/BroadbentT/WIN-MASTER/blob/master/cdcover.png">
 </p>
 
 ## A COMMAND CONSOLE FOR REMOTELY ANALYSING COMPUTER SYSTEMS.
