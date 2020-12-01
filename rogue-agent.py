@@ -67,7 +67,7 @@ colour8 = "magenta"
 netWork = "tun0"
 dataDir = "DATAFILES"						# LOCAL DIRECTORY
 workDir = "WORKFILES"
-httpDir = "HTTPFILES"
+httpDir = "TREADSTONE"
 fileExt = "xlsx,docx,doc,txt,xml,bak,zip,php,html,pdf"		# FILE EXTENSIONS
 keyPath = "python3 /usr/share/doc/python3-impacket/examples/"	# PATH TO IPACKET
 

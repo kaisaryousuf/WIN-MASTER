@@ -43,7 +43,7 @@ print("\t\t      BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)    \n\n")
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-print("[*] Installing Rogue Agent system requirements...")
+print("[*] Installing Rogue Agent system requirements, please wait...")
 
 os.system("apt-get install seclists -y > log.tmp 2>&1")
 os.system("apt-get install python3-pip -y >> log.tmp 2>&1")
