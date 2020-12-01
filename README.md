@@ -12,7 +12,7 @@
         python3 install.py
         python3 rogue-agent.py
         
-        TREADSTONE ADDITIONAL EXPLOIT PACK
+        ADDITIONAL TREADSTONE EXPLOIT PACK
         --------------------------------------------
         python3 treadstone.py
 <br>
@@ -32,8 +32,9 @@ USAGE : python3 rogue-agent.py
 
 | LANGUAGE  | FILENAME       | MD5 Hash                         | Version      |
 |------     |-------         | -------                          | ----         |
-| python3   | install.py     | ab3f59d48bada51b057fccaab672430c | TREADSTONE   |	                
-| python3   | rogue-agent.py | db93b27ad04656f79fc5fa9eebbac332 | TREADSTONE   |
+| python3   | install.py     | 136f0cb19832f6615d7326c72c5c0c7a | TREADSTONE   |
+| python3   | treadstone.py  | dcfb04a13b21070d95815790cd584e76 | TREADSTONE   |	                
+| python3   | rogue-agent.py | 4048f1eb439d7f6040fa965283df2ee4 | TREADSTONE   |
        
 ## CONSOLE DISPLAY AND VIDEO LINK
 
