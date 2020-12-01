@@ -32,7 +32,7 @@ USAGE : python3 rogue-agent.py
 | LANGUAGE  | FILENAME       | MD5 Hash                         | Description    | Version    |
 |------     |-------         | -------                          | ----           | ----       |
 | python3   | install.py     | 90686b01c82ff2a3a79e6c4cb9a9f3c4 | Basic Install  | TREADSTONE |
-| python3   | rogue-agent.py | 1fd73dde8afd63129ceef68b5c0a3e04 | Command Centre | TREADSTONE |
+| python3   | rogue-agent.py | b178a5842948cd2db225341cc5b0c084 | Command Centre | TREADSTONE |
 | python3   | treadstone.py  | f0d212a1d8f71a24fe4982764990ae52 | Exploit Pack   | TREADSTONE |
 
        

