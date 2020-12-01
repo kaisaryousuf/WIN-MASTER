@@ -6,9 +6,13 @@
 
 **INSTALLATION INSTRUCTIONS**
 
-        TREADSTONE INSTALL
+        ROGUE AGENT
         -------------------------------------------
         git clone https://github.com/BroadbentT/rogue-agent.git
+        python3 rogue-agent.py
+        
+        TREADSTONE EXPLOIT PACK
+        --------------------------------------------
         python3 install.py
 <br>
 
