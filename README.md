@@ -9,11 +9,12 @@
         ROGUE AGENT
         -------------------------------------------
         git clone https://github.com/BroadbentT/rogue-agent.git
+        python3 install.py
         python3 rogue-agent.py
         
-        TREADSTONE EXPLOIT PACK
+        TREADSTONE ADDITIONAL EXPLOIT PACK
         --------------------------------------------
-        python3 install.py
+        python3 treadstone.py
 <br>
 
 <p align="center">
