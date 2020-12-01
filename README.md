@@ -44,5 +44,5 @@ USAGE : python3 rogue-agent.py
 ### COMPUTER MISUSE ACT 1990 - SECTION 3A
 This software program has been specifically written for the purpose of legitimate penetration testing and should not be used for any other unauthorised or nefarious reasons.
 
-Found this project useful, or would like to see it amended in some way - make a donation.
+Found this project useful, or would like to buy the developer a coffee - make a donation.
 https://paypal.me/TerenceBroadbent
