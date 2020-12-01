@@ -16,7 +16,6 @@
 
 import os
 import sys
-import os.path
 import shutil
 
 def banner():
@@ -54,6 +53,6 @@ os.system("git clone https://github.com/ropnop/windapsearch.git")
 os.system("mv windapsearch/windapsearch.py /usr/share/doc/python3-impacket/examples/windapsearch.py")
 shutil.rmtree("windapsearch")
 
-print("[+] Good Job!! Rogue Agent System Requirements Installed...")
+print("\n[+] Good Job!! Rogue Agent System Requirements Installed...")
 
 #Eof
