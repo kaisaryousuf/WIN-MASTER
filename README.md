@@ -12,7 +12,7 @@
         python3 install.py
         python3 rogue-agent.py
         
-        ADDITIONAL TREADSTONE EXPLOIT PACK
+        TREADSTONE EXPLOIT PACK
         --------------------------------------------
         python3 treadstone.py
 <br>
