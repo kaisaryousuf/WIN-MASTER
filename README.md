@@ -14,7 +14,6 @@
         TREADSTONE EXPLOIT PACK
         --------------------------------------------
         python3 install.py
-        python3 rogue-agenct.py
 <br>
 
 <p align="center">
