@@ -33,7 +33,7 @@ USAGE : python3 rogue-agent.py
 |------     |-------         | -------                          | ----           | ----       |
 | python3   | install.py     | 526f4e608ecaafb24e30bb0adb6864ca | Basic Install  | TREADSTONE |
 | python3   | rogue-agent.py | 4048f1eb439d7f6040fa965283df2ee4 | Command Centre | TREADSTONE |
-| python3   | treadstone.py  | 5945ad144effd2686f04d628777f3913 | Exploit Pack   | TREADSTONE |
+| python3   | treadstone.py  | 5193cea8512862c36ede54197ccd50f7 | Exploit Pack   | TREADSTONE |
 
        
 ## CONSOLE DISPLAY AND VIDEO LINK
