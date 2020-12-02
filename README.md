@@ -27,7 +27,7 @@ A comprehensive, yet sleek and portable python script file that enables cyber se
 </p>
 
 TESTED: Kali Linux 2019 <br>
-USAGE : python3 rogue-agent.py
+**USAGE : python3 rogue-agent.py**
 
 | LANGUAGE  | FILENAME       | MD5 Hash                         | Description    | Version    |
 |------     |-------         | -------                          | ----           | ----       |
