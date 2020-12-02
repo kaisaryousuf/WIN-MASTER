@@ -202,29 +202,6 @@ def banner1():
    print("\t\t      BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)        ")
    print("\t\t                                                                  ")
    return
-   
-def banner2():
-   with open("banner.tmp", "w") as banner:
-      banner.write("\t\t _   _ _____ _____ ____    ____  _____ ______     _______ ____   \n")
-      banner.write("\t\t| | | |_   _|_   _|  _ \  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
-      banner.write("\t\t| |_| | | |   | | | |_) | \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
-      banner.write("\t\t|  _  | | |   | | |  __/   ___) | |___|  _ < \ V / | |___|  _ <  \n")
-      banner.write("\t\t|_| |_| |_|   |_| |_|     |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
-      banner.write("\t\t                                                                 \n")
-      banner.write("\t\t      BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)      \n")
-      banner.write("                                                                     \n")
-      banner.write("                                                                                                                                                         \n")
-      banner.write("ENUMERATION			SHELLS				RUNNING PROCESSES		COMMUNICATIONS			CORE EXPLOITS		     \n")
-      banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
-      banner.write("jawsenum.ps1                meterpreter.exe                 powerup.ps1                     nc64.exe                        mimidump.ps1                 \n")
-      banner.write("sharphound.ps1              webshell.php                    powercat.ps                     plink64.exe                     mimikatz.ps1                 \n")
-      banner.write("sharphound.exe              myshell.php                     powerview.ps1                   chisel64.exe                    winpwn.ps1                   \n")
-      banner.write("winpeas32.exe               image.php.jpg                   powermad.ps1                    test_clsid.bat                  lovelypotato.ps1             \n")
-      banner.write("winpeas64.exe                                               procdump32.exe                  rogueoxidresolver.exe           roguepotato.exe              \n")
-      banner.write("rubeus.exe                                                  procdump64.exe                                                  mimikatz64.exe               \n")
-      banner.write("nmapsetup.exe                                                                                                               mimikatz32.exe               \n")
-      banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
-   return
      
 def banner3():
    with open("banner.tmp", "w") as banner:
