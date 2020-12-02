@@ -10,10 +10,6 @@
         -------------------------------------------
         git clone https://github.com/BroadbentT/rogue-agent.git
         python3 install.py
-        
-        TREADSTONE EXPLOIT PACK
-        --------------------------------------------
-        python3 treadstone.py
 <br>
 
 <p align="center">
@@ -31,10 +27,8 @@ A comprehensive, yet sleek and portable python script file that enables cyber se
 
 | LANGUAGE  | FILENAME       | MD5 Hash                         | Description    | Version    |
 |------     |-------         | -------                          | ----           | ----       |
-| python3   | install.py     | 90686b01c82ff2a3a79e6c4cb9a9f3c4 | Basic Install  | TREADSTONE |
-| python3   | rogue-agent.py | b178a5842948cd2db225341cc5b0c084 | Command Centre | TREADSTONE |
-| python3   | treadstone.py  | f0d212a1d8f71a24fe4982764990ae52 | Exploit Pack   | TREADSTONE |
-
+| python3   | install.py     | 331898a13afb93a2d5e12e791b9ae62b | Basic Install  | TREADSTONE |
+| python3   | rogue-agent.py | eb3014df5329bfd484ca24d9e8d514c1 | Command Centre | TREADSTONE |
        
 ## CONSOLE DISPLAY AND VIDEO LINK
 
