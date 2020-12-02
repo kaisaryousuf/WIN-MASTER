@@ -26,14 +26,8 @@ import shutil
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-Black  = '\e[1;30m'
-Red    = '\e[0;91m'
-Green  = '\e[1;32m'
-Yellow = '\e[0;93m'
-Blue   = '\e[1;34m'
-Purple = '\e[1;35m'
-Cyan   = '\e[1;36m'
-White  = '\e[1;37m'
+Red    = '\e[1;91m'
+Yellow = '\e[1;93m'
 Reset  = '\e[0m'
 
 # ------------------------------------------------------------------------------------- 
@@ -84,6 +78,7 @@ os.system("echo '" + Red + "'")
 print("[*] Installing rogue agent, please wait...\n")
 print("    " + "_"*72 + " PROGRESS BAR " + "_"*72)
 print_no_newline("    ")
+
 if not os.path.exists("ROGUEAGENT"):
    os.system("mkdir ROGUEAGENT"); bar()
 os.chdir("ROGUEAGENT"); bar()
@@ -114,7 +109,6 @@ with open("banner2.txt", "w") as banner:
    banner.write("linenum.sh\n")
    banner.write("linenumplus.sh\n")
    banner.write("linpe.sh\n")
-   banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
 bar()
 
 with open("banner3.txt", "w") as banner:
