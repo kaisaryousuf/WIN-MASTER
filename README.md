@@ -7,7 +7,7 @@
 **INSTALLATION INSTRUCTIONS**
 
         ROGUE AGENT
-        -------------------------------------------
+        -------------------------------------------------------
         git clone https://github.com/BroadbentT/rogue-agent.git
         python3 install.py
 <br>
