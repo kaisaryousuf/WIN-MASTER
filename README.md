@@ -13,7 +13,7 @@
 <br>
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/picture-1.png">
+  <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/2.png">
 </p>
 
 ## A REMOTE COMMAND CENTER FOR COMPUTER NETWORK ANALYSIS
