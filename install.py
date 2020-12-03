@@ -75,9 +75,8 @@ os.system("echo '" + Red + "'")
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-print("[*] Installing rogue agent, please wait...\n")
-print("    " + "_"*72 + " PROGRESS BAR " + "_"*72)
-print_no_newline("    ")
+print("  " + "_"*72 + " PROGRESS BAR " + "_"*72)
+print_no_newline("  ")
 
 if not os.path.exists("ROGUEAGENT"):
    os.system("mkdir ROGUEAGENT"); bar()
@@ -235,7 +234,5 @@ os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.2/chi
 os.system("gzip -d chisel_1.7.2_linux_amd64.gz >> log.tmp 2>&1"); bar()
 os.system("mv chisel_1.7.2_linux_amd64 chisel.linux64 >> log.tmp 2>&1"); bar()
 os.chdir(".."); bar()
-
-print("\n\n[+] Rogue agent successfully installed...")
 os.system("echo '" + Reset + "'")
 #Eof
