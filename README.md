@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/pictur0.png">
+  <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/picture0.png">
 </p>
 
 ## TREADSTONE EDITION
