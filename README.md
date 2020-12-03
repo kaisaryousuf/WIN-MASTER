@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/picture0.png">
+  <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/header.png">
 </p>
 
 ## TREADSTONE EDITION
@@ -13,7 +13,7 @@
 <br>
 
 <p align="center">
-  <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/picture.png">
+  <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/cd.png">
 </p>
 
 ## A REMOTE COMMAND CENTER FOR COMPUTER NETWORK ANALYSIS
