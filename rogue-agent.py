@@ -178,7 +178,7 @@ def saveParams():
       config.write(SID + "\n")
       config.write(TSH + "\n")
       config.write(LTM + "\n")
-      config.write(DIR + "\n")
+#      config.write(DIR + "\n")
    return
    
 def privCheck(TGT):
@@ -486,7 +486,7 @@ def options():
    print('\u2551' + "(04) Re/Set WEB ADDRESS (15) Recon DNS SERVER   (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER (74) Hydra POP3 (84) Telnet " + '\u2551')
    print('\u2551' + "(05) Re/Set USER NAME   (16) Dump DNS SERVER    (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS (75) Hydra TOM  (85) NetCat " + '\u2551')
    print('\u2551' + "(06) Re/Set PASS WORD   (17) NMap LIVE PORTS    (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH (76) MSF TOMCAT (86) SQSH   " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORT Servcie  (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST (77) RemoteSync (87) MSSQL  " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORT Service  (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST (77) RemoteSync (87) MSSQL  " + '\u2551')
    print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap SubDOMAINS    (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (68) GoPhishing  (78) RSyncDumpS (88) MySQL  " + '\u2551')
    print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Server TIME   (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (69) GoBuster    (79) RDeskTop   (89) WinRm  " + '\u2551')
    print('\u2551' + "(10) Re/Set DOMAIN SID                          (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (70) Nikto Scan  (80) XDesktop   (90)        " + '\u2551')
@@ -557,6 +557,7 @@ if not os.path.exists(dataDir + "/tokens.txt"):
    print("[+] File tokens.txt created...")
 else:
    print("[+] File tokens.txt already exists...")
+   
 SKEW = 0         							# TIME SKEW
 DOMC = 0								# DOMAIN COUNTER
 DNSC = 0								# DNS COUNTER
@@ -579,7 +580,7 @@ VALD = ["0"*COL5]*maxUser						# USER TOKEN
 # -------------------------------------------------------------------------------------
 
 if not os.path.exists(dataDir + "/config.txt"):
-   print("[+] Configuration file not found - using defualt values...")
+   print("[-] Configuration file not found - using defualt values...")
    DNS = "EMPTY              "						# DNS NAME
    TIP = "EMPTY              " 						# REMOTE IP
    POR = "EMPTY              " 						# LIVE PORTS
@@ -592,10 +593,10 @@ if not os.path.exists(dataDir + "/config.txt"):
    SID = "EMPTY              " 						# DOMAIN SID
    TSH = "EMPTY              " 						# SESSION SHARE
    LTM = "00:00              " 						# LOCAL TIME    
-   DIR = workDir	       						# DIRECTORY   
+#   DIR = workDir	       						# DIRECTORY   
    PTS = POR		       						# FULL PORT LISTING      
 else:
-   print("[-] Configuration file found - restoring saved data....")
+   print("[+] Configuration file found - restoring saved data....")
    DNS = linecache.getline(dataDir + "/config.txt", 1).rstrip("\n")
    TIP = linecache.getline(dataDir + "/config.txt", 2).rstrip("\n")
    POR = linecache.getline(dataDir + "/config.txt", 3).rstrip("\n")
@@ -608,8 +609,9 @@ else:
    SID = linecache.getline(dataDir + "/config.txt", 10).rstrip("\n")
    TSH = linecache.getline(dataDir + "/config.txt", 11).rstrip("\n")
    LTM = linecache.getline(dataDir + "/config.txt", 12).rstrip("\n")
-   DIR = linecache.getline(dataDir + "/config.txt", 13).rstrip("\n")      
+#   DIR = linecache.getline(dataDir + "/config.txt", 13).rstrip("\n")      
    PTS = POR     
+   
 DNS = spacePadding(DNS, COL1)
 TIP = spacePadding(TIP, COL1)
 POR = spacePadding(POR, COL1)
@@ -622,7 +624,7 @@ DOM = spacePadding(DOM, COL1)
 SID = spacePadding(SID, COL1)
 TSH = spacePadding(TSH, COL1)
 LTM = spacePadding(LTM, COL1)
-DIR = spacePadding(DIR, COL1)
+# DIR = spacePadding(DIR, COL1)
 with open(dataDir + "/usernames.txt", "r") as read1, open(dataDir + "/hashes.txt", "r") as read2, open(dataDir + "/tokens.txt", "r") as read3, open(dataDir + "/shares.txt", "r") as read4:
    for x in range(0, maxUser):
       USER[x] = read1.readline()
@@ -881,22 +883,31 @@ while True:
          DNS = BAK
       else:
          DNS = spacePadding(DNS, COL1)
+         
+         count = DNS.count('.')
+         if count == 1:
+            IP46 = input("[*] Please enter IP type -4 or -6: ")
+            if IP46 != "-6":
+               count = 3         
+         if count == 3:
+            print("[+] Defualting to IP 4...")
+            IP46 = "-4"
+         else:
+            print("[+] Defaulting to IP 6...")
+            IP46 = "-6"
+            
          if DNSC == 1:
             print("\n[+] Resetting current DNSERVER IP association...")
             command("sed -i '$d' /etc/resolv.conf")
             DNS = "EMPTY"
             DNS = spacePadding(DNS, COL1)
             DNSC = 0
+            
          if DNS[:5] != "EMPTY":
+            print("[+] Adding DNS IP " + DNS.rstrip(" ") + " to /etc/resolv.conf...")
             command("echo 'nameserver " + DNS.rstrip(" ") + "' >> /etc/resolv.conf")
-            print("[+] DNSERVER IP " + DNS.rstrip(" ") + " has been added to /etc/resolv.conf...")
             DNSC = 1
-         if":" in TIP:
-            print("[*] Defaulting to IP 6...")
-            IP46 = "-6"
-         else:
-            print("[*] Defualting to IP 4...")
-            IP46 = "-4"     
+    
          checkInterface("DNS")       
          prompt()    
 
@@ -915,22 +926,31 @@ while True:
          TIP = BAK
       else:
          TIP = spacePadding(TIP, COL1)
+                  
+         count = TIP.count('.')
+         if count == 1:
+            IP46 = input("[*] Please enter IP type -4 or -6: ")
+            if IP46 != "-6":
+               count = 3         
+         if count == 3:
+            print("[+] Defualting to IP 4...")
+            IP46 = "-4"
+         else:
+            print("[+] Defaulting to IP 6...")
+            IP46 = "-6"
+         
          if DOMC == 1:
             print("[+] Resetting current domain association...")
             command("sed -i '$d' /etc/hosts")
             DOM = "EMPTY"
             DOM = spacePadding(DOM, COL1)
             DOMC = 0
+            
          if DOM[:5] != "EMPTY":
+            print("[+] Adding DOMAIN " + DOM.rstrip(" ") + " to /etc/hosts...")
             command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
-            print("[+] DOMAIN " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-            DOMC = 1         
-         if ":" in TIP:
-            print("[+] Defaulting to IP 6...")
-            IP46 = "-6"
-         else:
-            print("[+] Defualting to IP 4...")
-            IP46 = "-4"
+            DOMC = 1
+
          checkInterface("TIP")
          prompt()
 
