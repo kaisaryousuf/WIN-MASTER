@@ -2399,18 +2399,18 @@ while True:
    if selection =='63':
       checkParams = testOne()     
       if checkParams != 1:
-         if WEB[:1] != "":
-            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write passwords.txt " + WEB.rstrip(" ") + " 2>&1")
+         if WEB[:5] != "EMPTY":
+            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write " + dataDir + "/passwords.txt " + WEB.rstrip(" ") + " 2>&1")
             print("[+] Password list generated via website...")
          else:
-            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write passwords.txt " + TIP.rstrip(" ") + " 2>&1")
+            command("cewl --depth 5 --min_word_length 3 --email --with-numbers --write " + dataDir + "/passwords.txt " + TIP.rstrip(" ") + " 2>&1")
             print("[+] Password list generated via ip address...")
          if os.path.exists("/usr/share/ncrack/minimal.usr"):
-            command("cat /usr/share/ncrack/minimal.usr >> " + dataDir + "/passwords.txt 2>&1")
-            command("sed -i '/#/d' passwords.txt 2>&1")
-            command("sed -i '/Email addresses found/d' passwords.txt 2>&1")
-            command("sed -i '/---------------------/d' passwords.txt 2>&1")
             print("[+] Adding NCrack minimal.usr list as well...")
+            command("cat /usr/share/ncrack/minimal.usr >> " + dataDir + "/passwords.txt 2>&1")
+            command("sed -i '/#/d' " + dataDir + "/passwords.txt 2>&1")
+            command("sed -i '/Email addresses found/d' " + dataDir + "/passwords.txt 2>&1")
+            command("sed -i '/---------------------/d' " + dataDir + "/passwords.txt 2>&1")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
