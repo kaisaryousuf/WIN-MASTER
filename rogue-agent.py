@@ -1908,6 +1908,7 @@ while True:
 
    if selection =='45':
       checkParams = testTwo()
+      command("touch authorised.tmp")
       with open(dataDir + "/usernames.txt", "r") as read:
          for x in range(0, maxUser):
             line = read.readline().rstrip("\n")
