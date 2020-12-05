@@ -537,17 +537,17 @@ def display():
    return
    
 def options():
-   print('\u2551' + "(01) Re/Set DNS SERVER  (12) Re/Set SERVER TIME (21) GetArch (31) WinDap Search  (41) Kerberos Info  (51) Golden PAC  (61) GenSSHKeyID  (78) Hydra FTP  (89) FTP   " + '\u2551')
-   print('\u2551' + "(02) Re/Set REMOTE IP   (13) Whois DNS SERVER   (22) NetView (32) Lookup SIDs    (42) KerbUserFilter (52) Domain Dump (62) GenListUSER  (79) Hydra SSH  (90) SSH   " + '\u2551')
-   print('\u2551' + "(03) Re/Set LIVE PORTS  (14) dig DNS SERVER     (23) Service (33) SamDump Users  (43) KerbBruteForce (53) *BloodHound (63) GenListPASS  (80) Hydra SMB  (91) SSH ID" + '\u2551')
-   print('\u2551' + "(04) Re/Set WEB ADDRESS (15) Recon DNS SERVER   (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER  (81) Hydra POP3 (92) Telnet" + '\u2551')
-   print('\u2551' + "(05) Re/Set USER NAME   (16) Dump DNS SERVER    (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS  (82) Hydra HTTP (93) NetCat" + '\u2551')
-   print('\u2551' + "(06) Re/Set PASS WORD   (17) NMap LIVE PORTS    (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH  (83) Hydra TOM  (94) SQSH  " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORT Service  (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST  (84) MSF TOMCAT (95) MSSQL " + '\u2551')
-   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap SubDOMAINS    (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (74) Man Phishing (85) RemoteSync (96) MySQL " + '\u2551')
-   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Server TIME   (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (75) AutoPhishing (86) RSyncDumps (97) WinRm " + '\u2551')
-   print('\u2551' + "(10) Re/Set DOMAIN SID                          (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (76) GoBuster     (87) RDesktop   (98)       " + '\u2551')
-   print('\u2551' + "(11) Re/Set SHARE NAME                                                                                                (77) Nikto Scan   (88) XDesktop   (99) Exit  " + '\u2551')
+   print('\u2551' + "(01) Re/Set DNS SERVER  (12) Re/Set SERVERTIME (21) GetArch (31) WinDap Search  (41) Kerberos Info  (51) Golden PAC  (61) GenSSHKeyID  (78) Hydra FTP  (89) FTP    " + '\u2551')
+   print('\u2551' + "(02) Re/Set REMOTE IP   (13) Whois DNS SERVER  (22) NetView (32) Lookup SIDs    (42) KerbUserFilter (52) Domain Dump (62) GenListUSER  (79) Hydra SSH  (90) SSH    " + '\u2551')
+   print('\u2551' + "(03) Re/Set LIVE PORTS  (14) dig DNS SERVER    (23) Service (33) SamDump Users  (43) KerbBruteForce (53) *BloodHound (63) GenListPASS  (80) Hydra SMB  (91) SSH ID " + '\u2551')
+   print('\u2551' + "(04) Re/Set WEB ADDRESS (15) Recon DNS SERVER  (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER  (81) Hydra POP3 (92) Telnet " + '\u2551')
+   print('\u2551' + "(05) Re/Set USER NAME   (16) Dump DNS SERVER   (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS  (82) Hydra HTTP (93) NetCat " + '\u2551')
+   print('\u2551' + "(06) Re/Set PASS WORD   (17) NMap LIVE PORTS   (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH  (83) Hydra TOM  (94) SQSH   " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORT Service (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST  (84) MSF TOMCAT (95) MSSQL  " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap SubDOMAINS   (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (74) Man Phishing (85) RemoteSync (96) MySQL  " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Server TIME  (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (75) AutoPhishing (86) RSyncDumps (97) WinRm  " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN SID                         (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (76) GoBuster     (87) RDesktop   (98)        " + '\u2551')
+   print('\u2551' + "(11) Re/Set SHARE NAME                                                                                               (77) Nikto Scan   (88) XDesktop   (99) Exit   " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
