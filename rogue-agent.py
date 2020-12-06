@@ -581,20 +581,23 @@ print("[+] Using localhost IP address " + localIP + "...")
 # -------------------------------------------------------------------------------------
 
 if not os.path.exists(dataDir):
-   os.mkdir(dataDir)
-   print("[+] Directory " + dataDir + " created...")
+   print("[-] Missing required files, you need to run install.py first...")
+   exit(1)
 else:
-   print("[+] Directory " + dataDir + " already exists...")     
+   print("[+] Directory " + dataDir + " already exists...")  
+      
 if not os.path.exists(httpDir):
-   os.mkdir(httpDir)
-   print("[+] Directory " + httpDir + " created...")
+   print("[-] Missing required files, you need to run install.py first...")
+   exit(1)
 else:
    print("[+] Directory " + httpDir + " already exists...") 
+   
 if not os.path.exists(workDir):
    os.mkdir(workDir)
    print("[+] Directory " + workDir + " created...")
 else:
    print("[+] Directory " + workDir + " already exists...")   
+   
 print("[*] Populating system variables...")
 if not os.path.exists(dataDir + "/usernames.txt"):			
    command("touch " + dataDir + "/usernames.txt")
