@@ -766,7 +766,7 @@ command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
 
 print("[*] Starting phishing server...")
 command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'GO PHISHING'; xdotool key Return")
+command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return")
 command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return")
 command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return")
 command("xdotool key Ctrl+Shift+Tab")
@@ -2583,7 +2583,7 @@ while True:
       if checkParams != 1:
          command("xdotool key Ctrl+Shift+T")
          command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return")
-         command("xdotool type 'clear; cat ; + dataDir + '/banner5.txt'; xdotool key Return")
+         command("xdotool type 'clear; cat ; + dataDir + '/banner4.txt'; xdotool key Return")
          command("xdotool type 'nc -nvlp 80'; xdotool key Return")
          command("xdotool key Ctrl+Shift+Tab")
          command("xdotool key Ctrl+Shift+Tab") # extra screens open
