@@ -536,8 +536,8 @@ def display():
    return
    
 def options():
-   print('\u2551' + " (01) Re/Set DNS  SERVER (12) Sync SERVER Time (21) Get Arch (31) WinDap  Search  (41) Kerberos Info (51) Golden  PAC (61) Editor USER (78) Hydra  FTP (89) FTP    " + '\u2551')
-   print('\u2551' + " (02) Re/Set REMOTE   IP (13) Whois DNS SERVER (22) Net View (32) Lookup    SIDs  (42) KerberoFilter (52) Domain Dump (62) Editor PASS (79) Hydra  SSH (90) SSH    " + '\u2551')
+   print('\u2551' + " (01) Re/Set DNS  SERVER (12) Sync SERVER Time (21) Get Arch (31) WinLDAP Search  (41) Kerberos Info (51) Golden  PAC (61) Editor USER (78) Hydra  FTP (89) FTP    " + '\u2551')
+   print('\u2551' + " (02) Re/Set REMOTE   IP (13) Whois DNS SERVER (22) Net View (32) Lookup Sec IDs  (42) KerberoFilter (52) Domain Dump (62) Editor PASS (79) Hydra  SSH (90) SSH    " + '\u2551')
    print('\u2551' + " (03) Re/Set LIVE  PORTS (14) dig   DNS SERVER (23) Services (33) Sam Dump Users  (43) KerberosBrute (53) *BloodHound (63) Editor HASH (80) Hydra  SMB (91) SSH ID " + '\u2551')
    print('\u2551' + " (04) Re/Set WEBSITE URL (15) Recon DNS SERVER (24) At  Exec (34) REGistry Hives  (44) Kerberoasting (54) *BH  ACLPwn (64) Editor HOST (81) Hydra POP3 (92) Telnet " + '\u2551')
    print('\u2551' + " (05) Re/Set USER   NAME (16) Dump  DNS SERVER (25) Dcom Exe (35) List EndPoints  (45) Kerbero Spray (55) SecretsDump (65) GenSSHkeyID (82) Hydra HTTP (93) NetCat " + '\u2551')
