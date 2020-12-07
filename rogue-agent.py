@@ -90,7 +90,7 @@ with open("up.tmp","r") as local_interface:
    up = local_interface.readlines()
 
 if str(netWork) not in str(up):
-   print(colored("\n[!] WARNING!!! - You need to specify your local network interface on line 70 of this script file...", colour0))
+   print(colored("\n[!] WARNING!!! - You need to specify your local network interface on line 70 of the rogue-agent.py file...", colour0))
    exit(1)
 else:
    os.system("ip a s " + netWork + " | awk '/inet/ {print $2}' > localIP.tmp")
