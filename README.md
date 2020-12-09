@@ -6,7 +6,7 @@
 
 **INSTALLATION INSTRUCTIONS**
 
-        ROGUE AGENT
+        ROGUE AGENT (Beta)
         -------------------------------------------------------
         git clone https://github.com/BroadbentT/rogue-agent.git
         python3 install.py
@@ -28,7 +28,7 @@ A comprehensive, yet sleek and portable python script file that enables cyber se
 | LANGUAGE  | FILENAME       | MD5 Hash                         | Description     | Version    |
 |------     |-------         | -------                          | ----            |  ----       |
 | python3   | install.py     | e91c51a26022e21fbef15f65c9ef5a11 | Install Program | TREADSTONE |
-| python3   | rogue-agent.py | 640907f50455915446b23d576656e20c | Command Centre  | TREADSTONE |
+| python3   | rogue-agent.py | 42534a604768fcc77543be2c5263bb72 | Command Centre  | TREADSTONE |
        
 ## CONSOLE DISPLAY AND VIDEO LINK
 
