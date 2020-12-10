@@ -84,8 +84,7 @@ os.system("echo '" + Red + "'")
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-print("  " + "_"*72 + " PROGRESS BAR " + "_"*72)
-print_no_newline("  ")
+print("_"*73 + " PROGRESS BAR " + "_"*77)
 
 if not os.path.exists("ROGUEAGENT"):
    os.system("mkdir ROGUEAGENT")
@@ -104,28 +103,29 @@ with open("banner0.txt","w") as banner:
    banner.write("\t\t\t\t\t\t|_| \_\\\\___/ \____|\___/|_____| /_/   \_\____|_____|_| \_| |_|          \n")
 
 with open("banner1.txt", "w") as banner:
-   banner.write("\t\t\t\t\t\t _   _ _____ _____ ____    ____  _____ ______     _______ ____            \n")
-   banner.write("\t\t\t\t\t\t| | | |_   _|_   _|  _ \  / ___|| ____|  _ \ \   / / ____|  _ \           \n")
-   banner.write("\t\t\t\t\t\t| |_| | | |   | | | |_) | \___ \|  _| | |_) \ \ / /|  _| | |_) |          \n")
-   banner.write("\t\t\t\t\t\t|  _  | | |   | | |  __/   ___) | |___|  _ < \ V / | |___|  _ <           \n")
-   banner.write("\t\t\t\t\t\t|_| |_| |_|   |_| |_|     |____/|_____|_| \_\ \_/  |_____|_| \_\          \n")
-   banner.write("\t\t\t\t\t\t                                                                        \n\n")
-   banner.write("ENUMERATION\t\tSHELLS\t\t\tRUNNING PROCESSES\t\tCOMMUNICATIONS\t\t\tCORE EXPLOITS     \n")
+   banner.write("\t\t\t\t\t\t _   _ _____ _____ ____    ____  _____ ______     _______ ____              \n")
+   banner.write("\t\t\t\t\t\t| | | |_   _|_   _|  _ \  / ___|| ____|  _ \ \   / / ____|  _ \             \n")
+   banner.write("\t\t\t\t\t\t| |_| | | |   | | | |_) | \___ \|  _| | |_) \ \ / /|  _| | |_) |            \n")
+   banner.write("\t\t\t\t\t\t|  _  | | |   | | |  __/   ___) | |___|  _ < \ V / | |___|  _ <             \n")
+   banner.write("\t\t\t\t\t\t|_| |_| |_|   |_| |_|     |____/|_____|_| \_\ \_/  |_____|_| \_\            \n")
+   banner.write("\t\t\t\t\t\t                                                                          \n\n")
+   
+   banner.write("ENUMERATION\t\tSHELLS\t\t\tRUNNING PROCESSES\t\tCOMMUNICATIONS\t\t\tCORE EXPLOITS       \n")
    banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
-   banner.write("jawsenum.ps1\t\twinshell32.exe\t\tpowerup.ps1\t\t\tnc64.exe\t\t\tmimidump.ps1         \n")
-   banner.write("sharphound.ps1\t\twinshell64.exe\t\tpowercat.ps\t\t\tplink64.exe\t\t\tmimikatz.ps1    \n")
-   banner.write("sharphound.exe\t\twebshell.php\t\tpowerview.ps1\t\t\tchisel64.exe\t\t\twinpwn.ps1     \n")
-   banner.write("winpeas32.exe\t\tmyshell.jpg\t\tpowermad.ps1\t\t\ttest_clsid.bat\t\t\tlovelypotato.ps1\n")
-   banner.write("winpeas64.exe\t\t\t\t\tprocdump32.exe\t\t\trogueoxidresolver.exe\t\troguepotato.exe   \n")
-   banner.write("rubeus.exe\t\t\t\t\tprocdump64.exe\t\t\t\t\t\t\tmimikatz64.exe                        \n")
-   banner.write("nmapsetup.exe\t\t\t\t\t\t\t\t\t\t\t\t\tmimikatz32.exe                                 \n")
+   banner.write("jawsenum.ps1\t\twinshell32.exe\t\tpowerup.ps1\t\t\tnc64.exe\t\t\tmimidump.ps1           \n")
+   banner.write("sharphound.ps1\t\twinshell64.exe\t\tpowercat.ps\t\t\tplink64.exe\t\t\tmimikatz.ps1      \n")
+   banner.write("sharphound.exe\t\twebshell.php\t\tpowerview.ps1\t\t\twin_chisel64.exe\t\twinpwn.ps1     \n")
+   banner.write("winpeas32.exe\t\tmyshell.jpg\t\tpowermad.ps1\t\t\twin_chisel32.exe\t\tlovelypotato.ps1  \n")
+   banner.write("winpeas64.exe\t\t\t\t\tprocdump32.exe\t\t\ttest_clsid.bat\t\t\troguepotato.exe          \n")
+   banner.write("rubeus.exe\t\t\t\t\tprocdump64.exe\t\t\trogueoxidresolver.exet\t\tmimikatz64.exe        \n")
+   banner.write("nmapsetup.exe\t\t\t\t\t\t\t\t\t\t\t\t\tmimikatz32.exe                                   \n")
    banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
-   banner.write("coffee.sh\t\tlinshell32.elf\t\tpspy32\t\t\t\t\t\t\t\tnaughtycowcompile.sh             \n")
-   banner.write("linpeas.sh\t\tlineshell64.elf\t\tpspy64\t\t\t\t\t\t\t\tnaughycow.c                    \n")
-   banner.write("linenum.sh                                                                            \n")
-   banner.write("linenumplus.sh                                                                        \n")
-   banner.write("linpe.sh                                                                              \n")
-bars(2)
+   banner.write("coffee.sh\t\tlinshell32.elf\t\tpspy32\t\t\t\tlin_chisel64\t\t\tnaughtycowcompile.sh     \n")
+   banner.write("linpeas.sh\t\tlineshell64.elf\t\tpspy64\t\t\t\tlin_chisel32\t\t\tnaughycow.c            \n")
+   banner.write("linenum.sh                                                                              \n")
+   banner.write("linenumplus.sh                                                                          \n")
+   banner.write("linpe.sh                                                                                \n")
+bar()
 
 with open("banner2.txt", "w") as banner:
    banner.write("\t\t\t\t\t\t ____  __  __ ____    ____  _____ ______     _______ ____                 \n") 
@@ -164,17 +164,21 @@ bar()
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-list = ["seclists", "python3-pip", "python3-ldap", "gobuster", "crackmapexec", "exiftool", "rlwrap", "xdotool"]
+list = ["hashcat", "python3-pip", "python3-ldap", "gobuster", "crackmapexec", "exiftool", "rlwrap", "xdotool", "seclists"]
 
 for x in range(0, len(list)):
    os.system("apt-get install " + list[x] + " -y >> log.tmp 2>&1")
    bar()
+
+# -----
 
 list2 = ["kerbrute", "smtp-user-enum", "termcolor", "adidnsdump"]
 
 for x in range(0, len(list2)):
   os.system("pip3 install " + list2[x] + " >> log.tmp 2>&1")
   bar()
+  
+# -----
 
 os.system("gem install evil-winrm >> log.tmp 2>&1")
 bar()
@@ -199,12 +203,8 @@ else:
 
 if not os.path.exists("TREADSTONE"):
    os.system("mkdir TREADSTONE")
-   bar()
-else:
-   bar()
 
 os.chdir("TREADSTONE")
-bar()
 
 if not os.path.exists("procdump64.exe"):
    os.system("wget https://download.sysinternals.com/files/Procdump.zip -O Procdump.zip > log.tmp 2>&1")
@@ -230,8 +230,15 @@ if not os.path.exists("winpeas64.exe"):
 else:
    bars(2)
 
-# os.system("wget 'https://github.com/BloodHoundAD/BloodHound/raw/master/Ingestors/SharpHound.exe' -O sharphound.exe >> log.tmp 2>&1")
-# os.system("wget 'https://github.com/BloodHoundAD/BloodHound/raw/master/Ingestors/SharpHound.ps1' -O sharphound.ps1 >> log.tmp 2>&1")
+if not os.path.exists("sharphound.exe"):
+   os.system("wget 'https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.exe' -O sharphound.exe >> log.tmp 2>&1")
+   bar()
+   os.system("wget 'https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.ps1' -O sharphound.ps1 >> log.tmp 2>&1")
+   bar()
+   os.system("wget 'https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/AzureHound.ps1' -O azurehound.ps1 >> log.tmp 2>&1")
+   bar()
+else:
+   bars(3)
 
 if not os.path.exists("lovelypotato.ps1"):
    os.system("git clone https://github.com/TsukiCTF/Lovely-Potato.git >> log.tmp 2>&1")
@@ -281,21 +288,33 @@ else:
    bars(8)
 
 
-if not os.path.exists("chisel64.exe"):
+if not os.path.exists("win_chisel64.exe"):
    os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.2/chisel_1.7.2_windows_amd64.gz' -O chisel.gz >> log.tmp 2>&1")
    bar()
    os.system("gunzip chisel.gz")
    bar()
-   os.system("mv chisel chisel64.exe >> log.tmp 2>&1")
+   os.system("mv chisel win_chisel64.exe >> log.tmp 2>&1")
    bar()
    os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.2/chisel_1.7.2_windows_386.gz' -O chisel.gz >> log.tmp 2>&1")
    bar()
    os.system("gunzip chisel.gz")
    bar()
-   os.system("mv chisel chisel32.exe >> log.tmp 2>&1")
+   os.system("mv chisel win_chisel32.exe >> log.tmp 2>&1")
+   bar()   
+   os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.3/chisel_1.7.3_linux_amd64.gz' -O chisel.gz >> log.tmp 2>&1")
+   bar()
+   os.system("gunzip chisel.gz")
+   bar()
+   os.system("mv chisel lin_chisel64 >> log.tmp 2>&1")
+   bar()
+   os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.3/chisel_1.7.3_linux_386.gz' -O chisel.gz >> log.tmp 2>&1")
+   bar()
+   os.system("gunzip chisel.gz")
+   bar()
+   os.system("mv chisel lin_chisel32 >> log.tmp 2>&1")
    bar()
 else:
-   bars(6)
+   bars(12)
 
 if not os.path.exists("rubeus.exe"):
    os.system("wget 'https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe' -O rubeus.exe >> log.tmp 2>&1")
@@ -318,6 +337,10 @@ if not os.path.exists("webshell.php"):
    bar()
    os.system("wget 'https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php' -O myshell.php >> log.tmp 2>&1")
    bar()
+else:
+   bars(2)
+   
+if not os.path.exists("linenum.sh"):   
    os.system("wget 'https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh' -O linenum.sh >> log.tmp 2>&1")
    bar()
    os.system("wget 'https://github.com/diego-treitos/linux-smart-enumeration/raw/master/lse.sh' -O linenumplus.sh >> log.tmp 2>&1")
@@ -331,7 +354,7 @@ if not os.path.exists("webshell.php"):
    os.system("wget 'https://raw.githubusercontent.com/WhiteWinterWolf/wwwolf-php-webshell/master/webshell.php' -O webshell.php >> log.tmp 2>&1")
    bar()
 else:
-   bars(8)
+   bars(6)
 
 if not os.path.exists("pspy64"):
    os.system("wget 'https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy32' -O pspy32 >> log.tmp 2>&1")
@@ -349,18 +372,7 @@ if not os.path.exists("naughtycow.c"):
 else:
    bars(2)
 
-if not os.path.exists("chisel64.exe"):
-   os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.2/chisel_1.7.2_linux_amd64.gz' -O chisel_1.7.2_linux_amd64.gz >> log.tmp 2>&1")
-   bar()
-   os.system("gzip -d chisel_1.7.2_linux_amd64.gz >> log.tmp 2>&1")
-   bar()
-   os.system("mv chisel_1.7.2_linux_amd64 chisel.linux64 >> log.tmp 2>&1")
-   bar()
-else:
-   bars(3)
-
 os.chdir("..")
-bar()
 
 os.system("echo '" + Blink + "'") 
 null = input("\n\n\t\t\t\t\t\t\t\t       PRESS ENTER TO BEGIN  ")
