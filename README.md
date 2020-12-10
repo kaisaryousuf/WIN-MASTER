@@ -16,7 +16,7 @@
   <img src="https://github.com/BroadbentT/ROGUE-AGENT/blob/master/picture1.png">
 </p>
 
-## A REMOTE COMMAND CENTER FOR COMPUTER NETWORK ANALYSIS
+## A COMMAND CENTER FOR REMOTE COMPUTER NETWORK ANALYSIS
 
 <p align="justify">
 A comprehensive, yet sleek and portable python script file that enables cyber security professionals worldwide to remotely evaluate the threat posture of their companies forward-facing computer network. The latest release 'Treadstone' is not just capable of enumerating live ports and services, it can analyse smb and ldap active directory systems, start phishing campaigns, extrapolate hidden data such as subdomains, security identifers, usernames and encrypted passwords; utilise pass the hash techniques, crack and auto import ntds.dit files, create on-demand golden and silver Kerberos tickets and... well, so much more...
