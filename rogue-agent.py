@@ -227,24 +227,30 @@ def keys():
    return
    
 def checkInterface(variable):
-   print("[*] Checking network interface...\n")
+   print("[*] Checking network interface...")
    try:      
       authLevel = RPC_C_AUTHN_LEVEL_NONE
+      
       if variable == "DNS":
          stringBinding = r'ncacn_ip_tcp:%s' % DNS.rstrip(" ")
       if variable == "TIP":
          stringBinding = r'ncacn_ip_tcp:%s' % TIP.rstrip(" ")
+         
       rpctransport = transport.DCERPCTransportFactory(stringBinding)
       portmap = rpctransport.get_dce_rpc()
       portmap.set_auth_level(authLevel)
       portmap.connect()
       objExporter = IObjectExporter(portmap)
       bindings = objExporter.ServerAlive2()
+      
+      print("\n")
       for binding in bindings:
          NetworkAddr = binding['aNetworkAddr']
          print(colored("Address: " + NetworkAddr, colour6))
+         
    except:
       print("[-] No responce from network interface, checking connection instead...\n")
+      
       if variable == "DNS":
            command("ping -c 5 " + DNS.rstrip(" "))
       if variable == "TIP":
@@ -556,9 +562,9 @@ def options():
    print('\u2551' + "(03) Re/Set LIVE  PORTS (14) Start HTTPServer (25) Services (36) Sam Dump Users (47) KerberosBrute (58) *BH  ACLPWN (69) Editor HASH (80) Hydra  SMB (91) SSHKeyID " + '\u2551')
    print('\u2551' + "(04) Re/Set WEBSITE URL (15) Start SMB Server (26) AT  Exec (37) REGistry Hives (48) Kerberoasting (59) SecretsDump (70) Editor HOST (81) Hydra  POP (92) Telnet   " + '\u2551')
    print('\u2551' + "(05) Re/Set USER   NAME (16) WhoIs DNS SERVER (27) DCOMExec (38) Find EndPoints (49) Kerbero Spray (60) CrackMapExe (71) GenSSHkeyID (82) Hydra  TOM (93) Netcat   " + '\u2551')
-   print('\u2551' + "(06) Re/Set PASS   WORD (17) Dig   DNS SERVER (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83)            (94) SQSH     " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM   HASH (18) Recon DNS SERVER (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
-   print('\u2551' + "(08) Re/Set TICKET NAME (19) Dump  DNS SERVER (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85) MSF  SHELL (96) MySQL    " + '\u2551')
+   print('\u2551' + "(06) Re/Set PASS   WORD (17) Dig   DNS SERVER (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) MSF TOMCAT (94) SQSH     " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM   HASH (18) Recon DNS SERVER (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF RSHELL (95) MSSQL    " + '\u2551')
+   print('\u2551' + "(08) Re/Set TICKET NAME (19) Dump  DNS SERVER (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85)            (96) MySQL    " + '\u2551')
    print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Live  PORTS (31)          (42) Smb Map SHARES (53) Silver Ticket (64) Remote Sync (75) AutoPhisher (86) Evil WinRm (97)          " + '\u2551')
    print('\u2551' + "(10) Re/Set DOMAIN  SID (21) Nmap PORTService (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
    print('\u2551' + "(11) Re/Set SHARE  NAME (22) Nmap Sub DOMAINS (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
@@ -1348,7 +1354,7 @@ while True:
       checkParams = testOne()      
       
       if checkParams != 1:
-            print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
+            print("[*] Attempting to enumerate live ports, please wait as this may take sometime...")
             command("ports=$(nmap " + IP46 + " -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
             PTS = linecache.getline("PORTS.tmp", 1).rstrip("\n")
             POR = spacePadding(PTS, COL1)
@@ -3182,22 +3188,11 @@ while True:
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
 # Version : TREADSTONE                                                             
-# Details : Menu option selected - 
-# Modified: N/A
-# -------------------------------------------------------------------------------------
-
-   if selection =='83':
-      prompt()
-      
-# ------------------------------------------------------------------------------------- 
-# AUTHOR  : Terence Broadbent                                                    
-# CONTRACT: GitHub
-# Version : TREADSTONE                                                             
 # Details : Menu option selected - Start metersploit tomcat classic exploit
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='84':
+   if selection =='83':
       checkParams = getPort()
       
       if checkParams != 1:
@@ -3233,7 +3228,7 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='85':
+   if selection =='84':
       checkParams = getPort()
       
       if checkParams != 1:
@@ -3252,6 +3247,17 @@ while True:
          command("xdotool key Alt+Shift+S; xdotool type 'METERPRETER SHELL'; xdotool key Return"); time.sleep(1)
          command("xdotool type 'msfconsole -r meterpreter.rc'; xdotool key Return"); time.sleep(1)
          command("xdotool key Ctrl+Tab")
+      prompt()
+
+# ------------------------------------------------------------------------------------- 
+# AUTHOR  : Terence Broadbent                                                    
+# CONTRACT: GitHub
+# Version : TREADSTONE                                                             
+# Details : Menu option selected - 
+# Modified: N/A
+# -------------------------------------------------------------------------------------
+
+   if selection =='85':
       prompt()
 
 # ------------------------------------------------------------------------------------- 
