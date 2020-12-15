@@ -558,8 +558,8 @@ def display():
    
 def options():
    print('\u2551' + "(01) Re/Set DNS  SERVER (12) Synchronize Time (23) Get Arch (34) WinLDAP Search (45) Kerberos Info (56) Domain Dump (67) Editor USER (78) Hydra  FTP (89) FTP      " + '\u2551')
-   print('\u2551' + "(02) Re/Set REMOTE   IP (13) Compile Exploits (24) Net View (35) Look up SecIDs (46) KerberoFilter (57) *BloodHound (68) Editor PASS (79) Hydra  SSH (90) SSH      " + '\u2551')
-   print('\u2551' + "(03) Re/Set LIVE  PORTS (14) Start HTTPServer (25) Services (36) Sam Dump Users (47) KerberosBrute (58) *BH  ACLPWN (69) Editor HASH (80) Hydra  WEB (91) SSHKeyID " + '\u2551')
+   print('\u2551' + "(02) Re/Set REMOTE   IP (13) Compile Exploits (24) Net View (35) Look up SecIDs (46) KerberoFilter (57) Blood Hound (68) Editor PASS (79) Hydra  SSH (90) SSH      " + '\u2551')
+   print('\u2551' + "(03) Re/Set LIVE  PORTS (14) Start HTTPServer (25) Services (36) Sam Dump Users (47) KerberosBrute (58) BH ACL PAWN (69) Editor HASH (80) Hydra  WEB (91) SSHKeyID " + '\u2551')
    print('\u2551' + "(04) Re/Set WEBSITE URL (15) Start SMB Server (26) AT  Exec (37) REGistry Hives (48) Kerberoasting (59) SecretsDump (70) Editor HOST (81) Hydra  SMB (92) Telnet   " + '\u2551')
    print('\u2551' + "(05) Re/Set USER   NAME (16) WhoIs DNS SERVER (27) DCOMExec (38) Find EndPoints (49) ASREPRoasting (60) CrackMapExe (71) GenSSHkeyID (82) Hydra  POP (93) Netcat   " + '\u2551')
    print('\u2551' + "(06) Re/Set PASS   WORD (17) Dig   DNS SERVER (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) Hydra  TOM (94) SQSH     " + '\u2551')
@@ -2367,8 +2367,8 @@ while True:
          else:
             command("ldapdomaindump -u '" + DOM.rstrip(" ") + '\\' + USR.rstrip(" ") + "' -p '" + PAS.rstrip(" ") +"' " + TIP.rstrip(" ") + " -o " + workDir)            
          
-         print("[*] Checking downloaded files: \n")
-         command("ls -la ./" + workDir)        
+         print("[*] Checking downloaded files...\n")
+         command("ls -la ./" + workDir + "/*.*")
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2389,6 +2389,10 @@ while True:
             command("bloodhound-python -d " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -c all -ns " + TIP.rstrip(" "))
          else:
             command("bloodhound-python -d " + DOM.rstrip(" ") + " -u " + USR.rstrip(" ") + " --hashes " + NTM.rstrip(" ") + " -c all -ns " + TIP.rstrip(" "))
+
+      print("[*] Checking downloaded files...\n")
+      command("mv *.json ./" + workDir)
+      command("ls -la ./" + workDir + "/*.*")
             
       prompt()
          

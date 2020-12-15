@@ -88,9 +88,6 @@ print("_"*73 + " PROGRESS BAR " + "_"*77)
 
 if not os.path.exists("ROGUEAGENT"):
    os.system("mkdir ROGUEAGENT")
-   bar()
-else:
-   bar()
 
 os.chdir("ROGUEAGENT")
 
@@ -158,7 +155,6 @@ with open("banner4.txt", "w") as banner:
    banner.write("\t\t\t\t\t\t                                                                        \n\n")
 
 os.chdir("..")
-bar()
 
 # -------------------------------------------------------------------------------------
 # AUTHOR  : Terence Broadbent                                                    
@@ -176,7 +172,7 @@ for x in range(0, len(list)):
 
 # -----
 
-list2 = ["kerbrute", "smtp-user-enum", "termcolor", "adidnsdump"]
+list2 = ["python-bloodhound", "aclpwn", "kerbrute", "smtp-user-enum", "termcolor", "adidnsdump"]
 
 for x in range(0, len(list2)):
   os.system("pip3 install " + list2[x] + " >> log.tmp 2>&1")
@@ -292,7 +288,6 @@ if not os.path.exists("aclpwn.ps1"):
    bar()
 else:
    bars(9)
-
 
 if not os.path.exists("win_chisel64.exe"):
    os.system("wget 'https://github.com/jpillora/chisel/releases/download/v1.7.2/chisel_1.7.2_windows_amd64.gz' -O chisel.gz >> log.tmp 2>&1")
