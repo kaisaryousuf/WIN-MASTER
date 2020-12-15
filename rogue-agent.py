@@ -1153,7 +1153,7 @@ while True:
       checkParams = testFour("88")
 
       if checkParams != 1:
-         command("nmap " + IP46 + " -sV -p 88 " + TIP.rstrip(" ") + | grep 'server time' | sed 's/^.*: //' > time.tmp")
+         command("nmap " + IP46 + " -sV -p 88 " + TIP.rstrip(" ") + " | grep 'server time' | sed 's/^.*: //' > time.tmp")
       
          dateTime = linecache.getline("time.tmp", 1).rstrip("\n")
          date, time = dateTime.split(" ")
