@@ -2495,9 +2495,9 @@ while True:
             
          if "445" in PTS:
             print("\n[+] Enumerating users...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' --users --jitter 5")      
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " --users ")      
             print("\n[+] Enumerating shares...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' --shares --jitter 5")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " --shares")
             checkParams = 1
 
       if checkParams != 1:
@@ -2509,11 +2509,10 @@ while True:
          
          if "445" in PTS:
             print("\n[+] Enumerating users...\n")
-            command("crackmapexec  smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --users")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --users ")
             print("\n[+] Enumerating shares...\n")
-            command("crackmapexec  smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --shares")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --shares")
       
-      exit(1)	# FOR SOME REASON GET EOF ERROR HERE ???   
       prompt()
    
 # ------------------------------------------------------------------------------------- 
