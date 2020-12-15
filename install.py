@@ -93,7 +93,6 @@ else:
    bar()
 
 os.chdir("ROGUEAGENT")
-bar()
 
 with open("banner0.txt","w") as banner:
    banner.write("\t\t\t\t\t\t ____   ___   ____ _   _ _____      _    ____ _____ _   _ _____           \n")
@@ -272,7 +271,9 @@ if not os.path.exists("lovelypotato.ps1"):
 else:
    bars(11)
 
-if not os.path.exists("jawsenum.ps1"):
+if not os.path.exists("aclpwn.ps1"):
+   os.system("wget 'https://raw.githubusercontent.com/fox-it/Invoke-ACLPwn/master/Invoke-ACLPwn.ps1' -O aclpwn.ps1 >> log.tmp 2>&1")
+   bar()
    os.system("wget 'https://github.com/411Hall/JAWS/raw/master/jaws-enum.ps1' -O jawsenum.ps1 >> log.tmp 2>&1")
    bar()
    os.system("wget 'https://github.com/besimorhino/powercat/raw/master/powercat.ps1' -O powercat.ps1 >> log.tmp 2>&1")
@@ -290,7 +291,7 @@ if not os.path.exists("jawsenum.ps1"):
    os.system("wget 'https://github.com/Kevin-Robertson/Powermad/raw/master/Powermad.ps1' -O powermad.ps1 >> log.tmp 2>&1")
    bar()
 else:
-   bars(8)
+   bars(9)
 
 
 if not os.path.exists("win_chisel64.exe"):

