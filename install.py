@@ -172,7 +172,7 @@ for x in range(0, len(list)):
 
 # -----
 
-list2 = ["python-bloodhound", "aclpwn", "kerbrute", "smtp-user-enum", "termcolor", "adidnsdump"]
+list2 = ["bloodhound", "aclpwn", "kerbrute", "smtp-user-enum", "termcolor", "adidnsdump"]
 
 for x in range(0, len(list2)):
   os.system("pip3 install " + list2[x] + " >> log.tmp 2>&1")
